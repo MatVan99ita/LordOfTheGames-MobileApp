@@ -1,0 +1,14 @@
+package com.example.lordofthegames.RecyclerView
+
+import android.view.View
+import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.R
+
+class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val gameImg: ImageView
+
+    init {
+        this.gameImg = itemView.findViewById(R.id.gameImage)
+    }
+}
