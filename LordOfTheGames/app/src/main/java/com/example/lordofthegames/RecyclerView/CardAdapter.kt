@@ -1,20 +1,37 @@
 package com.example.lordofthegames.RecyclerView
 
+import android.app.Activity
+import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.RecyclerView.CardViewHolder
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import com.example.lordofthegames.R
+import org.jetbrains.annotations.NotNull
 
-class CardAdapter : RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        TODO("Not yet implemented")
+        val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
+        return CardViewHolder(layoutView)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentCardItem: CardItem = this.cardItemList.get(position)
+        val imagePath: String = currentCardItem.imageResource
+
+        if (imagePath.contains("ic_")){
+            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+            holder.gameImg.setImageDrawable(drawable)
+        }
+
+        holder.gameTitle.setText(currentCardItem.gameTitle)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return cardItemList.size
     }
 
 }

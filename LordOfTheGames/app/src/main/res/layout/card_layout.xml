@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_card"
     android:layout_margin="16dp"
-    android:cardBackGroundColor="@color/white"
 
     >
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -21,6 +20,13 @@
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
             android:contentDescription="@string/image_of_game"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/game_title"
+            android:text="@string/game_title"
+            android:layout_margin="3dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.circularreveal.CircularRevealGridLayout>
