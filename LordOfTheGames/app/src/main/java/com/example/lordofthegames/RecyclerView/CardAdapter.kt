@@ -5,11 +5,9 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.RecyclerView.CardViewHolder
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.R
-import org.jetbrains.annotations.NotNull
 
 class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 

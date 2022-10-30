@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.lordofthegames.R
 
 class CustomAdapter(var context: Context, var logos: IntArray) : BaseAdapter() {
-    val inflater: LayoutInflater = (LayoutInflater.from(context))
+    private val inflater: LayoutInflater = (LayoutInflater.from(context))
 
     override fun getCount(): Int {
         return logos.count()

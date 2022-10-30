@@ -12,7 +12,7 @@
         android:id="@+id/recycler_view"
         android:layout_marginTop="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/card_layout"/>
+        tools:listitem="@layout/grid_layout"/>
 
 
 
