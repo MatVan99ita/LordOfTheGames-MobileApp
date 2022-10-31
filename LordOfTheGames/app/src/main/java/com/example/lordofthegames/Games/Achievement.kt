@@ -13,7 +13,7 @@ import android.media.Image
 class Achievement(
     var name: String,
     var descr: String?,
-    var img: Image?,
+    var img: String?,
     var count: Int = 1,
     var status: Boolean = false
     ) {

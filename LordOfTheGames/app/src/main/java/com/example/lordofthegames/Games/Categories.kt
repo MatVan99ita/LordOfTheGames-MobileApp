@@ -5,6 +5,6 @@ package com.example.lordofthegames.Games
  *
  * @param name
  */
-class Categories(var name: String) {
+class Categories(var tag: String) {
 
 }

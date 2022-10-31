@@ -1,20 +1,25 @@
 package com.example.lordofthegames.GridView
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.core.content.ContextCompat
+import com.example.lordofthegames.Games.Game
 import com.example.lordofthegames.R
+import com.example.lordofthegames.RecyclerView.CardItem
+import com.example.lordofthegames.RecyclerView.CardViewHolder
 
-class CustomAdapter(var context: Context, var logos: IntArray) : BaseAdapter() {
+class CustomAdapter(var context: Context, var games: List<Game>, var activity: Activity) : BaseAdapter() {
     private val inflater: LayoutInflater = (LayoutInflater.from(context))
 
     override fun getCount(): Int {
-        return logos.count()
+        return games.count()
     }
 
     override fun getItem(p0: Int): Any? {
@@ -29,7 +34,14 @@ class CustomAdapter(var context: Context, var logos: IntArray) : BaseAdapter() {
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
         val view = inflater.inflate(R.layout.grid_item, null)
         val icon: ImageView = view!!.findViewById(R.id.icon)
-        icon.setImageResource(logos[i])
+        var el = games[i]
+
+        val imagePath: String = el.image
+        if (imagePath.contains("ic_")){
+            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+            icon.setImageDrawable(drawable)
+        }
         return view
     }
+
 }
