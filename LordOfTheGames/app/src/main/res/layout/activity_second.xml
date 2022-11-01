@@ -7,12 +7,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#8E1616"
     tools:context="com.example.lordofthegames.GridView.SecondActivity">
+
     <ImageView
         android:id="@+id/selectedImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="277dp"
+        android:layout_height="303dp"
         android:layout_centerInParent="true"
         android:scaleType="fitXY" />
 </RelativeLayout>
