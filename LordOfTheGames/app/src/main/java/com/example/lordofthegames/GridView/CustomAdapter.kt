@@ -23,18 +23,20 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
     }
 
     override fun getItem(p0: Int): Any? {
-        return null
+        return games[p0]
     }
 
     override fun getItemId(p0: Int): Long {
-        return 0
+        return games.indexOf(this.getItem(p0)).toLong()
     }
 
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
         val view = inflater.inflate(R.layout.grid_item, null)
         val icon: ImageView = view!!.findViewById(R.id.icon)
-        var el = games[i]
+        var el = this.games[i]
+
+        println("BESUGHI   " + el.image)
 
         val imagePath: String = el.image
         if (imagePath.contains("ic_")){

@@ -13,13 +13,17 @@ class SecondActivity: AppCompatActivity() {
         setContentView(R.layout.activity_second)
         selectedImage = findViewById(R.id.selectedImage)
         val intent: Intent = intent
-
-        /*
-        * if (imagePath.contains("ic_")){
+        val imagePath = intent.getIntExtra("copertina", 0).
+        val ima = intent.getIntArrayExtra("copertina")
+        /*if (imagePath.contains("ic_")){
             val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
             icon.setImageDrawable(drawable)
         }
         * */
+
+        println("BESUGHI 2   " + imagePath)
+
+        println("BESUGHI 3   " + ima)
         //selectedImage.setImageResource(intent.getIntExtra("ic_launcher_foreground", 0))
         selectedImage.setImageResource(intent.getIntExtra("copertina", 0))
     }
