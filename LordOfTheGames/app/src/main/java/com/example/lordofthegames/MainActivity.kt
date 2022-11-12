@@ -100,8 +100,7 @@ class MainActivity : AppCompatActivity() {
             OnItemClickListener { _, _, position, _ ->
                 // set an Intent to Another Activity
                 val intent = Intent(this, SecondActivity::class.java)
-                intent.putExtra("copertina", games[position].image) // put image data in Intent
-                StartGameDialogFragment(games[position].image)
+                intent.putExtra("game_cover", games[position].image) // put image data in Intent
                 startActivity(intent) // start Intent
             }
     }
