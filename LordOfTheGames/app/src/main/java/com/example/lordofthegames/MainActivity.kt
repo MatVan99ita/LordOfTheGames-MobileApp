@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Button
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -59,8 +60,27 @@ class MainActivity : AppCompatActivity() {
     var tag: List<Categories> = listOf(Categories("GDR"), Categories("FPS"))
     var games: List<Game> = listOf(
         Game("Spado spado uccidi uccidi", achievements, "ic__search_white_24", listOf(tag[0]), "", Notes("", "") ),
-        Game("Sparo sparo uccidi uccidi", achievements, "ic_menu_24dp",        listOf(tag[1]), "", Notes("", "") )
+        Game("Sparo sparo uccidi uccidi", achievements, "ic_menu_24dp",        listOf(tag[1]), "", Notes("", "") ),
+        Game("Matel Gear Rising: Revengence", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Dark Souls 3", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Bloodborne", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("God of War: Ragnarok", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Horizon Zero Dawn: Forbidden West", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") )
     )
+
     var simpleGrid: GridView? = null
     var logos = intArrayOf(
         R.drawable.ic_launcher_foreground,
@@ -78,7 +98,6 @@ class MainActivity : AppCompatActivity() {
         R.drawable.ic_launcher_foreground
     )
     var recyclerView: RecyclerView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 // set an Intent to Another Activity
                 val intent = Intent(this, SecondActivity::class.java)
                 intent.putExtra("game_cover", games[position].image) // put image data in Intent
+                intent.putExtra("game_title", games[position].name) // put image data in Intent
                 startActivity(intent) // start Intent
             }
     }

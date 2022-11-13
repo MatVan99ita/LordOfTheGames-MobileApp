@@ -15,5 +15,4 @@
         tools:listitem="@layout/grid_layout"/>
 
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

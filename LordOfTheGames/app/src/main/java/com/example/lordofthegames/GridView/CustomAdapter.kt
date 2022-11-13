@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.Games.Game
 import com.example.lordofthegames.R
@@ -34,13 +35,17 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
         val view = inflater.inflate(R.layout.grid_item, null)
         val icon: ImageView = view!!.findViewById(R.id.icon)
-        var el = this.games[i]
+        val icon_title: TextView = view.findViewById(R.id.title)
+        val el = this.games[i]
 
         println("BESUGHI   " + el.image)
 
         val imagePath: String = el.image
         if (imagePath.contains("ic_")){
             val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+            icon.setImageDrawable(drawable)
+        } else {
+            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
             icon.setImageDrawable(drawable)
         }
         return view
