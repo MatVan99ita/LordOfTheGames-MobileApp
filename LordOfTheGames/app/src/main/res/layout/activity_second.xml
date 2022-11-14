@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/game_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@color/purple_500"
@@ -36,7 +36,7 @@
             <ImageView
                 android:id="@+id/selectedImage"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toBottomOf="@id/game_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:text="@string/long_text"
                 app:layout_constraintTop_toBottomOf="@id/game_title"
                 app:layout_constraintStart_toEndOf="@id/selectedImage"
@@ -60,10 +60,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/long_text"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/selectedImage"
-                app:layout_constraintStart_toEndOf="@id/selectedImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:layout_constraintHorizontal_bias="0.921"
+                app:layout_constraintStart_toEndOf="@id/selectedImage"
+                app:layout_constraintTop_toBottomOf="@id/selectedImage"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
