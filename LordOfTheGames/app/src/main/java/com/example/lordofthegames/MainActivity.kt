@@ -50,6 +50,16 @@ import com.example.lordofthegames.GridView.StartGameDialogFragment
  * Game.id -> Achievements.game
  *
  *
+ *
+ *
+ *
+ * RICREARE IL FRAGMENT PER I DETTAGLI IN MODO CHE NON SIA UNA PAGINA VUOTA CON DELLE INFO A CASO
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 

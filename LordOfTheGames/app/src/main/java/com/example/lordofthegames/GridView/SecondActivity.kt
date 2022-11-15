@@ -16,6 +16,7 @@ class SecondActivity: AppCompatActivity() {
     private lateinit var gtitle: TextView
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_second)
         selectedImage = findViewById(R.id.selectedImage)
         gtitle = findViewById(R.id.game_title)
@@ -42,4 +43,5 @@ class SecondActivity: AppCompatActivity() {
         //selectedImage.setImageResource(intent.getIntExtra("ic_launcher_foreground", 0))
         //selectedImage.setImageResource(imagePath)
     }
+
 }
