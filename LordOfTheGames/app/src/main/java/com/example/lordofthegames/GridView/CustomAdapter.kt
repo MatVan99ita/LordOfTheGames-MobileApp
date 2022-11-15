@@ -39,15 +39,17 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
         val el = this.games[i]
         icon_title.text = this.games[i].name
         println("BESUGHI   " + el.image)
-
+        var drawable: Drawable? = null
         val imagePath: String = el.image
+
         if (imagePath.contains("ic_")){
-            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
-            icon.setImageDrawable(drawable)
-        } else {
-            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
-            icon.setImageDrawable(drawable)
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+        } else if(imagePath.contains("gabibbo")){
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
+        } else if(imagePath.contains("yee")){
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
         }
+        icon.setImageDrawable(drawable)
         return view
     }
 

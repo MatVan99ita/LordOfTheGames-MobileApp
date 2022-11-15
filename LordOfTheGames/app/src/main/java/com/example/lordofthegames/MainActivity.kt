@@ -59,44 +59,35 @@ class MainActivity : AppCompatActivity() {
     var achievements: List<Achievement> = listOf(Achievement("Uccidi", "Uccidi il cattivo", "", 1, false), Achievement("Finisci", "Finisci il gioco", "", 1, false))
     var tag: List<Categories> = listOf(Categories("GDR"), Categories("FPS"))
     var games: List<Game> = listOf(
-        Game("Spado spado uccidi uccidi", achievements, "ic__search_white_24", listOf(tag[0]), "", Notes("", "") ),
-        Game("Sparo sparo uccidi uccidi", achievements, "ic_menu_24dp",        listOf(tag[1]), "", Notes("", "") ),
-        Game("Matel Gear Rising: Revengence", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Dark Souls 3", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("MARVEL Spider-Man", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Bloodborne", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("God of War: Ragnarok", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Horizon Zero Dawn: Forbidden West", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") )
+        Game("Spado spado uccidi uccidi",         achievements, "ic__search_white_24",  listOf(tag[0]),         "", Notes("", "") ),
+        Game("Sparo sparo uccidi uccidi",         achievements, "ic_menu_24dp",         listOf(tag[1]),         "", Notes("", "") ),
+        Game("Matel Gear Rising: Revengence",     achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Dark Souls 3",                      achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man",                 achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Bloodborne",                        achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("God of War: Ragnarok",              achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo",                           achievements, "ic_t_pose",            listOf(tag[1], tag[0]), "", Notes("", "") ), // */
+        Game("Dark Souls 3",                      achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man",                 achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Dark Souls 3",                      achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man",                 achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Horizon Zero Dawn: Forbidden West", achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Gabibbo BELAAAAAAAAAN",             achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Dark Souls 3",                      achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man",                 achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Bloodborne",                        achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Dark Souls 3",                      achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("MARVEL Spider-Man",                 achievements, "yee",                  listOf(tag[1], tag[0]), "", Notes("", "") ),
+        Game("Bloodborne",                        achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
     )
 
     var simpleGrid: GridView? = null
-    var logos = intArrayOf(
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground
-    )
     var recyclerView: RecyclerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
