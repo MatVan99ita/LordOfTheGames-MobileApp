@@ -37,7 +37,7 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
         val icon: ImageView = view!!.findViewById(R.id.icon)
         val icon_title: TextView = view.findViewById(R.id.title)
         val el = this.games[i]
-
+        icon_title.text = this.games[i].name
         println("BESUGHI   " + el.image)
 
         val imagePath: String = el.image
