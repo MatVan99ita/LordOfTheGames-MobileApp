@@ -17,20 +17,36 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:id="@+id/game_title"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:background="@color/purple_500"
                 android:text="@string/long_title"
                 android:textColor="#8C9EFF"
                 android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/add_to_list"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.8"
+                />
+
+            <ImageButton
+                android:id="@+id/add_to_list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_videogame_30"
+                app:layout_constraintStart_toEndOf="@id/game_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2"
+                app:layout_constraintBottom_toBottomOf="@id/game_title"
                 />
 
             <ImageView
