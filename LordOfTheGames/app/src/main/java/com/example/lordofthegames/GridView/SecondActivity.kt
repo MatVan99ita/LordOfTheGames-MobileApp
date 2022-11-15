@@ -5,11 +5,12 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.lordofthegames.HomeFragment
 import com.example.lordofthegames.R
-import android.net.Uri
-import android.widget.TextView
+import com.example.lordofthegames.Utilities
 
 class SecondActivity: AppCompatActivity() {
     private lateinit var selectedImage: ImageView
@@ -18,6 +19,13 @@ class SecondActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_second)
+
+        if (savedInstanceState == null) Utilities.insertFragment(
+            this,
+            HomeFragment(),
+            HomeFragment::class.java.getSimpleName()
+        )
+
         selectedImage = findViewById(R.id.selectedImage)
         gtitle = findViewById(R.id.game_title)
         val intent: Intent = intent

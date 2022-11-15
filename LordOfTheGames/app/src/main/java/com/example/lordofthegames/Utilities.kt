@@ -7,17 +7,19 @@ import androidx.fragment.app.FragmentTransaction
 
 class Utilities {
     private final val REQUEST_IMAGE_CAPTURE: Int = 1
+    companion object{
+        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
 
-    fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
+            var transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
-        var transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-        transaction.replace(androidx.fragment.R.id.fragment_container_view_tag, fragment, tag)
+            if(!(fragment is HomeFragment)){
+                transaction.addToBackStack(tag)
+            }
 
-        if(!(fragment is MainActivity)){
-            transaction.addToBackStack(tag)
+            transaction.commit()
         }
-
-        transaction.commit()
     }
+
 }
