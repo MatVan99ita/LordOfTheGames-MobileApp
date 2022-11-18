@@ -5,11 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_card"
-    android:layout_margin="16dp"
-    android:padding="2dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
+    android:layout_margin="16dp">
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,15 +19,11 @@
             android:layout_height="200dp"
             android:scaleType="fitCenter"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_launcher_foreground"
-            android:paddingTop="5dp"/>
+            android:src="@drawable/ic_launcher_foreground" />
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sifgebjavhbj"
-            android:paddingBottom="2dp"
-            android:singleLine="true"
-            />
+            android:text=""/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
