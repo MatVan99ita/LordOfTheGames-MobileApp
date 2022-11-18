@@ -17,7 +17,6 @@ class SecondActivity: AppCompatActivity() {
     private lateinit var gtitle: TextView
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_second)
 
         if (savedInstanceState == null) Utilities.insertFragment(
@@ -51,5 +50,4 @@ class SecondActivity: AppCompatActivity() {
         //selectedImage.setImageResource(intent.getIntExtra("ic_launcher_foreground", 0))
         //selectedImage.setImageResource(imagePath)
     }
-
 }
