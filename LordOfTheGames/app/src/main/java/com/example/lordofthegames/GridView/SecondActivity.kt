@@ -31,18 +31,14 @@ class SecondActivity: AppCompatActivity() {
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
         //val ima = intent.getIntArrayExtra("copertina")
-        var drawable: Drawable? = null
-
         if (imagePath.contains("ic_")){
-            drawable = ContextCompat.getDrawable(this, this.resources.getIdentifier(imagePath, "drawable", this.packageName))
+            val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier(imagePath, "drawable", this.packageName))
+            selectedImage.setImageDrawable(drawable)
         } else if(imagePath.contains("gabibbo")) {
-            drawable = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo_test", "mipmap", this.packageName))
-        } else if(imagePath.contains("yee")){
-            drawable = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_yeee_foreground", "mipmap", this.packageName))
+            val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo_test", "mipmap", this.packageName))
+            selectedImage.setImageDrawable(drawable)
         }
         gtitle.text = title
-
-        selectedImage.setImageDrawable(drawable)
 
         Log.i("BESUGHIo" , imagePath)
 
