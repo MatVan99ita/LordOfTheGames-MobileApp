@@ -75,9 +75,12 @@
                 android:ems="3"
                 android:layout_marginEnd="20dp"
 <<<<<<< HEAD
+<<<<<<< HEAD
                 android:layout_marginTop="10dp"
 =======
 >>>>>>> parent of 3e1b4ed (sistemato il grid layout e il second)
+=======
+>>>>>>> parent of 645f999 (Update activity_second.xml)
 =======
 >>>>>>> parent of 645f999 (Update activity_second.xml)
                 />
