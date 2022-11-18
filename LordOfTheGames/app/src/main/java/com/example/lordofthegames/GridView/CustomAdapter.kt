@@ -31,6 +31,8 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
         return games.indexOf(this.getItem(p0)).toLong()
     }
 
+    //dhvcblawdivgahkjbvnlhaiykjgrm ,hygvj
+
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
         val view = inflater.inflate(R.layout.grid_item, null)
