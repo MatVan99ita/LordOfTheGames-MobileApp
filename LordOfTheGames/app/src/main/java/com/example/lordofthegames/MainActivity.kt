@@ -1,22 +1,18 @@
 package com.example.lordofthegames
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
-import android.widget.Button
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.Games.Achievement
-import com.example.lordofthegames.Games.Categories
-import com.example.lordofthegames.Games.Game
-import com.example.lordofthegames.Games.Notes
-import com.example.lordofthegames.GridView.CustomAdapter
-import com.example.lordofthegames.GridView.SecondActivity
-import com.example.lordofthegames.GridView.StartGameDialogFragment
+import com.example.lordofthegames.games.Achievement
+import com.example.lordofthegames.games.Categories
+import com.example.lordofthegames.games.Game
+import com.example.lordofthegames.games.Notes
+import com.example.lordofthegames.gridView.CustomAdapter
+import com.example.lordofthegames.gridView.SecondActivity
 
 /* Struttura del db
  *

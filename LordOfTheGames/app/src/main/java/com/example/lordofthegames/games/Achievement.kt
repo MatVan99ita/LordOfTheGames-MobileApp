@@ -1,6 +1,4 @@
-package com.example.lordofthegames.Games
-
-import android.media.Image
+package com.example.lordofthegames.games
 
 /**
  * ##Achievement di gioco

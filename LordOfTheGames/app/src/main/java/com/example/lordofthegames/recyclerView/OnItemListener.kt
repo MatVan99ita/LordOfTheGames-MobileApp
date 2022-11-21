@@ -1,4 +1,4 @@
-package com.example.lordofthegames.RecyclerView
+package com.example.lordofthegames.recyclerView
 
 interface OnItemListener {
     fun onItemClick(position: Int)

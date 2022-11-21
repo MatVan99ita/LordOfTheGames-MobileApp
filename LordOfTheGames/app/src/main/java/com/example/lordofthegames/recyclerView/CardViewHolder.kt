@@ -1,4 +1,4 @@
-package com.example.lordofthegames.RecyclerView
+package com.example.lordofthegames.recyclerView
 
 import android.view.View
 import android.widget.ImageView

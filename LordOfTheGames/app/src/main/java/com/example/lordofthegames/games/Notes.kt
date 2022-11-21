@@ -1,4 +1,4 @@
-package com.example.lordofthegames.Games
+package com.example.lordofthegames.games
 
 /**
  * ##Le note dell'utente per un gioco

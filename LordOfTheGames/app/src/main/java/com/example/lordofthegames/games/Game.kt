@@ -1,6 +1,4 @@
-package com.example.lordofthegames.Games
-
-import android.media.Image
+package com.example.lordofthegames.games
 
 /*
  * (*) -> da scegliere un nome migliore o comunque da modificare

@@ -1,4 +1,4 @@
-package com.example.lordofthegames.GridView
+package com.example.lordofthegames.gridView
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,10 +11,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.lordofthegames.Games.Game
+import com.example.lordofthegames.games.Game
 import com.example.lordofthegames.R
-import com.example.lordofthegames.RecyclerView.CardItem
-import com.example.lordofthegames.RecyclerView.CardViewHolder
 
 class CustomAdapter(var context: Context, var games: List<Game>, var activity: Activity) : BaseAdapter() {
     private val inflater: LayoutInflater = (LayoutInflater.from(context))
@@ -23,7 +21,7 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
         return games.count()
     }
 
-    override fun getItem(p0: Int): Any? {
+    override fun getItem(p0: Int): Any {
         return games[p0]
     }
 
@@ -31,15 +29,13 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
         return games.indexOf(this.getItem(p0)).toLong()
     }
 
-    //dhvcblawdivgahkjbvnlhaiykjgrm ,hygvj
-
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
         val view = inflater.inflate(R.layout.grid_item, null)
         val icon: ImageView = view!!.findViewById(R.id.icon)
-        val icon_title: TextView = view.findViewById(R.id.title)
+        val iconTitle: TextView = view.findViewById(R.id.title)
         val el = this.games[i]
-        icon_title.text = this.games[i].name
+        iconTitle.text = this.games[i].name
         println("BESUGHI   " + el.image)
         var drawable: Drawable? = null
         val imagePath: String = el.image

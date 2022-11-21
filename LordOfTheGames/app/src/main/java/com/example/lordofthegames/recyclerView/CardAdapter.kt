@@ -1,4 +1,4 @@
-package com.example.lordofthegames.RecyclerView
+package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
 import android.graphics.drawable.Drawable

@@ -1,4 +1,4 @@
-package com.example.lordofthegames.Games
+package com.example.lordofthegames.games
 
 /**
  * ##Tag per il gioco

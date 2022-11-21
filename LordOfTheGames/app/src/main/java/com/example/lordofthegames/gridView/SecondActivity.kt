@@ -1,4 +1,4 @@
-package com.example.lordofthegames.GridView
+package com.example.lordofthegames.gridView
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.R
-import android.net.Uri
 import android.widget.TextView
 
 class SecondActivity: AppCompatActivity() {

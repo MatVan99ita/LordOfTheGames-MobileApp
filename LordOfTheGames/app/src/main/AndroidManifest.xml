@@ -25,7 +25,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".GridView.SecondActivity"/>
+        <activity android:name=".gridView.SecondActivity"/>
     </application>
 
 </manifest>
