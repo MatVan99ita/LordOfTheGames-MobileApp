@@ -1,8 +1,11 @@
 package com.example.lordofthegames
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -58,90 +61,59 @@ import com.example.lordofthegames.recyclerView.CardItem
 
 
 class MainActivity : AppCompatActivity() {
-    val DEBUG: Int = 0
 
     var gameItems: List<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi",),
-        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi",),
-        CardItem("ic_t_pose", "Matel Gear Rising: Revengence",),
-        CardItem("ic_t_pose", "Dark Souls 3",),
-        CardItem("ic_t_pose", "MARVEL Spider-Man",),
-        CardItem("ic_t_pose", "Bloodborne",),
-        CardItem("ic_t_pose", "God of War: Ragnarok",),
-        CardItem("ic_t_pose", "Gabibbo",), // */
-        CardItem("yee", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("gabibbo", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
+        CardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi",),
+        CardItem("ic_t_pose",           "Matel Gear Rising: Revengence",),
+        CardItem("ic_t_pose",           "Dark Souls 3",),
+        CardItem("ic_t_pose",           "MARVEL Spider-Man",),
+        CardItem("ic_t_pose",           "Bloodborne",),
+        CardItem("ic_t_pose",           "God of War: Ragnarok",),
+        CardItem("ic_t_pose",           "Gabibbo",), // */
+        CardItem("yee",                 "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("gabibbo",             "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Bloodborne",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Bloodborne",),
     )
 
-    private val LOG_TAG = "HomeFragment"
-
-    private var adapter: CardAdapter? = null
-
-    private var adapter2: CustomAdapter? = null
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var contexter: ViewGroup
     private lateinit var gridView: GridView
 
 
-    val uti: Utilities = Utilities()
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main);
-
-        if(savedInstanceState == null && DEBUG == 0){
-            uti.insertFragment(this, HomeFragment(), HomeFragment::class.java.simpleName)
-        } else {
-            //setGridView(this)
-        }
-
-    }*/
-
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.home)
 
-        // initializing variables of grid view with their ids.
-        gridView = findViewById(R.id.gameGridView)
+        println("BELANDIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: $this")
 
+        gridView = this.findViewById(R.id.gameGridView)
 
-        // on below line we are initializing our course adapter
-        // and passing course list and context.
-        val courseAdapter = CustomAdapter(this@MainActivity, gameItems, this)
+        Log.e("BELANDIH", this.toString())
+        val courseAdapter = CustomAdapter(this@MainActivity, gameItems, this@MainActivity)
 
         // on below line we are setting adapter to our grid view.
         gridView.adapter = courseAdapter
 
-        // on below line we are adding on item
-        // click listener for our grid view.
         gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            // inside on click method we are simply displaying
-            // a toast message with course name.
             Toast.makeText(
                 applicationContext, gameItems[position].gameTitle + " selected",
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
-
-
-
-
 
 }
