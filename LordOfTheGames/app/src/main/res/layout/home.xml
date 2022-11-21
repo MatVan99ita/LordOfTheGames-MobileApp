@@ -6,13 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <include layout="@layout/topbar"/>
 
+    <include layout="@layout/topbar"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view"
         android:layout_marginTop="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/grid_layout"/>
+        tools:listitem="@layout/grid_layout1234"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
