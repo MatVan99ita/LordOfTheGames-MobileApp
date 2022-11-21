@@ -18,34 +18,34 @@ import com.example.lordofthegames.recyclerView.CardItem
 
 class HomeFragment: Fragment() {
 
-    var gameItems: ArrayList<CardItem> = listOf(
+    var gameItems: List<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi",),
-        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi",),
-        CardItem("ic_t_pose", "Matel Gear Rising: Revengence",),
-        CardItem("ic_t_pose", "Dark Souls 3",),
-        CardItem("ic_t_pose", "MARVEL Spider-Man",),
-        CardItem("ic_t_pose", "Bloodborne",),
-        CardItem("ic_t_pose", "God of War: Ragnarok",),
-        CardItem("ic_t_pose", "Gabibbo",), // */
-        CardItem("yee", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("gabibbo", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
-    ) as ArrayList<CardItem>
+        CardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi",),
+        CardItem("ic_t_pose",           "Matel Gear Rising: Revengence",),
+        CardItem("ic_t_pose",           "Dark Souls 3",),
+        CardItem("ic_t_pose",           "MARVEL Spider-Man",),
+        CardItem("ic_t_pose",           "Bloodborne",),
+        CardItem("ic_t_pose",           "God of War: Ragnarok",),
+        CardItem("ic_t_pose",           "Gabibbo",), // */
+        CardItem("yee",                 "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("gabibbo",             "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Bloodborne",),
+        CardItem("gabibbo",             "Dark Souls 3",),
+        CardItem("yee",                 "MARVEL Spider-Man",),
+        CardItem("gabibbo",             "Bloodborne",),
+    )
 
     private val LOG_TAG = "HomeFragment"
 
