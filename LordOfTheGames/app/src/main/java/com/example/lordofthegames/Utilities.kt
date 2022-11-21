@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.gridView.CustomAdapter
 import com.example.lordofthegames.gridView.SecondActivity
 
-class Utilities {
+public class Utilities {
     public fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
         val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 

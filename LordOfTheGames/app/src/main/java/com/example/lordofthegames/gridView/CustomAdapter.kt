@@ -50,8 +50,7 @@ class CustomAdapter(
         var drawable: Drawable? = null
         var convertView = view
         if (layoutInflater == null) {
-            layoutInflater =
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         }
 
         if (convertView == null) {

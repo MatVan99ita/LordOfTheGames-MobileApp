@@ -62,6 +62,8 @@ import com.example.lordofthegames.recyclerView.CardItem
 
 class MainActivity : AppCompatActivity() {
 
+    val DEBUG = 0
+
     var gameItems: List<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi",),
         CardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi",),
@@ -92,28 +94,33 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var gridView: GridView
-
+    private val uti: Utilities = Utilities()
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.home)
+        setContentView(R.layout.activity_main)
 
-        println("BELANDIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: $this")
 
-        gridView = this.findViewById(R.id.gameGridView)
+        if(savedInstanceState == null || DEBUG == 0){
+            uti.insertFragment(this, HomeFragment(), HomeFragment::class.java.simpleName)
+        } else {
+            println("BELANDIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: $this")
 
-        Log.e("BELANDIH", this.toString())
-        val courseAdapter = CustomAdapter(this@MainActivity, gameItems, this@MainActivity)
+            gridView = this.findViewById(R.id.gameGridView)
 
-        // on below line we are setting adapter to our grid view.
-        gridView.adapter = courseAdapter
+            Log.e("BELANDIH", this.toString())
+            val courseAdapter = CustomAdapter(this@MainActivity, gameItems, this)
 
-        gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            Toast.makeText(
-                applicationContext, gameItems[position].gameTitle + " selected",
-                Toast.LENGTH_SHORT
-            ).show()
+            gridView.adapter = courseAdapter
+
+            gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                Toast.makeText(
+                    applicationContext, gameItems[position].gameTitle + " selected",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
     }
+
+        }
 
 }
