@@ -13,7 +13,7 @@
         android:id="@+id/recycler_view"
         android:layout_marginTop="?attr/actionBarSize"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/grid_layout1234"/>
+        tools:listitem="@layout/activity_main"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
