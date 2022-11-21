@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/topbar"/>
+    <include layout="@layout/topbar"/>
     <!--
     GridView with 3 value for numColumns attribute
     -->

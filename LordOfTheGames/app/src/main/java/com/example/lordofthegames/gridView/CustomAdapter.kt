@@ -11,11 +11,16 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.lordofthegames.games.Game
+import com.example.lordofthegames.HomeFragment
 import com.example.lordofthegames.R
+import com.example.lordofthegames.recyclerView.CardItem
+import kotlinx.coroutines.NonDisposableHandle.parent
 
-class CustomAdapter(var context: Context, var games: List<Game>, var activity: Activity) : BaseAdapter() {
-    private val inflater: LayoutInflater = (LayoutInflater.from(context))
+class CustomAdapter(private var context: Context, private var games: List<CardItem>, private val activity: Activity) : BaseAdapter() {
+    private var layoutInflater: LayoutInflater? = null
+
+    private lateinit var iconTitle: TextView
+    private lateinit var icon: ImageView
 
     override fun getCount(): Int {
         return games.count()
@@ -31,14 +36,31 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
 
     @SuppressLint("ViewHolder", "InflateParams")
     override fun getView(i: Int, view: View?, viewGroup: ViewGroup?): View {
-        val view = inflater.inflate(R.layout.grid_item, null)
-        val icon: ImageView = view!!.findViewById(R.id.icon)
-        val iconTitle: TextView = view.findViewById(R.id.title)
-        val el = this.games[i]
-        iconTitle.text = this.games[i].name
         var drawable: Drawable? = null
-        val imagePath: String = el.image
+        var convertView = view
+        // on blow line we are checking if layout inflater
+        // is null, if it is null we are initializing it.
+        if (layoutInflater == null) {
+            layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        }
 
+        if (convertView == null) {
+            // on below line we are passing the layout file
+            // which we have to inflate for each item of grid view.
+            convertView = layoutInflater!!.inflate(R.layout.gridview_item, null)
+        }
+
+        // on the below line we are checking if convert view is null.
+        // If it is null we are initializing it.
+        // on below line we are initializing our course image view
+        // and course text view with their ids.
+        icon      = convertView!!.findViewById(R.id.game_img)
+        iconTitle = convertView  .findViewById(R.id.game_title2)
+
+        // on below line we are setting image for our course image view.
+        val el = this.games[i]
+        val imagePath: String = el.imageResource
         if (imagePath.contains("ic_")) {
             drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
         } else if(imagePath.contains("gabibbo")) {
@@ -47,7 +69,10 @@ class CustomAdapter(var context: Context, var games: List<Game>, var activity: A
             drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
         }
         icon.setImageDrawable(drawable)
-        return view
+        // on below line we are setting text in our course text view.
+        iconTitle.text = el.gameTitle
+        // at last we are returning our convert view.
+        return convertView
     }
 
 }
