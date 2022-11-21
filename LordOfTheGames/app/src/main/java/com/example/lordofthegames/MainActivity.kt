@@ -13,6 +13,7 @@ import com.example.lordofthegames.games.Game
 import com.example.lordofthegames.games.Notes
 import com.example.lordofthegames.gridView.CustomAdapter
 import com.example.lordofthegames.gridView.SecondActivity
+import com.example.lordofthegames.recyclerView.CardItem
 
 /* Struttura del db
  *
@@ -52,6 +53,8 @@ import com.example.lordofthegames.gridView.SecondActivity
 
 
 class MainActivity : AppCompatActivity() {
+    val DEBUG: Int = 0
+
     var achievements: List<Achievement> = listOf(Achievement("Uccidi", "Uccidi il cattivo", "", 1, false), Achievement("Finisci", "Finisci il gioco", "", 1, false))
     var tag: List<Categories> = listOf(Categories("GDR"), Categories("FPS"))
     var games: List<Game> = listOf(
@@ -83,17 +86,24 @@ class MainActivity : AppCompatActivity() {
         Game("Bloodborne",                        achievements, "gabibbo",              listOf(tag[1], tag[0]), "", Notes("", "") ),
     )
 
-    var simpleGrid: GridView? = null
-    var recyclerView: RecyclerView? = null
+
+    val uti: Utilities = Utilities()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.grid_layout);
+        setContentView(R.layout.activity_main);
 
-        setGridView(this)
+        if(savedInstanceState == null && DEBUG == 0){
+            uti.insertFragment(this, HomeFragment(), HomeFragment::class.java.simpleName)
+        } else {
+            setGridView(this)
+        }
+
     }
 
-    private fun setGridView(mainActivity: MainActivity) {
+    var simpleGrid: GridView? = null
+    var recyclerView: RecyclerView? = null
+    public fun setGridView(mainActivity: MainActivity) {
 
         simpleGrid = findViewById<View>(R.id.simpleGridView) as GridView // init GridView
 
@@ -111,5 +121,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent) // start Intent
             }
     }
+
+
 
 }

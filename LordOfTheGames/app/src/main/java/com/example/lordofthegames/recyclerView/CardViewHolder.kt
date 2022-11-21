@@ -11,7 +11,7 @@ class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val gameTitle: TextView
 
     init {
-        this.gameImg = itemView.findViewById(R.id.gameImage)
-        this.gameTitle = itemView.findViewById(R.id.game_title)
+        this.gameImg = itemView.findViewById(R.id.icon)
+        this.gameTitle = itemView.findViewById(R.id.title)
     }
 }

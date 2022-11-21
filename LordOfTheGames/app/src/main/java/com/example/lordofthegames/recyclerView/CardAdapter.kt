@@ -12,7 +12,7 @@ import com.example.lordofthegames.R
 class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.card_layout, parent, false)
+        val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
         return CardViewHolder(layoutView)
     }
 
@@ -20,10 +20,16 @@ class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): Rec
         val currentCardItem: CardItem = this.cardItemList.get(position)
         val imagePath: String = currentCardItem.imageResource
 
-        if (imagePath.contains("ic_")){
-            val drawable: Drawable? = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
-            holder.gameImg.setImageDrawable(drawable)
+        var drawable: Drawable? = null
+
+        if (imagePath.contains("ic_")) {
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+        } else if(imagePath.contains("gabibbo")) {
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
+        } else if(imagePath.contains("yee")) {
+            drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
         }
+            holder.gameImg.setImageDrawable(drawable)
 
         holder.gameTitle.setText(currentCardItem.gameTitle)
     }
