@@ -13,7 +13,9 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.games.Achievement
 import com.example.lordofthegames.games.Categories
 import com.example.lordofthegames.games.Game
@@ -94,14 +96,20 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var gridView: GridView
-    private val uti: Utilities = Utilities()
+    private lateinit var addViewModel: AddViewModel
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_settings)
 
+        if (savedInstanceState == null) Utilities.insertFragment(
+            this, HomeFragment(),
+            HomeFragment::class.java.simpleName
+        )
+        addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 
-        if(savedInstanceState == null || DEBUG == 0){
+/*
+        if (savedInstanceState == null || DEBUG == 0) {
             uti.insertFragment(this, HomeFragment(), HomeFragment::class.java.simpleName)
         } else {
             println("BELANDIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII: $this")
@@ -118,9 +126,7 @@ class MainActivity : AppCompatActivity() {
                     applicationContext, gameItems[position].gameTitle + " selected",
                     Toast.LENGTH_SHORT
                 ).show()
-        }
+            }
+        }// */
     }
-
-        }
-
 }
