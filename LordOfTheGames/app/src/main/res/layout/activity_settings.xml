@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/topbar"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="0dp"

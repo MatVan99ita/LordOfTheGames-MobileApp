@@ -4,13 +4,17 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 
 
 public class Utilities {
     companion object{
+
+        const val REQUEST_IMAGE_CAPTURE = 1
         public fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
@@ -41,6 +45,16 @@ public class Utilities {
             drawable.setBounds(0, 0, canvas.width, canvas.height)
             drawable.draw(canvas)
             return bitmap
+        }
+
+        fun setUpToolBar(activity: AppCompatActivity, title: String?) {
+            val actionBar: ActionBar? = activity.supportActionBar
+            if (actionBar == null) {
+                val toolBar = Toolbar(activity)
+                activity.setSupportActionBar(toolBar)
+            } else {
+                activity.supportActionBar!!.title = title
+            }
         }
     }
 

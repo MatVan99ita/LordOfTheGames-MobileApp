@@ -7,7 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <include layout="@layout/topbar"/>
     <!--
     GridView with 3 value for numColumns attribute
     -->

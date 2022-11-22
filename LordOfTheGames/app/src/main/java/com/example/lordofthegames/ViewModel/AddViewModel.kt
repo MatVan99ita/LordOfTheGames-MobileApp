@@ -13,11 +13,15 @@ import com.example.lordofthegames.Utilities
 class AddViewModel(application: Application) : AndroidViewModel(
     application
 ) {
-    public val imageBitmap = MutableLiveData<Bitmap>()
+    public var imageBitmap = MutableLiveData<Bitmap>()
     private var app: Application
     init {
         this.app = application
         initializeBitmap()
+    }
+
+    public fun setImageBitmap(bitmap: Bitmap){
+        this.imageBitmap.value = bitmap
     }
 
     public fun initializeBitmap() {
