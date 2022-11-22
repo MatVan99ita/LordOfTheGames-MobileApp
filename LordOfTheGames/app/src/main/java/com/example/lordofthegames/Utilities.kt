@@ -18,7 +18,7 @@ public class Utilities {
         public fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
-            transaction.replace(R.id.gameGridView, fragment, tag)
+            transaction.replace(R.id.fragment_container_view, fragment, tag)
 
             when(fragment){
                 is HomeFragment -> transaction.addToBackStack(tag)

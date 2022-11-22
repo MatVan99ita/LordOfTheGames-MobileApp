@@ -10,10 +10,8 @@ import android.widget.AdapterView
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.gridView.CustomAdapter
-
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CardItem
 
@@ -21,32 +19,32 @@ import com.example.lordofthegames.recyclerView.CardItem
 class HomeFragment: Fragment() {
 
     var gameItems: List<CardItem> = listOf(
-        CardItem("ic__search_white_24", "Spado spado uccidi uccidi",),
-        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi",),
-        CardItem("ic_t_pose", "Matel Gear Rising: Revengence",),
-        CardItem("ic_t_pose", "Dark Souls 3",),
-        CardItem("ic_t_pose", "MARVEL Spider-Man",),
-        CardItem("ic_t_pose", "Bloodborne",),
-        CardItem("ic_t_pose", "God of War: Ragnarok",),
-        CardItem("ic_t_pose", "Gabibbo",), // */
-        CardItem("yee", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("gabibbo", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
-        CardItem("gabibbo", "Dark Souls 3",),
-        CardItem("yee", "MARVEL Spider-Man",),
-        CardItem("gabibbo", "Bloodborne",),
+        CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
+        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi"),
+        CardItem("ic_t_pose", "Matel Gear Rising: Revengence"),
+        CardItem("ic_t_pose", "Dark Souls 3"),
+        CardItem("ic_t_pose", "MARVEL Spider-Man"),
+        CardItem("ic_t_pose", "Bloodborne"),
+        CardItem("ic_t_pose", "God of War: Ragnarok"),
+        CardItem("ic_t_pose", "Gabibbo"), // */
+        CardItem("yee", "Dark Souls 3"),
+        CardItem("yee", "MARVEL Spider-Man"),
+        CardItem("gabibbo", "Dark Souls 3"),
+        CardItem("gabibbo", "MARVEL Spider-Man"),
+        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West"),
+        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo", "Dark Souls 3"),
+        CardItem("yee", "MARVEL Spider-Man"),
+        CardItem("gabibbo", "Bloodborne"),
+        CardItem("gabibbo", "Dark Souls 3"),
+        CardItem("yee", "MARVEL Spider-Man"),
+        CardItem("gabibbo", "Bloodborne"),
     )
 
     private val LOG_TAG = "HomeFragment"
@@ -72,12 +70,12 @@ class HomeFragment: Fragment() {
         if(activity != null){
             Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.app_name))
 
-            setGridView(activity)
+            setRecyclerView(activity)
 
         }
     }
 
-    private fun setGridView(activity: Activity) {
+    /*private fun setGridView(activity: Activity) {
 
         simpleGrid = activity.findViewById(R.id.gameGridView) as GridView // init GridView
         //this.adapter = CardAdapter(gameItems, activity)
@@ -95,6 +93,13 @@ class HomeFragment: Fragment() {
                 intent.putExtra("game_title", games[position].name) // put image data in Intent
                 startActivity(intent) // start Intent*/
         }
+    }*/
+
+    private fun setRecyclerView(activity: Activity) {
+        recyclerView = activity.findViewById(R.id.recycler_view)
+        recyclerView.setHasFixedSize(true)
+        adapter = CardAdapter(gameItems, activity)
+        recyclerView.adapter = adapter
     }
 }
 
