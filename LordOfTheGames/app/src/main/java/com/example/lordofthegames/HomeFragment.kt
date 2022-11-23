@@ -61,11 +61,11 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val act: Activity? = activity
-        if(act != null){
-            Utilities.setUpToolBar(act as AppCompatActivity, getString(R.string.app_name))
+        val activity: Activity? = activity
+        if(activity != null){
+            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.app_name))
 
-            setRecyclerView(act)
+            setRecyclerView(activity)
 
         } else {
             Log.e("HomeFragment", "Activity is null")
@@ -75,10 +75,8 @@ class HomeFragment: Fragment() {
     private fun setRecyclerView(act: Activity) {
         recyclerView = act.findViewById(R.id.recycler_view)
         adapter = CardAdapter(gameItems, act)
-        val gridLayout: GridLayoutManager = GridLayoutManager(activity, 3)
-        recyclerView.setHasFixedSize(false)
-        recyclerView.setPadding(0, 0, 0, 0)
-        recyclerView.clipChildren = true
+        val gridLayout = GridLayoutManager(activity, 3)
+        recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
     }
