@@ -6,10 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.gridView.CustomAdapter
 import com.example.lordofthegames.recyclerView.CardAdapter
@@ -18,7 +18,7 @@ import com.example.lordofthegames.recyclerView.CardItem
 
 class HomeFragment: Fragment() {
 
-    var gameItems: List<CardItem> = listOf(
+    private var gameItems: MutableList<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
         CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi"),
         CardItem("ic_t_pose", "Matel Gear Rising: Revengence"),
@@ -45,33 +45,29 @@ class HomeFragment: Fragment() {
         CardItem("gabibbo", "Dark Souls 3"),
         CardItem("yee", "MARVEL Spider-Man"),
         CardItem("gabibbo", "Bloodborne"),
-    )
-
-    private val LOG_TAG = "HomeFragment"
+    ) as MutableList<CardItem>
 
     private var adapter: CardAdapter? = null
-
-    private var adapter2: CustomAdapter? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var contexter: ViewGroup
-    var simpleGrid: GridView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings, container, false)
+        return inflater.inflate(R.layout.home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity: Activity? = activity
-        if(activity != null){
-            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.app_name))
+        val act: Activity? = activity
+        if(act != null){
+            Utilities.setUpToolBar(act as AppCompatActivity, getString(R.string.app_name))
 
-            setRecyclerView(activity)
+            setRecyclerView(act)
 
+        } else {
+            Log.e("HomeFragment", "Activity is null")
         }
     }
 
@@ -95,10 +91,13 @@ class HomeFragment: Fragment() {
         }
     }*/
 
-    private fun setRecyclerView(activity: Activity) {
-        recyclerView = activity.findViewById(R.id.recycler_view)
+    private fun setRecyclerView(act: Activity) {
+        recyclerView = act.findViewById(R.id.recycler_view)
+        adapter = CardAdapter(gameItems, act)
+        val gridLayout: GridLayoutManager = GridLayoutManager(activity, 3)
+
         recyclerView.setHasFixedSize(true)
-        adapter = CardAdapter(gameItems, activity)
+        recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
     }
 }

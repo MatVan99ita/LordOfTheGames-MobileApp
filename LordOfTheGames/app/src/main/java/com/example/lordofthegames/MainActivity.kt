@@ -3,15 +3,12 @@ package com.example.lordofthegames
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.GridView
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
-import com.example.lordofthegames.recyclerView.CardItem
 
 
 /* Struttura del db
@@ -52,60 +49,20 @@ import com.example.lordofthegames.recyclerView.CardItem
 
 
 class MainActivity : AppCompatActivity() {
-
-    val DEBUG = 0
-
-    var gameItems: List<CardItem> = listOf(
-        CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi"),
-        CardItem("ic_t_pose", "Matel Gear Rising: Revengence"),
-        CardItem("ic_t_pose", "Dark Souls 3"),
-        CardItem("ic_t_pose", "MARVEL Spider-Man"),
-        CardItem("ic_t_pose", "Bloodborne"),
-        CardItem("ic_t_pose", "God of War: Ragnarok"),
-        CardItem("ic_t_pose", "Gabibbo"), // */
-        CardItem("yee", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("gabibbo", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Bloodborne"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Bloodborne"),
-    )
-
-    private lateinit var gridView: GridView
-    private lateinit var addViewModel: AddViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    private var addViewModel: AddViewModel? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         if (savedInstanceState == null) Utilities.insertFragment(
-            this, HomeFragment(),
+            this,
+            HomeFragment(),
             HomeFragment::class.java.simpleName
         )
         addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // return super.onCreateOptionsMenu(menu);
-        menuInflater.inflate(R.menu.top_app_bar, menu)
-        return true
-    }*/
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        //return super.onCreateOptionsMenu(menu)
+        // return super.onCreateOptionsMenu(menu);
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
@@ -120,16 +77,16 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == Utilities.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            val bundle: Bundle? = data?.extras
-            if(bundle != null){
-                val bitmap: Bitmap = bundle.get("data") as Bitmap
-                addViewModel.setImageBitmap(bitmap)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val bundle = data!!.extras
+            if (bundle != null) {
+                val imageBitmap = bundle["data"] as Bitmap?
+                addViewModel!!.setImageBitmap(imageBitmap!!)
             }
         }
     }
+
 
 }

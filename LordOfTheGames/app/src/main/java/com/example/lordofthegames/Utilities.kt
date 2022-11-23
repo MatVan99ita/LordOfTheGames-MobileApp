@@ -15,6 +15,7 @@ public class Utilities {
     companion object{
 
         const val REQUEST_IMAGE_CAPTURE = 1
+
         public fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 

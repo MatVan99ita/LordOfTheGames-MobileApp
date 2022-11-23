@@ -17,7 +17,7 @@ class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): Rec
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val currentCardItem: CardItem = this.cardItemList.get(position)
+        val currentCardItem: CardItem = this.cardItemList[position]
         val imagePath: String = currentCardItem.imageResource
 
         var drawable: Drawable? = null
@@ -29,9 +29,10 @@ class CardAdapter(var cardItemList: List<CardItem>, var activity: Activity): Rec
         } else if(imagePath.contains("yee")) {
             drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
         }
-            holder.gameImg.setImageDrawable(drawable)
 
-        holder.gameTitle.setText(currentCardItem.gameTitle)
+        holder.gameImg.setImageDrawable(drawable)
+
+        holder.gameTitle.text = currentCardItem.gameTitle
     }
 
     override fun getItemCount(): Int {
