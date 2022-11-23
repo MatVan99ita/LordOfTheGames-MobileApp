@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,31 +21,31 @@ class HomeFragment: Fragment() {
 
     private var gameItems: MutableList<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        CardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi"),
-        CardItem("ic_t_pose", "Matel Gear Rising: Revengence"),
-        CardItem("ic_t_pose", "Dark Souls 3"),
-        CardItem("ic_t_pose", "MARVEL Spider-Man"),
-        CardItem("ic_t_pose", "Bloodborne"),
-        CardItem("ic_t_pose", "God of War: Ragnarok"),
-        CardItem("ic_t_pose", "Gabibbo"), // */
-        CardItem("yee", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("gabibbo", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Horizon Zero Dawn: Forbidden West"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Bloodborne"),
-        CardItem("gabibbo", "Dark Souls 3"),
-        CardItem("yee", "MARVEL Spider-Man"),
-        CardItem("gabibbo", "Bloodborne"),
+        CardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
+        CardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
+        CardItem("ic_t_pose",           "Dark Souls 3"),
+        CardItem("ic_t_pose",           "MARVEL Spider-Man"),
+        CardItem("ic_t_pose",           "Bloodborne"),
+        CardItem("ic_t_pose",           "God of War: Ragnarok"),
+        CardItem("ic_t_pose",           "Gabibbo"), // */
+        CardItem("yee",                 "Dark Souls 3"),
+        CardItem("yee",                 "MARVEL Spider-Man"),
+        CardItem("gabibbo",             "Dark Souls 3"),
+        CardItem("gabibbo",             "MARVEL Spider-Man"),
+        CardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West"),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        CardItem("gabibbo",             "Dark Souls 3"),
+        CardItem("yee",                 "MARVEL Spider-Man"),
+        CardItem("gabibbo",             "Bloodborne"),
+        CardItem("gabibbo",             "Dark Souls 3"),
+        CardItem("yee",                 "MARVEL Spider-Man"),
+        CardItem("gabibbo",             "Bloodborne"),
     ) as MutableList<CardItem>
 
     private var adapter: CardAdapter? = null
@@ -71,32 +72,13 @@ class HomeFragment: Fragment() {
         }
     }
 
-    /*private fun setGridView(activity: Activity) {
-
-        simpleGrid = activity.findViewById(R.id.gameGridView) as GridView // init GridView
-        //this.adapter = CardAdapter(gameItems, activity)
-        this.adapter2 = CustomAdapter(contexter.context, gameItems, activity)
-        // Create an object of CustomAdapter and set Adapter to GirdView
-        // Create an object of CustomAdapter and set Adapter to GirdView
-        simpleGrid!!.adapter = adapter2
-        // implement setOnItemClickListener event on GridView
-        simpleGrid!!.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                Log.i("HomeFragment", gameItems[position].toString())
-                // set an Intent to Another Activity
-                /*val intent = Intent(this, SecondActivity::class.java)
-                intent.putExtra("game_cover", games[position].image) // put image data in Intent
-                intent.putExtra("game_title", games[position].name) // put image data in Intent
-                startActivity(intent) // start Intent*/
-        }
-    }*/
-
     private fun setRecyclerView(act: Activity) {
         recyclerView = act.findViewById(R.id.recycler_view)
         adapter = CardAdapter(gameItems, act)
         val gridLayout: GridLayoutManager = GridLayoutManager(activity, 3)
-
-        recyclerView.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(false)
+        recyclerView.setPadding(0, 0, 0, 0)
+        recyclerView.clipChildren = true
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
     }

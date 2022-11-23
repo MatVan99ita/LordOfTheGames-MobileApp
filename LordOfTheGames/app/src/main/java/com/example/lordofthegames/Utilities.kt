@@ -16,7 +16,7 @@ public class Utilities {
 
         const val REQUEST_IMAGE_CAPTURE = 1
 
-        public fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
+        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
             transaction.replace(R.id.fragment_container_view, fragment, tag)
@@ -34,7 +34,7 @@ public class Utilities {
          * @param drawable the drawable of the android icon
          * @return the bitmap of the drawable
          */
-        public fun drawableToBitmap(drawable: Drawable): Bitmap? {
+        fun drawableToBitmap(drawable: Drawable): Bitmap? {
             if (drawable is BitmapDrawable) {
                 return drawable.bitmap
             }

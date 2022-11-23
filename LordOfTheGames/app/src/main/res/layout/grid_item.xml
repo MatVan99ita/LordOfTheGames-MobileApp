@@ -5,14 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_card"
-    android:layout_margin="16dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="2dp"
     >
 
     <LinearLayout
+        android:id="@+id/linearItemLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/game_icon"
@@ -21,12 +24,12 @@
             android:scaleType="fitCenter"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_launcher_foreground"
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:contentDescription="@string/immagine" />
         <TextView
             android:id="@+id/game_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="sifgebjavhbj"
             android:paddingBottom="2dp"
             android:singleLine="true"
             />

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view"
         android:layout_marginTop="?attr/actionBarSize"
+        android:clipChildren="true"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/grid_item"
         />

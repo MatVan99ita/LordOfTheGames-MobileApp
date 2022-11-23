@@ -2,11 +2,10 @@ package com.example.lordofthegames
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+
 
 class AddFragment: Fragment() {
     override fun onCreateView(
@@ -29,6 +28,11 @@ class AddFragment: Fragment() {
             Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.findItem(R.id.app_bar_search).setVisible(false)
     }
 
 }
