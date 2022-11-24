@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.lordofthegames.app-mergeDebugResources-30:/values-it-rIT/values-it-rIT.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\vanni\\Desktop\\SCUOLA\\UNIVERSITA\\ANDOROIDO\\ProgettoMobile\\LordOfTheGames-MobileApp\\LordOfTheGames\\app\\src\\main\\res\\values-it-rIT\\strings.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "57,110",
+                        "endColumns": "51,40",
+                        "endOffsets": "104,146"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,107",
+                        "endColumns": "51,40",
+                        "endOffsets": "102,143"
+                    }
+                }
+            ]
+        }
+    ]
+}
