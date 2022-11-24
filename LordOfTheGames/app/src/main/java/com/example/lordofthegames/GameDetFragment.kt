@@ -2,17 +2,24 @@ package com.example.lordofthegames
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 
 
 class GameDetFragment: Fragment() {
+    private lateinit var imagePath: String
+    private lateinit var title: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +27,9 @@ class GameDetFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState);
+
+        imagePath = arguments?.getString("game_cover").toString()
+        title     = arguments?.getString("game_title").toString()
         return inflater.inflate(R.layout.game_details, container, false)
     }
 
@@ -34,7 +44,23 @@ class GameDetFragment: Fragment() {
         if (activity != null) {
             Utilities.setUpToolBar((activity as AppCompatActivity?)!!, getString(R.string.settings))
             val gameDetTitle: TextView = view.findViewById(R.id.game_det_title)
-            gameDetTitle.text = getString(R.string.search)
+            val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
+
+            Log.e("BELIN", imagePath)
+            Log.e("BELIN", title)
+
+            var drawable: Drawable? = null
+
+            if (imagePath.contains("ic_")){
+                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+            } else if(imagePath.contains("gabibbo")) {
+                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
+            } else if(imagePath.contains("yee")){
+                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
+            }
+
+            gameDetTitle.text = title
+            selectedImage.setImageDrawable(drawable)
 
         }
     }

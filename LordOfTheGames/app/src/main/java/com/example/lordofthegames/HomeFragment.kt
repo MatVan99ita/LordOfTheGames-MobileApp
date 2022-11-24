@@ -1,6 +1,7 @@
 package com.example.lordofthegames
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -86,7 +87,14 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onItemClick(position: Int) {
         val act: Activity? = activity
         if(act != null){
+            val bundle = Bundle()
+            bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
+            bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
+            val gamedet = GameDetFragment()
+            gamedet.arguments = bundle
             Utilities.insertFragment(act as AppCompatActivity, GameDetFragment(), GameDetFragment::class.java.simpleName)
+
+        // */
         }
     }
 }
