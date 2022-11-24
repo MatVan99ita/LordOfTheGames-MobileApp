@@ -50,19 +50,25 @@ import com.example.lordofthegames.ViewModel.AddViewModel
 
 class MainActivity : AppCompatActivity() {
     private var addViewModel: AddViewModel? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) Utilities.insertFragment(
-            this,
-            HomeFragment(),
-            HomeFragment::class.java.simpleName
-        )
+        if (savedInstanceState == null) {
+            Utilities.insertFragment(
+                this,
+                HomeFragment(),
+                HomeFragment::class.java.simpleName
+            )
+        }
+
         addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // return super.onCreateOptionsMenu(menu);
+        //super.onCreateOptionsMenu(menu);
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
@@ -87,6 +93,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
 
 }

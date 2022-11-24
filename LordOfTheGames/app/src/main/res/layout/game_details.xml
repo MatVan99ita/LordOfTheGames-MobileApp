@@ -9,10 +9,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.lordofthegames.gridView.SecondActivity">
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayoutCompat"
@@ -22,7 +22,7 @@
             >
 
             <TextView
-                android:id="@+id/game_title"
+                android:id="@+id/game_det_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -43,11 +43,11 @@
                 android:layout_height="0dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_videogame_30"
-                app:layout_constraintStart_toEndOf="@id/game_title"
+                app:layout_constraintStart_toEndOf="@id/game_det_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.2"
-                app:layout_constraintBottom_toBottomOf="@id/game_title"
+                app:layout_constraintBottom_toBottomOf="@id/game_det_title"
                 />
 
             <ImageView
@@ -55,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:scaleType="fitXY"
-                app:layout_constraintTop_toBottomOf="@id/game_title"
+                app:layout_constraintTop_toBottomOf="@id/game_det_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/textView"
                 tools:layout_editor_absoluteY="75dp"
@@ -68,7 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="300dp"
                 android:text="@string/long_text"
-                app:layout_constraintTop_toBottomOf="@id/game_title"
+                app:layout_constraintTop_toBottomOf="@id/game_det_title"
                 app:layout_constraintStart_toEndOf="@id/selectedImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:gravity="clip_vertical"

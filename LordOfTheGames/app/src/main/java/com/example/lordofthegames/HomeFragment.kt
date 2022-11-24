@@ -15,9 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.gridView.CustomAdapter
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CardItem
+import com.example.lordofthegames.recyclerView.OnItemListener
 
 
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(), OnItemListener {
 
     private var gameItems: MutableList<CardItem> = listOf(
         CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
@@ -63,7 +64,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if(activity != null){
-            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.app_name))
+            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
             setRecyclerView(activity)
 
@@ -74,11 +75,19 @@ class HomeFragment: Fragment() {
 
     private fun setRecyclerView(act: Activity) {
         recyclerView = act.findViewById(R.id.recycler_view)
-        adapter = CardAdapter(gameItems, act)
+        val listener: OnItemListener = this
+        adapter = CardAdapter(listener, gameItems, act)
         val gridLayout = GridLayoutManager(activity, 3)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
+    }
+
+    override fun onItemClick(position: Int) {
+        val act: Activity? = activity
+        if(act != null){
+            Utilities.insertFragment(act as AppCompatActivity, GameDetFragment(), GameDetFragment::class.java.simpleName)
+        }
     }
 }
 

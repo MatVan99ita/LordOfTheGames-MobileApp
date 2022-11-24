@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -21,8 +22,8 @@ public class Utilities {
 
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            when(fragment){
-                is HomeFragment -> transaction.addToBackStack(tag)
+            if (fragment !is HomeFragment){
+                transaction.addToBackStack(tag);
             }
 
             transaction.commit()
@@ -50,9 +51,12 @@ public class Utilities {
 
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
             val actionBar: ActionBar? = activity.supportActionBar
+            Log.e("BELINDI Util.setUp", actionBar.toString())
             if (actionBar == null) {
                 val toolBar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
+
+                Log.e("BELINDI Util.setUp", toolBar.toString())
             } else {
                 activity.supportActionBar!!.title = title
             }

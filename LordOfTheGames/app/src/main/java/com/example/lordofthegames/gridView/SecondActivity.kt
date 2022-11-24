@@ -15,9 +15,9 @@ class SecondActivity: AppCompatActivity() {
     private lateinit var gtitle: TextView
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.game_details)
         selectedImage = findViewById(R.id.selectedImage)
-        gtitle = findViewById(R.id.game_title)
+        gtitle = findViewById(R.id.game_det_title)
         val intent: Intent = intent
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()

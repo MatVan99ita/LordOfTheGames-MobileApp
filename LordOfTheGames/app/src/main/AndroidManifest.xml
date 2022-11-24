@@ -25,7 +25,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".gridView.SecondActivity"/>
+        <activity android:name=".GameDetActivity"/>
     </application>
 
 </manifest>

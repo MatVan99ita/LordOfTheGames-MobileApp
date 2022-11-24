@@ -17,4 +17,5 @@
     <style name="Theme.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="android:textColorPrimary">@color/white</item>
     </style>
+
 </resources>
