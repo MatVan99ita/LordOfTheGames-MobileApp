@@ -90,9 +90,8 @@ class HomeFragment: Fragment(), OnItemListener {
             val bundle = Bundle()
             bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
             bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
-            val gamedet = GameDetFragment()
-            gamedet.arguments = bundle
-            Utilities.insertFragment(act as AppCompatActivity, GameDetFragment(), GameDetFragment::class.java.simpleName)
+
+            Utilities.insertFragment(act as AppCompatActivity, GameDetFragment(), GameDetFragment::class.java.simpleName, bundle)
 
         // */
         }

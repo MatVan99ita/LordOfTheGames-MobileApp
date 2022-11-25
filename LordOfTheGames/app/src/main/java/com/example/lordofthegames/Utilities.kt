@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -17,8 +18,14 @@ public class Utilities {
 
         const val REQUEST_IMAGE_CAPTURE = 1
 
-        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String){
+        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
+
+            Log.e("UTIL", bundle.toString())
+
+            fragment.arguments = bundle
+
+            Log.e("UTIL 2", fragment.arguments.toString())
 
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 

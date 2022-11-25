@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             Utilities.insertFragment(
                 this,
                 HomeFragment(),
-                HomeFragment::class.java.simpleName
+                HomeFragment::class.java.simpleName, null
             )
         }
 

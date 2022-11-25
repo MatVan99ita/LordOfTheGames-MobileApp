@@ -27,9 +27,6 @@ class GameDetFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState);
-
-        imagePath = arguments?.getString("game_cover").toString()
-        title     = arguments?.getString("game_title").toString()
         return inflater.inflate(R.layout.game_details, container, false)
     }
 
@@ -46,8 +43,9 @@ class GameDetFragment: Fragment() {
             val gameDetTitle: TextView = view.findViewById(R.id.game_det_title)
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
 
-            Log.e("BELIN", imagePath)
-            Log.e("BELIN", title)
+
+            imagePath = arguments?.getString("game_cover").toString()
+            title     = arguments?.getString("game_title").toString()
 
             var drawable: Drawable? = null
 
