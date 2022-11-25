@@ -6,14 +6,17 @@
         android:id="@+id/app_bar_search"
         android:icon="@drawable/ic_search_black_24"
         android:title="@string/search"
-        app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom"
+        android:contentDescription="@string/search"
         />
 
     <item
         android:id="@+id/app_bar_settings"
         android:icon="@drawable/ic_settings_24"
         android:title="@string/settings"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom"
+        android:contentDescription="@string/settings"
+        />
 
 </menu>

@@ -21,11 +21,7 @@ public class Utilities {
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
-            Log.e("UTIL", bundle.toString())
-
             fragment.arguments = bundle
-
-            Log.e("UTIL 2", fragment.arguments.toString())
 
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
@@ -58,15 +54,13 @@ public class Utilities {
 
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
             val actionBar: ActionBar? = activity.supportActionBar
-            Log.e("BELINDI Util.setUp", actionBar.toString())
             if (actionBar == null) {
-                val toolBar = Toolbar(activity)
+                val toolBar: Toolbar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
-
-                Log.e("BELINDI Util.setUp", toolBar.toString())
             } else {
-                activity.supportActionBar!!.title = title
+                actionBar.title = title
             }
+            Log.e("UTIL SETUP", actionBar.toString())
         }
     }
 

@@ -1,19 +1,15 @@
 package com.example.lordofthegames
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.GridView
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.gridView.CustomAdapter
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -61,10 +57,16 @@ class HomeFragment: Fragment(), OnItemListener {
         return inflater.inflate(R.layout.home, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if(activity != null){
+
             Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
             setRecyclerView(activity)
@@ -87,6 +89,8 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onItemClick(position: Int) {
         val act: Activity? = activity
         if(act != null){
+
+
             val bundle = Bundle()
             bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
             bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
@@ -95,6 +99,36 @@ class HomeFragment: Fragment(), OnItemListener {
 
         // */
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        /*val item = menu.findItem(R.id.app_bar_search)
+        val searchView: SearchView = item.actionView as SearchView
+        searchView.setOnQueryTextListener(object : OnQueryTextListener {
+            /**
+             * Called when the user submits the query. This could be due to a key press on the keyboard
+             * or due to pressing a submit button.
+             * @param query the query text that is to be submitted
+             * @return true if the query has been handled by the listener, false to let the
+             * SearchView perform the default action.
+             */
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            /**
+             * Called when the query text is changed by the user.
+             * @param newText the new content of the query text field.
+             * @return false if the SearchView should perform the default action of showing any
+             * suggestions if available, true if the action was handled by the listener.
+             */
+            override fun onQueryTextChange(newText: String): Boolean {
+                //adapter.getFilter().filter(newText);
+                return true
+            }
+        }) // */
+
     }
 }
 
