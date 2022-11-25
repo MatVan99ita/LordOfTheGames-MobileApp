@@ -1,9 +1,10 @@
-package com.example.lordofthegames
+package com.example.lordofthegames.Settings
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import com.example.lordofthegames.R
 
 class SettingsActivity: AppCompatActivity() {
 

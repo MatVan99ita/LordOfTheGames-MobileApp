@@ -1,6 +1,5 @@
-package com.example.lordofthegames
+package com.example.lordofthegames.Settings
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,6 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.google.android.material.textfield.TextInputLayout
 
 class SettingsFragment: Fragment() {

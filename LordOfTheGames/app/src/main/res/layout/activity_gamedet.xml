@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:name="com.example.lordofthegames.GameDetFragment"
+        android:name="com.example.lordofthegames.GameDeatils.GameDetFragment"
         tools:layout="@layout/game_details"
         />
 

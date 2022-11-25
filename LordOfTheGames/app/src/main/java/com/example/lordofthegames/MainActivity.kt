@@ -3,12 +3,12 @@ package com.example.lordofthegames
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val toolbar = findViewById<Toolbar>(R.id.topAppBar)
+        //val toolbar = findViewById<Toolbar>(R.id.topAppBar)
         menuInflater.inflate(R.layout.topbar as Int, menu)
         return true
     }
