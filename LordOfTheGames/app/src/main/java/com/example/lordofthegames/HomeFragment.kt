@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
@@ -103,6 +104,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
+
         /*val item = menu.findItem(R.id.app_bar_search)
         val searchView: SearchView = item.actionView as SearchView
         searchView.setOnQueryTextListener(object : OnQueryTextListener {

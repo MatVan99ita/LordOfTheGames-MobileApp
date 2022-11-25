@@ -55,11 +55,12 @@ public class Utilities {
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
             val actionBar: ActionBar? = activity.supportActionBar
             if (actionBar == null) {
-                val toolBar: Toolbar = Toolbar(activity)
+                val toolBar: Toolbar = activity.findViewById(R.id.topAppBar)
                 activity.setSupportActionBar(toolBar)
-            } else {
-                actionBar.title = title
             }
+            //actionBar?.title = title
+            //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
+
             Log.e("UTIL SETUP", actionBar.toString())
         }
     }

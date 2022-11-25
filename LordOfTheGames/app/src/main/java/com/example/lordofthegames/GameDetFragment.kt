@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -14,7 +15,6 @@ import androidx.fragment.app.Fragment
 
 class GameDetFragment: Fragment() {
     private lateinit var imagePath: String
-    private lateinit var title: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +34,12 @@ class GameDetFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if (activity != null) {
-            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.settings))
+            Utilities.setUpToolBar(activity as AppCompatActivity, arguments?.getString("game_title").toString())
             val gameDetTitle: TextView = view.findViewById(R.id.game_det_title)
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
 
 
             imagePath = arguments?.getString("game_cover").toString()
-            title     = arguments?.getString("game_title").toString()
 
             var drawable: Drawable? = null
 
@@ -52,17 +51,13 @@ class GameDetFragment: Fragment() {
                 drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
             }
 
-            gameDetTitle.text = title
             selectedImage.setImageDrawable(drawable)
 
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.e("GameDetFragment", " onCreateOptionsMenu")
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.top_app_bar, menu)
         menu.findItem(R.id.app_bar_search).isVisible = false
-        menu.findItem(R.id.app_bar_settings).isVisible = false
     }
 }

@@ -3,8 +3,10 @@ package com.example.lordofthegames
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
@@ -68,8 +70,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        //super.onCreateOptionsMenu(menu);
-        menuInflater.inflate(R.menu.top_app_bar, menu)
+        val toolbar = findViewById<Toolbar>(R.id.topAppBar)
+        menuInflater.inflate(R.layout.topbar as Int, menu)
         return true
     }
 

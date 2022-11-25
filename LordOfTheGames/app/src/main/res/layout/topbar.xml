@@ -7,22 +7,22 @@
     <!--com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/app_name"
-        android:theme="@style/Theme.App.Toolbar"
-        app:menu="@menu/top_app_bar"
-        app:navigationIcon="@drawable/ic_menu_24dp"
-        /-->
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/topAppBar"
-        app:title="@string/app_name"
-        app:menu="@menu/top_app_bar"
         android:theme="@style/Theme.App.Toolbar"
+        app:menu="@menu/top_app_bar"
         app:navigationIcon="@drawable/ic_menu_24dp"
-        />
+        app:title="@string/app_name" /-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        >
+    </androidx.appcompat.widget.Toolbar>
 
 </com.google.android.material.appbar.AppBarLayout>
 <!--
