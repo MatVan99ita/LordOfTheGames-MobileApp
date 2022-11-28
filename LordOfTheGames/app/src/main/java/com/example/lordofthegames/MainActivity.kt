@@ -5,12 +5,14 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
+import com.example.lordofthegames.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 
 
 /* Struttura del db
@@ -52,8 +54,8 @@ import com.example.lordofthegames.ViewModel.AddViewModel
 
 class MainActivity : AppCompatActivity() {
     private var addViewModel: AddViewModel? = null
-
-
+    private var binding: ActivityMainBinding? = null
+    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,13 +67,19 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        val drawer: DrawerLayout = binding!!.
+        val navigationView: NavigationView = binding!!.navView
+
+        Utilities.setUpDrawer(this, drawer, navigationView)
+
         addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         //val toolbar = findViewById<Toolbar>(R.id.topAppBar)
-        menuInflater.inflate(R.layout.topbar as Int, menu)
+        menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
 

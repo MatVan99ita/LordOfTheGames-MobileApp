@@ -5,24 +5,26 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.databinding.FragmentGameDetailsBinding
 
 
 class GameDetFragment: Fragment() {
     private lateinit var imagePath: String
+    private var binding: FragmentGameDetailsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.game_details, container, false)
+        binding = FragmentGameDetailsBinding.inflate(inflater, container, false)
+        return inflater.inflate(R.layout.fragment_game_details, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,6 @@ class GameDetFragment: Fragment() {
                 activity as AppCompatActivity,
                 arguments?.getString("game_title").toString()
             )
-            val gameDetTitle: TextView = view.findViewById(R.id.game_det_title)
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
 
 
@@ -62,5 +63,10 @@ class GameDetFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.findItem(R.id.app_bar_search).isVisible = false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

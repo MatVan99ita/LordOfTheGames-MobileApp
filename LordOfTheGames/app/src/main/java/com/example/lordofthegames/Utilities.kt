@@ -9,8 +9,15 @@ import android.util.Log
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.navigation.NavigationView
 
 
 public class Utilities {
@@ -55,16 +62,29 @@ public class Utilities {
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
             val actionBar: ActionBar? = activity.supportActionBar
             if (actionBar == null) {
-                val toolBar: Toolbar = activity.findViewById(R.id.topAppBar)
+                val toolBar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
+            } else {
+                actionBar.title = title
             }
-            //actionBar?.title = title
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
 
             Log.e("UTIL SETUP", actionBar.toString())
         }
+
+        fun setUpDrawer(activity: AppCompatActivity, drawerLayout: DrawerLayout, navigationView: NavigationView){
+            val navController = findNavController(activity, R.id.fragment_container_view)
+            setupActionBarWithNavController(
+                activity,
+                navController,
+                AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_setting)
+                    .setOpenableLayout(drawerLayout)
+                    .build()
+            )
+            setupWithNavController(navigationView, navController)
+        }
+
     }
-
-
 
 }
