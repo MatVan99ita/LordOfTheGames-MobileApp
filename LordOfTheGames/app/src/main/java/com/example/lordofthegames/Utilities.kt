@@ -12,10 +12,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -61,6 +64,8 @@ public class Utilities {
 
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
             val actionBar: ActionBar? = activity.supportActionBar
+            //val navController: NavController = NavController(context = activity)
+            //val appBarConfiguration = AppBarConfiguration(navController.graph)
             if (actionBar == null) {
                 val toolBar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
@@ -68,6 +73,7 @@ public class Utilities {
                 actionBar.title = title
             }
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
+
 
             Log.e("UTIL SETUP", actionBar.toString())
         }

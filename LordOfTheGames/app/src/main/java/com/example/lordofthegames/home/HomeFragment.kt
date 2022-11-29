@@ -79,6 +79,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
             Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
+            //<include layout="@layout/topbar"/>
             setRecyclerView(activity)
 
         } else {

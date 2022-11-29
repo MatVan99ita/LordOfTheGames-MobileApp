@@ -6,8 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
@@ -69,16 +74,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
         //val drawer: DrawerLayout = binding.drawerLayout
         //val navigationView: NavigationView = binding.navView
 
         //Utilities.setUpDrawer(this, drawer, navigationView)
 
-        addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
+        //addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        //val toolbar = findViewById<Toolbar>(R.id.topAppBar)
+        val toolbar = R.layout.topbar
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
@@ -86,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         if (item.itemId == R.id.app_bar_settings) {
-            val intent = Intent(this, SettingsActivity::class.java)
+            val intent = Intent(this, R.layout.activity_drawer_main.javaClass)
             this.startActivity(intent)
             return true
         }
