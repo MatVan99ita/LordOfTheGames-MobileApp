@@ -12,10 +12,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.lordofthegames.HomeFragment
 import com.example.lordofthegames.R
 import com.example.lordofthegames.recyclerView.CardItem
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class CustomAdapter(
     private val context: Context,

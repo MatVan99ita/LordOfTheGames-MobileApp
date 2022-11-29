@@ -16,7 +16,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.viewbinding.ViewBinding
+import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
 

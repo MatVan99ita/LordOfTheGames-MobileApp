@@ -12,6 +12,7 @@ import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.databinding.ActivityMainBinding
+import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
 
@@ -54,11 +55,11 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private var addViewModel: AddViewModel? = null
-    private var binding: ActivityMainBinding? = null
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         if (savedInstanceState == null) {
             Utilities.insertFragment(
                 this,
@@ -67,10 +68,9 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        val drawer: DrawerLayout = binding!!.
-        val navigationView: NavigationView = binding!!.navView
+        val drawer: DrawerLayout = binding.drawerLayout
+        val navigationView: NavigationView = binding.navView
 
         Utilities.setUpDrawer(this, drawer, navigationView)
 

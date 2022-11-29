@@ -1,4 +1,4 @@
-package com.example.lordofthegames
+package com.example.lordofthegames.home
 
 import android.app.Activity
 import android.os.Bundle
@@ -6,9 +6,13 @@ import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDeatils.GameDetFragment
+import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.databinding.FragmentHomeBinding
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -48,16 +52,19 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var contest: ViewGroup
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        if (container != null) {
-            contest = container
-        }
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        //return inflater.inflate(R.layout.fragment_home, container, false)
+        val homeViewModel: HomeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +105,12 @@ class HomeFragment: Fragment(), OnItemListener {
             bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
             bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
 
-            Utilities.insertFragment(act as AppCompatActivity, GameDetFragment(), GameDetFragment::class.java.simpleName, bundle)
+            Utilities.insertFragment(
+                act as AppCompatActivity,
+                GameDetFragment(),
+                GameDetFragment::class.java.simpleName,
+                bundle
+            )
 
         // */
         }
