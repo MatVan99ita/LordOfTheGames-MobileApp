@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
-import com.example.lordofthegames.databinding.ActivityMainBinding
+//import com.example.lordofthegames.databinding.ActivityMainBinding
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -55,11 +55,11 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private var addViewModel: AddViewModel? = null
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             Utilities.insertFragment(
                 this,
@@ -69,10 +69,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val drawer: DrawerLayout = binding.drawerLayout
-        val navigationView: NavigationView = binding.navView
+        //val drawer: DrawerLayout = binding.drawerLayout
+        //val navigationView: NavigationView = binding.navView
 
-        Utilities.setUpDrawer(this, drawer, navigationView)
+        //Utilities.setUpDrawer(this, drawer, navigationView)
 
         addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 

@@ -59,7 +59,7 @@ class HomeFragment: Fragment(), OnItemListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
         val homeViewModel: HomeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
