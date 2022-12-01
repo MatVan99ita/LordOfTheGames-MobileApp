@@ -43,6 +43,15 @@ public class Utilities {
             transaction.commit()
         }
 
+        fun showSideMenu(activity: AppCompatActivity, fragment: Fragment){
+            val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
+
+            transaction.add(fragment, "side")
+            transaction.show(fragment, )
+
+            transaction.commit()
+        }
+
 
         /**
          * Utility to convert a drawable into a bitmap (to store the android icon as a bitmap)

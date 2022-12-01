@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.lordofthegames.Settings.SettingsActivity
+import com.example.lordofthegames.SideMenu.SideMenuFragment
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 //import com.example.lordofthegames.databinding.ActivityMainBinding
@@ -90,8 +91,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         if (item.itemId == R.id.app_bar_settings) {
-            val intent = Intent(this, SettingsActivity::class.java)
-            this.startActivity(intent)
+            Utilities.showSideMenu(
+                this,
+                SideMenuFragment()
+            )
+            //val intent = Intent(this, SettingsActivity::class.java)
+            //this.startActivity(intent)
             return true
         }
         return false
