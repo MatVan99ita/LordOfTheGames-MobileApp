@@ -19,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.lordofthegames.GameDeatils.GameDetFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -35,7 +36,7 @@ public class Utilities {
 
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            if (fragment !is HomeFragment){
+            if (fragment !is HomeFragment && fragment !is GameDetFragment){
                 transaction.addToBackStack(tag);
             }
 

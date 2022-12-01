@@ -1,6 +1,7 @@
 package com.example.lordofthegames.home
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.GameDeatils.GameDetActivity
 import com.example.lordofthegames.GameDeatils.GameDetFragment
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -101,17 +103,21 @@ class HomeFragment: Fragment(), OnItemListener {
         val act: Activity? = activity
         if(act != null){
 
+            //val bundle = Bundle()
+            //bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
+            //bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
 
-            val bundle = Bundle()
-            bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
-            bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
+            val intent = Intent(context, GameDetActivity::class.java)
+            intent.putExtra("game_cover", gameItems[position].imageResource)
+            intent.putExtra("game_title", gameItems[position].gameTitle)
+            this.startActivity(intent)
 
-            Utilities.insertFragment(
+            /*Utilities.insertFragment(
                 act as AppCompatActivity,
                 GameDetFragment(),
                 GameDetFragment::class.java.simpleName,
                 bundle
-            )
+            )*/
 
         // */
         }

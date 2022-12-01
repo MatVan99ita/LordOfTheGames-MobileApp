@@ -1,8 +1,10 @@
 package com.example.lordofthegames.GameDeatils
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +18,16 @@ import com.example.lordofthegames.databinding.FragmentGameDetailsBinding
 class GameDetFragment: Fragment() {
     private lateinit var imagePath: String
     private var binding: FragmentGameDetailsBinding? = null
-
+    private var bundle: Bundle? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         //return super.onCreateView(inflater, container, savedInstanceState);
+
+        bundle = savedInstanceState
+        Log.e("onCreateView", savedInstanceState.toString())
         binding = FragmentGameDetailsBinding.inflate(inflater, container, false)
         return inflater.inflate(R.layout.fragment_game_details, container, false)
     }
@@ -41,7 +46,6 @@ class GameDetFragment: Fragment() {
                 arguments?.getString("game_title").toString()
             )
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
-
 
             imagePath = arguments?.getString("game_cover").toString()
 
@@ -62,7 +66,7 @@ class GameDetFragment: Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu.findItem(R.id.app_bar_search).isVisible = false
+        //menu.findItem(R.id.app_bar_search).isVisible = false
     }
 
     override fun onDestroyView() {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/gd_app_bar_add"
+        android:icon="@drawable/ic_videogame_30"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom"
+        android:contentDescription="@string/settings"
+        />
+
+    <item
+        android:id="@+id/gd_app_bar_settings"
+        android:icon="@drawable/ic_settings_24"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom"
+        android:contentDescription="@string/settings"
+        />
+
+
+
+</menu>

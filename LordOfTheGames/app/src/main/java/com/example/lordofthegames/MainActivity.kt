@@ -74,8 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
         //val drawer: DrawerLayout = binding.drawerLayout
         //val navigationView: NavigationView = binding.navView
 
@@ -85,7 +83,6 @@ class MainActivity : AppCompatActivity() {
 
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val toolbar = R.layout.topbar
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
@@ -93,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
         if (item.itemId == R.id.app_bar_settings) {
-            val intent = Intent(this, R.layout.activity_drawer_main.javaClass)
+            val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
             return true
         }
