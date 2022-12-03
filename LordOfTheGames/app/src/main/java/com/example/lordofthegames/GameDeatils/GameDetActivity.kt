@@ -1,5 +1,6 @@
 package com.example.lordofthegames.GameDeatils
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -21,12 +22,7 @@ class GameDetActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_gamedet)
-        drawerLayout = findViewById(R.id.game_det_drawer)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), this)
 
         val intent: Intent = intent
         val bundle = Bundle()
@@ -43,13 +39,6 @@ class GameDetActivity: AppCompatActivity() {
             )
         }
 
-
-        /*Utilities.insertFragment(
-            this,
-            GameDetFragment(),
-            GameDetFragment::class.java.simpleName,
-            bundle
-        )*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,16 +47,21 @@ class GameDetActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.app_bar_settings) {
+        return if (item.itemId == R.id.gd_app_bar_settings) {
             val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
             true
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
             true
+        } else if(item.itemId == R.id.gd_app_bar_add) {
+            Utilities.insertFragment(
+                this,
+                GameDetFragment(),
+                GameDetFragment::class.java.simpleName, null
+            )
+            true
         } else {
             super.onOptionsItemSelected(item)
-            true
         }
-        return false
     }
 }

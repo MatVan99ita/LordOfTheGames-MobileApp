@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="?attr/actionBarSize"
+    android:id="@+id/top_bar"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -9,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/Theme.App.Toolbar"
-        app:menu="@menu/top_app_bar"
         app:navigationIcon="@drawable/ic_menu_24dp"
         app:title="@string/app_name" />
 

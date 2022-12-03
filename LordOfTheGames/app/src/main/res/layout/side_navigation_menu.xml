@@ -6,4 +6,6 @@
     android:fitsSystemWindows="true"
     app:headerLayout="@layout/nav_header_main"
     app:menu="@menu/drawer_menu"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_view"
+    />

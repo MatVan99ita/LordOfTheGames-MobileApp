@@ -84,19 +84,19 @@ public class Utilities {
             }
             actionBar?.title = title
             actionBar?.setDisplayHomeAsUpEnabled(true)
+            //supportActionBar?.setDisplayHomeAsUpEnabled(true)
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
-
 
             Log.e("UTIL SETUP", actionBar.toString())
         }
 
-        fun setUpDrawer(drawerLayout: DrawerLayout, activity: Activity, supportActionBar: ActionBar?){
+        fun setUpDrawer(drawerLayout: DrawerLayout, activity: Activity): ActionBarDrawerToggle{
             //drawerLayout = findViewById(R.id.main_activity_drawer)
             val actionBarDrawerToggle = ActionBarDrawerToggle(activity as AppCompatActivity, drawerLayout, R.string.belandih, R.string.besughi)
 
             drawerLayout.addDrawerListener(actionBarDrawerToggle)
             actionBarDrawerToggle.syncState()
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            return actionBarDrawerToggle
         }
 
     }

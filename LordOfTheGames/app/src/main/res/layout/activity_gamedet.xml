@@ -7,13 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameDeatils.GameDetActivity"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     tools:openDrawer="start"
     tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".GameDeatils.GameDetFragment">
 
         <androidx.fragment.app.FragmentContainerView
@@ -24,6 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="?attr/actionBarSize"
             android:name="com.example.lordofthegames.GameDeatils.GameDetFragment"
             tools:layout="@layout/fragment_game_details"
             />

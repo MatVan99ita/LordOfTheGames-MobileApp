@@ -1,6 +1,7 @@
 package com.example.lordofthegames
 
 //import com.example.lordofthegames.databinding.ActivityMainBinding
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,12 +9,19 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.SideMenu.SideMenuFragment
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.HomeFragment
+import com.google.android.material.navigation.NavigationView
 
 
 /* Struttura del db
@@ -65,6 +73,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //binding = ActivityMainBinding.inflate(layoutInflater)
@@ -80,22 +89,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         Utilities.setUpToolBar(this, getString(R.string.app_name))
+        actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.main_activity_drawer), this)
 
-        //Utilities.setUpDrawer(findViewById(R.id.main_activity_drawer), this, supportActionBar)
 
-        drawerLayout = findViewById(R.id.main_activity_drawer)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        //val drawer: DrawerLayout = binding.drawerLayout
-        //val navigationView: NavigationView = binding.navView
-
-        //Utilities.setUpDrawer(this, drawer, navigationView)
-
-        //addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 
     }
 
@@ -107,10 +103,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.app_bar_settings) {
-            /*Utilities.showSideMenu(
-                this,
-                SideMenuFragment()
-            )*/
             val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
             true
@@ -118,9 +110,7 @@ class MainActivity : AppCompatActivity() {
             true
         } else {
             super.onOptionsItemSelected(item)
-            true
         }
-        return false
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -133,6 +123,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
