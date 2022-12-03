@@ -70,13 +70,6 @@ class MainActivity : AppCompatActivity() {
         //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-        drawerLayout = findViewById(R.id.main_activity_drawer)
-        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
-
-        drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         if (savedInstanceState == null) {
             Utilities.insertFragment(
@@ -86,6 +79,16 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+        Utilities.setUpToolBar(this, getString(R.string.app_name))
+
+        //Utilities.setUpDrawer(findViewById(R.id.main_activity_drawer), this, supportActionBar)
+
+        drawerLayout = findViewById(R.id.main_activity_drawer)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //val drawer: DrawerLayout = binding.drawerLayout
         //val navigationView: NavigationView = binding.navView
@@ -95,6 +98,8 @@ class MainActivity : AppCompatActivity() {
         //addViewModel = ViewModelProvider(this)[AddViewModel::class.java]
 
     }
+
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return true

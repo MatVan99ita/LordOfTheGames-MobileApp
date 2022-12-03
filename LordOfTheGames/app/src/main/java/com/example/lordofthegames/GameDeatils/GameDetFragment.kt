@@ -45,6 +45,8 @@ class GameDetFragment: Fragment() {
                 activity as AppCompatActivity,
                 arguments?.getString("game_title").toString()
             )
+
+            //Utilities.setUpDrawer(activity.findViewById(R.id.game_det_drawer), activity, activity.supportActionBar)
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
 
             imagePath = arguments?.getString("game_cover").toString()

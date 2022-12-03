@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -56,6 +58,9 @@ class HomeFragment: Fragment(), OnItemListener {
     private lateinit var contest: ViewGroup
     private lateinit var binding: FragmentHomeBinding
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,6 +76,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setHasOptionsMenu(true)
     }
 
@@ -79,7 +85,6 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null){
 
-            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
             //<include layout="@layout/topbar"/>
             setRecyclerView(activity)

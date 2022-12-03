@@ -1,5 +1,6 @@
 package com.example.lordofthegames
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -7,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -79,26 +81,22 @@ public class Utilities {
             if (actionBar == null) {
                 val toolBar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
-            } else {
-                actionBar.title = title
             }
+            actionBar?.title = title
+            actionBar?.setDisplayHomeAsUpEnabled(true)
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
 
 
             Log.e("UTIL SETUP", actionBar.toString())
         }
 
-        fun setUpDrawer(activity: AppCompatActivity, drawerLayout: DrawerLayout, navigationView: NavigationView){
-            val navController = findNavController(activity, R.id.fragment_container_view)
-            setupActionBarWithNavController(
-                activity,
-                navController,
-                AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_setting)
-                    .setOpenableLayout(drawerLayout)
-                    .build()
-            )
-            setupWithNavController(navigationView, navController)
+        fun setUpDrawer(drawerLayout: DrawerLayout, activity: Activity, supportActionBar: ActionBar?){
+            //drawerLayout = findViewById(R.id.main_activity_drawer)
+            val actionBarDrawerToggle = ActionBarDrawerToggle(activity as AppCompatActivity, drawerLayout, R.string.belandih, R.string.besughi)
+
+            drawerLayout.addDrawerListener(actionBarDrawerToggle)
+            actionBarDrawerToggle.syncState()
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
 
     }
