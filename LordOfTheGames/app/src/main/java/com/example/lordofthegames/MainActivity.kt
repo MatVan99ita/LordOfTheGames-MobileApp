@@ -1,25 +1,19 @@
 package com.example.lordofthegames
 
+//import com.example.lordofthegames.databinding.ActivityMainBinding
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.SideMenu.SideMenuFragment
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
-//import com.example.lordofthegames.databinding.ActivityMainBinding
 import com.example.lordofthegames.home.HomeFragment
-import com.google.android.material.navigation.NavigationView
 
 
 /* Struttura del db
@@ -60,12 +54,30 @@ import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity : AppCompatActivity() {
+
+
     private var addViewModel: AddViewModel? = null
     //private lateinit var binding: ActivityMainBinding
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
+
+        drawerLayout = findViewById(R.id.main_activity_drawer)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
         if (savedInstanceState == null) {
             Utilities.insertFragment(
                 this,
@@ -89,15 +101,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        if (item.itemId == R.id.app_bar_settings) {
-            Utilities.showSideMenu(
+        return if (item.itemId == R.id.app_bar_settings) {
+            /*Utilities.showSideMenu(
                 this,
                 SideMenuFragment()
-            )
-            //val intent = Intent(this, SettingsActivity::class.java)
-            //this.startActivity(intent)
-            return true
+            )*/
+            val intent = Intent(this, SettingsActivity::class.java)
+            this.startActivity(intent)
+            true
+        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+            true
         }
         return false
     }

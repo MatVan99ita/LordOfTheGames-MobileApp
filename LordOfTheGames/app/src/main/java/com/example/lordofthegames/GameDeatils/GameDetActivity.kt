@@ -4,18 +4,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.home.HomeFragment
 
 
 class GameDetActivity: AppCompatActivity() {
 
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_gamedet)
+        drawerLayout = findViewById(R.id.game_det_drawer)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val intent: Intent = intent
         val bundle = Bundle()
@@ -47,11 +58,15 @@ class GameDetActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        if (item.itemId == R.id.app_bar_settings) {
-            val intent = Intent(this, R.layout.activity_drawer_main.javaClass)
+        return if (item.itemId == R.id.app_bar_settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
-            return true
+            true
+        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+            true
         }
         return false
     }

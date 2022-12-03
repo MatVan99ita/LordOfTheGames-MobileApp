@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme. Theme.MaterialComponents.DayNight.DarkActionBar Theme.AppCompat.DayNight.NoActionBar-->
     <style name="Theme.LordOfTheGames" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#6200ee</item>
