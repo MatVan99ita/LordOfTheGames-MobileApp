@@ -8,4 +8,5 @@
     app:menu="@menu/drawer_menu"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nav_view"
+    style="@style/App.SideMenu"
     />

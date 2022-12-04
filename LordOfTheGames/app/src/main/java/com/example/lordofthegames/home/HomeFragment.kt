@@ -56,7 +56,6 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var contest: ViewGroup
     private lateinit var binding: FragmentHomeBinding
 
 
@@ -86,8 +85,6 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null){
 
-
-            //<include layout="@layout/topbar"/>
             setRecyclerView(activity)
 
         } else {

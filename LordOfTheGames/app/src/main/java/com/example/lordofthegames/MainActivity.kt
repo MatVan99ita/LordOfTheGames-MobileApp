@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private var addViewModel: AddViewModel? = null
-    //private lateinit var binding: ActivityMainBinding
-
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
@@ -76,9 +74,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-
 
         if (savedInstanceState == null) {
             Utilities.insertFragment(
@@ -88,10 +84,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        Utilities.setUpToolBar(this, getString(R.string.app_name))
         actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.main_activity_drawer), this)
-
-
+        Utilities.setUpToolBar(this, getString(R.string.app_name))
 
     }
 
