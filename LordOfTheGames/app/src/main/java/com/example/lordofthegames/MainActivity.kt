@@ -56,6 +56,22 @@ import com.google.android.material.navigation.NavigationView
  * Game.id -> Achievements.game
  *
  *
+ *
+ *
+ *
+ *
+ *
+ * #TODO:
+ *  O RIFARE COMPLETAMENTE RIPARTENDO DAL PROGETTO VUOTO DEL DRAWER
+ * CAPIRE COME SWITCHARE FRAGMENTE E ACTIVITY
+ * METTERE LA BOTTOM BAR CON LE 3 ACTIVITY PER USARE L'APP
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
 
 
