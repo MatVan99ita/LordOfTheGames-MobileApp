@@ -25,7 +25,7 @@ class AddFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if(activity != null){
-            Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
+            //Utilities.setUpToolBar(activity as AppCompatActivity, getString(R.string.search))
 
         }
     }

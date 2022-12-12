@@ -1,52 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:id="@+id/top_bar"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/Theme.App.Toolbar"
-        app:navigationIcon="@drawable/ic_menu_24dp"
-        app:title="@string/app_name" />
-
-    <!--androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:menu="@menu/top_app_bar"
-        >
-    </androidx.appcompat.widget.Toolbar-->
+        app:title="@string/app_name"
+        app:navigationIcon="@drawable/ic_menu_24dp"
+        android:theme="@style/Theme.App.Toolbar"/>
 
 </com.google.android.material.appbar.AppBarLayout>
-<!--
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.App.Toolbar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_menu_24dp"
-            app:title="@string/app_name"
-            app:menu="@menu/top_app_bar"
-            app:popupTheme="@style/Theme.LordOfTheGames"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
--->

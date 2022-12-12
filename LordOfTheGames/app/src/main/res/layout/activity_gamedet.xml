@@ -6,15 +6,20 @@
     android:id="@+id/game_det_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameDeatils.GameDetActivity"
+    tools:context=".GameDetails.GameDetActivity"
     android:fitsSystemWindows="false"
     tools:openDrawer="start"
     tools:ignore="HardcodedText">
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".GameDeatils.GameDetFragment">
+        tools:context=".GameDetails.GameDetFragment">
+
+        <include layout="@layout/topbar"/>
 
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="0dp"
@@ -24,12 +29,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:name="com.example.lordofthegames.GameDeatils.GameDetFragment"
+            android:name="com.example.lordofthegames.GameDetails.GameDetFragment"
             tools:layout="@layout/fragment_game_details"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <include layout="@layout/side_navigation_menu"/>
 

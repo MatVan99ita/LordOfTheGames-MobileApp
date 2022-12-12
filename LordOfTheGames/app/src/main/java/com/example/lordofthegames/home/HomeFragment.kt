@@ -5,22 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.GameDeatils.GameDetActivity
-import com.example.lordofthegames.GameDeatils.GameDetFragment
+import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentHomeBinding
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 
 
 class HomeFragment: Fragment(), OnItemListener {
@@ -60,7 +62,6 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,6 +78,8 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         setHasOptionsMenu(true)
     }
 
@@ -86,6 +89,7 @@ class HomeFragment: Fragment(), OnItemListener {
         if(activity != null){
 
             setRecyclerView(activity)
+
 
         } else {
             Log.e("HomeFragment", "Activity is null")

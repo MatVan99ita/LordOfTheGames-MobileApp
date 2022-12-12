@@ -1,17 +1,16 @@
-package com.example.lordofthegames.GameDeatils
+package com.example.lordofthegames.GameDetails
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.home.HomeFragment
 
 
 class GameDetActivity: AppCompatActivity() {
@@ -22,7 +21,7 @@ class GameDetActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_gamedet)
-        actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), this)
+        //actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), )
 
         val intent: Intent = intent
         val bundle = Bundle()
@@ -32,11 +31,23 @@ class GameDetActivity: AppCompatActivity() {
         bundle.putString("game_title", title) // put image data in Intent
 
         if (savedInstanceState == null) {
-            Utilities.insertFragment(
+            actionBarDrawerToggle = Utilities.insertFragment(
                 this,
                 GameDetFragment(),
-                GameDetFragment::class.java.simpleName, bundle
+                GameDetFragment::class.java.simpleName, bundle,
+                drawerLayout = findViewById(R.id.game_det_drawer),
+                navigationView = findViewById(R.id.nav_view),
+                title.toString()
             )
+        }
+
+        val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
+
+        toolbar?.inflateMenu(R.menu.game_det_top_bar)
+        toolbar?.title = title
+
+        toolbar?.setNavigationOnClickListener {
+            //ActionBarDrawerToggle(this, findViewById(R.id.drawer_layout), R.string.belandih, R.string.besughi).syncState()
         }
 
     }
@@ -57,7 +68,10 @@ class GameDetActivity: AppCompatActivity() {
             Utilities.insertFragment(
                 this,
                 GameDetFragment(),
-                GameDetFragment::class.java.simpleName, null
+                GameDetFragment::class.java.simpleName, null,
+                drawerLayout,
+                navigationView = findViewById(R.id.nav_view),
+                title.toString()
             )
             true
         } else {

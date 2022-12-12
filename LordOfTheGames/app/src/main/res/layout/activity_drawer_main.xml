@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GameDeatils.GameDetFragment">
+    tools:context=".GameDetails.GameDetFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="0dp"

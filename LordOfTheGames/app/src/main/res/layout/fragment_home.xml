@@ -6,9 +6,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".home.HomeFragment">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/recycler_view"
         android:clipChildren="true"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

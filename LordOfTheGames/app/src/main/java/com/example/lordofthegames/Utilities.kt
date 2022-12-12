@@ -1,12 +1,12 @@
 package com.example.lordofthegames
 
-import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,14 +14,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.lordofthegames.GameDeatils.GameDetFragment
+import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -31,11 +24,13 @@ public class Utilities {
 
         const val REQUEST_IMAGE_CAPTURE = 1
 
-        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
+        fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?, drawerLayout: DrawerLayout, navigationView: NavigationView, string: String): ActionBarDrawerToggle {
+
+
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
             fragment.arguments = bundle
-
+            val actionBarDrawerToggle = this.setUpDrawer(drawerLayout, navigationView, activity)
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
             if (fragment !is HomeFragment && fragment !is GameDetFragment){
@@ -43,13 +38,26 @@ public class Utilities {
             }
 
             transaction.commit()
+            return actionBarDrawerToggle
+        }
+
+        fun setUpDrawer(
+            drawerLayout: DrawerLayout,
+            navigationView: NavigationView,
+            activity: AppCompatActivity,
+        ): ActionBarDrawerToggle {
+            val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
+            drawerLayout.addDrawerListener(actionBarDrawerToggle)
+            actionBarDrawerToggle.syncState()
+            drawerLayout.closeDrawers()
+            return actionBarDrawerToggle
         }
 
         fun showSideMenu(activity: AppCompatActivity, fragment: Fragment){
             val transaction: FragmentTransaction = activity.supportFragmentManager.beginTransaction()
 
             transaction.add(fragment, "side")
-            transaction.show(fragment, )
+            transaction.show(fragment)
 
             transaction.commit()
         }
@@ -74,30 +82,35 @@ public class Utilities {
             return bitmap
         }
 
+        fun setToolBarLayout(activity: AppCompatActivity, toolbar: Toolbar, string: String, view: View){
+            activity.setSupportActionBar(toolbar)
+            toolbar.title = string
+
+
+
+
+        }
+
         fun setUpToolBar(activity: AppCompatActivity, title: String?) {
-            val actionBar: ActionBar? = activity.supportActionBar
+            var actionBar: ActionBar? = activity.supportActionBar
             //val navController: NavController = NavController(context = activity)
             //val appBarConfiguration = AppBarConfiguration(navController.graph)
             if (actionBar == null) {
                 val toolBar = Toolbar(activity)
                 activity.setSupportActionBar(toolBar)
+                actionBar = activity.supportActionBar
             }
             actionBar?.title = title
+            //actionBar?.displayOptions = DISPLAY_USE_LOGO
+            actionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp)
             actionBar?.setDisplayHomeAsUpEnabled(true)
-            //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            //supportActionBar?.setDisplayHomeAsUpEnabled(true)1
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
 
             Log.e("UTIL SETUP", actionBar.toString())
         }
 
-        fun setUpDrawer(drawerLayout: DrawerLayout, activity: Activity): ActionBarDrawerToggle{
-            //drawerLayout = findViewById(R.id.main_activity_drawer)
-            val actionBarDrawerToggle = ActionBarDrawerToggle(activity as AppCompatActivity, drawerLayout, R.string.belandih, R.string.besughi)
 
-            drawerLayout.addDrawerListener(actionBarDrawerToggle)
-            actionBarDrawerToggle.syncState()
-            return actionBarDrawerToggle
-        }
 
     }
 

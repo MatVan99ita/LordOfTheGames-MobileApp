@@ -1,18 +1,18 @@
-package com.example.lordofthegames.GameDeatils
+package com.example.lordofthegames.GameDetails
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentGameDetailsBinding
+import com.google.android.material.appbar.MaterialToolbar
 
 
 class GameDetFragment: Fragment() {
@@ -34,6 +34,8 @@ class GameDetFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setHasOptionsMenu(true)
     }
 
@@ -41,10 +43,7 @@ class GameDetFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if (activity != null) {
-            Utilities.setUpToolBar(
-                activity as AppCompatActivity,
-                arguments?.getString("game_title").toString()
-            )
+            //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )
 
             //Utilities.setUpDrawer(activity.findViewById(R.id.game_det_drawer), activity, activity.supportActionBar)
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
