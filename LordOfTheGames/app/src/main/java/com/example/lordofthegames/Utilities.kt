@@ -5,9 +5,8 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
 import android.view.View
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -91,9 +90,18 @@ public class Utilities {
 
         }
 
-        fun setUpToolBar(activity: AppCompatActivity, toolbar: Toolbar, title: String?, drawerLayout: DrawerLayout, menu: Int) {
+        fun setUpToolBar(
+            activity: AppCompatActivity,
+            toolbar: Toolbar,
+            title: String?,
+            drawerLayout: DrawerLayout,
+            menu: Int?,
+        ) {
 
-            toolbar.inflateMenu(menu)
+            if (menu != null) {
+                toolbar.inflateMenu(menu)
+            }
+
             toolbar.title = title
 
             toolbar.setNavigationOnClickListener {
@@ -108,7 +116,7 @@ public class Utilities {
             activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
 
 
-            var actionBar: ActionBar? = activity.supportActionBar
+            /*var actionBar: ActionBar? = activity.supportActionBar
             //val navController: NavController = NavController(context = activity)
             //val appBarConfiguration = AppBarConfiguration(navController.graph)
             if (actionBar == null) {
@@ -123,7 +131,7 @@ public class Utilities {
             //supportActionBar?.setDisplayHomeAsUpEnabled(true)1
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
 
-            Log.e("UTIL SETUP", actionBar.toString())
+            Log.e("UTIL SETUP", actionBar.toString())*/
         }
 
 

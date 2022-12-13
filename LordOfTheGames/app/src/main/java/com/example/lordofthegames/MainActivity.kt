@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -98,20 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), getString(R.string.app_name), drawerLayout, R.menu.top_app_bar)
-
-        /*onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-
-                Log.e("é aperto?", drawerLayout.isDrawerOpen(GravityCompat.END).toString())
-                if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
-                    drawerLayout.closeDrawer(GravityCompat.END)
-                } else {
-                    finish()
-                }
-                //finish()
-            }
-        })*/
+        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), getString(R.string.app_name), drawerLayout, null)
 
     }
 
@@ -122,10 +110,7 @@ class MainActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.top_app_bar, menu)
-        return true
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.app_bar_settings) {
@@ -133,6 +118,10 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
             true
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+            true
+        } else if(item.itemId == R.id.nav_setting){
+            val intent = Intent(this, SettingsActivity::class.java)
+            this.startActivity(intent)
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -157,6 +146,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        Log.e("CreateOPTMenu", menu.toString())
+        return super.onCreateOptionsMenu(menu)
     }
 
 

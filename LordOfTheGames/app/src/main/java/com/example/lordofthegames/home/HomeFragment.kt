@@ -58,9 +58,6 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var binding: FragmentHomeBinding
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,18 +65,10 @@ class HomeFragment: Fragment(), OnItemListener {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_home, container, false)
-        val homeViewModel: HomeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
         setHasOptionsMenu(true)
     }
 
@@ -89,7 +78,6 @@ class HomeFragment: Fragment(), OnItemListener {
         if(activity != null){
 
             setRecyclerView(activity)
-
 
         } else {
             Log.e("HomeFragment", "Activity is null")
@@ -110,23 +98,11 @@ class HomeFragment: Fragment(), OnItemListener {
         val act: Activity? = activity
         if(act != null){
 
-            //val bundle = Bundle()
-            //bundle.putString("game_cover", gameItems[position].imageResource) // put image data in Intent
-            //bundle.putString("game_title", gameItems[position].gameTitle) // put image data in Intent
-
             val intent = Intent(context, GameDetActivity::class.java)
             intent.putExtra("game_cover", gameItems[position].imageResource)
             intent.putExtra("game_title", gameItems[position].gameTitle)
             this.startActivity(intent)
 
-            /*Utilities.insertFragment(
-                act as AppCompatActivity,
-                GameDetFragment(),
-                GameDetFragment::class.java.simpleName,
-                bundle
-            )*/
-
-        // */
         }
     }
 

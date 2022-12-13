@@ -34,8 +34,6 @@ class GameDetFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         setHasOptionsMenu(true)
     }
 
@@ -65,10 +63,7 @@ class GameDetFragment: Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        //menu.findItem(R.id.app_bar_search).isVisible = false
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -44,7 +44,13 @@ class GameDetActivity: AppCompatActivity() {
         }
 
 
-        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), title, drawerLayout, R.menu.game_det_top_bar)
+        Utilities.setUpToolBar(
+            this,
+            findViewById<Toolbar>(R.id.toolbar),
+            title,
+            drawerLayout,
+            R.menu.game_det_top_bar,
+        )
 
     }
 
@@ -54,11 +60,11 @@ class GameDetActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.gd_app_bar_settings) {
+        return  if(item.itemId == R.id.nav_setting){
             val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
             true
-        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+        }  else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
             true
         } else if(item.itemId == R.id.gd_app_bar_add) {
             Utilities.insertFragment(
