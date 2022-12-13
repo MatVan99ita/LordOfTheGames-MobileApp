@@ -91,7 +91,23 @@ public class Utilities {
 
         }
 
-        fun setUpToolBar(activity: AppCompatActivity, title: String?) {
+        fun setUpToolBar(activity: AppCompatActivity, toolbar: Toolbar, title: String?, drawerLayout: DrawerLayout, menu: Int) {
+
+            toolbar.inflateMenu(menu)
+            toolbar.title = title
+
+            toolbar.setNavigationOnClickListener {
+                val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
+                drawerLayout.addDrawerListener(actionBarDrawerToggle)
+                actionBarDrawerToggle.syncState()
+                drawerLayout.closeDrawers()
+            }
+
+            activity.setSupportActionBar(toolbar)
+            activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
+
+
             var actionBar: ActionBar? = activity.supportActionBar
             //val navController: NavController = NavController(context = activity)
             //val appBarConfiguration = AppBarConfiguration(navController.graph)

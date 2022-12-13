@@ -7,16 +7,15 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.HomeFragment
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.navigation.NavigationView
 
 
@@ -77,19 +76,15 @@ class MainActivity : AppCompatActivity() {
 
     private var addViewModel: AddViewModel? = null
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-    private lateinit var toolbar: Toolbar
-
+    private lateinit var drawerLayout: DrawerLayout
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.main_activity_drawer)
+        drawerLayout = findViewById(R.id.main_activity_drawer)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
-
-        //Utilities.setToolBarLayout(this, findViewById<Toolbar>(R.id.top_bar_l), getString(R.string.app_name))
-
 
         if (savedInstanceState == null) {
             actionBarDrawerToggle = Utilities.insertFragment(
@@ -102,34 +97,33 @@ class MainActivity : AppCompatActivity() {
             )
 
         }
-        val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
-        toolbar?.inflateMenu(R.menu.top_app_bar)
-        toolbar?.title = getString(R.string.app_name)
 
-        toolbar?.setNavigationOnClickListener {
-            val actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.belandih, R.string.besughi)
-            drawerLayout.addDrawerListener(actionBarDrawerToggle)
-            actionBarDrawerToggle.syncState()
-            drawerLayout.closeDrawers()
-        }
+        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), getString(R.string.app_name), drawerLayout, R.menu.top_app_bar)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
+        /*onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
 
-        //Utilities.setUpToolBar(this, getString(R.string.app_name))
+                Log.e("é aperto?", drawerLayout.isDrawerOpen(GravityCompat.END).toString())
+                if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                    drawerLayout.closeDrawer(GravityCompat.END)
+                } else {
+                    finish()
+                }
+                //finish()
+            }
+        })*/
 
     }
 
 
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressed()
+
         return super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_app_bar, menu)
-
         return true
     }
 
@@ -157,6 +151,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 
 
 

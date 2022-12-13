@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
@@ -17,6 +18,7 @@ class GameDetActivity: AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,26 +31,20 @@ class GameDetActivity: AppCompatActivity() {
         val title = intent.getStringExtra("game_title").toString()
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
-
+        drawerLayout = findViewById(R.id.game_det_drawer)
         if (savedInstanceState == null) {
             actionBarDrawerToggle = Utilities.insertFragment(
                 this,
                 GameDetFragment(),
                 GameDetFragment::class.java.simpleName, bundle,
-                drawerLayout = findViewById(R.id.game_det_drawer),
+                drawerLayout = drawerLayout,
                 navigationView = findViewById(R.id.nav_view),
                 title.toString()
             )
         }
 
-        val toolbar: Toolbar? = findViewById<Toolbar>(R.id.toolbar)
 
-        toolbar?.inflateMenu(R.menu.game_det_top_bar)
-        toolbar?.title = title
-
-        toolbar?.setNavigationOnClickListener {
-            //ActionBarDrawerToggle(this, findViewById(R.id.drawer_layout), R.string.belandih, R.string.besughi).syncState()
-        }
+        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), title, drawerLayout, R.menu.game_det_top_bar)
 
     }
 
@@ -76,6 +72,14 @@ class GameDetActivity: AppCompatActivity() {
             true
         } else {
             super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 }
