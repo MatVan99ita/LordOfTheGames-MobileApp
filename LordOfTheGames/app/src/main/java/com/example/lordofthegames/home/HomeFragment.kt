@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentHomeBinding
 import com.example.lordofthegames.recyclerView.CardAdapter
@@ -69,6 +70,9 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         setHasOptionsMenu(true)
     }
 

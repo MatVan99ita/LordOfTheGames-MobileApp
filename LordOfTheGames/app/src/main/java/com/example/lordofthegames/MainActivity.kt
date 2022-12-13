@@ -78,28 +78,38 @@ class MainActivity : AppCompatActivity() {
     private var addViewModel: AddViewModel? = null
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
 
-    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         drawerLayout = findViewById(R.id.main_activity_drawer)
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView = findViewById(R.id.nav_view)
 
         if (savedInstanceState == null) {
-            actionBarDrawerToggle = Utilities.insertFragment(
+             Utilities.insertFragment(
                 this,
                 HomeFragment(),
                 HomeFragment::class.java.simpleName, null,
-                drawerLayout = drawerLayout,
-                navigationView = navigationView,
-                getString(R.string.app_name)
             )
 
         }
 
-        Utilities.setUpToolBar(this, findViewById<Toolbar>(R.id.toolbar), getString(R.string.app_name), drawerLayout, null)
+        Utilities.setUpToolBar(
+            this,
+            findViewById(R.id.toolbar),
+            getString(R.string.app_name),
+            drawerLayout,
+            null
+        )
+        actionBarDrawerToggle = Utilities.setUpDrawer(
+            drawerLayout,
+            navigationView,
+            this
+        )
+
+
 
     }
 
@@ -138,6 +148,7 @@ class MainActivity : AppCompatActivity() {
                 addViewModel!!.setImageBitmap(imageBitmap!!)
             }
         }
+
     }
 
     override fun onBackPressed() {
@@ -149,7 +160,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            if (id == R.id.nav_setting) {
+                val intent = Intent(this, SettingsActivity::class.java)
+                this.startActivity(intent)
+            }
+            //This is for maintaining the behavior of the Navigation view
+            //onNavDestinationSelected(menuItem, navController)
+            //This is for closing the drawer after acting on it
+            //drawer.closeDrawer(GravityCompat.START)
+            true
+        }
         Log.e("CreateOPTMenu", menu.toString())
         return super.onCreateOptionsMenu(menu)
     }

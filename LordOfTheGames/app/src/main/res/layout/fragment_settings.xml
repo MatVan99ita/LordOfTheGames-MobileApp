@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Settings.SettingsActivity"
+    android:layout_marginTop="?attr/actionBarSize"
+    >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/username_textinput"
+                android:layout_margin="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="username"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="textPersonName"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/username_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="username"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

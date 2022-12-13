@@ -1,5 +1,6 @@
 package com.example.lordofthegames.Settings
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -16,7 +17,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class SettingsFragment: Fragment() {
 
-    private lateinit var utilities: Utilities
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class SettingsFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.settings, container, false)
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class SettingsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity: FragmentActivity? = activity
+        val activity: Activity? = activity
 
         if(activity != null){
             val textInputLayout: TextInputLayout = view.findViewById(R.id.username_textinput)
@@ -68,10 +68,8 @@ class SettingsFragment: Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.top_app_bar, menu)
-
-        menu.findItem(R.id.app_bar_search).isVisible = false
-        menu.findItem(R.id.app_bar_settings).isVisible = false
     }
+
+
 
 }

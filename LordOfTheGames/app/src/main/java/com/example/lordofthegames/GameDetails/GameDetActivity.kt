@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
+import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
 
 
@@ -32,25 +33,31 @@ class GameDetActivity: AppCompatActivity() {
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
         drawerLayout = findViewById(R.id.game_det_drawer)
+
         if (savedInstanceState == null) {
-            actionBarDrawerToggle = Utilities.insertFragment(
+            Utilities.insertFragment(
                 this,
                 GameDetFragment(),
                 GameDetFragment::class.java.simpleName, bundle,
-                drawerLayout = drawerLayout,
-                navigationView = findViewById(R.id.nav_view),
-                title.toString()
             )
         }
 
-
         Utilities.setUpToolBar(
             this,
-            findViewById<Toolbar>(R.id.toolbar),
+            findViewById(R.id.toolbar),
             title,
             drawerLayout,
             R.menu.game_det_top_bar,
         )
+
+        actionBarDrawerToggle = Utilities.setUpDrawer(
+            drawerLayout,
+            navigationView = findViewById(R.id.nav_view),
+            this
+        )
+
+
+
 
     }
 
@@ -69,11 +76,8 @@ class GameDetActivity: AppCompatActivity() {
         } else if(item.itemId == R.id.gd_app_bar_add) {
             Utilities.insertFragment(
                 this,
-                GameDetFragment(),
-                GameDetFragment::class.java.simpleName, null,
-                drawerLayout,
-                navigationView = findViewById(R.id.nav_view),
-                title.toString()
+                SettingsFragment(),
+                SettingsFragment::class.java.simpleName, null,
             )
             true
         } else {

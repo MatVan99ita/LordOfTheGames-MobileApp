@@ -11,20 +11,16 @@
     tools:openDrawer="start"
     tools:ignore="HardcodedText">
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".GameDetails.GameDetFragment">
+        android:layout_height="wrap_content">
 
         <include layout="@layout/topbar"/>
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/fragment_container_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +30,6 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <include layout="@layout/side_navigation_menu"/>
 

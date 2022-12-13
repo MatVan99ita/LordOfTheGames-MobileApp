@@ -6,18 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
-import com.example.lordofthegames.databinding.FragmentGameDetailsBinding
-import com.google.android.material.appbar.MaterialToolbar
 
 
 class GameDetFragment: Fragment() {
     private lateinit var imagePath: String
-    private var binding: FragmentGameDetailsBinding? = null
     private var bundle: Bundle? = null
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +23,6 @@ class GameDetFragment: Fragment() {
 
         bundle = savedInstanceState
         Log.e("onCreateView", savedInstanceState.toString())
-        binding = FragmentGameDetailsBinding.inflate(inflater, container, false)
         return inflater.inflate(R.layout.fragment_game_details, container, false)
     }
 
@@ -63,10 +57,4 @@ class GameDetFragment: Fragment() {
         }
     }
 
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
-    }
 }
