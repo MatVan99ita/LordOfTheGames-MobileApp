@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_nav_home"
+        android:icon="@mipmap/ic_gabibbo_test"
+        android:title="@string/app_name"/>
+
+    <item
+        android:id="@+id/bottom_nav_search"
+        android:icon="@drawable/ic__search_white_24"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/bottom_my_game_list"
+        android:icon="@drawable/ic_baseline_view_list_24"
+        android:title="My game" />
+
+</menu>

@@ -128,6 +128,10 @@ class Utilities {
             Log.e("UTIL SETUP", actionBar.toString())*/
         }
 
+        fun setUpBottomNavigation(){
+
+        }
+
 
 
     }
