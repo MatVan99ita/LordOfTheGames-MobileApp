@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             this
         )
 
+        bottomNavigationView.itemIconTintList = null
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
