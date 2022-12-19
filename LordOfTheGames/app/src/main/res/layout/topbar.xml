@@ -9,7 +9,7 @@
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/toolbar"
         app:title="@string/app_name"
-        app:navigationIcon="@drawable/ic_menu_24dp"
+        app:navigationIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.App.Toolbar"/>
 
 </com.google.android.material.appbar.AppBarLayout>

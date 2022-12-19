@@ -1,12 +1,15 @@
 <resources>
-    <string name="app_name">LordOfTheGames</string>
-    <string name="search">search</string>
+    <string name="app_name" translatable="false">LordOfTheGames</string>
+    <string name="search">Search</string>
     <string name="settings">Settings</string>
-    <string name="image_of_game">Image of the game</string>
-    <string name="game_title">Game title</string>
-    <string name="long_text">DESCRIZIONE DELLO GIUOCO molto molto molto lunga perchè non sia mai che non provo a scrivere talemente gcevfbpwvb fgwhcgvwcbpw9 ouwq gv cbnjp9woucvk bwen uun vweknfh kwunwkuf nwef vnwf wenf wjfnadkuvjcb aeujh vcabsnlci unawe vbchwjv bna ub ujwvcisavy jcuknec vaknwce javwkbnclhiauwjvbnaluc vbaeli cuvsbcnhsauyvbnhlwejayv cbarkcu vabchkuaewvbnasuagcv ncg vncligv kncl uavsubcis uc us niav cksh vjuknil sgjhbc nseuvnasci vn evcnisa ghna cuhvaneicjvsbcnismjbnsaelikc hvbnaeic hgvsaneicjm vseacijsgve cnihcg vbsakcjm vasnkumavsckumavscniasjvcg bnli jcj tanta roba da far impaazire tutto il layout, nooo non sia mai</string>
-    <string name="long_title">un nome abbastanza lungo da poter testare il layout</string>
-    <string name="immagine">immagine</string>
-    <string name="belandih">BELANDIH</string>
-    <string name="besughi">BESUGHI</string>
+    <string name="image_of_game" translatable="false">Image of the game</string>
+    <string name="game_title" translatable="false">Game title</string>
+    <string name="long_text" translatable="false">DESCRIZIONE DELLO GIUOCO molto molto molto lunga perchè non sia mai che non provo a scrivere talemente gcevfbpwvb fgwhcgvwcbpw9 ouwq gv cbnjp9woucvk bwen uun vweknfh kwunwkuf nwef vnwf wenf wjfnadkuvjcb aeujh vcabsnlci unawe vbchwjv bna ub ujwvcisavy jcuknec vaknwce javwkbnclhiauwjvbnaluc vbaeli cuvsbcnhsauyvbnhlwejayv cbarkcu vabchkuaewvbnasuagcv ncg vncligv kncl uavsubcis uc us niav cksh vjuknil sgjhbc nseuvnasci vn evcnisa ghna cuhvaneicjvsbcnismjbnsaelikc hvbnaeic hgvsaneicjm vseacijsgve cnihcg vbsakcjm vasnkumavsckumavscniasjvcg bnli jcj tanta roba da far impaazire tutto il layout, nooo non sia mai</string>
+    <string name="long_title" translatable="false">un nome abbastanza lungo da poter testare il layout</string>
+    <string name="immagine" translatable="false">immagine</string>
+    <string name="belandih" translatable="false">BELANDIH</string>
+    <string name="besughi" translatable="false">BESUGHI</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="community">Community</string>
+    <string name="my_game">My game</string>
 </resources>

@@ -105,9 +105,12 @@ class Utilities {
                 drawerLayout.closeDrawers()
             }
 
+            toolbar.setNavigationIcon(R.mipmap.ic_launcher_round)
+
             activity.setSupportActionBar(toolbar)
+            activity.supportActionBar?.setHomeButtonEnabled(true);
             activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            activity.supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp);
+            activity.supportActionBar?.setHomeAsUpIndicator(R.mipmap.ic_launcher_round)
 
 
             /*var actionBar: ActionBar? = activity.supportActionBar
@@ -127,13 +130,6 @@ class Utilities {
 
             Log.e("UTIL SETUP", actionBar.toString())*/
         }
-
-        fun setUpBottomNavigation(){
-
-        }
-
-
-
     }
 
 }

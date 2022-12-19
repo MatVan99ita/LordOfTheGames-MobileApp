@@ -1,22 +1,27 @@
 package com.example.lordofthegames
 
 //import com.example.lordofthegames.databinding.ActivityMainBinding
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
+import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
+import com.example.lordofthegames.home.MyGameListFragment
+import com.example.lordofthegames.home.SearchFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
@@ -79,6 +84,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var actualFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +93,9 @@ class MainActivity : AppCompatActivity() {
 
         drawerLayout = findViewById(R.id.main_activity_drawer)
         navigationView = findViewById(R.id.nav_view)
+        bottomNavigationView = findViewById(R.id.bottom)
+
+        actualFragment = HomeFragment()
 
         if (savedInstanceState == null) {
              Utilities.insertFragment(
@@ -93,7 +103,6 @@ class MainActivity : AppCompatActivity() {
                 HomeFragment(),
                 HomeFragment::class.java.simpleName, null,
             )
-
         }
 
         Utilities.setUpToolBar(
@@ -110,7 +119,70 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bottom_nav_home -> {
+                    if(actualFragment !is HomeFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            HomeFragment(),
+                            HomeFragment::class.java.simpleName, null
+                        )
+                        actualFragment = HomeFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Home already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_nav_search -> {
+                    if(this.actualFragment !is SearchFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            SearchFragment(),
+                            SearchFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = SearchFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Search already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_my_game_list -> {
+                    if(this.actualFragment !is MyGameListFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            MyGameListFragment(),
+                            MyGameListFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = MyGameListFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Game list already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_community -> {
+                    if(this.actualFragment !is CommunityFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            CommunityFragment(),
+                            CommunityFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = CommunityFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Game list already initialized")
+                        false
+                    }
+                }
+                else -> {false}
+            }
+        }
     }
 
 
