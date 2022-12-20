@@ -11,7 +11,7 @@ private val TAB_TITLES = arrayOf(
     R.string.playing,
     R.string.completed,
     R.string.dropped,
-    R.string.plan_to_play
+    R.string.plan_to_play,
 )
 
 /**

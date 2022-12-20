@@ -3,7 +3,7 @@ package com.example.lordofthegames.home.mygame
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
-class PlanToPlayFragment: Fragment() {
+class CompletedView: Fragment() {
     companion object {
         /**
          * The fragment argument representing the section number for this
@@ -16,8 +16,8 @@ class PlanToPlayFragment: Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlanToPlayFragment {
-            return PlanToPlayFragment().apply {
+        fun newInstance(sectionNumber: Int): CompletedView {
+            return CompletedView().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
