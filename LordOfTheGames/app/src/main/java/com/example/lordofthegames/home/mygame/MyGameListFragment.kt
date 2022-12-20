@@ -15,7 +15,7 @@ class MyGameListFragment: Fragment() {
 
     private var viewPager: ViewPager? = null
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
-
+    private var tabLayout: TabLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,7 @@ class MyGameListFragment: Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_mygame, container, false)
         viewPager = view.findViewById<View>(R.id.view_pager) as ViewPager
         viewPager?.adapter = sectionsPagerAdapter
+        tabLayout = view.findViewById(R.id.tabs)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
