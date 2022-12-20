@@ -1,46 +1,55 @@
 package com.example.lordofthegames.home.mygame
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.lordofthegames.R
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.Tab
 
 
 class MyGameListFragment: Fragment() {
 
-    private var viewPager: ViewPager? = null
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
-    private var tabLayout: TabLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sectionsPagerAdapter = context?.let { cntx -> activity?.supportFragmentManager?.let { actFragMng ->
-                SectionsPagerAdapter(cntx, actFragMng)
+        sectionsPagerAdapter = context?.let { context -> activity?.supportFragmentManager?.let { actFragMng ->
+                SectionsPagerAdapter(context, actFragMng)
             }
         }
-        //val viewPager: ViewPager = view?.findViewById(R.id.view_pager) as ViewPager
 
-        context?.let { TabLayout(it) }?.setupWithViewPager(viewPager)
-        val tabs: TabLayout? = context?.let { TabLayout(it) }
-        tabs?.setupWithViewPager(viewPager)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        initViews(view);
         val view: View = inflater.inflate(R.layout.fragment_mygame, container, false)
-        viewPager = view.findViewById<View>(R.id.view_pager) as ViewPager
+        val viewPager = view.findViewById<ViewPager>(R.id.view_pager)
         viewPager?.adapter = sectionsPagerAdapter
-        tabLayout = view.findViewById(R.id.tabs)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val tablayout: TabLayout = view.findViewById(R.id.tab_mygame)
+        tablayout.setupWithViewPager(viewPager)
+        //TAB_TITLES.forEach { el -> tablayout.addTab(tablayout.newTab().setText(getString(el))) }
+
+        return view
+        //super.onCreateView(inflater, container, savedInstanceState)
     }
+
+    private fun initViews(view: View?) {
+        //val textView: TextView = requireView().findViewById(R.id.commonTextView)
+        //textView.text = "Category :  " + arguments!!.getInt("position")
+    }
+
 
     companion object {
         /**
