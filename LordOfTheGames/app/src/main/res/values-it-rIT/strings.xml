@@ -2,4 +2,9 @@
 <resources>
     <string name="search">Cerca</string>
     <string name="settings">Impostazioni</string>
+    <string name="completed">Completati</string>
+    <string name="all">Tutti</string>
+    <string name="plan_to_play">Pianificato per giocare</string>
+    <string name="dropped">Abbandonato</string>
+    <string name="playing">Giocando</string>
 </resources>

@@ -10,6 +10,11 @@
     <string name="belandih" translatable="false">BELANDIH</string>
     <string name="besughi" translatable="false">BESUGHI</string>
     <string name="home" translatable="false">Home</string>
-    <string name="community">Community</string>
-    <string name="my_game">My game</string>
+    <string name="community" translatable="false">Community</string>
+    <string name="my_game" translatable="false">My game</string>
+    <string name="completed">Completed</string>
+    <string name="all">All</string>
+    <string name="plan_to_play">Plan to play</string>
+    <string name="dropped">Dropped</string>
+    <string name="playing">Playing</string>
 </resources>

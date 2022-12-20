@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -19,7 +18,7 @@ import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
-import com.example.lordofthegames.home.MyGameListFragment
+import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.example.lordofthegames.home.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -68,8 +67,12 @@ import com.google.android.material.navigation.NavigationView
  *
  *
  *
- *
- *
+ * QUERY PER IL COUNT DEGLI ACHIEVEMENT
+ * SELECT
+ *  (SELECT COUNT(id) FROM achievement WHERE completed != 0) as "Completati",
+ *  (SELECT count(id) FROM achievement WHERE completed = 0) as "Non Completati",
+ *   COUNT(id) as "Totali"
+ * FROM achievement;
  *
  *
  */
