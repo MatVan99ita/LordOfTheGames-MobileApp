@@ -6,38 +6,27 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/tab_mygame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabGravity="start"
-        tools:ignore="MissingConstraints"/>
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="?attr/actionBarSize"
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layoutDirection="rtl"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_mygame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/belandih"
-            app:layout_constraintStart_toStartOf="@+id/view_pager"
-            app:layout_constraintTop_toTopOf="@+id/view_pager"
-            app:layout_constraintTop_toBottomOf = "@id/tab_mygame"
-            android:gravity="center"/>
-
-    </androidx.viewpager.widget.ViewPager>
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

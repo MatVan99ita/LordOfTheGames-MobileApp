@@ -1,11 +1,15 @@
 package com.example.lordofthegames.home.mygame
 
+import android.content.Context
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
-class AllGameView: ViewModel() {
+class AllGameView(): Fragment() {
     private val _index = MutableLiveData<Int>()
     val text: LiveData<String> = Transformations.map(_index) {
         "Hello world from section: $it"
@@ -13,5 +17,14 @@ class AllGameView: ViewModel() {
 
     fun setIndex(index: Int) {
         _index.value = index
+    }
+    private val ARG_SECTION_NUMBER = "section_number"
+
+    fun newInstance(i: Int): Fragment {
+        return CompletedView().apply {
+            arguments = Bundle().apply {
+                putInt(ARG_SECTION_NUMBER, i)
+            }
+        }
     }
 }
