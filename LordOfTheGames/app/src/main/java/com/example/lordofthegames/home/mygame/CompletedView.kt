@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 class CompletedView: Fragment() {
-    private val ARG_SECTION_NUMBER = "section_number"
+    private val ARG_SECTION_NUMBER = "2"
 
     fun newInstance(sectionNumber: Int): Fragment {
         return CompletedView().apply {

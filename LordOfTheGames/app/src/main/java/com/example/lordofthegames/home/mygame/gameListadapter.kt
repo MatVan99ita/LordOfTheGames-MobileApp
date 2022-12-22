@@ -36,11 +36,11 @@ class SectionsPagerAdapter(fm: FragmentActivity) :
 
         return if(position % 2 == 0) {
             Log.e("FragmentStateAdapter", "All")
-            AllGameView()
+            AllGameView().newInstance(position + 1)
         } //AllGameView().newInstance(position + 1)
         else {
             Log.e("FragmentStateAdapter", "Completed")
-            CompletedView()
+            CompletedView().newInstance(position + 1)
         } //CompletedView().newInstance(position + 1)
         //return MyGameListFragment()
     }

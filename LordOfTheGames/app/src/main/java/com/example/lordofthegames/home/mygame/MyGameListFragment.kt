@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.Orientation
 import com.example.lordofthegames.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -52,6 +53,7 @@ class MyGameListFragment: Fragment() {
         viewPager2.adapter = sectionsPagerAdapter
         //tabLayout.tabMode = TabLayout.MODE_SCROLLABLE;
         viewPager2.offscreenPageLimit = 4
+        viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.text = context?.resources?.getString(TAB_TITLES[position])
         }.attach()

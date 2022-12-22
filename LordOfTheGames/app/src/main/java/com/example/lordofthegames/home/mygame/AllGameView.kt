@@ -18,7 +18,7 @@ class AllGameView(): Fragment() {
     fun setIndex(index: Int) {
         _index.value = index
     }
-    private val ARG_SECTION_NUMBER = "section_number"
+    private val ARG_SECTION_NUMBER = "1"
 
     fun newInstance(i: Int): Fragment {
         return CompletedView().apply {
