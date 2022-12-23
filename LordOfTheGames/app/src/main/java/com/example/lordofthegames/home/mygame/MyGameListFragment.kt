@@ -48,7 +48,6 @@ class MyGameListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        initViews(view);
         sectionsPagerAdapter = context?.let { context ->  SectionsPagerAdapter(context as FragmentActivity) }
 
         val view = inflater.inflate(R.layout.fragment_mygame, container, false)
@@ -68,53 +67,68 @@ class MyGameListFragment: Fragment() {
         }.attach()
 
         textView = view.findViewById(R.id.mygame_textview)
-        textView.text = "1/5"
+        textView.text = "1/5\nTUTTE COSE"
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 activity!!.runOnUiThread {
                     textView.visibility = View.VISIBLE
-                    val i = (tab.position + 1).toString()
-                    val j = tabLayout.tabCount.toString()
+                    val i = (tab.position + 1)
+                    val j = tabLayout.tabCount
 
-                    textView.text = "$i/$j"
-                }
-                /*timer.clock(3000, object : Thread() {
-                    override fun run() {
-                        super.run()
-                        activity!!.runOnUiThread { pageCount.setVisibility(View.GONE) }
+                    //textView.text = "$i/$j"
+                    when(i){
+                        1 -> {
+                            textView.text = "$i/$j"
+                            textView.append(tab.text)
+                        }
+                        2 -> {
+                            textView.text = "$i/$j"
+                            textView.append(tab.text)
+                        }
+                        3 -> {
+                            textView.text = "$i/$j"
+                            textView.append(tab.text)
+                        }
+                        4 -> {
+                            textView.text = "$i/$j"
+                            textView.append(tab.text)
+                        }
+                        5 -> {
+                            textView.text = "$i/$j"
+                            textView.append(tab.text)
+                        }
                     }
-                }) */
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
-
-        /*pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        }) */
-        /**
-         * TODO:
-         *      CAPIRE COME METTERE UNA VIEW TRA LE VARIE SEZIONI SENZA BESTEMMIARE E AGGIUNGERE UN OVERFLOW AL TAB LAYOUT
-         */
-
-        //tabLayout.setupWithViewPager(viewPager2)
-        //tabLayout.tabGravity = TabLayout.GRAVITY_CENTER;
-        //val vp: ViewPager? = context?.let { ViewPager(it) }
-        //vp?.offscreenPageLimit = 2
-        //vp?.adapter = sectionsPagerAdapter
-        //
-        //TAB_TITLES.forEach { el -> tablayout.addTab(tablayout.newTab().setText(getString(el))) }
         return view
     }
 
-    private fun initViews(view: View?) {
-        //val textView: TextView = requireView().findViewById(R.id.commonTextView)
-        //textView.text = "Category :  " + arguments!!.getInt("position")
+    /**
+     * TODO:
+     *      5 funzioni che vanno richiamate nella sezione when
+     *
+     *      EXTRA: fare in modo che alla creazione della view la prima tab venga selezionata automaticamente
+     */
+    private fun AllGame(){
+
     }
+    private fun CompletedGame(){
 
+    }
+    private fun PlayingGame(){
 
+    }
+    private fun AbandonedGame(){
+
+    }
+    private fun PlanToPlayGame(){
+
+    }
 
 
     companion object {
