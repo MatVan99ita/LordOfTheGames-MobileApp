@@ -58,6 +58,11 @@ class MyGameListFragment: Fragment() {
             tab.text = context?.resources?.getString(TAB_TITLES[position])
         }.attach()
 
+        /**
+         * TODO:
+         *      CAPIRE COME METTERE UNA VIEW TRA LE VARIE SEZIONI SENZA BESTEMMIARE E AGGIUNGERE UN OVERFLOW AL TAB LAYOUT
+         */
+
         //tabLayout.setupWithViewPager(viewPager2)
         //tabLayout.tabGravity = TabLayout.GRAVITY_CENTER;
         //val vp: ViewPager? = context?.let { ViewPager(it) }
