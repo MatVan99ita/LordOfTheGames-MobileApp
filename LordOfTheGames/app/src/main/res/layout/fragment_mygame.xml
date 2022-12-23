@@ -24,4 +24,22 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_lezzo"
+        >
+
+        <TextView
+            android:id="@+id/mygame_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/belandih"
+            android:textColor="@color/purple_200"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
