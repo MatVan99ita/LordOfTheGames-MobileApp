@@ -5,15 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_marginTop="?attr/actionBarSize"
-        android:id="@+id/tab_mygame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        >
 
-    </com.google.android.material.tabs.TabLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginTop="?attr/actionBarSize"
+            android:id="@+id/tab_mygame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="scrollable"
+            tools:ignore="MissingConstraints">
+        </com.google.android.material.tabs.TabLayout>
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -23,13 +27,9 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/layout_lezzo"
-        >
-
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/mygame_textview"
             android:layout_width="match_parent"
@@ -39,7 +39,6 @@
             android:textColor="@color/purple_200"
             android:textSize="60sp"
             android:textStyle="bold" />
-
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

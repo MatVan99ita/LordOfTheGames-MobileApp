@@ -61,7 +61,7 @@ class MyGameListFragment: Fragment() {
         //viewPager2.addView(viewModel)
 
             //tabLayout.tabMode = TabLayout.MODE_SCROLLABLE;
-        viewPager2.offscreenPageLimit = 4
+        //viewPager2.offscreenPageLimit = 4
         viewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.text = context?.resources?.getString(TAB_TITLES[position])
@@ -114,7 +114,7 @@ class MyGameListFragment: Fragment() {
         //textView.text = "Category :  " + arguments!!.getInt("position")
     }
 
-    
+
 
 
     companion object {
