@@ -5,4 +5,5 @@
     android:id="@+id/tab_mygame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:tabBackground="@color/white"/>
+    app:tabBackground="@color/white"
+    />

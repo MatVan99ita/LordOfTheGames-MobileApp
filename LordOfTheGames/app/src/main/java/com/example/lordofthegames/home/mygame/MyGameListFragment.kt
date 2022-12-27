@@ -3,6 +3,7 @@ package com.example.lordofthegames.home.mygame
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,9 +30,9 @@ class MyGameListFragment: Fragment() {
     private val TAB_TITLES = arrayOf(
         R.string.all,
         R.string.playing,
+        R.string.plan_to_play,
         R.string.completed,
         R.string.dropped,
-        R.string.plan_to_play,
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,17 +66,16 @@ class MyGameListFragment: Fragment() {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.text = context?.resources?.getString(TAB_TITLES[position])
         }.attach()
-
         textView = view.findViewById(R.id.mygame_textview)
-        textView.text = "1/5\nTUTTE COSE"
+        //textView.text = "1/5\nTUTTE COSE"
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 activity!!.runOnUiThread {
                     textView.visibility = View.VISIBLE
                     val i = (tab.position + 1)
                     val j = tabLayout.tabCount
-
-                    //textView.text = "$i/$j"
+                    // textView.text = "$i/$j"
+                    // textView.append(tab.text)
                     when(i){
                         1 -> {
                             textView.text = "$i/$j"
@@ -105,6 +105,7 @@ class MyGameListFragment: Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
+        tabLayout.getTabAt(1)?.select()
         return view
     }
 

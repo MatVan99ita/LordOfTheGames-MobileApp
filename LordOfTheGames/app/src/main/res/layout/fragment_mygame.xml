@@ -15,7 +15,8 @@
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"
             app:tabMode="scrollable"
-            tools:ignore="MissingConstraints">
+            tools:ignore="MissingConstraints"
+            >
         </com.google.android.material.tabs.TabLayout>
 
 
