@@ -115,12 +115,14 @@ class MainActivity : AppCompatActivity() {
             drawerLayout,
             null
         )
+
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,
             navigationView,
             this
         )
 
+        this.supportActionBar?.setHomeAsUpIndicator(R.mipmap.ic_yeee)
         bottomNavigationView.itemIconTintList = null
 
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -187,6 +189,8 @@ class MainActivity : AppCompatActivity() {
                 else -> {false}
             }
         }
+
+
     }
 
 
@@ -207,6 +211,7 @@ class MainActivity : AppCompatActivity() {
             true
         } else if(item.itemId == R.id.nav_setting){
             val intent = Intent(this, SettingsActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
             this.startActivity(intent)
             true
         } else {
@@ -241,6 +246,7 @@ class MainActivity : AppCompatActivity() {
             //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
             if (id == R.id.nav_setting) {
                 val intent = Intent(this, SettingsActivity::class.java)
+                drawerLayout.closeDrawer(GravityCompat.START)
                 this.startActivity(intent)
             }
             //This is for maintaining the behavior of the Navigation view

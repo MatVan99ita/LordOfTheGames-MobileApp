@@ -1,15 +1,11 @@
 package com.example.lordofthegames
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Toast
+import android.view.Gravity
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,9 +13,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import com.example.lordofthegames.GameDetails.GameDetFragment
-import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -88,7 +82,7 @@ class Utilities {
             activity: AppCompatActivity,
             toolbar: Toolbar,
             title: String?,
-            drawerLayout: DrawerLayout,
+            drawerLayout: DrawerLayout?,
             menu: Int?,
         ) {
 
@@ -98,20 +92,23 @@ class Utilities {
 
             toolbar.title = title
 
-            toolbar.setNavigationOnClickListener {
-                val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
-                drawerLayout.addDrawerListener(actionBarDrawerToggle)
-                actionBarDrawerToggle.syncState()
-                drawerLayout.closeDrawers()
+            if(drawerLayout != null) {
+
+                toolbar.setNavigationOnClickListener {
+                    val actionBarDrawerToggle = ActionBarDrawerToggle(
+                        activity,
+                        drawerLayout,
+                        R.string.belandih,
+                        R.string.besughi
+                    )
+                    actionBarDrawerToggle.isDrawerIndicatorEnabled = false
+                    toolbar.setNavigationIcon(R.drawable.ic_t_pose)
+                    drawerLayout.addDrawerListener(actionBarDrawerToggle)
+                    actionBarDrawerToggle.syncState()
+                    //drawerLayout.closeDrawers()
+                }
             }
-
-            toolbar.setNavigationIcon(R.mipmap.ic_launcher_round)
-
             activity.setSupportActionBar(toolbar)
-            activity.supportActionBar?.setHomeButtonEnabled(true);
-            activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            activity.supportActionBar?.setHomeAsUpIndicator(R.mipmap.ic_launcher_round)
-
 
             /*var actionBar: ActionBar? = activity.supportActionBar
             //val navController: NavController = NavController(context = activity)

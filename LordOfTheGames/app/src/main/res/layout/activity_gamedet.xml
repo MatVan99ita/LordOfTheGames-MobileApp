@@ -19,15 +19,16 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
+            android:name="com.example.lordofthegames.GameDetails.GameDetFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:name="com.example.lordofthegames.GameDetails.GameDetFragment"
-            tools:layout="@layout/fragment_game_details"
-            />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout="@layout/fragment_game_details" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

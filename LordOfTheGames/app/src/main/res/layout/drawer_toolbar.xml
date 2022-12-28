@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize"
+    app:navigationIcon="@mipmap/ic_launcher_round"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
     >
