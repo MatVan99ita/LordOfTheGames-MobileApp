@@ -4,12 +4,16 @@ package com.example.lordofthegames
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -18,8 +22,8 @@ import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
-import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.example.lordofthegames.home.SearchFragment
+import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -122,7 +126,14 @@ class MainActivity : AppCompatActivity() {
             this
         )
 
-        this.supportActionBar?.setHomeAsUpIndicator(R.mipmap.ic_yeee)
+        val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo2_round", "mipmap", this.packageName))
+        //val bitmap = (drawable as BitmapDrawable).bitmap
+        val cianni = Utilities.drawableToBitmap(drawable!!)
+        val newdrawable: Drawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!! , 100, 100, true))
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.setHomeAsUpIndicator(newdrawable)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setHomeAsUpIndicator(newdrawable)
         bottomNavigationView.itemIconTintList = null
 
         bottomNavigationView.setOnItemSelectedListener { item ->

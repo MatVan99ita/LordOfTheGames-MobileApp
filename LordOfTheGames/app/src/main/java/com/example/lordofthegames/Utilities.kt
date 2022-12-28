@@ -93,7 +93,6 @@ class Utilities {
             toolbar.title = title
 
             if(drawerLayout != null) {
-
                 toolbar.setNavigationOnClickListener {
                     val actionBarDrawerToggle = ActionBarDrawerToggle(
                         activity,
