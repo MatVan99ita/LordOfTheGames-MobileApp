@@ -67,17 +67,24 @@ class GameDetActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return  if(item.itemId == R.id.nav_setting){
+        return if (item.itemId == R.id.nav_setting) {
             val intent = Intent(this, SettingsActivity::class.java)
             this.startActivity(intent)
             true
-        }  else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             true
-        } else if(item.itemId == R.id.gd_app_bar_add) {
+        } else if (item.itemId == R.id.gd_app_bar_add) {
             Utilities.insertFragment(
                 this,
                 SettingsFragment(),
                 SettingsFragment::class.java.simpleName, null,
+            )
+            true
+        } else if (item.itemId == R.id.gd_app_bar_note) {
+            Utilities.insertFragment(
+                this,
+                NotesFragment(),
+                NotesFragment::class.java.simpleName, null
             )
             true
         } else {
