@@ -16,6 +16,11 @@ import com.google.android.material.textfield.TextInputLayout
 
 class NotesFragment : Fragment() {
 
+    /**
+     * TODO:
+     * CREARE DB E FAR SALVARE LE NOTE
+     */
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
