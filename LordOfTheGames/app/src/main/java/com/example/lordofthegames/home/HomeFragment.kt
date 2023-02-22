@@ -5,57 +5,46 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Settings.SettingsActivity
-import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.databinding.FragmentHomeBinding
 import com.example.lordofthegames.recyclerView.CardAdapter
-import com.example.lordofthegames.recyclerView.CardItem
+import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.navigation.NavigationView
 
 
 class HomeFragment: Fragment(), OnItemListener {
 
-    private var gameItems: MutableList<CardItem> = listOf(
-        CardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        CardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
-        CardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
-        CardItem("ic_t_pose",           "Dark Souls 3"),
-        CardItem("ic_t_pose",           "MARVEL Spider-Man"),
-        CardItem("ic_t_pose",           "Bloodborne"),
-        CardItem("ic_t_pose",           "God of War: Ragnarok"),
-        CardItem("ic_t_pose",           "Gabibbo"), // */
-        CardItem("yee",                 "Dark Souls 3"),
-        CardItem("yee",                 "MARVEL Spider-Man"),
-        CardItem("gabibbo",             "Dark Souls 3"),
-        CardItem("gabibbo",             "MARVEL Spider-Man"),
-        CardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West"),
-        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        CardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        CardItem("gabibbo",             "Dark Souls 3"),
-        CardItem("yee",                 "MARVEL Spider-Man"),
-        CardItem("gabibbo",             "Bloodborne"),
-        CardItem("gabibbo",             "Dark Souls 3"),
-        CardItem("yee",                 "MARVEL Spider-Man"),
-        CardItem("gabibbo",             "Bloodborne"),
-    ) as MutableList<CardItem>
+    private var gameItems: MutableList<GameCardItem> = listOf(
+        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
+        GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
+        GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
+        GameCardItem("ic_t_pose",           "Dark Souls 3"),
+        GameCardItem("ic_t_pose",           "MARVEL Spider-Man"),
+        GameCardItem("ic_t_pose",           "Bloodborne"),
+        GameCardItem("ic_t_pose",           "God of War: Ragnarok"),
+        GameCardItem("ic_t_pose",           "Gabibbo"), // */
+        GameCardItem("yee",                 "Dark Souls 3"),
+        GameCardItem("yee",                 "MARVEL Spider-Man"),
+        GameCardItem("gabibbo",             "Dark Souls 3"),
+        GameCardItem("gabibbo",             "MARVEL Spider-Man"),
+        GameCardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West"),
+        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        GameCardItem("gabibbo",             "Dark Souls 3"),
+        GameCardItem("yee",                 "MARVEL Spider-Man"),
+        GameCardItem("gabibbo",             "Bloodborne"),
+        GameCardItem("gabibbo",             "Dark Souls 3"),
+        GameCardItem("yee",                 "MARVEL Spider-Man"),
+        GameCardItem("gabibbo",             "Bloodborne"),
+    ) as MutableList<GameCardItem>
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView

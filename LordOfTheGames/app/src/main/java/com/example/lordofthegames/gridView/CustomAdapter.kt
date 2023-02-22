@@ -13,11 +13,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.R
-import com.example.lordofthegames.recyclerView.CardItem
+import com.example.lordofthegames.recyclerView.GameCardItem
 
 class CustomAdapter(
     private val context: Context,
-    private val games: List<CardItem>,
+    private val games: List<GameCardItem>,
     private val activity: Activity
 ):
     BaseAdapter() {

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.R
 
-class CardAdapter(var listener: OnItemListener, var cardItemList: List<CardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
@@ -17,7 +17,7 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<CardItem>
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val currentCardItem: CardItem = this.cardItemList[position]
+        val currentCardItem: GameCardItem = this.cardItemList[position]
         val imagePath: String = currentCardItem.imageResource
 
         var drawable: Drawable? = null
