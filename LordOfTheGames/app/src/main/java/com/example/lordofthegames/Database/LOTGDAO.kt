@@ -1,13 +1,11 @@
 package com.example.lordofthegames.Database
 
+import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.example.lordofthegames.db_entities.Achievement
-import com.example.lordofthegames.db_entities.Game
-import com.example.lordofthegames.db_entities.GameCategory
-import com.example.lordofthegames.db_entities.Notes
+import com.example.lordofthegames.db_entities.*
 import com.example.lordofthegames.recyclerView.CardItem
 
 @Dao
@@ -30,8 +28,9 @@ interface LOTGDAO {
      */
     fun insertComplex()
 
-    fun getGame(): LiveData<List<CardItem?>?>?
-    fun getAchievement(): LiveData<List<CardItem?>?>?
-    fun getCategory(): LiveData<List<CardItem?>?>?
-    fun getNote(): LiveData<List<CardItem?>?>?
+    fun getGame(): LiveData<List<Game?>?>?
+    fun getGameCard(): LiveData<List<CardItem?>?>?
+    fun getAchievementListCard(): LiveData<List<Achievement?>?>?
+    fun getCategory(): LiveData<List<Categories?>?>?
+    fun getNote(): LiveData<List<Note?>?>?
 }

@@ -29,15 +29,17 @@ data class Game(
     var name: String,
 
 
-    var achievements: List<Achievement>,
 
     @ColumnInfo(name = "game_cover")
-    var image: String,
+    var image: String?,
 
-    var categories: List<Categories>,
 
     @ColumnInfo(name = "game_status", defaultValue = "Not played")
-    var status: String
+    var status: String,
+
+
+    var achievements: List<Achievement>?,
+    var categories: List<Categories>?,
     ) {
 
     companion object {
