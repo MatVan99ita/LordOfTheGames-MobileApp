@@ -43,6 +43,8 @@ class NotesFragment : Fragment() {
             val insert: TextInputEditText =  view.findViewById(R.id.noteInsert)
             insert.hint = "Insert note here"
         }
+
+        //editText.addTextChangedListener(this);
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
