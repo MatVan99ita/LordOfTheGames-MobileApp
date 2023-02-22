@@ -1,10 +1,9 @@
-package com.example.lordofthegames.games
+package com.example.lordofthegames.db_entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import org.jetbrains.annotations.NotNull
 
 /**
  * ##Achievement di gioco

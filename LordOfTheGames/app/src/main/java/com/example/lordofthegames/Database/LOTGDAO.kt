@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.example.lordofthegames.games.Achievement
-import com.example.lordofthegames.games.Game
-import com.example.lordofthegames.games.GameCategory
-import com.example.lordofthegames.games.Notes
+import com.example.lordofthegames.db_entities.Achievement
+import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.GameCategory
+import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.recyclerView.CardItem
 
 @Dao

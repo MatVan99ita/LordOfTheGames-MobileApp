@@ -1,10 +1,10 @@
 package com.example.lordofthegames.Database
 
 import androidx.lifecycle.LiveData
-import com.example.lordofthegames.games.Achievement
-import com.example.lordofthegames.games.Categories
-import com.example.lordofthegames.games.Game
-import com.example.lordofthegames.games.Notes
+import com.example.lordofthegames.db_entities.Achievement
+import com.example.lordofthegames.db_entities.Categories
+import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.Notes
 
 class LOTGRepository(
     val LOTGDAO: LOTGDAO,

@@ -1,4 +1,4 @@
-package com.example.lordofthegames.games
+package com.example.lordofthegames.db_entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

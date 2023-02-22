@@ -1,6 +1,5 @@
-package com.example.lordofthegames.games
+package com.example.lordofthegames.db_entities
 
-import com.example.lordofthegames.games.Game
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
 import androidx.room.Entity
