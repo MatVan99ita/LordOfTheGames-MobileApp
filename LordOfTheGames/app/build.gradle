@@ -55,4 +55,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.7.20"
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
+
+    def room_version = "2.4.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

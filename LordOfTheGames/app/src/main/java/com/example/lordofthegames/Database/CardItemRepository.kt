@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.recyclerView.CardItem
 
-class CardItemRepository(application: Application?) {
+class                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        nCardItemRepository(application: Application?) {
     private lateinit var cardItemDAO: CardItemDAO
     val cardItemList: LiveData<List<CardItem?>?>?
 

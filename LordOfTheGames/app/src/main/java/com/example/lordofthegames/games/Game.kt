@@ -1,5 +1,9 @@
 package com.example.lordofthegames.games
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /*
  * (*) -> da scegliere un nome migliore o comunque da modificare
  */
@@ -13,13 +17,30 @@ package com.example.lordofthegames.games
  * @param categories   Categorie del gioco
  * @param note         Il blocco note per segnarsi le cose da ricordarsi o quello che si vuole
  */
-class Game(
+
+@Entity(tableName = "games")
+data class Game(
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "game_id")
+    var id: Int,
+
+    @ColumnInfo(name = "game_title")
     var name: String,
+
+
     var achievements: List<Achievement>,
+
+    @ColumnInfo(name = "game_cover")
     var image: String,
+
     var categories: List<Categories>,
-    var status: String,
-    var note: Notes
+
+    @ColumnInfo(name = "game_status", defaultValue = "Not played")
+    var status: String
     ) {
+
+    companion object {
+    }
 
 }
