@@ -10,10 +10,14 @@ import androidx.room.PrimaryKey
  * @param name
  */
 @Entity(tableName = "Categories")
-class Categories(
+data class Categories(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "tag")
-    var tag: String) {
+    var tag: String,
+
+    @ColumnInfo(name = "full_name")
+    var nome: String
+    ) {
 
 }

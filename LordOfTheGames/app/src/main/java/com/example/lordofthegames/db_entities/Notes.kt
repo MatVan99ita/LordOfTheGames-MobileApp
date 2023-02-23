@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
         parentColumns = ["game_id"]
     )]
 )
-class Notes(
+data class Notes(
     /**
      * ##Le note dell'utente per un gioco
      * @param title
@@ -35,5 +35,4 @@ class Notes(
 
     @ColumnInfo(name = "game_ref")
     var gameId: Int ) {
-
 }

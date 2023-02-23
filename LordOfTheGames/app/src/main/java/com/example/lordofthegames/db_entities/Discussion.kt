@@ -13,7 +13,7 @@ import java.util.Date
         parentColumns = ["game_id"]
     )
 ])
-class Discussion(
+data class Discussion(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "discussion_id")

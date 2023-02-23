@@ -21,7 +21,7 @@ import androidx.room.PrimaryKey
         parentColumns = ["game_id"]
     )
 ])
-class Achievement(
+data class Achievement(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "achievement_id")
     var id: Int,

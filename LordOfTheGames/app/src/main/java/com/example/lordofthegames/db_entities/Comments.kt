@@ -13,7 +13,7 @@ import java.util.Date
         parentColumns = ["discussion_id"]
     )
 ])
-class Comments(
+data class Comments(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "comment_id")

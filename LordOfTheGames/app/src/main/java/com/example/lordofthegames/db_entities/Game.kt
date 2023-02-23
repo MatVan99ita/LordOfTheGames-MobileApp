@@ -18,7 +18,7 @@ import androidx.room.PrimaryKey
  * @param note         Il blocco note per segnarsi le cose da ricordarsi o quello che si vuole
  */
 
-@Entity(tableName = "games")
+@Entity(tableName = "game")
 data class Game(
 
     @PrimaryKey(autoGenerate = true)
@@ -28,8 +28,6 @@ data class Game(
     @ColumnInfo(name = "game_title")
     var name: String,
 
-
-
     @ColumnInfo(name = "game_cover")
     var image: String?,
 
@@ -38,8 +36,8 @@ data class Game(
     var status: String,
 
 
-    var achievements: List<Achievement>?,
-    var categories: List<Categories>?,
+    //var achievements: List<Achievement>?,
+    //var categories: List<Categories>?,
     ) {
 
     companion object {

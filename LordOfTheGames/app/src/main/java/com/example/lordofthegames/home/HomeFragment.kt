@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -68,9 +71,12 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
-        if(activity != null){
-
+        if(activity != null) {
             setRecyclerView(activity)
+
+            val repository = LOTGRepository(activity.application)
+            val cardItems: LiveData<List<Game>> = repository.getGame()
+            print(cardItems)
 
         } else {
             Log.e("HomeFragment", "Activity is null")
