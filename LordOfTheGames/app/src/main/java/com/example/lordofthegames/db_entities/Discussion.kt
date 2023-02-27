@@ -1,9 +1,7 @@
 package com.example.lordofthegames.db_entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.lordofthegames.Database.AnyTypeConverter
 import java.util.Date
 
 @Entity(tableName = "game_discussion", foreignKeys = [
@@ -13,6 +11,7 @@ import java.util.Date
         parentColumns = ["game_id"]
     )
 ])
+@TypeConverters(AnyTypeConverter::class)
 data class Discussion(
 
     @PrimaryKey(autoGenerate = true)
@@ -24,6 +23,9 @@ data class Discussion(
 
     @ColumnInfo(name = "discussion_body")
     var content: Any?,
+
+    @ColumnInfo(name = "game_ref")
+    var game_ref: Int
 
 ) {
 }

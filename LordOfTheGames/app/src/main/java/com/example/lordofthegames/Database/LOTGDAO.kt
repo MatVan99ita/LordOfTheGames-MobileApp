@@ -2,13 +2,10 @@ package com.example.lordofthegames.Database
 
 import android.provider.ContactsContract.CommonDataKinds.Note
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 import com.example.lordofthegames.db_entities.*
 import com.example.lordofthegames.recyclerView.GameCardItem
+import java.util.*
 
 @Dao
 interface LOTGDAO {
@@ -28,7 +25,7 @@ interface LOTGDAO {
     /**
      * funzione per l'inserimento complesso di più record per più tabelle
      */
-    fun insertComplex()
+    //fun insertComplex()
 
 
     /**
@@ -37,16 +34,56 @@ interface LOTGDAO {
      * Per selezionare i giochi che fanno riferimento ad una certa categoria
      *
      * SELECT Videogioco.*
-    FROM Videogioco
-    JOIN VideogiocoCategoria ON VideogiocoCategoria.id_gioco = Videogioco.id
-    JOIN Categoria ON Categoria.id = VideogiocoCategoria.id_categoria
-    WHERE Categoria.nome = 'Avventura';
-
+     * FROM Videogioco
+     * JOIN VideogiocoCategoria ON VideogiocoCategoria.id_gioco = Videogioco.id
+     * JOIN Categoria ON Categoria.id = VideogiocoCategoria.id_categoria
+     * WHERE Categoria.nome = 'Avventura';
+     *
      */
     @Transaction
     @Query("SELECT * FROM game ORDER BY game_title")
     fun getGame(): LiveData<List<Game>>
-    fun getAchievementListCard(): LiveData<List<Achievement?>?>?
-    fun getCategory(): LiveData<List<Categories?>?>?
-    fun getNote(): LiveData<List<Note?>?>?
+
+
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateNoteDate(data: Date)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateDiscussion(value: String)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateNoteContent(value: String)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateComment(value: String)
+
+
+
+    //fun getAchievementListCard(): LiveData<List<Achievement?>?>?
+    //fun getCategory(): LiveData<List<Categories?>?>?
+    //fun getNote(): LiveData<List<Note?>?>?
+/*
+    @Query("UPDATE notes SET last_modified = :currentDateTime WHERE note_id = :id")
+    fun updateNotesTimestamp(id: Int, currentDateTime: Long)
+
+    @Insert
+    fun insertDate(data: Long)
+
+    @Query("UPDATE notes SET note_content = :value WHERE note_id = :id")
+    fun updateNotes(id: Int, value: String)
+
+    @Insert
+    fun insertNoteContent(value: String)
+
+    @Query("UPDATE comment SET content = :value WHERE comment_id = :id")
+    fun updateCommentContent(id: Int, value: String)
+
+    @Insert
+    fun insertCommentContent(value: String)
+
+    @Query("UPDATE game_discussion SET discussion_body = :value WHERE discussion_id = :id")
+    fun updateDiscussionContent(id: Int, value: String)
+
+    @Insert
+    fun insertDiscussion(value: String)
+*/
+
 }

@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Categories")
 data class Categories(
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey()
     @ColumnInfo(name = "tag")
     var tag: String,
 

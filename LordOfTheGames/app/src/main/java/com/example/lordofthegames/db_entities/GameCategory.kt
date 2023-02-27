@@ -1,14 +1,11 @@
 package com.example.lordofthegames.db_entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "GameCategory",
 
-    primaryKeys = ["game_ref, category_ref"],
-
+    primaryKeys = ["game_ref", "category_ref"],
+    //indices = [Index(value = ["game_ref", "category_ref"], unique = true)],
     foreignKeys = [
     ForeignKey(
         entity = Game::class,
@@ -23,9 +20,9 @@ import androidx.room.PrimaryKey
 ])
 data class GameCategory(
     @ColumnInfo(name = "game_ref")
-    var game_id: Int,
+    var game_ref: Int,
 
     @ColumnInfo(name = "category_ref")
-    var cat_id: Int
+    var cat_ref: Int
 ) {
 }
