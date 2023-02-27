@@ -45,6 +45,10 @@ interface LOTGDAO {
     fun getGame(): LiveData<List<Game>>
 
 
+    /**
+     * scrivendo `@Update(onConflict = OnConflictStrategy.REPLACE) fun myFun(data: MyData)` mi dà errore "Type of the paramenter must be a class annotated with @Entity or a collection/array of it" e non so come correggere questo errore
+     */
+
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateNoteDate(data: Date)
