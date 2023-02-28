@@ -1,7 +1,6 @@
 package com.example.lordofthegames.Database
 
 import android.app.Application
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.db_entities.*
 import java.util.*

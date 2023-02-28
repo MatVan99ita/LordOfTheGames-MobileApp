@@ -1,10 +1,8 @@
 package com.example.lordofthegames.Database
 import android.content.Context
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.example.lordofthegames.db_entities.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
