@@ -31,20 +31,16 @@ class LOTGRepository(
         return game_card
     }
 
-    fun updateNoteData() {
-        LOTGDAO.updateNoteDate(Date())
+    fun updateNoteContent(id: Int, value: String) {
+        LOTGDAO.updateNoteContent(id, value)
     }
 
-    fun updateNoteContent(value: String) {
-        LOTGDAO.updateNoteContent(value)
+    fun updateComment(id: Int, value: String) {
+       LOTGDAO.updateComment(id, value)
     }
 
-    fun updateComment(value: String) {
-       LOTGDAO.updateComment(value)
-    }
-
-    fun updateDiscussion(value: String) {
-        LOTGDAO.updateDiscussion(value)
+    fun updateDiscussion(id: Int, value: String) {
+        LOTGDAO.updateDiscussion(id, value)
     }
 
 
