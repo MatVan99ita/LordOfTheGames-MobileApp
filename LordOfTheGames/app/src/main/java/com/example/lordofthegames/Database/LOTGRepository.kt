@@ -12,7 +12,7 @@ class LOTGRepository(
     private val lotgdao: LOTGDAO,
     var application: Application
     ) {
-    val allGames: Flow<List<Game>> = lotgdao.getAllGames()
+    val allGames: LiveData<List<Game>> = lotgdao.getAllGames()
 
     //private lateinit var game_card: LiveData<List<Game>>
     //private lateinit var achievement_card_list: LiveData<List<Achievement>>

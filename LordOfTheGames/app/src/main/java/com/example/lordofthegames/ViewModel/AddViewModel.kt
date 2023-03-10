@@ -17,8 +17,7 @@ class WordViewModel(private val repository: LOTGRepository) : ViewModel() {
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allGames: LiveData<List<Game>> = repository.allGames.asLiveData()
-
+    val allGames: LiveData<List<Game>> = repository.allGames
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
@@ -47,7 +46,7 @@ class AddViewModel(application: Application, val repo: LOTGRepository) : Android
     init {
         this.app = application
         initializeBitmap()
-        cardItems = repo.allGames.asLiveData()
+        cardItems = repo.allGames
     }
 
     fun setImageBitmap(bitmap: Bitmap){

@@ -110,7 +110,7 @@ interface LOTGDAO {
      */
 
     @Query("SELECT * FROM game")
-    fun getAllGames(): Flow<List<Game>>
+    fun getAllGames(): LiveData<List<Game>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGame(game: Game)
