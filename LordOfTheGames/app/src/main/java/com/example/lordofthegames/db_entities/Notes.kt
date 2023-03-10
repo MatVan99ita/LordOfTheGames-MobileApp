@@ -11,11 +11,11 @@ import java.sql.Timestamp
     tableName = "notes",
     foreignKeys = [ForeignKey(
         entity = Game::class,
+        parentColumns = ["game_id"],
         childColumns = ["game_ref"],
-        parentColumns = ["game_id"]
-    )]
+    )],
+    indices = [Index("note_id"), Index("game_ref")]
 )
-@TypeConverters(AnyTypeConverter::class, DateConverter::class)
 data class Notes(
     /**
      * ##Le note dell'utente per un gioco
@@ -30,13 +30,10 @@ data class Notes(
     var title: String,
 
     @ColumnInfo(name = "note_content")
-    var content: Any?,
+    var content: String,
 
     @ColumnInfo(name = "last_modified")
     var lastModified: Date,
 
     @ColumnInfo(name = "game_ref")
-    var gameId: Int ) {
-
-
-}
+    var gameId: Int )

@@ -29,7 +29,7 @@ data class Game(
     var name: String,
 
     @ColumnInfo(name = "game_cover")
-    var image: String?,
+    var image: String,
 
 
     @ColumnInfo(name = "game_status", defaultValue = "Not played")
@@ -38,9 +38,4 @@ data class Game(
 
     //var achievements: List<Achievement>?,
     //var categories: List<Categories>?,
-    ) {
-
-    companion object {
-    }
-
-}
+    )

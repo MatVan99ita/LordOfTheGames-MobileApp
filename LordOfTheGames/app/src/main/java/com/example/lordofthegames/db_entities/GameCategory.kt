@@ -5,7 +5,6 @@ import androidx.room.*
 @Entity(tableName = "GameCategory",
 
     primaryKeys = ["game_ref", "category_ref"],
-    //indices = [Index(value = ["game_ref", "category_ref"], unique = true)],
     foreignKeys = [
     ForeignKey(
         entity = Game::class,
@@ -16,13 +15,13 @@ import androidx.room.*
         entity = Categories::class,
         childColumns = ["category_ref"],
         parentColumns = ["tag"]
-    )
-])
+    )],
+    indices = [Index("game_ref"), Index("category_ref")],
+)
 data class GameCategory(
     @ColumnInfo(name = "game_ref")
     var game_ref: Int,
 
     @ColumnInfo(name = "category_ref")
     var cat_ref: Int
-) {
-}
+)

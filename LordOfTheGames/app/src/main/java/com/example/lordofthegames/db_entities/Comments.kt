@@ -10,8 +10,9 @@ import java.util.Date
         childColumns = ["discussion_ref"],
         parentColumns = ["discussion_id"]
     )
-])
-@TypeConverters(AnyTypeConverter::class)
+],
+indices = [Index("comment_id"), Index("discussion_ref")]
+)
 data class Comments(
 
     @PrimaryKey(autoGenerate = true)
@@ -22,7 +23,6 @@ data class Comments(
     var discussion_ref: Int,
 
     @ColumnInfo(name = "content")
-    var content: Any,
+    var content: String,
 
-) {
-}
+)

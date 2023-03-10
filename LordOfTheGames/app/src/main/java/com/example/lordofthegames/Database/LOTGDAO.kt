@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lordofthegames.db_entities.*
 import com.example.lordofthegames.recyclerView.GameCardItem
+import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 @Dao
@@ -14,8 +15,8 @@ interface LOTGDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAchievement(achievement: Achievement)
-    @Update
-    fun updateAchievement(id: Int, achievement: Achievement)
+    //@Update
+    //fun updateAchievement(achievement: Achievement)
 
     /** //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -30,15 +31,15 @@ interface LOTGDAO {
 
     @Insert
     fun insertComment(comments: Comments)
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateComment(id: Int, value: Any?)
+    //@Update(onConflict = OnConflictStrategy.REPLACE)
+    //fun updateComment(comments: Comments)
 
     /** //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
     /** //// DISCUSSION //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateDiscussion(id: Int, value: Any?)
+    //@Update(onConflict = OnConflictStrategy.REPLACE)
+    //fun updateDiscussion(discussion: Discussion)
 
     /** //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -50,23 +51,21 @@ interface LOTGDAO {
 
     /** //// GAME ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertGame(game: Game)
-
-    @Transaction
-    @Query("SELECT * FROM game ORDER BY game_title")
-    fun getGame(): LiveData<List<Game>>
+    //@Insert(onConflict = OnConflictStrategy.IGNORE)
+    //fun insertGame(game: Game)
+//
+    //@Transaction
+    //@Query("SELECT * FROM game ORDER BY game_title")
+    //fun getGame(): LiveData<List<Game>>
 
     /** //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
     /** //// NOTES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertNote(notes: Notes)
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateNoteDate(id: Int, data: Date)
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateNoteContent(id: Int, value: Any?)
+    //@Insert(onConflict = OnConflictStrategy.IGNORE)
+    //fun insertNote(notes: Notes)
+    //@Update(onConflict = OnConflictStrategy.REPLACE)
+    //fun updateNoteContent(notes: Notes)
 
     /** //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -110,9 +109,11 @@ interface LOTGDAO {
      * scrivendo `@Update(onConflict = OnConflictStrategy.REPLACE) fun myFun(data: MyData)` mi dà errore "Type of the paramenter must be a class annotated with @Entity or a collection/array of it" e non so come correggere questo errore
      */
 
+    @Query("SELECT * FROM game")
+    fun getAllGames(): Flow<List<Game>>
 
-
-
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertGame(game: Game)
 
 
 

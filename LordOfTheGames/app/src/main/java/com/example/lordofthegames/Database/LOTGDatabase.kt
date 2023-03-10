@@ -3,35 +3,40 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.lordofthegames.db_entities.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Database(entities =
-                [
-                    Game::class,
+arrayOf(Game::class,
                     Achievement::class,
                     Categories::class,
                     Notes::class,
                     GameCategory::class,
                     Discussion::class,
-                    Comments::class
-                ], version = 1, exportSchema = true)
+                    Comments::class)
+                , version = 3, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {
 
-    abstract fun lotgDAO(): LOTGDAO?
-
     companion object {
+        @Volatile
         private var INSTANCE: LOTGDatabase? = null
+
         val executor: ExecutorService = Executors.newFixedThreadPool(4)
-        fun getDatabase(context: Context): LOTGDatabase?{
-            if(INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(
+
+        fun getDatabase(context: Context): LOTGDatabase {
+
+            return INSTANCE ?: synchronized(this){
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    LOTGDatabase::class.java, "lotg_db"
+                    LOTGDatabase::class.java,
+                    "lotgdb"
                 ).build()
+                INSTANCE = instance
+                instance
             }
-            return INSTANCE
         }
     }
 

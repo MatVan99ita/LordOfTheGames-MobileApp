@@ -9,9 +9,9 @@ import java.util.Date
         entity = Game::class,
         childColumns = ["game_ref"],
         parentColumns = ["game_id"]
-    )
-])
-@TypeConverters(AnyTypeConverter::class)
+    )],
+    indices = [Index("discussion_id"), Index("game_ref")]
+)
 data class Discussion(
 
     @PrimaryKey(autoGenerate = true)
@@ -22,10 +22,9 @@ data class Discussion(
     var title: String,
 
     @ColumnInfo(name = "discussion_body")
-    var content: Any?,
+    var content: String,
 
     @ColumnInfo(name = "game_ref")
     var game_ref: Int
 
-) {
-}
+)

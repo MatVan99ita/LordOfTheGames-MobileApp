@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
@@ -74,9 +75,9 @@ class HomeFragment: Fragment(), OnItemListener {
         if(activity != null) {
             setRecyclerView(activity)
 
-            val repository = LOTGRepository(activity.application)
-            val cardItems: LiveData<List<Game>> = repository.getGame()
-            print(cardItems)
+            //val repository = LOTGRepository(LOTGDAO, activity.application)
+            //val cardItems: LiveData<List<Game>> = repository.getGame()
+            //print(cardItems)
 
         } else {
             Log.e("HomeFragment", "Activity is null")

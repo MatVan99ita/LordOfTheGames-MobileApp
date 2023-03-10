@@ -7,4 +7,6 @@
     <string name="plan_to_play">Pianificato per giocare</string>
     <string name="dropped">Abbandonato</string>
     <string name="playing">Giocando</string>
+    <string name="abandoned">Abbandonato</string>
+    <string name="notes">Note</string>
 </resources>
