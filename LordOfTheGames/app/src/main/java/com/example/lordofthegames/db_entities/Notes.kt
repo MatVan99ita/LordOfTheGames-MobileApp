@@ -16,6 +16,7 @@ import java.sql.Timestamp
     )],
     indices = [Index("note_id"), Index("game_ref")]
 )
+@TypeConverters(DateConverter::class)
 data class Notes(
     /**
      * ##Le note dell'utente per un gioco
