@@ -9,13 +9,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Database(entities =
-arrayOf(Game::class,
-                    Achievement::class,
-                    Categories::class,
-                    Notes::class,
-                    GameCategory::class,
-                    Discussion::class,
-                    Comments::class)
+[Game::class, Achievement::class, Categories::class, Notes::class, GameCategory::class, Discussion::class, Comments::class]
                 , version = 3, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {
