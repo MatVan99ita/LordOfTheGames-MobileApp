@@ -1,5 +1,7 @@
 package com.example.lordofthegames
 
+import android.content.Context
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -14,10 +16,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.ViewModel.LOTGViewModel
+import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
+import java.io.File
 
 
 class Utilities {
@@ -134,6 +140,30 @@ class Utilities {
             /** TODO Aggiungere questo tipo di cosa ad Utilities
             //lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
              */
+        }
+
+        fun fillRoomDatabase(context: Context, vararg databaseNames: String) {
+            for (databaseName in databaseNames) {
+                val dbFile = File(context.getDatabasePath(databaseName).path)
+                val db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READONLY)
+                val query = "SELECT * FROM game"
+                val cursor = db.rawQuery(query, null)
+                val list = mutableListOf<Game>()
+                while (cursor.moveToNext()) {
+                    val data = Game(
+                        cursor.getInt(cursor.getColumnIndex("id")),
+                        cursor.getString(cursor.getColumnIndex("title")),
+                        cursor.getString(cursor.getColumnIndex("img")),
+                        cursor.getLong(cursor.getColumnIndex("status"))
+                    )
+                    list.add(data)
+                }
+                cursor.close()
+                db.close()
+                val roomDb = Room.databaseBuilder(context, LOTGDatabase::class.java, "my-db-name").build()
+                roomDb.lotgdao().fillGame(list)
+                roomDb.close()
+            }
         }
     }
 
