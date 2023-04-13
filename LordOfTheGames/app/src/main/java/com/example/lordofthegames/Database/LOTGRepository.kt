@@ -20,12 +20,12 @@ class LOTGRepository(
     //private lateinit var note_elem: LiveData<List<Notes>>
     //private lateinit var discussion_elem: LiveData<List<Discussion>>
     //private lateinit var comment_elem: LiveData<List<Comments>>
-
+/*
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insertGame(game: Game){
         lotgdao.insertGame(game)
     }
-
+*/
 
 }

@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt' // aggiungi questa riga
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -16,7 +16,16 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
+    buildscript {
+        dependencies {
+            classpath "com.google.devtools.ksp:symbol-processing-gradle-plugin:1.8.20-1.0.10"
+        }
+    }
+
 
     buildTypes {
         release {
@@ -25,39 +34,80 @@ android {
         }
     }
     packagingOptions {
-        resources.excludes.add("META-INF/*")
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_9
+        sourceCompatibility JavaVersion.VERSION_1_9
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
     buildFeatures {
+        compose true
         viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
     }
 }
 
 dependencies {
     implementation('com.google.android.material:material:1.8.0')
-    implementation('androidx.core:core-ktx:1.9.0')
+    // implementation('androidx.core:core-ktx:1.9.0')
     implementation('androidx.appcompat:appcompat:1.6.1')
     implementation('com.google.android.material:material:1.8.0')
     implementation('androidx.constraintlayout:constraintlayout:2.1.4')
-    implementation("androidx.room:room-runtime:2.5.0")
+    // implementation("androidx.room:room-runtime:2.5.0")
     implementation('androidx.navigation:navigation-ui-ktx:2.5.3')
-    implementation('androidx.databinding:databinding-compiler-common:7.4.1')
+    implementation('androidx.databinding:databinding-compiler-common:7.4.2')
+    implementation 'androidx.core:core-ktx:1.10.0'
+
     testImplementation('junit:junit:4.13.2')
     androidTestImplementation('androidx.test.ext:junit:1.1.5')
     androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
-    implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.7.20")
+    // implementation("org.jetbrains.kotlin:kotlin-script-runtime:1.7.20")
     implementation('androidx.navigation:navigation-fragment:2.5.3')
     implementation('androidx.navigation:navigation-ui:2.5.3')
 
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
-    kapt("com.android.databinding:compiler:3.1.4")
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.activity:activity-compose:1.7.0'
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation 'androidx.compose.material3:material3:1.1.0-beta02'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
-    implementation("androidx.room:room-runtime:2.5.0")
-    kapt("androidx.room:room-compiler:2.5.0")
+
+    implementation("androidx.room:room-runtime:2.5.1")
+    ksp("androidx.room:room-compiler:2.5.1")
+
+
+    // Optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.5.1"
+}
+
+class RoomSchemaArgProvider implements CommandLineArgumentProvider {
+
+    @InputDirectory
+    @PathSensitive(PathSensitivity.RELATIVE)
+    File schemaDir
+
+    RoomSchemaArgProvider(File schemaDir) {
+        this.schemaDir = schemaDir
+    }
+
+    @Override
+    Iterable<String> asArguments() {
+        // Note: If you're using KSP, you should change the line below to return
+        // ["room.schemaLocation=${schemaDir.path}"]
+        return ["room.schemaLocation=${schemaDir.path}"]
+    }
+}
+
+ksp {
+    arg(new RoomSchemaArgProvider(new File(projectDir, "schemas")))
 }
