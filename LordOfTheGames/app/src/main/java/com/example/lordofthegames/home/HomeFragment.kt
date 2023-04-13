@@ -6,13 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.lordofthegames.Database.LOTGDAO
 //import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.ViewModel.LOTGViewModel
 //import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem
@@ -20,6 +22,7 @@ import com.example.lordofthegames.recyclerView.OnItemListener
 
 
 class HomeFragment: Fragment(), OnItemListener {
+
 
     private var gameItems: MutableList<GameCardItem> = listOf(
         GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
@@ -63,9 +66,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
+        Utilities.createDatabase(this)
         setHasOptionsMenu(true)
     }
 

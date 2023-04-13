@@ -1,23 +1,27 @@
 package com.example.lordofthegames.ViewModel
 
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import android.app.Application
 import android.graphics.Bitmap
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.*
-// import com.example.lordofthegames.Database.LOTGRepository
+import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
-// import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.Game
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 
-class WordViewModel(private val repository: String/*LOTGRepository*/){// : ViewModel() {
-/*
+class WordViewModel(private val repository: LOTGRepository) : ViewModel() {
+
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allGames: LiveData<List<Game>> = repository.allGames
+    val allGames: Flow<List<Game>> = repository.allGames
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
@@ -39,7 +43,7 @@ class WordViewModelFactory(private val repository: LOTGRepository) : ViewModelPr
 class AddViewModel(application: Application, val repo: LOTGRepository) : AndroidViewModel(application){
     var imageBitmap = MutableLiveData<Bitmap?>()
     private var app: Application
-    private var cardItems: LiveData<List<Game>>
+    private var cardItems: Flow<List<Game>>
 
 
 
@@ -59,9 +63,5 @@ class AddViewModel(application: Application, val repo: LOTGRepository) : Android
         imageBitmap.value = bitmap
     }
 
-    fun getRobeh(): LiveData<List<Game>> {
-        return cardItems
-    }
 
-*/
 }

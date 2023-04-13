@@ -13,7 +13,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.GameDetails.GameDetFragment
+import com.example.lordofthegames.ViewModel.LOTGViewModel
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -125,6 +127,13 @@ class Utilities {
             //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
 
             Log.e("UTIL SETUP", actionBar.toString())*/
+        }
+
+        fun createDatabase(owner: Fragment) {
+            var lotgViewModel: LOTGViewModel = ViewModelProvider(owner)[LOTGViewModel::class.java]
+            /** TODO Aggiungere questo tipo di cosa ad Utilities
+            //lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
+             */
         }
     }
 
