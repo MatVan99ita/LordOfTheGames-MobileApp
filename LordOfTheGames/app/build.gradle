@@ -1,16 +1,17 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
 }
 
 android {
     namespace 'com.example.lordofthegames'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.lordofthegames"
-        minSdk 21
-        targetSdk 32
+        minSdk 26
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -43,4 +44,35 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+
+    // Room
+    implementation "androidx.room:room-runtime:2.5.1"
+    ksp "androidx.room:room-compiler:2.5.1"
+
+    // Optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.5.1"
+
+}
+
+class RoomSchemaArgProvider implements CommandLineArgumentProvider {
+
+    @InputDirectory
+    @PathSensitive(PathSensitivity.RELATIVE)
+    File schemaDir
+
+    RoomSchemaArgProvider(File schemaDir) {
+        this.schemaDir = schemaDir
+    }
+
+    @Override
+    Iterable<String> asArguments() {
+        // Note: If you're using KSP, you should change the line below to return
+        // ["room.schemaLocation=${schemaDir.path}"]
+        return ["room.schemaLocation=${schemaDir.path}"]
+    }
+}
+
+ksp {
+    arg(new RoomSchemaArgProvider(new File(projectDir, "schemas")))
 }
