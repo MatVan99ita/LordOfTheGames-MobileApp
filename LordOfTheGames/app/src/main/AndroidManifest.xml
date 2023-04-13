@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LordOfTheGames"
+        android:theme="@style/TemaBase"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -25,7 +25,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".GridView.SecondActivity"/>
+        <activity android:name=".GameDetails.GameDetActivity"/>
+        <activity android:name=".Settings.SettingsActivity"/>
     </application>
 
 </manifest>

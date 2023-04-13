@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LordOfTheGames</string>
     <string name="search">Cerca</string>
+    <string name="settings">Impostazioni</string>
+    <string name="completed">Completati</string>
+    <string name="all">Tutti</string>
+    <string name="plan_to_play">Pianificato per giocare</string>
+    <string name="dropped">Abbandonato</string>
+    <string name="playing">Giocando</string>
+    <string name="abandoned">Abbandonato</string>
+    <string name="notes">Note</string>
 </resources>

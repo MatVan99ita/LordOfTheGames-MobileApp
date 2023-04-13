@@ -3,16 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="@string/app_name"
         android:theme="@style/Theme.App.Toolbar"
-        app:menu="@menu/top_app_bar"
-        app:navigationIcon="@drawable/ic_menu_24dp"
-        style="@style/ThemeOverlay.MaterialComponents.Toolbar.Primary"
-        />
+        app:navigationIcon="@mipmap/ic_gabibbo2_round"
+        android:padding="1dp"
+        android:layout_margin="3dp"
+        app:title="@string/app_name" />
 
 </com.google.android.material.appbar.AppBarLayout>

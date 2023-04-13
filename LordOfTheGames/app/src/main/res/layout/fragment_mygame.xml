@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginTop="?attr/actionBarSize"
+            android:id="@+id/tab_mygame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
+            app:tabMode="scrollable"
+            tools:ignore="MissingConstraints"
+            >
+        </com.google.android.material.tabs.TabLayout>
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/mygame_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/belandih"
+            android:textColor="@color/purple_200"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

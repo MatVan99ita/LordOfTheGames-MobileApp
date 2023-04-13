@@ -1,7 +1,32 @@
 package com.example.lordofthegames
 
+//import com.example.lordofthegames.databinding.ActivityMainBinding
+
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import com.example.lordofthegames.Settings.SettingsActivity
+import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
+import com.example.lordofthegames.ViewModel.AddViewModel
+import com.example.lordofthegames.home.CommunityFragment
+import com.example.lordofthegames.home.HomeFragment
+import com.example.lordofthegames.home.SearchFragment
+import com.example.lordofthegames.home.mygame.MyGameListFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
+
 
 /* Struttura del db
  *
@@ -35,66 +60,217 @@ import androidx.appcompat.app.AppCompatActivity
  * Game.id -> Achievements.game
  *
  *
+ *
+ *
+ *
+ *
+ *
+ * #TODO:
+ *   CAPIRE COME GESTIRE L'APERTURA DELLA NAVVIEW CON LA TOPBAR
+ * METTERE LA BOTTOM BAR CON LE 3 ACTIVITY PER USARE L'APP
+ *
+ *
+ *
+ * QUERY PER IL COUNT DEGLI ACHIEVEMENT
+ * SELECT
+ *  (SELECT COUNT(id) FROM achievement WHERE completed != 0) as "Completati",
+ *  (SELECT count(id) FROM achievement WHERE completed = 0) as "Non Completati",
+ *   COUNT(id) as "Totali"
+ * FROM achievement;
+ *
+ *
  */
 
 
 
 
 class MainActivity : AppCompatActivity() {
-<<<<<<< HEAD
 
-=======
-    var achievements: List<Achievement> = listOf(Achievement("Uccidi", "Uccidi il cattivo", "", 1, false), Achievement("Finisci", "Finisci il gioco", "", 1, false))
-    var tag: List<Categories> = listOf(Categories("GDR"), Categories("FPS"))
-    var games: List<Game> = listOf(
-        Game("Spado spado uccidi uccidi", achievements, "ic__search_white_24", listOf(tag[0]), "", Notes("", "") ),
-        Game("Sparo sparo uccidi uccidi", achievements, "ic_menu_24dp",        listOf(tag[1]), "", Notes("", "") ),
-        Game("Matel Gear Rising: Revengence", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Dark Souls 3", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("MARVEL Spider-Man", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Bloodborne", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("God of War: Ragnarok", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Horizon Zero Dawn: Forbidden West", achievements, "ic_t_pose", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") ),
-        Game("Gabibbo BELAAAAAAAAAN", achievements, "gabibbo", listOf(tag[1], tag[0]), "", Notes("", "") )
-    )
 
-    var simpleGrid: GridView? = null
-    var logos = intArrayOf(
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground,
-        R.drawable.ic_launcher_foreground
-    )
-    var recyclerView: RecyclerView? = null
->>>>>>> parent of 3e1b4ed (sistemato il grid layout e il second)
+    private var addViewModel: AddViewModel? = null
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var actualFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null)
-            Utilities.insertFragment(this, HomeFragment(), HomeFragment::class.java.simpleName)
+        drawerLayout = findViewById(R.id.main_activity_drawer)
+        navigationView = findViewById(R.id.nav_view)
+        bottomNavigationView = findViewById(R.id.bottom)
+
+        actualFragment = HomeFragment()
+
+        if (savedInstanceState == null) {
+             Utilities.insertFragment(
+                this,
+                HomeFragment(),
+                HomeFragment::class.java.simpleName, null,
+            )
+        }
+
+        Utilities.setUpToolBar(
+            this,
+            findViewById(R.id.toolbar),
+            getString(R.string.app_name),
+            drawerLayout,
+            null
+        )
+
+        actionBarDrawerToggle = Utilities.setUpDrawer(
+            drawerLayout,
+            navigationView,
+            this
+        )
+
+        val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo2_round", "mipmap", this.packageName))
+        //val bitmap = (drawable as BitmapDrawable).bitmap
+        val cianni = Utilities.drawableToBitmap(drawable!!)
+        val newdrawable: Drawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!! , 100, 100, true))
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.setHomeAsUpIndicator(newdrawable)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setHomeAsUpIndicator(newdrawable)
+        bottomNavigationView.itemIconTintList = null
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.bottom_nav_home -> {
+                    if(actualFragment !is HomeFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            HomeFragment(),
+                            HomeFragment::class.java.simpleName, null
+                        )
+                        actualFragment = HomeFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Home already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_nav_search -> {
+                    if(this.actualFragment !is SearchFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            SearchFragment(),
+                            SearchFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = SearchFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Search already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_my_game_list -> {
+                    if(this.actualFragment !is MyGameListFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            MyGameListFragment(),
+                            MyGameListFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = MyGameListFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Game list already initialized")
+                        false
+                    }
+                }
+                R.id.bottom_community -> {
+                    if(this.actualFragment !is CommunityFragment) {
+                        Utilities.insertFragment(
+                            this,
+                            CommunityFragment(),
+                            CommunityFragment::class.java.simpleName,
+                            null
+                        )
+                        this.actualFragment = CommunityFragment()
+                        true
+                    } else {
+                        Log.e("Bottom", "Game list already initialized")
+                        false
+                    }
+                }
+                else -> {false}
+            }
+        }
+
+
     }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+
+        return super.onSupportNavigateUp()
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.app_bar_settings) {
+            val intent = Intent(this, SettingsActivity::class.java)
+            this.startActivity(intent)
+            true
+        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+            true
+        } else if(item.itemId == R.id.nav_setting){
+            val intent = Intent(this, SettingsActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            this.startActivity(intent)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val bundle = data!!.extras
+            if (bundle != null) {
+                val imageBitmap = bundle["data"] as Bitmap?
+                addViewModel!!.setImageBitmap(imageBitmap!!)
+            }
+        }
+
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            val id = menuItem.itemId
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            if (id == R.id.nav_setting) {
+                val intent = Intent(this, SettingsActivity::class.java)
+                drawerLayout.closeDrawer(GravityCompat.START)
+                this.startActivity(intent)
+            }
+            //This is for maintaining the behavior of the Navigation view
+            //onNavDestinationSelected(menuItem, navController)
+            //This is for closing the drawer after acting on it
+            //drawer.closeDrawer(GravityCompat.START)
+            true
+        }
+        Log.e("CreateOPTMenu", menu.toString())
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
 
 
 

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.LordOfTheGames" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+    <!-- Base application theme. Theme.MaterialComponents.DayNight.DarkActionBar Theme.AppCompat.DayNight.NoActionBar-->
+    <style name="Theme.LordOfTheGames" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#6200ee</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -10,7 +10,26 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <!-- Customize your theme here. -->
+
+<!--
+-->
     </style>
+
+    <style name="TemaBase" parent="Theme.LordOfTheGames">
+        <!--<item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
+    </style>
+
+
+    <style name="Theme.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+
+
 </resources>
