@@ -19,7 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
-import com.example.lordofthegames.ViewModel.AddViewModel
+//import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.SearchFragment
@@ -87,7 +87,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity() {
 
 
-    private var addViewModel: AddViewModel? = null
+    //private var addViewModel: AddViewModel? = null
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
             val bundle = data!!.extras
             if (bundle != null) {
                 val imageBitmap = bundle["data"] as Bitmap?
-                addViewModel!!.setImageBitmap(imageBitmap!!)
+                //addViewModel!!.setImageBitmap(imageBitmap!!)
             }
         }
 

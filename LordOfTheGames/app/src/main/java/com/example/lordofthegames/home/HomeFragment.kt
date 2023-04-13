@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.Database.LOTGDAO
-import com.example.lordofthegames.Database.LOTGRepository
+//import com.example.lordofthegames.Database.LOTGDAO
+//import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.db_entities.Game
+//import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
