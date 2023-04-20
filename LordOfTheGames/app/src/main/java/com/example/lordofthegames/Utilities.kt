@@ -164,6 +164,7 @@ class Utilities {
             // Use the repository to interact with the database
             val myEntities: Flow<List<Game>> = myRepository.getAllGame()
             print(myEntities.toString())
+            db.close()
         }
 
         /*fun fillRoomDatabase(context: Context, vararg databaseNames: String) {

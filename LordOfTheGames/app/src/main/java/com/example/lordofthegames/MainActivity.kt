@@ -21,10 +21,6 @@ import androidx.fragment.app.Fragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 
-import com.example.lordofthegames.ViewModel.LOTGViewModel
-import com.example.lordofthegames.ViewModel.LOTGViewModelFactory
-import com.example.lordofthegames.app_entity.GameApplication
-//import com.example.lordofthegames.ViewModel.AddViewModel
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.SearchFragment
@@ -71,8 +67,6 @@ import com.google.android.material.navigation.NavigationView
  *
  *
  * #TODO:
- *   CAPIRE COME GESTIRE L'APERTURA DELLA NAVVIEW CON LA TOPBAR
- * METTERE LA BOTTOM BAR CON LE 3 ACTIVITY PER USARE L'APP
  *
  *
  *
