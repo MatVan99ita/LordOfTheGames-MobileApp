@@ -25,10 +25,13 @@ data class Notes(
     @PrimaryKey(autoGenerate = true)
     var note_id: Int,
 
+    @ColumnInfo(defaultValue = "")
     var title: String,
 
+    @ColumnInfo(defaultValue = "")
     var content: String,
 
-    var last_modified: Date,
+    @ColumnInfo(defaultValue = "")
+    var last_modified: String,
 
     var game_ref: Int )

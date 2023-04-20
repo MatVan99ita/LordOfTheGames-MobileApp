@@ -23,8 +23,12 @@ class LOTGRepository(
     @Suppress("RedundantSuspendModifier")
 */
     @WorkerThread
-    suspend fun insertGame(game: Game){
+    fun insertGame(game: Game){
         lotgdao.insertGame(game)
+    }
+
+    fun getAllGame(): Flow<List<Game>> {
+        return allGames
     }
 
 }

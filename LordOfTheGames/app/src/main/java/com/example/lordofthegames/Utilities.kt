@@ -1,29 +1,26 @@
 package com.example.lordofthegames
 
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.Gravity
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
+import androidx.room.Room.databaseBuilder
+import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGDatabase
+import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetFragment
-import com.example.lordofthegames.ViewModel.LOTGViewModel
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
-import java.io.File
+import kotlinx.coroutines.flow.Flow
 
 
 class Utilities {
@@ -135,11 +132,38 @@ class Utilities {
             Log.e("UTIL SETUP", actionBar.toString())*/
         }
 
-        fun createDatabase(owner: Fragment) {
-            var lotgViewModel: LOTGViewModel = ViewModelProvider(owner)[LOTGViewModel::class.java]
+        fun createDatabase(context: Context) {/*
+            val lotgViewModel: LOTGViewModel = ViewModelProvider(owner)[LOTGViewModel::class.java]
+
+            val LOTGViewModel by viewModels<LOTGViewModel> {
+                LOTGViewModelFactory(repository = (application as GameApplication).repository)
+            }
+            lotgViewModel.addItem(Game(1, "banana", "", ""))
+            // */
             /** TODO Aggiungere questo tipo di cosa ad Utilities
             //lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
              */
+
+
+            // Start the Room database
+
+            // Start the Room database
+            val db: LOTGDatabase = databaseBuilder(
+                context,
+                LOTGDatabase::class.java, "lotgdatabase"
+            ).build()
+
+            // Create the DAO and repository
+
+            // Create the DAO and repository
+            val myDao: LOTGDAO = db.lotgdao()
+            val myRepository = LOTGRepository(myDao)
+
+            // Use the repository to interact with the database
+
+            // Use the repository to interact with the database
+            val myEntities: Flow<List<Game>> = myRepository.getAllGame()
+            print(myEntities.toString())
         }
 
         /*fun fillRoomDatabase(context: Context, vararg databaseNames: String) {

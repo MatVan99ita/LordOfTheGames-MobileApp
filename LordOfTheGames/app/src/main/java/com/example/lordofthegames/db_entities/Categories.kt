@@ -14,5 +14,6 @@ import androidx.room.PrimaryKey
 data class Categories(
     @PrimaryKey()
     var category_id: Int,
+    @ColumnInfo(defaultValue = "")
     var category_name: String
     )

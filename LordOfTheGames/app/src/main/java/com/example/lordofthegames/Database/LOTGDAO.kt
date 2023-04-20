@@ -22,8 +22,8 @@ interface LOTGDAO {
     @Query("SELECT * FROM game")
     fun getGames(): Flow<List<Game>>
 
-    // @Insert(onConflict = OnConflictStrategy.IGNORE)
-    // fun insertGame(game: Game)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertGame(game: Game)
 
     // @Insert(onConflict = OnConflictStrategy.IGNORE)
     // fun fillGame(list: MutableList<Game>)

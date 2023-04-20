@@ -16,7 +16,9 @@ data class Discussion(
 
     @PrimaryKey(autoGenerate = true)
     var discussion_id: Int,
+    @ColumnInfo(defaultValue = "")
     var title: String,
+    @ColumnInfo(defaultValue = "")
     var content: String,
     var game_ref: Int
 

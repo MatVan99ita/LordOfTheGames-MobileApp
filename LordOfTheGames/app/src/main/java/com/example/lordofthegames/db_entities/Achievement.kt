@@ -24,11 +24,17 @@ indices = [Index("achievement_id"), Index("game_ref")]
 data class Achievement(
     @PrimaryKey(autoGenerate = true)
     var achievement_id: Int,
+    @ColumnInfo(defaultValue = "")
     var name: String,
+    @ColumnInfo(defaultValue = "")
     var description: String,
+    @ColumnInfo(defaultValue = "")
     var img: String,
+    @ColumnInfo(defaultValue = "0")
     var actual_count: Int = 0,
+    @ColumnInfo(defaultValue = "1")
     var total_count: Int = 1,
+    @ColumnInfo(defaultValue = "false")
     var status: Boolean = false,
     var game_ref: Int
     )
