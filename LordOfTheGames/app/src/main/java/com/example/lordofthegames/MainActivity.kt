@@ -203,6 +203,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        Utilities.createDatabase(this)
+
+
 
     }
 

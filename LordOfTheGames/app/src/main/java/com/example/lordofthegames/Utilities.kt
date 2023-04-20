@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -145,26 +146,18 @@ class Utilities {
              */
 
 
-            // Start the Room database
+            //val db: LOTGDatabase = LOTGDatabase.getDatabase(context)
+            val database by lazy { LOTGDatabase.getDatabase(context) }
+            val repository by lazy { LOTGRepository(database.lotgdao()) }
 
-            // Start the Room database
-            val db: LOTGDatabase = databaseBuilder(
-                context,
-                LOTGDatabase::class.java, "lotgdatabase"
-            ).build()
+            val myDao: LOTGDAO = database.lotgdao()
+            //val myRepository = LOTGRepository(myDao)
+            val myEntities: Flow<List<Game>> = repository.getAllGame()
 
-            // Create the DAO and repository
 
-            // Create the DAO and repository
-            val myDao: LOTGDAO = db.lotgdao()
-            val myRepository = LOTGRepository(myDao)
 
-            // Use the repository to interact with the database
+            Log.e("POCODIODROPLET", myEntities.toString())
 
-            // Use the repository to interact with the database
-            val myEntities: Flow<List<Game>> = myRepository.getAllGame()
-            print(myEntities.toString())
-            db.close()
         }
 
         /*fun fillRoomDatabase(context: Context, vararg databaseNames: String) {

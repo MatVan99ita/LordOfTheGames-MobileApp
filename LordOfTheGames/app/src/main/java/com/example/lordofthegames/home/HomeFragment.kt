@@ -66,7 +66,6 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Utilities.createDatabase(requireContext())
         setHasOptionsMenu(true)
     }
 
