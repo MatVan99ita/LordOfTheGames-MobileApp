@@ -1,16 +1,32 @@
 package com.example.lordofthegames.Database
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.lordofthegames.db_entities.*
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import java.util.stream.Collectors
+import kotlin.reflect.KClass
+import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.full.memberProperties
 
-@Database(entities =
-[Game::class, Achievement::class, Categories::class, Notes::class, GameCategory::class, Discussion::class, Comments::class]
-                , version = 1, exportSchema = true)
+@Database(entities = [
+            Achievement::class,
+            Categories::class,
+            Comments::class,
+            Discussion::class,
+            Game::class,
+            GameCategory::class,
+            GamePlatform::class,
+            Notes::class,
+            Platform::class
+        ], version = 1, exportSchema = true)
 @TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {
 
@@ -35,6 +51,7 @@ abstract class LOTGDatabase: RoomDatabase() {
             }
         }
     }
+}
 
 
 
@@ -52,4 +69,27 @@ abstract class LOTGDatabase: RoomDatabase() {
      *  (@id_videogioco, 2);
      */
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

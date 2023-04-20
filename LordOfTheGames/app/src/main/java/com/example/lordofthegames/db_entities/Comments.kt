@@ -16,13 +16,8 @@ indices = [Index("comment_id"), Index("discussion_ref")]
 data class Comments(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "comment_id")
-    var id: Int,
-
-    @ColumnInfo(name = "discussion_ref")
+    var comment_id: Int,
     var discussion_ref: Int,
-
-    @ColumnInfo(name = "content")
     var content: String,
 
 )

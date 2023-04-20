@@ -15,16 +15,9 @@ import java.util.Date
 data class Discussion(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "discussion_id")
-    var id: Int,
-
-    @ColumnInfo(name = "discussion_object")
+    var discussion_id: Int,
     var title: String,
-
-    @ColumnInfo(name = "discussion_body")
     var content: String,
-
-    @ColumnInfo(name = "game_ref")
     var game_ref: Int
 
 )

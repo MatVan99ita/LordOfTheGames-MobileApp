@@ -14,14 +14,11 @@ import androidx.room.*
     ForeignKey(
         entity = Categories::class,
         childColumns = ["category_ref"],
-        parentColumns = ["tag"]
+        parentColumns = ["category_id"]
     )],
     indices = [Index("game_ref"), Index("category_ref")],
 )
 data class GameCategory(
-    @ColumnInfo(name = "game_ref")
     var game_ref: Int,
-
-    @ColumnInfo(name = "category_ref")
-    var cat_ref: Int
+    var category_ref: Int
 )

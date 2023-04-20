@@ -22,16 +22,17 @@ import androidx.room.PrimaryKey
 data class Game(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "game_id")
-    var id: Int,
+    var game_id: Int,
 
-    @ColumnInfo(name = "game_title")
-    var name: String,
+    var game_title: String,
 
-    @ColumnInfo(name = "game_cover")
-    var image: String,
+    var game_description: String,
 
+    var game_cover: String,
 
+    /**
+     * Status -> ~, N
+     */
     @ColumnInfo(name = "game_status", defaultValue = "Not played")
     var status: String,
 

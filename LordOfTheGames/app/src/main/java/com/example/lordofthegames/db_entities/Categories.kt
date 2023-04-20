@@ -10,13 +10,9 @@ import androidx.room.PrimaryKey
  *
  * @param name
  */
-@Entity(tableName = "Categories", indices = [Index("tag")])
+@Entity(tableName = "categories")
 data class Categories(
-
     @PrimaryKey()
-    @ColumnInfo(name = "tag")
-    var tag: String,
-
-    @ColumnInfo(name = "full_name")
-    var nome: String
+    var category_id: Int,
+    var category_name: String
     )

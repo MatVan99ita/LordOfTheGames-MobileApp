@@ -14,7 +14,6 @@ import java.sql.Timestamp
         parentColumns = ["game_id"],
         childColumns = ["game_ref"],
     )],
-    indices = [Index("note_id"), Index("game_ref")]
 )
 @TypeConverters(DateConverter::class)
 data class Notes(
@@ -24,17 +23,12 @@ data class Notes(
      * @param content
      */
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "note_id")
-    var id: Int,
+    var note_id: Int,
 
-    @ColumnInfo(name = "note_title")
     var title: String,
 
-    @ColumnInfo(name = "note_content")
     var content: String,
 
-    @ColumnInfo(name = "last_modified")
-    var lastModified: Date,
+    var last_modified: Date,
 
-    @ColumnInfo(name = "game_ref")
-    var gameId: Int )
+    var game_ref: Int )

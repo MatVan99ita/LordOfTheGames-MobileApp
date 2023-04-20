@@ -142,7 +142,7 @@ class Utilities {
              */
         }
 
-        fun fillRoomDatabase(context: Context, vararg databaseNames: String) {
+        /*fun fillRoomDatabase(context: Context, vararg databaseNames: String) {
             for (databaseName in databaseNames) {
                 val dbFile = File(context.getDatabasePath(databaseName).path)
                 val db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READONLY)
@@ -164,7 +164,7 @@ class Utilities {
                 roomDb.lotgdao().fillGame(list)
                 roomDb.close()
             }
-        }
+        } // */
     }
 
 }
