@@ -66,6 +66,11 @@ class SettingsFragment: Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "super.onCreateOptionsMenu(menu, inflater)",
+        "androidx.fragment.app.Fragment"
+    )
+    )
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
     }

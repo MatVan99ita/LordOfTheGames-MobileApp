@@ -32,6 +32,11 @@ class SideMenuFragment: Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java", ReplaceWith(
+        "super.onCreateOptionsMenu(menu, inflater)",
+        "androidx.fragment.app.Fragment"
+    )
+    )
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         //menu.findItem(R.id.app_bar_search).setVisible(false)
