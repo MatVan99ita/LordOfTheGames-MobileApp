@@ -10,9 +10,11 @@ import android.view.*
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.textfield.TextInputLayout
 
 class SettingsFragment: Fragment() {
@@ -37,6 +39,12 @@ class SettingsFragment: Fragment() {
         val activity: Activity? = activity
 
         if(activity != null){
+
+            val fragmentManager: FragmentManager = childFragmentManager
+            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, GameDetFragment())
+            fragmentTransaction.commit()
+
             val textInputLayout: TextInputLayout = view.findViewById(R.id.username_textinput)
             val editText: EditText? = textInputLayout.editText
 
