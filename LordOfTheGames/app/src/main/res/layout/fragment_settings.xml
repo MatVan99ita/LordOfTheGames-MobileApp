@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -38,129 +40,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="277dp"
-            android:layout_height="448dp"
-            android:layout_marginStart="8dp"
-            android:background="#FB0000"
-            android:backgroundTint="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.548">
 
-        </FrameLayout>
-
-        <Button
-            android:id="@+id/light_default"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="336dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/azure_light"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="448dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/teal_200"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/red_light"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="392dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/dark_defaut"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/red_dark"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#6C0000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/azure_dark"
-            android:layout_width="63dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="216dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="#00608C"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="211dp"
-            android:layout_height="38dp"
-            android:text="Cambia tema"
-            android:textSize="30dp"
-            tools:layout_editor_absoluteX="11dp"
-            tools:layout_editor_absoluteY="7dp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="98dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="84dp"
-            android:text="Tema scuro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="98dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="316dp"
-            android:text="Tema chiaro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/fragment_container"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

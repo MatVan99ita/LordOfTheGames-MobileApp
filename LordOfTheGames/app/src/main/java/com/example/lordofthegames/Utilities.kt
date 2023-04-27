@@ -18,6 +18,7 @@ import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetFragment
+import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
@@ -37,7 +38,7 @@ class Utilities {
             fragment.arguments = bundle
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            if (fragment !is HomeFragment && fragment !is GameDetFragment){
+            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment){
                 transaction.addToBackStack(tag);
             }
 

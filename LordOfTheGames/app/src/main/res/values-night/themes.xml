@@ -25,11 +25,22 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
     </style>
 
-
-    <style name="Theme.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
-        <item name="android:textColorPrimary">@color/white</item>
+    <style name="Theme.LordOfTheGames.RED" parent="Theme.LordOfTheGames">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/red_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/red_dark_variant</item>
     </style>
 
+    <style name="Theme.LordOfTheGames.AZURE" parent="Theme.LordOfTheGames">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/azure_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/azure_dark_variant</item>
+    </style>
 
+    <style name="Theme.LordOfTheGames.GREEN" parent="Theme.LordOfTheGames">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/green_dark_variant</item>
+    </style>
 
 </resources>

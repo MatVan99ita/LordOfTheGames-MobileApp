@@ -6,16 +6,28 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.R
-import com.example.lordofthegames.home.HomeFragment
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
+
 
 class SettingsFragment: Fragment() {
 
@@ -32,6 +44,9 @@ class SettingsFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,10 +55,6 @@ class SettingsFragment: Fragment() {
 
         if(activity != null){
 
-            val fragmentManager: FragmentManager = childFragmentManager
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, GameDetFragment())
-            fragmentTransaction.commit()
 
             val textInputLayout: TextInputLayout = view.findViewById(R.id.username_textinput)
             val editText: EditText? = textInputLayout.editText
@@ -82,6 +93,13 @@ class SettingsFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater {
+        val inflater = super.onGetLayoutInflater(savedInstanceState)
+        val contextThemeWrapper: Context = ContextThemeWrapper(requireContext(), R.style.Theme_LordOfTheGames_AZURE)
+        return inflater.cloneInContext(contextThemeWrapper)
+    }
+
 
 
 

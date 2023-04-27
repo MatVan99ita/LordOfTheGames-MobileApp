@@ -2,32 +2,60 @@
     <!-- Base application theme. -->
     <style name="Theme.LordOfTheGames" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+        <item name="colorPrimary">@color/red_light_primary</item>
+        <item name="colorPrimaryVariant">@color/red_light_variant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
     </style>
 
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">
     </style>
 
-    <style name="TemaBase" parent="Theme.LordOfTheGames">
-        <!--<item name="android:windowContentTransitions">true</item>
-        <item name="android:windowAllowEnterTransitionOverlap">true</item>
-        <item name="android:windowAllowReturnTransitionOverlap">true</item>
-        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
-        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
+    <style name="Theme.LordOfTheGames.RED" parent="Theme.LordOfTheGames">
+
     </style>
 
-    <style name="Theme.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
-        <item name="android:textColorPrimary">@color/black</item>
+    <style name="Theme.LordOfTheGames.AZURE" parent="Theme.LordOfTheGames">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/teal_700</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
+
+    <style name="Theme.LordOfTheGames.GREEN" parent="Theme.LordOfTheGames">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_light_primary</item>
+        <item name="colorPrimaryVariant">@color/green_light_variant</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="defolto">
+
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+
 
 </resources>
