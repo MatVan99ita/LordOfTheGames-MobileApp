@@ -1,6 +1,8 @@
 package com.example.lordofthegames
 
+import android.app.UiModeManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
@@ -9,11 +11,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.room.Room.databaseBuilder
 import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Database.LOTGRepository
@@ -184,6 +186,20 @@ class Utilities {
                 roomDb.close()
             }
         } // */
-    }
+        fun darkThemeSwitch(context: Context, sharedPreferences: SharedPreferences): Boolean{
+            val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+            val mode = uiModeManager.nightMode
+            val isDarkTheme = sharedPreferences.getBoolean("theme", mode == UiModeManager.MODE_NIGHT_YES)
+            sharedPreferences.edit().putBoolean("theme", mode == UiModeManager.MODE_NIGHT_YES).apply()
+            return isDarkTheme
+        }
 
+
+
+
+
+
+
+
+    }
 }

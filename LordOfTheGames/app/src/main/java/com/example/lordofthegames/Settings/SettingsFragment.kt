@@ -1,6 +1,7 @@
 package com.example.lordofthegames.Settings
 
 import android.app.Activity
+import android.app.UiModeManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -12,20 +13,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.R
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.example.lordofthegames.Utilities
 import com.google.android.material.textfield.TextInputLayout
 
 
@@ -82,7 +77,22 @@ class SettingsFragment: Fragment() {
                     editor.apply()
                 }
             })
+
+            val switchCompat = view.findViewById<SwitchCompat>(R.id.theme_swap)
+
+            val uiModeManager = requireActivity().getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+            val mode = uiModeManager.nightMode
+            val isDarkTheme = sharedPreferences.getBoolean("theme", mode == UiModeManager.MODE_NIGHT_YES)
+            switchCompat.isChecked = !isDarkTheme
+            switchCompat.setOnCheckedChangeListener { _, isChecked ->
+                sharedPreferences.edit().putBoolean("theme", !isDarkTheme).apply()
+                AppCompatDelegate.setDefaultNightMode( if(isDarkTheme) AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES);
+            }
+
+
+
         }
+
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith(

@@ -1,9 +1,15 @@
 package com.example.lordofthegames.Settings
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.View.OnClickListener
+import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -16,8 +22,10 @@ class SettingsActivity: AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-
+    private var AavedInstanceState: Bundle? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        this.AavedInstanceState = savedInstanceState
+        this.setTheme(R.style.Theme_LordOfTheGames_AZURE)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_settings)
@@ -46,6 +54,14 @@ class SettingsActivity: AppCompatActivity() {
             this,
             "null"
         )
+
+        //val btn: Button = findViewById(R.id.btn_verde).setOnClickListener(this);
+        //val btn1: Button = findViewById(R.id.btn_azzurro).setOnClickListener(this);
+
+    }
+
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -11,19 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/topbar"/>
+        <include
+            android:id="@+id/include"
+            layout="@layout/topbar"
+            app:layout_constraintStart_toStartOf="@+id/fragment_container_view"
+            app:layout_constraintTop_toTopOf="@+id/fragment_container_view" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
+            android:name="com.example.lordofthegames.Settings.SettingsFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:name="com.example.lordofthegames.Settings.SettingsFragment"
-            tools:layout="@layout/fragment_settings"
-            />
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout="@layout/fragment_settings" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
