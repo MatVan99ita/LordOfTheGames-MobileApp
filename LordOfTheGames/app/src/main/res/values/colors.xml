@@ -37,5 +37,18 @@
     <color name="viola_secondo">#130046</color>
     <color name="viola_terzo">#7734aa</color>
 
+    <color name="rosso">#FF0000 </color>
+    <color name="arancione">#ff8000 </color>
+    <color name="giallo">#ffff00 </color>
+    <color name="verde1">#80ff00 </color>
+    <color name="verde2">#00ff00 </color>
+    <color name="verde3">#00ff80 </color>
+    <color name="azzurro1">#00ffff </color>
+    <color name="azzurro2">#0080ff </color>
+    <color name="blu">#0000ff </color>
+    <color name="viola1">#8000ff </color>
+    <color name="viola2">#ff00ff </color>
+    <color name="viola3">#ff0080 </color>
+
 
 </resources>

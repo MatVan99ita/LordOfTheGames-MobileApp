@@ -2,6 +2,7 @@ package com.example.lordofthegames.home
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -53,6 +54,7 @@ class HomeFragment: Fragment(), OnItemListener {
         GameCardItem("gabibbo",             "Bloodborne"),
     ) as MutableList<GameCardItem>
 
+
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
 
@@ -74,7 +76,6 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-
             //val repository = LOTGRepository(LOTGDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()
             //print(cardItems)

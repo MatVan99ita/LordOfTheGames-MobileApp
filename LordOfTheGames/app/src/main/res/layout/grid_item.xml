@@ -9,9 +9,11 @@
     android:layout_marginEnd="2dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="2dp"
+    android:background="@drawable/rainbow"
     >
 
     <LinearLayout
+        android:background="@drawable/rainbow"
         android:id="@+id/linearItemLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -7,11 +7,11 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -194,7 +194,28 @@ class Utilities {
             return isDarkTheme
         }
 
-
+        fun rainbowBG(): GradientDrawable{
+            val gradientDrawable = GradientDrawable(
+                GradientDrawable.Orientation.BL_TR, intArrayOf(
+                    R.color.rosso,
+                    R.color.arancione,
+                    R.color.giallo,
+                    R.color.verde1,
+                    R.color.verde2,
+                    R.color.verde3,
+                    R.color.azzurro1,
+                    R.color.azzurro2,
+                    R.color.blu,
+                    R.color.viola1,
+                    R.color.viola2,
+                    R.color.viola3,
+                    )
+            )
+            gradientDrawable.gradientType = GradientDrawable.SWEEP_GRADIENT
+            gradientDrawable.setGradientCenter(0.5f, 0.5f)
+            gradientDrawable.shape = GradientDrawable.RECTANGLE
+            return gradientDrawable
+        }
 
 
 

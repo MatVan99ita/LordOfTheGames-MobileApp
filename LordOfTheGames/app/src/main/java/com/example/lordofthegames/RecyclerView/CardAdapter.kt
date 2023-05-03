@@ -33,6 +33,7 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
         holder.gameImg.setImageDrawable(drawable)
 
         holder.gameTitle.text = currentCardItem.gameTitle
+
     }
 
     override fun getItemCount(): Int {
