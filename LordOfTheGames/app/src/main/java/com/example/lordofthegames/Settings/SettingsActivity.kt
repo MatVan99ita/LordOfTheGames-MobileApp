@@ -25,7 +25,7 @@ class SettingsActivity: AppCompatActivity() {
     private var AavedInstanceState: Bundle? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         this.AavedInstanceState = savedInstanceState
-        this.setTheme(R.style.Theme_LordOfTheGames_AZURE)
+        this.setTheme(R.style.Theme_LordOfTheGames)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_settings)
