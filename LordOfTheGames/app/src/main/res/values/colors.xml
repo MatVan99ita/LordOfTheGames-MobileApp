@@ -33,4 +33,9 @@
     <color name="green_light_primary">#15BC1C</color>
     <color name="green_light_variant">#118116</color>
 
+    <color name="viola_primo">#450278</color>
+    <color name="viola_secondo">#130046</color>
+    <color name="viola_terzo">#7734aa</color>
+
+
 </resources>

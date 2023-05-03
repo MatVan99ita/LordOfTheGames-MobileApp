@@ -40,20 +40,5 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/theme_swap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textOn="Tema chiaro"
-        android:textOff="Tema scuro"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="@android:color/transparent"
-        android:button="@null"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:showText="true"
-        android:text="Switch" />
-
 
 </androidx.appcompat.widget.LinearLayoutCompat>

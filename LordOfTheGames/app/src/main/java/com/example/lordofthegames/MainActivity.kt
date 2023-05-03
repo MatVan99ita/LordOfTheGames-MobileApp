@@ -209,19 +209,6 @@ class MainActivity : AppCompatActivity() {
 
         Utilities.createDatabase(this)
 
-
-
-
-        val sharedPreferences: SharedPreferences = this.getPreferences(Context.MODE_PRIVATE)
-        val uiModeManager = this.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
-        val mode = uiModeManager.nightMode
-        val isDarkTheme = sharedPreferences.getBoolean("theme", mode == UiModeManager.MODE_NIGHT_YES)
-        AppCompatDelegate.setDefaultNightMode( if(isDarkTheme) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO);
-
-
-
-
-
     }
 
 

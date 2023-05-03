@@ -77,22 +77,7 @@ class SettingsFragment: Fragment() {
                     editor.apply()
                 }
             })
-
-            val switchCompat = view.findViewById<SwitchCompat>(R.id.theme_swap)
-
-            val uiModeManager = requireActivity().getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
-            val mode = uiModeManager.nightMode
-            val isDarkTheme = sharedPreferences.getBoolean("theme", mode == UiModeManager.MODE_NIGHT_YES)
-            switchCompat.isChecked = !isDarkTheme
-            switchCompat.setOnCheckedChangeListener { _, isChecked ->
-                sharedPreferences.edit().putBoolean("theme", !isDarkTheme).apply()
-                AppCompatDelegate.setDefaultNightMode( if(isDarkTheme) AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES);
-            }
-
-
-
         }
-
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith(
@@ -104,11 +89,6 @@ class SettingsFragment: Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onGetLayoutInflater(savedInstanceState: Bundle?): LayoutInflater {
-        val inflater = super.onGetLayoutInflater(savedInstanceState)
-        val contextThemeWrapper: Context = ContextThemeWrapper(requireContext(), R.style.Theme_LordOfTheGames_AZURE)
-        return inflater.cloneInContext(contextThemeWrapper)
-    }
 
 
 

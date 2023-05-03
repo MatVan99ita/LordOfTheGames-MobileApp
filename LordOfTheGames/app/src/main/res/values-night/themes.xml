@@ -1,46 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. Theme.MaterialComponents.DayNight.DarkActionBar Theme.AppCompat.DayNight.NoActionBar-->
-    <style name="Theme.LordOfTheGames" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.LordOfTheGames" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#6200ee</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/red_dark_primary</item>
+        <item name="colorPrimaryVariant">@color/red_light_variant</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">@color/viola_primo</item>
+        <item name="colorSecondaryVariant">@color/red_light_variant</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorOnPrimary</item>
         <!-- Customize your theme here. -->
 
-<!--
--->
-    </style>
-
-    <style name="TemaBase" parent="Theme.LordOfTheGames">
-        <!--<item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
-        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>-->
-    </style>
-
-    <style name="Theme.LordOfTheGames.RED" parent="Theme.LordOfTheGames">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_dark_primary</item>
-        <item name="colorPrimaryVariant">@color/red_dark_variant</item>
-    </style>
-
-    <style name="Theme.LordOfTheGames.AZURE" parent="Theme.LordOfTheGames">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/azure_dark_primary</item>
-        <item name="colorPrimaryVariant">@color/azure_dark_variant</item>
-    </style>
-
-    <style name="Theme.LordOfTheGames.GREEN" parent="Theme.LordOfTheGames">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green_dark_primary</item>
-        <item name="colorPrimaryVariant">@color/green_dark_variant</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+<!--
+-->
     </style>
 
 </resources>

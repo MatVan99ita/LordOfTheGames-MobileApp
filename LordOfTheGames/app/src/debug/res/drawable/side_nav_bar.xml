@@ -2,8 +2,15 @@
     android:shape="rectangle">
     <gradient
         android:angle="135"
-        android:centerColor="#009688"
-        android:endColor="#00695C"
-        android:startColor="#4DB6AC"
+        android:endColor="#670000"
+        android:centerColor="#990000"
+        android:startColor="#cb3232"
         android:type="linear" />
 </shape>
+<!--
+['#670000', '#990000', '#cb3232'] - rosso
+['#009acd', '#00ccff', '#32feff'] - azzurro
+['#008100', '#00b300', '#32e532'] - verde
+['#130046', '#450278', '#7734aa'] - viola
+
+-->
