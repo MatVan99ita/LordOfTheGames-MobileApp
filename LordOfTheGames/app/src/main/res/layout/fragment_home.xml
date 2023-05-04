@@ -12,9 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/recycler_view"
-        android:clipChildren="true"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/grid_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/gridview_item2"
         />
 
+        <!--
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        android:clipChildren="true"
+        -->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

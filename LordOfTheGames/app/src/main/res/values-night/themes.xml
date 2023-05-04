@@ -17,8 +17,13 @@
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+
 <!--
 -->
+    </style>
+
+    <style name="Fontato" parent="Theme.LordOfTheGames">
+        <item name="android:fontFamily">@font/god_of_war</item>
     </style>
 
 </resources>

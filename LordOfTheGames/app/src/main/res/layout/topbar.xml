@@ -12,6 +12,7 @@
         app:navigationIcon="@mipmap/ic_gabibbo2_round"
         android:padding="1dp"
         android:layout_margin="3dp"
+        app:theme="@style/Fontato"
         app:title="@string/app_name" />
 
 </com.google.android.material.appbar.AppBarLayout>
