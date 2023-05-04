@@ -1,44 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/single_card"
+    android:id="@+id/single_card2"
     android:layout_marginStart="2dp"
     android:layout_marginEnd="2dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="2dp"
     >
 
-    <LinearLayout
-        android:background="@drawable/rainbow_background"
-        android:id="@+id/linearItemLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/rainbow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="4dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <!--on below line we are creating
+                 a simple image view-->
+
+            <!--on below line we are creating
+                a simple text view-->
+
             <ImageView
-                android:id="@+id/game_icon"
+                android:id="@+id/game_img"
                 android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:scaleType="fitCenter"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_launcher_foreground"
-                android:paddingTop="5dp"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/immagine" />
-            <TextView
-                android:id="@+id/game_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:singleLine="true"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:contentDescription="img"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 />
-        </LinearLayout>
-    </LinearLayout>
+
+            <TextView
+                android:id="@+id/game_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_margin="5dp"
+                android:padding="4dp"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                app:theme="@style/Fontato"
+                app:layout_constraintLeft_toRightOf="@id/game_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/game_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:padding="4dp"
+                android:text="GDR"
+                android:textColor="@color/black"
+                android:textSize="7sp"
+                app:layout_constraintLeft_toRightOf="@id/game_img"
+                app:layout_constraintTop_toBottomOf="@+id/game_title2"
+                android:backgroundTint="@color/green_light_variant"
+                android:background="@color/green_light_variant"/>
+
+            <TextView
+                android:id="@+id/game_playable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_marginStart="20dp"
+                android:padding="4dp"
+                android:text="PS5"
+                android:textColor="@color/black"
+                android:textSize="7sp"
+                app:layout_constraintLeft_toRightOf="@id/game_img"
+                app:layout_constraintTop_toBottomOf="@+id/game_category"
+                android:backgroundTint="@color/green_light_variant"
+                android:background="@color/green_light_variant" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/add_combined"
+                android:backgroundTint="#5A5A5A"
+                android:backgroundTintMode="multiply"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

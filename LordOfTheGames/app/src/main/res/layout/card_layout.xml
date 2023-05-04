@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/single_card"
+    android:id="@+id/single_card2"
     android:layout_margin="16dp">
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -30,10 +30,9 @@
 
     <GridView
         android:id="@+id/simpleGridView"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:footerDividersEnabled="false"
-        android:padding="1dp"
-        android:numColumns="1" />
+        android:padding="1dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

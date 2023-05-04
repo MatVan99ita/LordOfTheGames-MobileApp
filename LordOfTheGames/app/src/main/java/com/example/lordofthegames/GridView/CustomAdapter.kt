@@ -52,7 +52,7 @@ class CustomAdapter(
         }
 
         if (convertView == null) {
-            convertView = layoutInflater!!.inflate(R.layout.gridview_item, null)
+            convertView = layoutInflater!!.inflate(R.layout.gridview_item2, null)
         }
 
         icon      = convertView!!.findViewById(R.id.game_img)

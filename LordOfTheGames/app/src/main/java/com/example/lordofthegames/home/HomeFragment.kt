@@ -9,6 +9,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 //import com.example.lordofthegames.Database.LOTGDAO
 //import com.example.lordofthegames.Database.LOTGRepository
@@ -89,7 +90,7 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this
         adapter = CardAdapter(listener, gameItems, act)
-        val gridLayout = GridLayoutManager(activity, 3)
+        val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter

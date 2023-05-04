@@ -12,7 +12,7 @@ import com.example.lordofthegames.R
 class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item, parent, false)
+        val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item2, parent, false)
         return CardViewHolder(layoutView, listener)
     }
 

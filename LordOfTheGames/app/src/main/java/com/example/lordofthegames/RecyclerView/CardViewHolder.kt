@@ -12,8 +12,8 @@ class CardViewHolder(itemView: View, lister: OnItemListener) : RecyclerView.View
     private val onItemListener: OnItemListener
 
     init {
-        this.gameImg = itemView.findViewById(R.id.game_icon)
-        this.gameTitle = itemView.findViewById(R.id.game_text)
+        this.gameImg = itemView.findViewById(R.id.game_img)
+        this.gameTitle = itemView.findViewById(R.id.game_title2)
         this.onItemListener = lister
         itemView.setOnClickListener(this)
     }
