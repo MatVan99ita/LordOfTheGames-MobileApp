@@ -52,6 +52,7 @@
                 app:layout_constraintLeft_toRightOf="@id/game_img"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- TODO: ############## LORO 2 DEVONO DIVENTARE 2 ULTERIORI RECYCLER CON DENTRO SOLO DEI TEXTVIEW ###################-->
             <TextView
                 android:id="@+id/game_category"
                 android:layout_width="wrap_content"
