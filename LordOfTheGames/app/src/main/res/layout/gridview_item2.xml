@@ -90,7 +90,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:background="@drawable/add_combined"
             android:backgroundTint="#5A5A5A"
             android:backgroundTintMode="multiply"
             app:layout_constraintBottom_toBottomOf="parent"

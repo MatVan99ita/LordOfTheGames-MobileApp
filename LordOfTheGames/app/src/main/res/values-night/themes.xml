@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. Theme.MaterialComponents.DayNight.DarkActionBar Theme.AppCompat.DayNight.NoActionBar-->
-    <style name="Theme.LordOfTheGames" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.LordOfTheGames" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red_dark_primary</item>
         <item name="colorPrimaryVariant">@color/red_light_variant</item>
@@ -26,4 +26,20 @@
         <item name="android:fontFamily">@font/god_of_war</item>
     </style>
 
+    <style name="controller" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/CustomButtonThemeOverlay</item>
+    </style>
+
+    <style name="CustomButtonThemeOverlay">
+        <item name="colorPrimary">@color/divider</item>
+    </style>
+
+
+    <style name="add_controller" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/CustomButtonThemeOverlay2</item>
+    </style>
+
+    <style name="CustomButtonThemeOverlay2">
+        <item name="colorPrimary">@color/black</item>
+    </style>
 </resources>
