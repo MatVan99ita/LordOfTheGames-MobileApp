@@ -87,7 +87,7 @@
                 android:layout_marginEnd="2.3dp"
                 android:layout_marginBottom="2dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/controller_modify3"
+                android:background="@drawable/controller_modifica_4"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
