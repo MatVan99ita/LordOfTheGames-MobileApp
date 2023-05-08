@@ -221,17 +221,17 @@ class Utilities {
 
 
 
-        fun generateSalt(): ByteArray{
+        fun generateSalt(): String{
             val random = SecureRandom()
             val salt = ByteArray(16) // 16 bytes = 128 bits
             random.nextBytes(salt)
-            return salt
+            return salt.toString()
         }
 
-        fun hashPassword(password: String, salt: ByteArray): ByteArray {
+        fun hashPassword(password: String, salt: String): String {
             val sha256 = MessageDigest.getInstance("SHA-256")
             val hashedSalt = sha256.digest(salt)
-            return hashedSalt
+            return hashedSalt.toString()
         }
 
 

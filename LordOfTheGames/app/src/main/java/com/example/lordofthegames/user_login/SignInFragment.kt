@@ -47,16 +47,23 @@ class SignInFragment: Fragment(), OnClickListener {
         return password.matches(regex)
     }
 
+    fun isValidMail(email: String): Boolean {
+        // Controlla se la password ha almeno 6 caratteri e contiene almeno una lettera minuscola,
+        // una lettera maiuscola, un numero e un carattere speciale.
+        val emailPattern = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        return emailPattern.matches(email)
+    }
+
     fun signin() {
         val n = nick.text.toString()
         val p = password.text.toString()
         val m = mail.text.toString()
 
-        if(n == ""){
-            nick.error = "Nickname is required.";
+        if(!isValidMail(m)){
+            nick.error = "Mail is required. Must be name@domain.net";
             nick.requestFocus();
             return;
-        } else if(n.length < 6){
+        } else if(m.length < 6){
             nick.error = "Nickname must be 6(or more) character ";
             nick.requestFocus();
             return;
@@ -69,10 +76,20 @@ class SignInFragment: Fragment(), OnClickListener {
             return;
         }
 
+        if(n == ""){
+            nick.error = "Nickname is required.";
+            nick.requestFocus();
+            return;
+        } else if(n.length < 6){
+            nick.error = "Nickname must be 6(or more) character ";
+            nick.requestFocus();
+            return;
+        }
 
 
-        var salt = Utilities.generateSalt()
-        var hashedPassword = Utilities.hashPassword(password.text.toString(), salt)
+        val salt = Utilities.generateSalt()
+        val hashedPassword = Utilities.hashPassword(p, salt)
+        repository.insertUser(User(m, n, hashedPassword))
 
         // Validate email and password
         if (TextUtils.isEmpty(email)) {
