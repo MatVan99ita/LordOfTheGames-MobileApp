@@ -27,8 +27,15 @@ class LOTGRepository(
         lotgdao.insertGame(game)
     }
 
+    @WorkerThread
+    fun insertUser(user: User){
+        lotgdao.insertUser(user)
+    }
+
     fun getAllGame(): Flow<List<Game>> {
         return allGames
     }
+
+
 
 }

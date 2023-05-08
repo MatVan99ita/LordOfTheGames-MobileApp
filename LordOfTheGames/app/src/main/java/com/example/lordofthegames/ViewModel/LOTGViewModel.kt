@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -37,6 +38,10 @@ class LOTGViewModel(private val repository: LOTGRepository): ViewModel() {
 
     fun addItem(item: Game) = viewModelScope.launch {
         repository.insertGame(item)
+    }
+
+    fun addUser(user: User) =viewModelScope.launch {
+        repository.insertUser(user)
     }
 /*
     fun deleteItem(item: Game) = viewModelScope.launch {

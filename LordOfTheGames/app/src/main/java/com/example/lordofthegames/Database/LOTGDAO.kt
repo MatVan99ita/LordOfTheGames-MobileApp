@@ -24,6 +24,8 @@ interface LOTGDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGame(game: Game)
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertUser(user: User)
 
     // @Insert(onConflict = OnConflictStrategy.IGNORE)
     // fun fillGame(list: MutableList<Game>)

@@ -25,6 +25,8 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.Flow
+import java.security.MessageDigest
+import java.security.SecureRandom
 
 
 class Utilities {
@@ -219,7 +221,18 @@ class Utilities {
 
 
 
+        fun generateSalt(): ByteArray{
+            val random = SecureRandom()
+            val salt = ByteArray(16) // 16 bytes = 128 bits
+            random.nextBytes(salt)
+            return salt
+        }
 
+        fun hashPassword(password: String, salt: ByteArray): ByteArray {
+            val sha256 = MessageDigest.getInstance("SHA-256")
+            val hashedSalt = sha256.digest(salt)
+            return hashedSalt
+        }
 
 
     }

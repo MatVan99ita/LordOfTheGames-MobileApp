@@ -9,4 +9,10 @@
     <string name="playing">Giocando</string>
     <string name="abandoned">Abbandonato</string>
     <string name="notes">Note</string>
+    <string name="log_in">Log-in</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="sign_in">Sign-in</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="nickname">Nickname</string>
 </resources>
