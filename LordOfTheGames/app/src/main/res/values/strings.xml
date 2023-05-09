@@ -27,4 +27,6 @@
     <string name="sign_in">Sign-in</string>
     <string name="confirm_password">Confirm password</string>
     <string name="nickname">Nickname</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="create_account">Create account</string>
 </resources>
