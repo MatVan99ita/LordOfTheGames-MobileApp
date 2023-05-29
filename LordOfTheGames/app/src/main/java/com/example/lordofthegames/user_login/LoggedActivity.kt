@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -50,7 +51,7 @@ class LoggedActivity: AppCompatActivity() {
         Utilities.setUpToolBar(
             this,
             findViewById(R.id.toolbar),
-            getString(R.string.settings),
+            "User details",
             drawerLayout,
             null,
         )
