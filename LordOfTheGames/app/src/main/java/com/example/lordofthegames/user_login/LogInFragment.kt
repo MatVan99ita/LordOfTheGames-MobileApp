@@ -1,5 +1,6 @@
 package com.example.lordofthegames.user_login
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -50,8 +51,25 @@ class LogInFragment: Fragment() {
 
     fun login(passw: String, email: String) {
 
+        val usr = repository.getUser(email, passw)
+        if (usr != null){
+            val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+            editor.putString("logged", "")
+            editor.putString("mail", email)
+            editor.putString("nick", usr)
+            editor.apply()
+            //val myValue = sharedPrefs.getString("myKey", defaultValue)
+            //Si passa alla logged interface e si tiene traccia di una variabile logged da usare per le varie cose
+
+            //val exists = sharedPrefs.contains("logged") <- da usare in caso
+
+            /*Per rimuovere la cosa in modo da poter checckare meglio
+            * editor.remove("logged")
+                editor.apply()
+            * */
+        }
         TODO("Prendere i dati e cofrontarli")
-        val usr = repository.getUser(mail.text.toString())
 
     }
 }

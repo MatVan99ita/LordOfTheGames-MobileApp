@@ -33,8 +33,8 @@ class LOTGRepository(
         return allGames
     }
 
-    fun getUser(mail: String): Array<String> {
-        return lotgdao.getUser(mail)
+    fun getUser(mail: String, passw: String): String? {
+        return lotgdao.getUser(mail, passw)
     }
 
 

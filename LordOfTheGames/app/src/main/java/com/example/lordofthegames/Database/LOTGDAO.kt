@@ -27,8 +27,8 @@ interface LOTGDAO {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertUser(user: User)
 
-    @Query("SELECT nickname FROM user WHERE mail=:mail")
-    fun getUser(mail: String): Array<String>
+    @Query("SELECT nickname FROM user WHERE mail=:mail AND password=:pass")
+    fun getUser(mail: String, pass: String): String?
 
     // @Insert(onConflict = OnConflictStrategy.IGNORE)
     // fun fillGame(list: MutableList<Game>)
