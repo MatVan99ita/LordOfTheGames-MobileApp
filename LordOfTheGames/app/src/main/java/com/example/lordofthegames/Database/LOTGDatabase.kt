@@ -23,7 +23,8 @@ import kotlin.reflect.KClass
             GameCategory::class,
             GamePlatform::class,
             Notes::class,
-            Platform::class
+            Platform::class,
+            User::class,
         ], version = 3, exportSchema = false)
 @TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {

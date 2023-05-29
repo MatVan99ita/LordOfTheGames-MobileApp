@@ -56,7 +56,7 @@ class SettingsFragment: Fragment() {
 
             val textView: TextView = view.findViewById(R.id.username_textview)
 
-            val sharedPreferences: SharedPreferences = activity.getPreferences(Context.MODE_PRIVATE)
+            val sharedPreferences: SharedPreferences = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
             textView.text = sharedPreferences.getString("Settings", "username")
 

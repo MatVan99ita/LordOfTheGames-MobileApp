@@ -59,6 +59,7 @@ class LogInFragment: Fragment() {
             editor.putString("mail", email)
             editor.putString("nick", usr)
             editor.apply()
+            parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
             //val myValue = sharedPrefs.getString("myKey", defaultValue)
             //Si passa alla logged interface e si tiene traccia di una variabile logged da usare per le varie cose
 
@@ -69,7 +70,7 @@ class LogInFragment: Fragment() {
                 editor.apply()
             * */
         }
-        TODO("Prendere i dati e cofrontarli")
+        //TODO("Prendere i dati e cofrontarli")
 
     }
 }

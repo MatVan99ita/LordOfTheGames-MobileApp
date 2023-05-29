@@ -29,6 +29,7 @@ import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.SearchFragment
 import com.example.lordofthegames.home.mygame.MyGameListFragment
+import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -209,6 +210,11 @@ class MainActivity : AppCompatActivity() {
 
         Utilities.createDatabase(this)
 
+
+        val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        sharedPreferences.getString("Settings", "username")?.let { Log.w("POCODIO", it) }
+
     }
 
 
@@ -221,14 +227,15 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.app_bar_settings) {
-            val intent = Intent(this, SettingsActivity::class.java)
-            this.startActivity(intent)
-            true
-        } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+        return if (actionBarDrawerToggle.onOptionsItemSelected(item)){
             true
         } else if(item.itemId == R.id.nav_setting){
             val intent = Intent(this, SettingsActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            this.startActivity(intent)
+            true
+        } else if(item.itemId == R.id.nav_usr){
+            val intent = Intent(this, LoggedActivity::class.java)
             drawerLayout.closeDrawer(GravityCompat.START)
             this.startActivity(intent)
             true
@@ -266,6 +273,10 @@ class MainActivity : AppCompatActivity() {
             //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
             if (id == R.id.nav_setting) {
                 val intent = Intent(this, SettingsActivity::class.java)
+                drawerLayout.closeDrawer(GravityCompat.START)
+                this.startActivity(intent)
+            } else if (id == R.id.nav_usr){
+                val intent = Intent(this, LoggedActivity::class.java)
                 drawerLayout.closeDrawer(GravityCompat.START)
                 this.startActivity(intent)
             }

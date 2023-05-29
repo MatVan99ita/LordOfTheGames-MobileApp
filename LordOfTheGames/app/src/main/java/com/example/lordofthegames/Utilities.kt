@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,9 +21,11 @@ import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetFragment
+import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
+import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.Flow
 import java.security.MessageDigest
@@ -53,7 +56,6 @@ class Utilities {
             drawerLayout: DrawerLayout,
             navigationView: NavigationView,
             activity: AppCompatActivity,
-            settingActivity: String? = null
         ): ActionBarDrawerToggle {
 
             val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
@@ -61,9 +63,27 @@ class Utilities {
             actionBarDrawerToggle.syncState()
             drawerLayout.closeDrawers()
 
-            if(settingActivity != null){
-                navigationView.menu.findItem(R.id.nav_setting).isVisible = false
+            val sharedPreferences: SharedPreferences = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+
+            if(sharedPreferences.contains("logged")){
+                val header_mail: TextView? = drawerLayout.findViewById(R.id.mail_header)
+                val header_nick: TextView? = drawerLayout.findViewById(R.id.nickname_header)
+                if (header_mail != null) {
+                    header_mail.text = sharedPreferences.getString("mail", "BELANDIH")
+                }
+                if (header_nick != null) {
+                    header_nick.text = sharedPreferences.getString("nick", "BESUGHI")
+                }
             }
+
+            if(activity.javaClass == SettingsActivity::class.java){
+                navigationView.menu.findItem(R.id.nav_setting).isVisible = false
+            }else if(activity.javaClass == LoggedActivity::class.java){
+                navigationView.menu.findItem(R.id.nav_usr).isVisible = false
+            }
+
+
 
 
             return actionBarDrawerToggle
@@ -104,7 +124,9 @@ class Utilities {
             toolbar.title = title
 
             if(drawerLayout != null) {
+
                 toolbar.setNavigationOnClickListener {
+
                     val actionBarDrawerToggle = ActionBarDrawerToggle(
                         activity,
                         drawerLayout,
@@ -228,7 +250,7 @@ class Utilities {
             return salt.toString()
         }
 
-        fun hashPassword(password: String, salt: String): String {
+        fun hashPassword(password: String, salt: ByteArray): String {
             val sha256 = MessageDigest.getInstance("SHA-256")
             val hashedSalt = sha256.digest(salt)
             return hashedSalt.toString()

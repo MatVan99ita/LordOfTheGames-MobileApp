@@ -23,9 +23,9 @@ interface LOTGDAO {
     fun getGames(): Flow<List<Game>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertGame(game: Game)
+    fun insertGame(game: Game): Long
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insertUser(user: User)
+    fun insertUser(user: User): Long
 
     @Query("SELECT nickname FROM user WHERE mail=:mail AND password=:pass")
     fun getUser(mail: String, pass: String): String?

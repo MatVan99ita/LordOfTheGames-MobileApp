@@ -1,5 +1,6 @@
 package com.example.lordofthegames.user_login
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -102,7 +103,16 @@ class SignInFragment: Fragment() {
         // val salt = Utilities.generateSalt()
         // val hashedPassword = Utilities.hashPassword(passw, salt)
         Log.w("SIGNIN", "$nickn $email $passw")
-        repository.insertUser(User(email, nickn, passw))
+        val check = repository.insertUser(User(email, nickn, passw))
+        if(check > 0){
+            val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+            editor.putString("logged", "")
+            editor.putString("mail", email)
+            editor.putString("nick", nickn)
+            editor.apply()
+            parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
+        }
 
     }
 }
