@@ -34,7 +34,7 @@ class LogInFragment: Fragment() {
         val login_btn: Button = view.findViewById(R.id.login_btn)
         val signin_btn: Button = view.findViewById(R.id.signin_btn)
         mail = requireView().findViewById(R.id.mail_textinput)
-        password = requireView().findViewById(R.id.confirm_password_textinput)
+        password = requireView().findViewById(R.id.password_textinput)
 
         signin_btn.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.login_fragment, SignInFragment()).addToBackStack(null).commit()
@@ -51,6 +51,7 @@ class LogInFragment: Fragment() {
     fun login(passw: String, email: String) {
 
         TODO("Prendere i dati e cofrontarli")
+        val usr = repository.getUser(mail.text.toString())
 
     }
 }

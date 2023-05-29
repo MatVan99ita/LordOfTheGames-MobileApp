@@ -1,10 +1,7 @@
 package com.example.lordofthegames.Database
 
-import android.app.Application
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 import com.example.lordofthegames.db_entities.*
-import java.util.*
 import kotlinx.coroutines.flow.Flow
 
 
@@ -36,6 +33,9 @@ class LOTGRepository(
         return allGames
     }
 
+    fun getUser(mail: String): Array<String> {
+        return lotgdao.getUser(mail)
+    }
 
 
 }

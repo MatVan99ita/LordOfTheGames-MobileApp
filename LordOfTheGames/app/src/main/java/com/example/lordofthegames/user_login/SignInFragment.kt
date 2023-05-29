@@ -37,14 +37,13 @@ class SignInFragment: Fragment() {
         nick = requireView().findViewById(R.id.nickname_textinput)
         mail = requireView().findViewById(R.id.mail_textinput)
         password = requireView().findViewById(R.id.password_textinput)
-        reqpassword = requireView().findViewById(R.id.confirm_password_textinput)
 
         login_btn.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, LogInFragment()).addToBackStack(null).commit()
         }
 
         signin_btn.setOnClickListener {
-            signin(nick.text.toString(), reqpassword.text.toString(), mail.text.toString());
+            signin(nick.text.toString(), password.text.toString(), mail.text.toString());
             TODO("Aggiungere l'if sul controllo della password")
         }
 
@@ -71,39 +70,39 @@ class SignInFragment: Fragment() {
     }
 
     fun signin(nickn: String, passw: String, email: String) {
+//TODO: servirsi del controllo
+//        if(!isValidMail(email)){
+//            nick.error = "Mail is required. Must be name@domain.net";
+//            nick.requestFocus();
+//            return;
+//        } else if(email.length < 6){
+//            nick.error = "Nickname must be 6(or more) character ";
+//            nick.requestFocus();
+//            return;
+//        }
+//
+//        if(!isValidPassword(passw)) {
+//            nick.error =
+//                "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
+//            nick.requestFocus();
+//            return;
+//        }
+//
+//        if (nickn == "") {
+//            nick.error = "Nickname is required.";
+//            nick.requestFocus();
+//            return;
+//        } else if (nickn.length < 6) {
+//            nick.error = "Nickname must be 6(or more) character ";
+//            nick.requestFocus();
+//            return;
+//        }
 
-        if(!isValidMail(email)){
-            nick.error = "Mail is required. Must be name@domain.net";
-            nick.requestFocus();
-            return;
-        } else if(email.length < 6){
-            nick.error = "Nickname must be 6(or more) character ";
-            nick.requestFocus();
-            return;
-        }
 
-        if(!isValidPassword(passw)) {
-            nick.error =
-                "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
-            nick.requestFocus();
-            return;
-        }
-
-        if (nickn == "") {
-            nick.error = "Nickname is required.";
-            nick.requestFocus();
-            return;
-        } else if (nickn.length < 6) {
-            nick.error = "Nickname must be 6(or more) character ";
-            nick.requestFocus();
-            return;
-        }
-
-
-        val salt = Utilities.generateSalt()
-        val hashedPassword = Utilities.hashPassword(passw, salt)
-        Log.w("SIGNIN", "$nickn $email $passw $hashedPassword $salt")
-        //repository.insertUser(User(email, nickn, hashedPassword, salt))
+        // val salt = Utilities.generateSalt()
+        // val hashedPassword = Utilities.hashPassword(passw, salt)
+        Log.w("SIGNIN", "$nickn $email $passw")
+        repository.insertUser(User(email, nickn, passw))
 
     }
 }

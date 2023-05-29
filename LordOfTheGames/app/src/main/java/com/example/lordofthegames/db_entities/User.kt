@@ -9,7 +9,7 @@ data class User(
     @PrimaryKey
     var mail: String,
 
-    var Nickname: String,
+    var nickname: String,
     var password: String,
-    var salt: String,
+    //var salt: String,
 )
