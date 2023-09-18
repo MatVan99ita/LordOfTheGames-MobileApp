@@ -32,7 +32,7 @@ class LoggedActivity: AppCompatActivity() {
 
         if (savedInstanceState == null) {
             val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            if (sharedPreferences.contains("logged")) {
+            if (true /*sharedPreferences.contains("logged")*/) {
                 Utilities.insertFragment(
                     this,
                     LoggedInFragment(),

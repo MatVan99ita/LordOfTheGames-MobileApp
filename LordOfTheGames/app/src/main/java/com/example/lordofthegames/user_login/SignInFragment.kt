@@ -28,8 +28,7 @@ class SignInFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        login_view = inflater.inflate(R.layout.fragment_login, container, false)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_signin, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -40,16 +39,16 @@ class SignInFragment: Fragment() {
         password = requireView().findViewById(R.id.password_textinput)
 
         login_btn.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, LogInFragment()).addToBackStack(null).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LogInFragment()).addToBackStack(null).commit()
         }
 
         signin_btn.setOnClickListener {
             signin(nick.text.toString(), password.text.toString(), mail.text.toString());
-            TODO("Aggiungere l'if sul controllo della password")
+            // TODO("Aggiungere l'if sul controllo della password")
         }
+        // TODO("Aggiungere il controllo tra password e reqpassword tramite l'onchange")
 
         super.onViewCreated(view, savedInstanceState)
-        TODO("Aggiungere il controllo tra password e reqpassword tramite l'onchange")
     }
 
     fun addUser(user: User) {

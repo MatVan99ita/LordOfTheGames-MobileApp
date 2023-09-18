@@ -26,6 +26,7 @@ import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.user_login.LoggedActivity
+import com.example.lordofthegames.user_login.LoggedInFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.Flow
 import java.security.MessageDigest
@@ -45,7 +46,7 @@ class Utilities {
             fragment.arguments = bundle
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment){
+            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment && fragment !is LoggedInFragment){
                 transaction.addToBackStack(tag);
             }
 
@@ -169,7 +170,7 @@ class Utilities {
             lotgViewModel.addItem(Game(1, "banana", "", ""))
             // */
             /** TODO Aggiungere questo tipo di cosa ad Utilities
-            //lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
+             *      lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
              */
 
 

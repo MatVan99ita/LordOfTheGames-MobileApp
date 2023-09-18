@@ -15,4 +15,6 @@
     <string name="sign_in">Sign-in</string>
     <string name="confirm_password">Confirm password</string>
     <string name="nickname">Nickname</string>
+    <string name="registrati_e_combatti">Registrati e combatti!</string>
+    <string name="torna_a_combattere">Torna a combattere!</string>
 </resources>

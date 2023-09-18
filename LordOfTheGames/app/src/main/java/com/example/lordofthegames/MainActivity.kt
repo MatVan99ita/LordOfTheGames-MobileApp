@@ -10,14 +10,17 @@ import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -29,7 +32,10 @@ import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.SearchFragment
 import com.example.lordofthegames.home.mygame.MyGameListFragment
+import com.example.lordofthegames.user_login.LogInFragment
 import com.example.lordofthegames.user_login.LoggedActivity
+import com.example.lordofthegames.user_login.LoggedInFragment
+import com.example.lordofthegames.user_login.SignInFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -71,7 +77,7 @@ import com.google.android.material.navigation.NavigationView
  *
  *
  *
- * #TODO:
+ * #TOD
  *
  *
  *
@@ -97,118 +103,140 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navigationView: NavigationView
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var actualFragment: Fragment
+    private lateinit var toolbar: Toolbar
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Utilities.createDatabase(this)
         setContentView(R.layout.activity_main)
-
+        toolbar = findViewById(R.id.toolbar)
         drawerLayout = findViewById(R.id.main_activity_drawer)
         navigationView = findViewById(R.id.nav_view)
         bottomNavigationView = findViewById(R.id.bottom)
-
-        actualFragment = HomeFragment()
-
-        if (savedInstanceState == null) {
-             Utilities.insertFragment(
-                this,
-                HomeFragment(),
-                HomeFragment::class.java.simpleName, null,
-            )
-        }
-
-        Utilities.setUpToolBar(
-            this,
-            findViewById(R.id.toolbar),
-            getString(R.string.app_name),
-            drawerLayout,
-            null
-        )
-
-        actionBarDrawerToggle = Utilities.setUpDrawer(
-            drawerLayout,
-            navigationView,
-            this
-        )
-
-        val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo2_round", "mipmap", this.packageName))
-        //val bitmap = (drawable as BitmapDrawable).bitmap
-        val cianni = Utilities.drawableToBitmap(drawable!!)
-        val newdrawable: Drawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!! , 100, 100, true))
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        //supportActionBar!!.setHomeAsUpIndicator(newdrawable)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
-        supportActionBar?.setHomeAsUpIndicator(newdrawable)
-        bottomNavigationView.itemIconTintList = null
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.bottom_nav_home -> {
-                    if(actualFragment !is HomeFragment) {
-                        Utilities.insertFragment(
-                            this,
-                            HomeFragment(),
-                            HomeFragment::class.java.simpleName, null
-                        )
-                        actualFragment = HomeFragment()
-                        true
-                    } else {
-                        Log.e("Bottom", "Home already initialized")
-                        false
-                    }
-                }
-                R.id.bottom_nav_search -> {
-                    if(this.actualFragment !is SearchFragment) {
-                        Utilities.insertFragment(
-                            this,
-                            SearchFragment(),
-                            SearchFragment::class.java.simpleName,
-                            null
-                        )
-                        this.actualFragment = SearchFragment()
-                        true
-                    } else {
-                        Log.e("Bottom", "Search already initialized")
-                        false
-                    }
-                }
-                R.id.bottom_my_game_list -> {
-                    if(this.actualFragment !is MyGameListFragment) {
-                        Utilities.insertFragment(
-                            this,
-                            MyGameListFragment(),
-                            MyGameListFragment::class.java.simpleName,
-                            null
-                        )
-                        this.actualFragment = MyGameListFragment()
-                        true
-                    } else {
-                        Log.e("Bottom", "Game list already initialized")
-                        false
-                    }
-                }
-                R.id.bottom_community -> {
-                    if(this.actualFragment !is CommunityFragment) {
-                        Utilities.insertFragment(
-                            this,
-                            CommunityFragment(),
-                            CommunityFragment::class.java.simpleName,
-                            null
-                        )
-                        this.actualFragment = CommunityFragment()
-                        true
-                    } else {
-                        Log.e("Bottom", "Game list already initialized")
-                        false
-                    }
-                }
-                else -> {false}
+        val banana=true
+        if(banana){
+            if (savedInstanceState == null) {
+                Utilities.insertFragment(
+                    this,
+                    SignInFragment(),
+                    SignInFragment::class.java.simpleName, null,
+                )
             }
+            drawerLayout.isEnabled=false
+            //drawerLayout.visibility= View.GONE
+            navigationView.visibility = View.GONE
+            bottomNavigationView.visibility = View.GONE
+            toolbar.visibility=View.GONE
+        }
+        else{
+
+
+            actualFragment = HomeFragment()
+
+            if (savedInstanceState == null) {
+                Utilities.insertFragment(
+                    this,
+                    HomeFragment(),
+                    HomeFragment::class.java.simpleName, null,
+                )
+            }
+
+            Utilities.setUpToolBar(
+                this,
+                findViewById(R.id.toolbar),
+                getString(R.string.app_name),
+                drawerLayout,
+                null
+            )
+
+            actionBarDrawerToggle = Utilities.setUpDrawer(
+                drawerLayout,
+                navigationView,
+                this
+            )
+
+            val drawable: Drawable? = ContextCompat.getDrawable(this, this.resources.getIdentifier("ic_gabibbo2_round", "mipmap", this.packageName))
+            //val bitmap = (drawable as BitmapDrawable).bitmap
+            val cianni = Utilities.drawableToBitmap(drawable!!)
+            val newdrawable: Drawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!! , 100, 100, true))
+            //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            //supportActionBar!!.setHomeAsUpIndicator(newdrawable)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true);
+            supportActionBar?.setHomeAsUpIndicator(newdrawable)
+            bottomNavigationView.itemIconTintList = null
+
+            bottomNavigationView.setOnItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.bottom_nav_home -> {
+                        if(actualFragment !is HomeFragment) {
+                            Utilities.insertFragment(
+                                this,
+                                HomeFragment(),
+                                HomeFragment::class.java.simpleName, null
+                            )
+                            actualFragment = HomeFragment()
+                            true
+                        } else {
+                            Log.e("Bottom", "Home already initialized")
+                            false
+                        }
+                    }
+                    R.id.bottom_nav_search -> {
+                        if(this.actualFragment !is SearchFragment) {
+                            Utilities.insertFragment(
+                                this,
+                                SearchFragment(),
+                                SearchFragment::class.java.simpleName,
+                                null
+                            )
+                            this.actualFragment = SearchFragment()
+                            true
+                        } else {
+                            Log.e("Bottom", "Search already initialized")
+                            false
+                        }
+                    }
+                    R.id.bottom_my_game_list -> {
+                        if(this.actualFragment !is MyGameListFragment) {
+                            Utilities.insertFragment(
+                                this,
+                                MyGameListFragment(),
+                                MyGameListFragment::class.java.simpleName,
+                                null
+                            )
+                            this.actualFragment = MyGameListFragment()
+                            true
+                        } else {
+                            Log.e("Bottom", "Game list already initialized")
+                            false
+                        }
+                    }
+                    R.id.bottom_community -> {
+                        if(this.actualFragment !is CommunityFragment) {
+                            Utilities.insertFragment(
+                                this,
+                                CommunityFragment(),
+                                CommunityFragment::class.java.simpleName,
+                                null
+                            )
+                            this.actualFragment = CommunityFragment()
+                            true
+                        } else {
+                            Log.e("Bottom", "Game list already initialized")
+                            false
+                        }
+                    }
+                    else -> {false}
+                }
+            }
+
         }
 
 
-        Utilities.createDatabase(this)
+
+
 
 
         val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)

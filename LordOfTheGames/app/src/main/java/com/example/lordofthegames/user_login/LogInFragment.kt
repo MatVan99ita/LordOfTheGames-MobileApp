@@ -27,8 +27,7 @@ class LogInFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        login_view = inflater.inflate(R.layout.fragment_login, container, false)
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -38,7 +37,7 @@ class LogInFragment: Fragment() {
         password = requireView().findViewById(R.id.password_textinput)
 
         signin_btn.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.login_fragment, SignInFragment()).addToBackStack(null).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment()).addToBackStack(null).commit()
         }
 
         login_btn.setOnClickListener {

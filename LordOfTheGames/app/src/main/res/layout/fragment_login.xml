@@ -7,7 +7,25 @@
     android:orientation="vertical"
     android:id="@+id/login_fragment"
     tools:context=".user_login.LogInFragment"
-    android:layout_marginTop="?attr/actionBarSize">
+    android:background="@drawable/rainbow_background">
+
+    <TextView
+
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="30sp"
+        android:fontFamily="@font/god_of_war" />
+    <TextView
+
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="29sp"
+        android:fontFamily="@font/god_of_war"
+        android:text="@string/torna_a_combattere" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -41,20 +59,28 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
             android:id="@+id/login_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/log_in"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/signin_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginTop="8dp"
             android:text="@string/create_account" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
