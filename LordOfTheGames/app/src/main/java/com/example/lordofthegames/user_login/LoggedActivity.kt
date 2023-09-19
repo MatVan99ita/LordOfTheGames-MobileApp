@@ -26,7 +26,7 @@ class LoggedActivity: AppCompatActivity() {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
 
-        databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
+        val db: LOTGDatabase = databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
 
         if(this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).contains("logged")){
             val intent = Intent(this, MainActivity::class.java)
