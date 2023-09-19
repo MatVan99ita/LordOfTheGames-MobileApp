@@ -9,24 +9,27 @@ import com.example.lordofthegames.db_entities.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+
 @Database(entities = [
-            Achievement::class,
-            Categories::class,
-            Comments::class,
-            Discussion::class,
-            Game::class,
-            GameCategory::class,
-            GamePlatform::class,
-            Notes::class,
-            Platform::class,
+            //Achievement::class,
+            //Categories::class,
+            //Comments::class,
+            //Discussion::class,
+            //Game::class,
+            //GameCategory::class,
+            //GamePlatform::class,
+            //Notes::class,
+            //Platform::class,
             User::class,
-        ], version = 1)
+        ], version = 1, exportSchema = true)
 @TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {
 
-    abstract fun lotgdao(): LOTGDAO
+    //abstract fun lotgdao(): LOTGDAO
 
-    abstract fun userDao(): UserDAO?
+    abstract fun userDao(): UserDAO
 
 
     companion object {
@@ -46,6 +49,7 @@ abstract class LOTGDatabase: RoomDatabase() {
                     "lotgdb"
                 ).build()
                 INSTANCE = instance
+
                 instance
             }
         }

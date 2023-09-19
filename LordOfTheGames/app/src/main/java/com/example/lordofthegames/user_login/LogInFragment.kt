@@ -8,14 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.google.android.material.textfield.TextInputEditText
 
 class LogInFragment: Fragment() {
-    private lateinit var repository: LOTGRepository
 
     private lateinit var nick: TextInputEditText
     private lateinit var mail: TextInputEditText
@@ -57,7 +55,7 @@ class LogInFragment: Fragment() {
 
     fun login(passw: String, email: String) {
 
-        val usr = repository.getUser(email, passw)
+        val usr = ""//repository.getUser(email, passw)
         if (usr != null){
             val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val editor = sharedPrefs.edit()

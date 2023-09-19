@@ -7,14 +7,19 @@ import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.room.Room.databaseBuilder
 import com.example.lordofthegames.Database.LOTGDatabase
+import com.example.lordofthegames.EntityApp.UserApplication
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.ViewModel.UserViewModel
+import com.example.lordofthegames.ViewModel.UserViewModelFactory
+import com.example.lordofthegames.db_entities.User
 
 
 class LoggedActivity: AppCompatActivity() {
@@ -26,8 +31,11 @@ class LoggedActivity: AppCompatActivity() {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
 
-        val db: LOTGDatabase = databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
-
+        //val db: LOTGDatabase = databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
+        val userViewModel by viewModels<UserViewModel> {
+            UserViewModelFactory(repository = (application as UserApplication).repository)
+        }
+        userViewModel.addItem(User("", "", ""))
         if(this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).contains("logged")){
             val intent = Intent(this, MainActivity::class.java)
             //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;

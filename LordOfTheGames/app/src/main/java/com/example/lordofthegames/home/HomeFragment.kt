@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.ViewModel.LOTGViewModel
 //import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem

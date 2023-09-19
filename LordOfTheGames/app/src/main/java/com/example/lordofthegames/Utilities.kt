@@ -18,9 +18,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.lordofthegames.Database.LOTGDAO
 import com.example.lordofthegames.Database.LOTGDatabase
-import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
@@ -177,15 +175,15 @@ class Utilities {
 
             //val db: LOTGDatabase = LOTGDatabase.getDatabase(context)
             val database by lazy { LOTGDatabase.getDatabase(context) }
-            val repository by lazy { LOTGRepository(database.lotgdao()) }
+            //val repository by lazy { LOTGRepository(database.lotgdao()) }
 
-            val myDao: LOTGDAO = database.lotgdao()
+            //val myDao: LOTGDAO = database.lotgdao()
             //val myRepository = LOTGRepository(myDao)
-            val myEntities: Flow<List<Game>> = repository.getAllGame()
+            //val myEntities: Flow<List<Game>> = repository.getAllGame()
 
 
 
-            Log.e("POCODIODROPLET", myEntities.toString())
+            //Log.e("POCODIODROPLET", myEntities.toString())
 
         }
 

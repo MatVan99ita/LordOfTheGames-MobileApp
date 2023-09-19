@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -17,7 +16,6 @@ import com.example.lordofthegames.db_entities.User
 import com.google.android.material.textfield.TextInputEditText
 
 class SignInFragment: Fragment() {
-    private lateinit var repository: LOTGRepository
 
     private lateinit var nick: TextInputEditText
     private lateinit var mail: TextInputEditText
@@ -64,7 +62,7 @@ class SignInFragment: Fragment() {
     }
 
     fun addUser(user: User) {
-        repository.insertUser(user)
+        //repository.insertUser(user)
     }
 
     fun isValidPassword(password: String): Boolean {
@@ -114,7 +112,7 @@ class SignInFragment: Fragment() {
         // val salt = Utilities.generateSalt()
         // val hashedPassword = Utilities.hashPassword(passw, salt)
         Log.w("SIGNIN", "$nickn $email $passw")
-        val check = repository.insertUser(User(email, nickn, passw))
+        val check = 10// repository.insertUser(User(email, nickn, passw))
         if(check > 0){
             val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val editor = sharedPrefs.edit()
