@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.main_activity_drawer)
         navigationView = findViewById(R.id.nav_view)
         bottomNavigationView = findViewById(R.id.bottom)
-        val banana=true
+        val banana=false
         if(banana){
             if (savedInstanceState == null) {
                 Utilities.insertFragment(

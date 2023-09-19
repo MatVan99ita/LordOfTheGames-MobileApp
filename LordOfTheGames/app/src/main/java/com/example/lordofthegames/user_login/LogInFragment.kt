@@ -1,17 +1,16 @@
 package com.example.lordofthegames.user_login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.Database.LOTGRepository
+import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.db_entities.User
 import com.google.android.material.textfield.TextInputEditText
 
 class LogInFragment: Fragment() {
@@ -37,11 +36,17 @@ class LogInFragment: Fragment() {
         password = requireView().findViewById(R.id.password_textinput)
 
         signin_btn.setOnClickListener {
-            parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment()).addToBackStack(null).commit()
+            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, SignInFragment()).commit()
         }
 
-        login_btn.setOnClickListener {
-            login(password.text.toString(), mail.text.toString());
+        login_btn.setOnClickListener {//TODO: ANDARE AFFANCULO NELL'ACTIVITY PRICIPALE
+
+            //requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit().putString("logged", "").apply()
+            val intent = Intent(context, MainActivity::class.java)
+            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            this.startActivity(intent)
+            //login(password.text.toString(), mail.text.toString());
         }
 
 
