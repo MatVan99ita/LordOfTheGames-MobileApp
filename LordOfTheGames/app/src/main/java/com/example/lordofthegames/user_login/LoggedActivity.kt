@@ -1,23 +1,21 @@
 package com.example.lordofthegames.user_login
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.room.Room.databaseBuilder
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
+
 
 class LoggedActivity: AppCompatActivity() {
 
@@ -27,6 +25,9 @@ class LoggedActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
+
+        databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
+
         if(this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).contains("logged")){
             val intent = Intent(this, MainActivity::class.java)
             //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;

@@ -122,7 +122,7 @@ class SignInFragment: Fragment() {
             editor.putString("mail", email)
             editor.putString("nick", nickn)
             editor.apply()
-            parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
+            //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
         }
 
     }
