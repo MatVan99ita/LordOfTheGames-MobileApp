@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.google.android.material.textfield.TextInputEditText
 
 class LogInFragment: Fragment() {
@@ -42,6 +43,7 @@ class LogInFragment: Fragment() {
         login_btn.setOnClickListener {//TODO: ANDARE AFFANCULO NELL'ACTIVITY PRICIPALE
 
             //requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit().putString("logged", "").apply()
+            Utilities.login(LoggedActivity(), "", "", "");
             val intent = Intent(context, MainActivity::class.java)
             //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK

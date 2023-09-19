@@ -1,5 +1,6 @@
 package com.example.lordofthegames
 
+import android.app.Activity
 import android.app.UiModeManager
 import android.content.Context
 import android.content.SharedPreferences
@@ -242,6 +243,16 @@ class Utilities {
             return gradientDrawable
         }
 
+        //TODO: funzioni di sign e log
+        fun signin(activity: AppCompatActivity, mail: String, nick: String, password: String){
+            //aggiungere entry al db e loggare aggiungendo allo sharedpreference nick, mail e logged
+            sharedPrefLog(activity, nick, mail)
+        }
+
+        fun login(activity: AppCompatActivity, mail: String, nick: String, password: String){
+            //aggiungere controllo sulle entry prese dal db usate con la query SELECT nick, mail FROM User where password=${password} e poi aggiungere tutto allo sharedpref
+            sharedPrefLog(activity, nick, mail)
+        }
 
 
         fun generateSalt(): String{
@@ -255,6 +266,14 @@ class Utilities {
             val sha256 = MessageDigest.getInstance("SHA-256")
             val hashedSalt = sha256.digest(salt)
             return hashedSalt.toString()
+        }
+
+        fun sharedPrefLog(activity: AppCompatActivity, nick: String, mail: String){
+            val sp = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit()
+            sp.putString("logged", "")
+            sp.putString("mail", mail)
+            sp.putString("nick", nick)
+            sp.apply()
         }
 
 
