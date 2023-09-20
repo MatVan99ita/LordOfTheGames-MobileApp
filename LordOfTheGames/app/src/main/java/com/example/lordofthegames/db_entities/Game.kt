@@ -3,6 +3,7 @@ package com.example.lordofthegames.db_entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.lordofthegames.Enum.PlatformEnum
 
 /*
  * (*) -> da scegliere un nome migliore o comunque da modificare

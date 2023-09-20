@@ -15,9 +15,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.Database.LotgViewModel
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.ViewModel.UserViewModel
+import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -58,14 +60,14 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var lotgViewModel: LotgViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+        lotgViewModel = ViewModelProvider(requireActivity())[LotgViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -80,7 +82,7 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-            this.userViewModel.getCurrentUser().observe(viewLifecycleOwner) { x -> Log.e("", x.toString())}
+            this.lotgViewModel.addItem(User("Gino", "Pippo", "Fribbuter"))
 
             //val repository = UserRepo(UserDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()

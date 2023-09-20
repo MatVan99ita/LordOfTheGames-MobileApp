@@ -1,35 +1,32 @@
 package com.example.lordofthegames.Database
+
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.example.lordofthegames.EntityDAO.UserDAO
+import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.lordofthegames.db_entities.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 
 @Database(entities = [
-            //Achievement::class,
-            //Categories::class,
-            //Comments::class,
-            //Discussion::class,
-            //Game::class,
-            //GameCategory::class,
-            //GamePlatform::class,
-            //Notes::class,
-            //Platform::class,
+            Achievement::class,
+            Categories::class,
+            Comments::class,
+            Discussion::class,
+            Game::class,
+            GameCategory::class,
+            GamePlatform::class,
+            Notes::class,
+            Platform::class,
             User::class,
-        ], version = 1, exportSchema = true)
+        ], version = 3, exportSchema = true)
 @TypeConverters(DateConverter::class)
 abstract class LOTGDatabase: RoomDatabase() {
 
-    //abstract fun lotgdao(): LOTGDAO
+    abstract fun lotgdao(): LotgDao
 
-    abstract fun userDao(): UserDAO
+    //abstract fun userDao(): UserDAO
 
 
     companion object {
@@ -39,7 +36,11 @@ abstract class LOTGDatabase: RoomDatabase() {
         private var INSTANCE: LOTGDatabase? = null
 
         val executor: ExecutorService = Executors.newFixedThreadPool(4)
-
+        private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Esegui le operazioni di migrazione qui
+            }
+        }
         fun getDatabase(context: Context): LOTGDatabase {
 
             return INSTANCE ?: synchronized(this){
@@ -47,7 +48,7 @@ abstract class LOTGDatabase: RoomDatabase() {
                     context.applicationContext,
                     LOTGDatabase::class.java,
                     "lotgdb"
-                ).build()
+                ).addMigrations(LOTGDatabase.MIGRATION_1_2).build()
                 INSTANCE = instance
 
                 instance

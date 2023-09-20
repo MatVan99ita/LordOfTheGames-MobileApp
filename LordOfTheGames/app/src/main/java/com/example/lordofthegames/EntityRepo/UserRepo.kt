@@ -12,7 +12,7 @@ class UserRepo(private val application: Application){
 
 
     private var db: LOTGDatabase = LOTGDatabase.getDatabase(application)
-    private var userDao: UserDAO = db.userDao()
+    private lateinit var userDao: UserDAO
     val allItems: LiveData<List<User?>?> = userDao.getItems()
 
 
