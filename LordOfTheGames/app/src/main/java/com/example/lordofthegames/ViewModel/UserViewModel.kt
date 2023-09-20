@@ -1,5 +1,8 @@
 package com.example.lordofthegames.ViewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -8,10 +11,10 @@ import com.example.lordofthegames.db_entities.User
 import kotlinx.coroutines.launch
 
 
-class UserViewModel(private val repository: UserRepo): ViewModel() {
-
-    val allItems = repository.allItems
-
+class UserViewModel(application: Application): AndroidViewModel(
+    application
+) {
+    private var repository: UserRepo = UserRepo(application)
     fun addItem(item: User) = viewModelScope.launch {
         repository.insertItem(item)
     }
@@ -24,8 +27,12 @@ class UserViewModel(private val repository: UserRepo): ViewModel() {
         repository.deleteAllItems()
     }
 
-}
+    fun getCurrentUser(): LiveData<List<User?>?> {
+        return repository.getAllUser()
+    }
 
+}
+/*
 class UserViewModelFactory(private val repository: UserRepo) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
@@ -34,4 +41,4 @@ class UserViewModelFactory(private val repository: UserRepo) : ViewModelProvider
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
+}*/

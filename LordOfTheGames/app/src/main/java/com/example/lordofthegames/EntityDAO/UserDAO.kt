@@ -1,13 +1,13 @@
 package com.example.lordofthegames.EntityDAO
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.lordofthegames.db_entities.User
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDAO {
     @Query("SELECT * FROM User")
-    fun getItems(): Flow<List<User>>
+    fun getItems(): LiveData<List<User?>?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: User)

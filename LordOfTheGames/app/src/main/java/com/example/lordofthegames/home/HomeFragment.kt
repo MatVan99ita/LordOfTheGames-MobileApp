@@ -1,22 +1,23 @@
 package com.example.lordofthegames.home
 
+//import com.example.lordofthegames.Database.LOTGDAO
+//import com.example.lordofthegames.Database.LOTGRepository
+//import com.example.lordofthegames.db_entities.Game
+
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.lordofthegames.Database.LOTGDAO
-//import com.example.lordofthegames.Database.LOTGRepository
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities
-//import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.ViewModel.UserViewModel
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -57,12 +58,15 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
+        ///userViewModel.addItem(User("", "", ""))
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -76,9 +80,22 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-            //val repository = LOTGRepository(LOTGDAO, activity.application)
+            this.userViewModel.getCurrentUser().observe(viewLifecycleOwner) { x -> Log.e("", x.toString())}
+
+            //val repository = UserRepo(UserDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()
             //print(cardItems)
+
+            //val db: LOTGDatabase = Room.databaseBuilder(
+            //    applicationContext,
+            //    LOTGDatabase::class.java,
+            //    "lotgdb"
+            //).build()
+            //val userViewModel by viewModels<UserViewModel> {
+            //    UserViewModelFactory((application as UserApplication).repository)
+            //}
+            //userViewModel.addItem(User("", "", ""))
+            //val d = db.userDao().getItems()
 
         } else {
             Log.e("HomeFragment", "Activity is null")

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LordOfTheGames"
         tools:targetApi="31">
         <activity
-            android:name=".user_login.LoggedActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -28,7 +28,14 @@
         </activity>
         <activity android:name=".GameDetails.GameDetActivity"/>
         <activity android:name=".Settings.SettingsActivity"/>
-        <activity android:name=".MainActivity"/>
+        <activity
+            android:name=".user_login.LoggedActivity"
+            />
     </application>
 
 </manifest>
+
+    <!--
+    android:name=".MainActivity"
+    android:name=".user_login.LoggedActivity"
+    -->
