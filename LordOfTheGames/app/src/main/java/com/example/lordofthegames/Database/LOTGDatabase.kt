@@ -48,7 +48,9 @@ abstract class LOTGDatabase: RoomDatabase() {
                     context.applicationContext,
                     LOTGDatabase::class.java,
                     "lotgdb"
-                ).addMigrations(LOTGDatabase.MIGRATION_1_2).build()
+                )
+                    //.addMigrations(LOTGDatabase.MIGRATION_1_2)
+                    .build()
                 INSTANCE = instance
 
                 instance

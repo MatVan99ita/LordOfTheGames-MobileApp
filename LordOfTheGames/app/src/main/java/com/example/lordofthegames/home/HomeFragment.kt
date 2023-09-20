@@ -60,14 +60,13 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var lotgViewModel: LotgViewModel
-
+    private lateinit var homeViewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        lotgViewModel = ViewModelProvider(requireActivity())[LotgViewModel::class.java]
+        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -82,7 +81,7 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-            this.lotgViewModel.addItem(User("Gino", "Pippo", "Fribbuter"))
+            this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
 
             //val repository = UserRepo(UserDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()

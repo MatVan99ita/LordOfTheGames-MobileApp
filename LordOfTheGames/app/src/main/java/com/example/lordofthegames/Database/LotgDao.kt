@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -66,4 +67,8 @@ interface LotgDao {
 
     @Query("SELECT * FROM game")
     fun getAllGames(): LiveData<List<Game?>?>
+
+    @Query("SELECT * FROM user WHERE mail = :email")
+    fun getCurrentUser(email: String?): LiveData<List<User?>?>?
+
 }
