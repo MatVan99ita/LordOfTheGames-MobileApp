@@ -68,7 +68,7 @@ interface LotgDao {
     @Query("SELECT * FROM game")
     fun getAllGames(): LiveData<List<Game?>?>
 
-    @Query("SELECT * FROM user WHERE mail = :email")
-    fun getCurrentUser(email: String?): LiveData<List<User?>?>?
+    @Query("SELECT * FROM user WHERE mail = :email AND password = :passw")
+    fun getCurrentUser(email: String, passw: String): LiveData<List<User?>?>
 
 }

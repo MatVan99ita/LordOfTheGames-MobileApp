@@ -81,7 +81,7 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-            this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
+            //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
 
             //val repository = UserRepo(UserDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()

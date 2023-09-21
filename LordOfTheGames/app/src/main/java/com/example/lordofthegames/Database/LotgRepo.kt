@@ -23,7 +23,7 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllGames()
     }
 
-    fun getCurrentUser(email: String?): LiveData<List<User?>?>? {
-        return lotgDao.getCurrentUser(email)
+    fun getCurrentUser(email: String, passw: String): LiveData<List<User?>?> {
+        return lotgDao.getCurrentUser(email, passw)
     }
 }

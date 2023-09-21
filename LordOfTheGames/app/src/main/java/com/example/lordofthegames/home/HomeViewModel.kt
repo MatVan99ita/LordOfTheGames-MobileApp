@@ -12,12 +12,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     private val mText: MutableLiveData<String> = MutableLiveData<String>()
     private val repository: LotgRepo = LotgRepo(application)
 
-    fun getText(): LiveData<String?>? {
+    fun getText(): LiveData<String?> {
         return mText
     }
 
-    fun getCurrentUser(user_name: String?): LiveData<List<User?>?>? {
-        return repository.getCurrentUser(user_name)
+    fun getCurrentUser(user_name: String, passw: String): LiveData<List<User?>?> {
+        return repository.getCurrentUser(user_name, passw)
     }
 
 }
