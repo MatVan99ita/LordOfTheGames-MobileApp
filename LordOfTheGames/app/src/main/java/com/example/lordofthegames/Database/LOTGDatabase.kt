@@ -21,7 +21,7 @@ import java.util.concurrent.Executors
             Notes::class,
             Platform::class,
             User::class,
-        ], version = 3)
+        ], version = 1)
 abstract class LOTGDatabase: RoomDatabase() {
 
     abstract fun lotgdao(): LotgDao
@@ -47,6 +47,7 @@ abstract class LOTGDatabase: RoomDatabase() {
                 )
                     .createFromAsset("lotgdb.db")
                     //.addMigrations(LOTGDatabase.MIGRATION_1_2)
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
 

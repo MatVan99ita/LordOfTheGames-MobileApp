@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "9439e4d2729bed1a0bf29588571ea13f",
+    "version": 4,
+    "identityHash": "4ffe813fdeae9361b2a3d8f40a4ca26a",
     "entities": [
       {
         "tableName": "achievement",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `img` TEXT NOT NULL DEFAULT 'img', `actual_count` INTEGER NOT NULL DEFAULT 0, `total_count` INTEGER NOT NULL DEFAULT 1, `status` INTEGER NOT NULL DEFAULT 0, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `img` TEXT NOT NULL DEFAULT '', `actual_count` INTEGER NOT NULL DEFAULT 0, `total_count` INTEGER NOT NULL DEFAULT 1, `status` INTEGER NOT NULL DEFAULT false, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "achievement_id",
@@ -33,7 +33,7 @@
             "columnName": "img",
             "affinity": "TEXT",
             "notNull": true,
-            "defaultValue": "'img'"
+            "defaultValue": "''"
           },
           {
             "fieldPath": "actual_count",
@@ -54,7 +54,7 @@
             "columnName": "status",
             "affinity": "INTEGER",
             "notNull": true,
-            "defaultValue": "0"
+            "defaultValue": "false"
           },
           {
             "fieldPath": "game_ref",
@@ -69,7 +69,26 @@
             "achievement_id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_achievement_achievement_id",
+            "unique": false,
+            "columnNames": [
+              "achievement_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_achievement_achievement_id` ON `${TABLE_NAME}` (`achievement_id`)"
+          },
+          {
+            "name": "index_achievement_game_ref",
+            "unique": false,
+            "columnNames": [
+              "game_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_achievement_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "game",
@@ -561,7 +580,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9439e4d2729bed1a0bf29588571ea13f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4ffe813fdeae9361b2a3d8f40a4ca26a')"
     ]
   }
 }

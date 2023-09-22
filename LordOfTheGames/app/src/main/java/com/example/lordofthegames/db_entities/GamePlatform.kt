@@ -2,7 +2,7 @@ package com.example.lordofthegames.db_entities
 
 import androidx.room.*
 
-@Entity(tableName = "GamePlatform",
+@Entity(tableName = "gameplatform",
 
     primaryKeys = ["game_ref", "platform_ref"],
     foreignKeys = [
