@@ -21,8 +21,7 @@ import java.util.concurrent.Executors
             Notes::class,
             Platform::class,
             User::class,
-        ], version = 3, exportSchema = true)
-@TypeConverters(DateConverter::class)
+        ], version = 3)
 abstract class LOTGDatabase: RoomDatabase() {
 
     abstract fun lotgdao(): LotgDao

@@ -3,6 +3,7 @@ package com.example.lordofthegames.user_login
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,20 +63,29 @@ class LogInFragment: Fragment() {
     fun login(passw: String, email: String) {
 
         val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        loggedViewModel.getUsr(email, passw).observe(viewLifecycleOwner) { usrs ->
-            usrs?.forEach{ usr ->
-                if (usr != null) {
-                    if(usr.mail == email && usr.password == passw){
-                        val editor = sharedPrefs.edit()
-                        editor.putString("logged", "")
-                        editor.putString("mail", usr.mail)
-                        editor.putString("nick", usr.nickname)
-                        editor.apply()
-                        parentFragmentManager.beginTransaction().replace(com.example.lordofthegames.R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
-                    }
+
+        loggedViewModel.getAllGames().observe(viewLifecycleOwner) {games ->
+            games?.forEach { game ->
+                if (game != null) {
+                    Log.e("Giuoco", game.game_title)
                 }
             }
         }
+
+        //loggedViewModel.getUsr(email, passw).observe(viewLifecycleOwner) { usrs ->
+        //    usrs?.forEach{ usr ->
+        //        if (usr != null) {
+        //            if(usr.mail == email && usr.password == passw){
+        //                val editor = sharedPrefs.edit()
+        //                editor.putString("logged", "")
+        //                editor.putString("mail", usr.mail)
+        //                editor.putString("nick", usr.nickname)
+        //                editor.apply()
+        //                parentFragmentManager.beginTransaction().replace(com.example.lordofthegames.R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
+        //            }
+        //        }
+        //    }
+        //}
             //val myValue = sharedPrefs.getString("myKey", defaultValue)
             //Si passa alla logged interface e si tiene traccia di una variabile logged da usare per le varie cose
 
