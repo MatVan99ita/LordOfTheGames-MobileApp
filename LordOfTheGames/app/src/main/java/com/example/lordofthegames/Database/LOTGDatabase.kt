@@ -5,6 +5,7 @@ import androidx.room.*
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.lordofthegames.db_entities.*
+import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -36,11 +37,7 @@ abstract class LOTGDatabase: RoomDatabase() {
         private var INSTANCE: LOTGDatabase? = null
 
         val executor: ExecutorService = Executors.newFixedThreadPool(4)
-        private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                // Esegui le operazioni di migrazione qui
-            }
-        }
+
         fun getDatabase(context: Context): LOTGDatabase {
 
             return INSTANCE ?: synchronized(this){

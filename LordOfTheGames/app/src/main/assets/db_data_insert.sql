@@ -1,46 +1,10 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Creato il: Set 20, 2023 alle 16:02
--- Versione del server: 10.4.24-MariaDB
--- Versione PHP: 8.0.19
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `db_per_android`
---
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `achievement`
---
-
-CREATE TABLE `achievement` (
-  `achievement_id` int(11) NOT NULL,
-  `name` tinytext NOT NULL,
-  `description` text NOT NULL,
-  `img` text DEFAULT NULL,
-  `actual_count` int(11) NOT NULL DEFAULT 0,
-  `total_count` int(11) NOT NULL DEFAULT 1,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  `game_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `achievement`
---
 
 INSERT INTO `achievement` (`achievement_id`, `name`, `description`, `img`, `actual_count`, `total_count`, `status`, `game_ref`) VALUES
 (20, 'Gli amici sono sempre qui per aiutarti', 'Utilizza il parcheggio automatico', '0', 0, 1, 0, 18),
@@ -49,20 +13,6 @@ INSERT INTO `achievement` (`achievement_id`, `name`, `description`, `img`, `actu
 (23, 'Secodonte sconfitto\r\n', '', '0', 0, 1, 0, 6),
 (26, 'Livello 10 raggiunto', 'Hai raggiunto il livello giocatore 10.', NULL, 3, 10, 0, 6);
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `categories`
---
-
-CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL,
-  `category_name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `categories`
---
 
 INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (1, 'Story-driven'),
@@ -81,62 +31,13 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (14, 'Dark fantasy'),
 (15, 'Horror');
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `comment`
---
-
-CREATE TABLE `comment` (
-  `comment_id` int(11) NOT NULL,
-  `discussion_ref` int(11) NOT NULL,
-  `content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `comment`
---
-
 INSERT INTO `comment` (`comment_id`, `discussion_ref`, `content`) VALUES
 (1, 1, 'Perchè è lo stormo che i approccia');
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `discussion`
---
-
-CREATE TABLE `discussion` (
-  `discussion_id` int(11) NOT NULL,
-  `title` text NOT NULL,
-  `content` longtext NOT NULL,
-  `game_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `discussion`
---
 
 INSERT INTO `discussion` (`discussion_id`, `title`, `content`, `game_ref`) VALUES
 (1, 'Vergil è più bello di Dante?', 'Si perchè you should motivate yourself NOW', 11);
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `game`
---
-
-CREATE TABLE `game` (
-  `game_id` int(11) NOT NULL,
-  `game_title` mediumtext NOT NULL,
-  `game_description` longtext NOT NULL,
-  `game_cover` text NOT NULL DEFAULT '\'img\'',
-  `game_status` varchar(11) NOT NULL DEFAULT 'Not played'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `game`
---
 
 INSERT INTO `game` (`game_id`, `game_title`, `game_description`, `game_cover`, `game_status`) VALUES
 (1, 'giuoco test', '', 'img', '0'),
@@ -154,20 +55,6 @@ INSERT INTO `game` (`game_id`, `game_title`, `game_description`, `game_cover`, `
 (17, 'Europa Universalis IV', 'Porta a termine la dominazione globale\r\nParadox Development Studio ritorna con il quarto episodio della pluripremiata serie Europa Universalis. Questo classico gioco del genere grand strategy ti permette di controllare una nazione che attraversa quattro secoli drammatici. Governa la tua terra e domina il mondo intero con una libertà, una profondità e un\'accuratezza storica senza precedenti. Scrivi una nuova storia del mondo e fonda un impero per i secoli a venire.\r\n\r\nAmbientazione storica dettagliata\r\nInizia prima del Rinascimento su una mappa del mondo com\'era allora. Scegli tra centinaia di nazioni e governa fino all\'Età napoleonica. In alternativa, se lo desideri, puoi iniziare la partita in qualsiasi data di questo arco di tempo, con i monarchi storici e gli altri leader dell\'epoca.\r\n\r\nGoditi la storia mentre prende vita\r\nCentinaia di eventi storici e dinamici sono a tua disposizione, da semplici guerre civili a momenti che cambiano il mondo, come la Riforma protestante. Scopri e colonizza il Nuovo Mondo, oppure resisti alla conquista europea.\r\n\r\nRiempiti le tasche\r\nControlla i flussi di mercato sviluppando una tua potenza commerciale nelle province chiave, e usa le navi e la politica governativa per far giungere le ricchezze del mondo nei tuoi porti.\r\n\r\nGuerra e pace\r\nStringi alleanze e trasformale in legami indissolubili, consolidati da un matrimonio reale, oppure mantieni un atteggiamento vago per tenere aperte tutte le tue opzioni. Colpisci quando i tuoi nemici sono deboli, usando i tuoi eserciti per conquistare nuove terre e nuove potenziali ricchezze.\r\n\r\nUn buon sovrano porta tempi prosperi\r\nIl ritmo di sviluppo della tua nazione sarà fortemente influenzato dalla persona che siede sul trono. Riscontra un rapido sviluppo sotto un abile monarca e assisti a un notevole rallentamento quando la carica passa a un erede meno competente. Pianifica il futuro impiegando saggiamente il potere monarchico.\r\n\r\nUna rivoluzione scientifica\r\nSono disponibili quattrocento anni di ricerche su nuovi metodi di guerra, amministrazione e commercio. Sblocca nuove armi, nuovi edifici e nuovi tipi di navi. Nel corso del tempo, puoi adottare approcci nazionali basati su idee che rappresentano sia la tua eredità storica che le tue ambizioni per il futuro.\r\nDai grandi viaggi di scoperta alle guerre di religione fino ai governi rivoluzionari, l\'intera storia del mondo moderno aspetta che tu la riscriva in Europa Universalis IV.', '\'img\'', '0'),
 (18, 'Euro Truck Simulator 2', 'Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore from the UK, Belgium, Germany, Italy, the Netherlands, Poland, and many more, your endurance, skill and speed will all be pushed to their limits. If you’ve got what it takes to be part of an elite trucking force, get behind the wheel and prove it!\r\nKey Features:\r\nTransport a vast variety of cargo across more than 60 European cities.\r\nRun your own business which continues to grow even as you complete your freight deliveries.\r\nBuild your own fleet of trucks, buy garages, hire drivers, manage your company for maximum profits.\r\nA varied amount of truck tuning that range from performance to cosmetic changes.\r\nCustomize your vehicles with optional lights, bars, horns, beacons, smoke exhausts, and more.\r\nThousands of miles of real road networks with hundreds of famous landmarks and structures.\r\nWorld of Trucks\r\nTake advantage of additional features of Euro Truck Simulator 2 by joining our online community on World of Trucks, our center for virtual truckers all around the world interested in Euro Truck Simulator 2 and future SCS Software\'s truck simulators.\r\n\r\nUse in-game Photo Mode to capture the best moments and share them with thousands of people who love trucks.\r\nFavorite the images you like the most and return to them anytime in the future.\r\nDiscuss the screenshots with everyone using World of Trucks.\r\nSee the best images hand-picked by the game creators in Editor\'s Pick updated almost every day. Try to get your own screenshot on this list!\r\nUpload and use your custom avatar and license plate in the game.\r\nMore features coming soon!', '\'img\'', '0');
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `gamecategory`
---
-
-CREATE TABLE `gamecategory` (
-  `game_ref` int(11) NOT NULL,
-  `category_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `gamecategory`
---
 
 INSERT INTO `gamecategory` (`game_ref`, `category_ref`) VALUES
 (7, 9),
@@ -186,20 +73,6 @@ INSERT INTO `gamecategory` (`game_ref`, `category_ref`) VALUES
 (17, 3),
 (18, 8);
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `gameplatform`
---
-
-CREATE TABLE `gameplatform` (
-  `platform_ref` int(11) NOT NULL,
-  `game_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `gameplatform`
---
 
 INSERT INTO `gameplatform` (`platform_ref`, `game_ref`) VALUES
 (1, 9),
@@ -210,35 +83,6 @@ INSERT INTO `gameplatform` (`platform_ref`, `game_ref`) VALUES
 (9, 14),
 (9, 15);
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `notes`
---
-
-CREATE TABLE `notes` (
-  `id` int(11) NOT NULL,
-  `title` tinytext NOT NULL,
-  `content` text NOT NULL,
-  `last_modified` datetime NOT NULL DEFAULT current_timestamp(),
-  `game_ref` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `platform`
---
-
-CREATE TABLE `platform` (
-  `platform_id` int(11) NOT NULL,
-  `nome` text NOT NULL,
-  `icona` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dump dei dati per la tabella `platform`
---
 
 INSERT INTO `platform` (`platform_id`, `nome`, `icona`) VALUES
 (1, 'PlayStation 4', ''),
@@ -250,155 +94,8 @@ INSERT INTO `platform` (`platform_id`, `nome`, `icona`) VALUES
 (7, 'Nintendo switch', ''),
 (8, 'Nintendo DS', ''),
 (9, 'Battle.net', ''),
-(10, "Game Pass");
+(10, 'Game Pass', ''),;
 
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `achievement`
---
-ALTER TABLE `achievement`
-  ADD PRIMARY KEY (`achievement_id`),
-  ADD KEY `game` (`game_ref`);
-
---
--- Indici per le tabelle `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`category_id`);
-
---
--- Indici per le tabelle `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`comment_id`),
-  ADD KEY `comment_ibfk_1` (`discussion_ref`);
-
---
--- Indici per le tabelle `discussion`
---
-ALTER TABLE `discussion`
-  ADD PRIMARY KEY (`discussion_id`),
-  ADD KEY `discussion_ibfk_1` (`game_ref`);
-
---
--- Indici per le tabelle `game`
---
-ALTER TABLE `game`
-  ADD PRIMARY KEY (`game_id`);
-
---
--- Indici per le tabelle `gamecategory`
---
-ALTER TABLE `gamecategory`
-  ADD PRIMARY KEY (`game_ref`,`category_ref`),
-  ADD KEY `categoria` (`category_ref`),
-  ADD KEY `gioco` (`game_ref`);
-
---
--- Indici per le tabelle `gameplatform`
---
-ALTER TABLE `gameplatform`
-  ADD PRIMARY KEY (`platform_ref`,`game_ref`),
-  ADD KEY `game ref` (`game_ref`);
-
---
--- Indici per le tabelle `notes`
---
-ALTER TABLE `notes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `notes_ibfk_1` (`game_ref`);
-
---
--- Indici per le tabelle `platform`
---
-ALTER TABLE `platform`
-  ADD PRIMARY KEY (`platform_id`);
-
---
--- AUTO_INCREMENT per le tabelle scaricate
---
-
---
--- AUTO_INCREMENT per la tabella `achievement`
---
-ALTER TABLE `achievement`
-  MODIFY `achievement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT per la tabella `categories`
---
-ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT per la tabella `comment`
---
-ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT per la tabella `discussion`
---
-ALTER TABLE `discussion`
-  MODIFY `discussion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT per la tabella `game`
---
-ALTER TABLE `game`
-  MODIFY `game_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT per la tabella `platform`
---
-ALTER TABLE `platform`
-  MODIFY `platform_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- Limiti per le tabelle scaricate
---
-
---
--- Limiti per la tabella `achievement`
---
-ALTER TABLE `achievement`
-  ADD CONSTRAINT `game` FOREIGN KEY (`game_ref`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`discussion_ref`) REFERENCES `discussion` (`discussion_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `discussion`
---
-ALTER TABLE `discussion`
-  ADD CONSTRAINT `discussion_ibfk_1` FOREIGN KEY (`game_ref`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `gamecategory`
---
-ALTER TABLE `gamecategory`
-  ADD CONSTRAINT `categoria` FOREIGN KEY (`category_ref`) REFERENCES `categories` (`category_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `gioco` FOREIGN KEY (`game_ref`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `gameplatform`
---
-ALTER TABLE `gameplatform`
-  ADD CONSTRAINT `game ref` FOREIGN KEY (`game_ref`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `platform ref` FOREIGN KEY (`platform_ref`) REFERENCES `platform` (`platform_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limiti per la tabella `notes`
---
-ALTER TABLE `notes`
-  ADD CONSTRAINT `notes_ibfk_1` FOREIGN KEY (`game_ref`) REFERENCES `game` (`game_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
