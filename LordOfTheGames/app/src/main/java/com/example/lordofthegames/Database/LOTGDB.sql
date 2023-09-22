@@ -78,8 +78,8 @@ INSERT INTO `categories` (`category_id`, `category_name`) VALUES
 (11, 'Third person'),
 (12, 'TPS'),
 (13, 'FPS'),
-(15, 'Dark fantasy'),
-(16, 'Horror');
+(14, 'Dark fantasy'),
+(15, 'Horror');
 
 -- --------------------------------------------------------
 
@@ -249,7 +249,8 @@ INSERT INTO `platform` (`platform_id`, `nome`, `icona`) VALUES
 (6, 'Xbox 360', ''),
 (7, 'Nintendo switch', ''),
 (8, 'Nintendo DS', ''),
-(9, 'Battle.net', '');
+(9, 'Battle.net', ''),
+(10, 'Game Pass', ''),;
 
 --
 -- Indici per le tabelle scaricate
