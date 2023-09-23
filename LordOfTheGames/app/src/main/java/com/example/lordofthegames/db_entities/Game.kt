@@ -24,21 +24,14 @@ data class Game(
 
     @PrimaryKey(autoGenerate = true)
     var game_id: Int,
-
-    @ColumnInfo(defaultValue = "")
     var game_title: String,
-
-    @ColumnInfo(defaultValue = "")
     var game_description: String,
-
-    @ColumnInfo(defaultValue = "img")
-    var game_cover: String,
+    var game_cover: String="img",
 
     /**
      * Status -> Not played, Playing, Played, Abandoned, Wanted to play
      */
-    @ColumnInfo(name = "game_status", defaultValue = "Not played")
-    var game_status: String = "Not played",
+    var game_status: String = "NP",
 
 
     //var achievements: List<Achievement>?,

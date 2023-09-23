@@ -24,14 +24,9 @@ data class Notes(
      */
     @PrimaryKey(autoGenerate = true)
     var note_id: Int,
-
-    @ColumnInfo(defaultValue = "")
     var title: String,
-
-    @ColumnInfo(defaultValue = "")
     var content: String,
-
-    @ColumnInfo(defaultValue = "")
-    var last_modified: String,
+    @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
+    var last_modified: Date,
 
     var game_ref: Int )

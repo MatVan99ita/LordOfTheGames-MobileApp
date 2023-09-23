@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9439e4d2729bed1a0bf29588571ea13f",
+    "identityHash": "0ad64072c619e4cd9e4a2ea11671d5f5",
     "entities": [
       {
         "tableName": "achievement",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL DEFAULT '', `description` TEXT NOT NULL DEFAULT '', `img` TEXT NOT NULL DEFAULT 'img', `actual_count` INTEGER NOT NULL DEFAULT 0, `total_count` INTEGER NOT NULL DEFAULT 1, `status` INTEGER NOT NULL DEFAULT 0, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `img` TEXT NOT NULL, `actual_count` INTEGER NOT NULL, `total_count` INTEGER NOT NULL, `status` INTEGER NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "achievement_id",
@@ -18,43 +18,37 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "img",
             "columnName": "img",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'img'"
+            "notNull": true
           },
           {
             "fieldPath": "actual_count",
             "columnName": "actual_count",
             "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "0"
+            "notNull": true
           },
           {
             "fieldPath": "total_count",
             "columnName": "total_count",
             "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "1"
+            "notNull": true
           },
           {
             "fieldPath": "status",
             "columnName": "status",
             "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "0"
+            "notNull": true
           },
           {
             "fieldPath": "game_ref",
@@ -86,7 +80,7 @@
       },
       {
         "tableName": "categories",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`category_id` INTEGER NOT NULL, `category_name` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`category_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`category_id` INTEGER NOT NULL, `category_name` TEXT NOT NULL, PRIMARY KEY(`category_id`))",
         "fields": [
           {
             "fieldPath": "category_id",
@@ -98,8 +92,7 @@
             "fieldPath": "category_name",
             "columnName": "category_name",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -113,7 +106,7 @@
       },
       {
         "tableName": "comment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL DEFAULT '', FOREIGN KEY(`discussion_ref`) REFERENCES `game_discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL, FOREIGN KEY(`discussion_ref`) REFERENCES `discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "comment_id",
@@ -131,8 +124,7 @@
             "fieldPath": "content",
             "columnName": "content",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -141,29 +133,10 @@
             "comment_id"
           ]
         },
-        "indices": [
-          {
-            "name": "index_comment_comment_id",
-            "unique": false,
-            "columnNames": [
-              "comment_id"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_comment_comment_id` ON `${TABLE_NAME}` (`comment_id`)"
-          },
-          {
-            "name": "index_comment_discussion_ref",
-            "unique": false,
-            "columnNames": [
-              "discussion_ref"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_comment_discussion_ref` ON `${TABLE_NAME}` (`discussion_ref`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": [
           {
-            "table": "game_discussion",
+            "table": "discussion",
             "onDelete": "NO ACTION",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -176,8 +149,8 @@
         ]
       },
       {
-        "tableName": "game_discussion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL DEFAULT '', `content` TEXT NOT NULL DEFAULT '', `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "tableName": "discussion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "discussion_id",
@@ -189,15 +162,13 @@
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "content",
             "columnName": "content",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "game_ref",
@@ -212,26 +183,7 @@
             "discussion_id"
           ]
         },
-        "indices": [
-          {
-            "name": "index_game_discussion_discussion_id",
-            "unique": false,
-            "columnNames": [
-              "discussion_id"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_discussion_discussion_id` ON `${TABLE_NAME}` (`discussion_id`)"
-          },
-          {
-            "name": "index_game_discussion_game_ref",
-            "unique": false,
-            "columnNames": [
-              "game_ref"
-            ],
-            "orders": [],
-            "createSql": "CREATE INDEX IF NOT EXISTS `index_game_discussion_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
-          }
-        ],
+        "indices": [],
         "foreignKeys": [
           {
             "table": "game",
@@ -248,7 +200,7 @@
       },
       {
         "tableName": "game",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `game_title` TEXT NOT NULL DEFAULT '', `game_description` TEXT NOT NULL DEFAULT '', `game_cover` TEXT NOT NULL DEFAULT 'img', `game_status` TEXT NOT NULL DEFAULT 'Not played')",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `game_title` TEXT NOT NULL, `game_description` TEXT NOT NULL, `game_cover` TEXT NOT NULL, `game_status` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "game_id",
@@ -260,29 +212,25 @@
             "fieldPath": "game_title",
             "columnName": "game_title",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "game_description",
             "columnName": "game_description",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "game_cover",
             "columnName": "game_cover",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'img'"
+            "notNull": true
           },
           {
             "fieldPath": "game_status",
             "columnName": "game_status",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'Not played'"
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -434,7 +382,7 @@
       },
       {
         "tableName": "notes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL DEFAULT '', `content` TEXT NOT NULL DEFAULT '', `last_modified` TEXT NOT NULL DEFAULT '', `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `last_modified` INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "note_id",
@@ -446,22 +394,20 @@
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "content",
             "columnName": "content",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "last_modified",
             "columnName": "last_modified",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true,
-            "defaultValue": "''"
+            "defaultValue": "CURRENT_TIMESTAMP"
           },
           {
             "fieldPath": "game_ref",
@@ -493,7 +439,7 @@
       },
       {
         "tableName": "platform",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`platform_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT NOT NULL DEFAULT '', `icona` TEXT NOT NULL DEFAULT 'img')",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`platform_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `nome` TEXT NOT NULL, `icona` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "platform_id",
@@ -505,15 +451,13 @@
             "fieldPath": "nome",
             "columnName": "nome",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "''"
+            "notNull": true
           },
           {
             "fieldPath": "icona",
             "columnName": "icona",
             "affinity": "TEXT",
-            "notNull": true,
-            "defaultValue": "'img'"
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -554,14 +498,24 @@
             "mail"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_user_nickname",
+            "unique": true,
+            "columnNames": [
+              "nickname"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_user_nickname` ON `${TABLE_NAME}` (`nickname`)"
+          }
+        ],
         "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9439e4d2729bed1a0bf29588571ea13f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0ad64072c619e4cd9e4a2ea11671d5f5')"
     ]
   }
 }

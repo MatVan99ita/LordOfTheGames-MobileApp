@@ -6,8 +6,6 @@ import androidx.room.*
 data class Platform(
     @PrimaryKey(autoGenerate = true)
     var platform_id: Int,
-    @ColumnInfo(defaultValue = "")
     var nome: String,
-    @ColumnInfo(defaultValue = "img")
-    var icona: String,
+    var icona: String = "img",
 )

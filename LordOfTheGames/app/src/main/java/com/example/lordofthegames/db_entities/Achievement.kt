@@ -1,5 +1,6 @@
 package com.example.lordofthegames.db_entities
 
+import androidx.annotation.NonNull
 import androidx.room.*
 
 /**
@@ -19,26 +20,15 @@ import androidx.room.*
     )
 ])
 data class Achievement(
-    @PrimaryKey()
+
+    @PrimaryKey(autoGenerate = true)
     var achievement_id: Int,
 
-    @ColumnInfo(defaultValue = "")
     var name: String,
-
-    @ColumnInfo(defaultValue = "")
     var description: String,
-
-    @ColumnInfo(defaultValue = "img")
-    var img: String,
-
-    @ColumnInfo(defaultValue = "0")
+    var img: String="img",
     var actual_count: Int = 0,
-
-    @ColumnInfo(defaultValue = "1")
     var total_count: Int = 1,
-
-    @ColumnInfo(defaultValue = "0")
     var status: Int = 0,
-
     var game_ref: Int
     )
