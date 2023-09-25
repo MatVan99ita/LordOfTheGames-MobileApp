@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
@@ -21,7 +22,7 @@ class SignInFragment: Fragment() {
     private lateinit var mail: TextInputEditText
     private lateinit var password: TextInputEditText
     private lateinit var reqpassword: TextInputEditText
-    private lateinit var login_view: View
+    private lateinit var lbl_error: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,8 @@ class SignInFragment: Fragment() {
         nick = requireView().findViewById(R.id.nickname_textinput)
         mail = requireView().findViewById(R.id.mail_textinput)
         password = requireView().findViewById(R.id.password_textinput)
+        lbl_error = requireView().findViewById(R.id.txt_error)
+        reqpassword = requireView().findViewById(R.id.confirm_password_textinput)
 
         login_btn.setOnClickListener {
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LogInFragment()).commit()
@@ -79,49 +82,45 @@ class SignInFragment: Fragment() {
         return emailPattern.matches(email)
     }
 
-    fun signin(nickn: String, passw: String, email: String) {
-//TODO: servirsi del controllo
-//        if(!isValidMail(email)){
-//            nick.error = "Mail is required. Must be name@domain.net";
-//            nick.requestFocus();
-//            return;
-//        } else if(email.length < 6){
-//            nick.error = "Nickname must be 6(or more) character ";
-//            nick.requestFocus();
-//            return;
-//        }
-//
-//        if(!isValidPassword(passw)) {
-//            nick.error =
-//                "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
-//            nick.requestFocus();
-//            return;
-//        }
-//
-//        if (nickn == "") {
-//            nick.error = "Nickname is required.";
-//            nick.requestFocus();
-//            return;
-//        } else if (nickn.length < 6) {
-//            nick.error = "Nickname must be 6(or more) character ";
-//            nick.requestFocus();
-//            return;
-//        }
+    fun signin(nickn: String, passw: String, c_passw: String, email: String) {
 
 
-        // val salt = Utilities.generateSalt()
-        // val hashedPassword = Utilities.hashPassword(passw, salt)
-        Log.w("SIGNIN", "$nickn $email $passw")
-        val check = 10// repository.insertUser(User(email, nickn, passw))
-        if(check > 0){
-            val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            val editor = sharedPrefs.edit()
-            editor.putString("logged", "")
-            editor.putString("mail", email)
-            editor.putString("nick", nickn)
-            editor.apply()
-            //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
+        if(!isValidMail(email)){
+            lbl_error.error = "Mail is required. Must be name@domain.net"
+            lbl_error.requestFocus()
+        } else if(nickn.length < 6){
+            lbl_error.error = "Nickname must be 6(or more) character ";
+            lbl_error.requestFocus();
+            return;
         }
+
+        if(!isValidPassword(passw)) {
+            lbl_error.error = "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
+            lbl_error.requestFocus();
+            return;
+        } else if(c_passw != passw){
+            lbl_error.error = "Password must be the same";
+            lbl_error.requestFocus();
+        }
+        parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, LoggedInFragment()).addToBackStack(null).commit()
+
+        Log.w("SIGNIN", "$nickn $email $passw")
+        /**
+         *
+         *     TODO: aggiungere i dati al db e il log nelle shared pref
+         *              val salt = Utilities.generateSalt()
+         *              val hashedPassword = Utilities.hashPassword(passw, salt)
+         *              val check = 10// repository.insertUser(User(email, nickn, passw))
+         *              if(check > 0){
+         *                  val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+         *                  val editor = sharedPrefs.edit()
+         *                  editor.putString("logged", "")
+         *                  editor.putString("mail", email)
+         *                  editor.putString("nick", nickn)
+         *                  editor.apply()
+         *                  //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
+         *              }
+         */
 
     }
 }

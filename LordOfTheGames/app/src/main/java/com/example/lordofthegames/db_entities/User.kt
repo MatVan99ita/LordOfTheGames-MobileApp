@@ -13,6 +13,7 @@ data class User(
     var mail: String,
     var nickname: String,
     var password: String,
+    var photo: ByteArray?,
     //var salt: String,
 )
 
