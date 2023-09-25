@@ -110,7 +110,11 @@ class MainActivity : AppCompatActivity() {
         Log.e("NOME", banana.getString("nickname", "BANANA").toString())
         Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
         if(!banana.contains("logged") && !banana.contains("nickname") && !banana.contains("email")){
-
+            /**
+             * TODO: Togliere questo if per far partire l'app direttamente con la lista di giochi
+             *       Mettere il login quando si clicca sui bottoni o sulle cose che richiedono un account
+             *       Così da poter cazzeggiare tra i giochi senza log come anime list
+             */
             //Se lo sharedpref non è stato settato si parte dal login
             val intent = Intent(this, LoggedActivity::class.java)
             //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
