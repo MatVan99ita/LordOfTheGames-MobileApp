@@ -48,7 +48,7 @@ class LogInFragment: Fragment() {
 
             //requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit().putString("logged", "").apply()
             //Utilities.login(LoggedActivity(), "", "", "");
-            this.login("", "")
+            this.login(password.text.toString(), mail.text.toString())
 
 
 
@@ -60,14 +60,28 @@ class LogInFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun login(passw: String, email: String) {
+    private fun login(passw: String, email: String) {
 
-        val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        if(passw != "" && email != ""){
+            loggedViewModel.getUsr(email, passw).observe(viewLifecycleOwner) {users ->
+                users?.forEach{ user ->
+                    if (user != null) {
+                        requireActivity()
+                            .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                            .edit()
+                            .putString("email", user.mail)
+                            .putString("nickname", user.nickname)
+                            .putString("logged", "SI")
+                            .apply()
 
-        loggedViewModel.getAllGames().observe(viewLifecycleOwner) {games ->
-            games?.forEach { game ->
-                if (game != null) {
-                    Log.e("Giuoco", game.game_title)
+                        val intent = Intent(context, MainActivity::class.java)
+                        //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        this.startActivity(intent)
+
+                    } else {
+                        print("BANANANANANANAN") // TODO: Creare un label che indichi che l'uente ha sbagliato il login
+                    }
                 }
             }
         }

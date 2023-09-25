@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 
@@ -27,6 +28,7 @@ import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.SearchFragment
 import com.example.lordofthegames.home.mygame.MyGameListFragment
+import com.example.lordofthegames.user_login.LogInFragment
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.SignInFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -103,29 +105,26 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Utilities.createDatabase(this)
-        setContentView(R.layout.activity_main)
-        toolbar = findViewById(R.id.toolbar)
-        drawerLayout = findViewById(R.id.main_activity_drawer)
-        navigationView = findViewById(R.id.nav_view)
-        bottomNavigationView = findViewById(R.id.bottom)
-        val banana=false
-        if(banana){
-            if (savedInstanceState == null) {
-                Utilities.insertFragment(
-                    this,
-                    SignInFragment(),
-                    SignInFragment::class.java.simpleName, null,
-                )
-            }
-            drawerLayout.isEnabled=false
-            //drawerLayout.visibility= View.GONE
-            navigationView.visibility = View.GONE
-            bottomNavigationView.visibility = View.GONE
-            toolbar.visibility=View.GONE
+
+        val banana=this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        Log.e("NOME", banana.getString("nickname", "BANANA").toString())
+        Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
+        if(!banana.contains("logged") && !banana.contains("nickname") && !banana.contains("email")){
+
+            //Se lo sharedpref non è stato settato si parte dal login
+            val intent = Intent(this, LoggedActivity::class.java)
+            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            this.startActivity(intent)
         }
-        else{
+        else{// si può startare con l'app
 
 
+            setContentView(R.layout.activity_main)
+            toolbar = findViewById(R.id.toolbar)
+            drawerLayout = findViewById(R.id.main_activity_drawer)
+            navigationView = findViewById(R.id.nav_view)
+            bottomNavigationView = findViewById(R.id.bottom)
             actualFragment = HomeFragment()
 
             if (savedInstanceState == null) {
@@ -258,6 +257,7 @@ class MainActivity : AppCompatActivity() {
         } else if(item.itemId == R.id.nav_usr){
             val intent = Intent(this, LoggedActivity::class.java)
             drawerLayout.closeDrawer(GravityCompat.START)
+            intent.putExtra("user_det", true)
             this.startActivity(intent)
             true
         } else {
@@ -290,17 +290,29 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         navigationView.setNavigationItemSelectedListener { menuItem ->
-            val id = menuItem.itemId
-            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
-            if (id == R.id.nav_setting) {
-                val intent = Intent(this, SettingsActivity::class.java)
-                drawerLayout.closeDrawer(GravityCompat.START)
-                this.startActivity(intent)
-            } else if (id == R.id.nav_usr){
-                val intent = Intent(this, LoggedActivity::class.java)
-                drawerLayout.closeDrawer(GravityCompat.START)
-                this.startActivity(intent)
+            when(menuItem.itemId) {
+                R.id.nav_setting -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+                R.id.nav_usr -> {
+                    val intent = Intent(this, LoggedActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+
             }
+            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
+            //if (id == R.id.nav_setting) {
+            //    val intent = Intent(this, SettingsActivity::class.java)
+            //    drawerLayout.closeDrawer(GravityCompat.START)
+            //    this.startActivity(intent)
+            //} else if (id == R.id.nav_usr){
+            //    val intent = Intent(this, LoggedActivity::class.java)
+            //    drawerLayout.closeDrawer(GravityCompat.START)
+            //    this.startActivity(intent)
+            //}
             //This is for maintaining the behavior of the Navigation view
             //onNavDestinationSelected(menuItem, navController)
             //This is for closing the drawer after acting on it

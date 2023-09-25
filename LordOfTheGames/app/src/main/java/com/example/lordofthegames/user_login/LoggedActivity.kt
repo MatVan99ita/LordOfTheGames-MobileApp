@@ -9,10 +9,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 
 class LoggedActivity: AppCompatActivity() {
@@ -20,6 +24,8 @@ class LoggedActivity: AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var savedInstanceState: Bundle? = null
+    private lateinit var toolbar: Toolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
@@ -29,14 +35,9 @@ class LoggedActivity: AppCompatActivity() {
         //    UserViewModelFactory(repository = (application as UserApplication).repository)
         //}
         //userViewModel.addItem(User("", "", ""))
-        if(this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).contains("logged")){
-            val intent = Intent(this, MainActivity::class.java)
-            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            this.startActivity(intent)
-        }
+        val sp = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-        setContentView(R.layout.activity_log)
+        setContentView(R.layout.activity_login)
 
         if (savedInstanceState == null) {
             Utilities.insertFragment(
@@ -46,14 +47,34 @@ class LoggedActivity: AppCompatActivity() {
             )
         }
 
-        /*if (savedInstanceState == null) {
-            val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            if (true /*sharedPreferences.contains("logged")*/) {
+        if (savedInstanceState == null) {
+            //val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            if (sp.contains("logged") && sp.contains("email") && sp.contains("nickname")) {
+
+
+                toolbar = findViewById(R.id.toolbar)
+                drawerLayout = findViewById(R.id.logged_activity_drawer)
+
                 Utilities.insertFragment(
                     this,
                     LoggedInFragment(),
                     LoggedInFragment::class.java.simpleName, null,
                 )
+
+                Utilities.setUpToolBar(
+                    this,
+                    findViewById(R.id.toolbar),
+                    "Equipment",
+                    drawerLayout,
+                    null,
+                )
+
+                actionBarDrawerToggle = Utilities.setUpDrawer(
+                    drawerLayout,
+                    navigationView = findViewById(R.id.nav_view),
+                    this,
+                )
+
             } else {
                 Utilities.insertFragment(
                     this,
@@ -64,19 +85,7 @@ class LoggedActivity: AppCompatActivity() {
         }
 
 
-        Utilities.setUpToolBar(
-            this,
-            findViewById(R.id.toolbar),
-            "User details",
-            drawerLayout,
-            null,
-        )
 
-        actionBarDrawerToggle = Utilities.setUpDrawer(
-            drawerLayout,
-            navigationView = findViewById(R.id.nav_view),
-            this,
-        )
 
         //val btn: Button = findViewById(R.id.btn_verde).setOnClickListener(this);
         //val btn1: Button = findViewById(R.id.btn_azzurro).setOnClickListener(this);*/

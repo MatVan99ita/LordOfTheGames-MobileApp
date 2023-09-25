@@ -63,18 +63,15 @@ class Utilities {
             actionBarDrawerToggle.syncState()
             drawerLayout.closeDrawers()
 
-            val sharedPreferences: SharedPreferences = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val sp: SharedPreferences = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-
-            if(sharedPreferences.contains("logged")){
-                val header_mail: TextView? = drawerLayout.findViewById(R.id.mail_header)
-                val header_nick: TextView? = drawerLayout.findViewById(R.id.nickname_header)
-                if (header_mail != null) {
-                    header_mail.text = sharedPreferences.getString("mail", "BELANDIH")
-                }
-                if (header_nick != null) {
-                    header_nick.text = sharedPreferences.getString("nick", "BESUGHI")
-                }
+            val header_mail: TextView? = drawerLayout.findViewById(R.id.mail_header)
+            val header_nick: TextView? = drawerLayout.findViewById(R.id.nickname_header)
+            if (header_mail != null) {
+                header_mail.text = sp.getString("email", "BELANDIH")
+            }
+            if (header_nick != null) {
+                header_nick.text = sp.getString("nickname", "BESUGHI")
             }
 
             if(activity.javaClass == SettingsActivity::class.java){
@@ -82,9 +79,6 @@ class Utilities {
             }else if(activity.javaClass == LoggedActivity::class.java){
                 navigationView.menu.findItem(R.id.nav_usr).isVisible = false
             }
-
-
-
 
             return actionBarDrawerToggle
         }

@@ -41,8 +41,8 @@ class LoggedInFragment: Fragment(){
     fun eschilo(){
         val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPrefs.edit()
-        editor.remove("nick")
-        editor.remove("mail")
+        editor.remove("nickname")
+        editor.remove("email")
         editor.remove("logged")
         editor.apply()
     }
