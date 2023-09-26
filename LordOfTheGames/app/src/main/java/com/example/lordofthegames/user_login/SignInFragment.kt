@@ -1,10 +1,20 @@
 package com.example.lordofthegames.user_login
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.annotation.SuppressLint
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,14 +23,27 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
-import com.example.lordofthegames.Manifest
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities.Companion.GALLERY_IMAGE
+import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
+import com.example.lordofthegames.Utilities.Companion.createImageFile
 import com.example.lordofthegames.db_entities.User
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.ExecutorService
 
 
 class SignInFragment: Fragment() {
@@ -31,9 +54,15 @@ class SignInFragment: Fragment() {
     private lateinit var reqpassword: TextInputEditText
     private lateinit var lbl_error: TextView
 
+    private lateinit var imageCapture: ImageCapture
+    private lateinit var outputDirectory: File
+    private lateinit var cameraExecutor: ExecutorService
 
     private lateinit var fragmentContainerView: FragmentContainerView
 
+    private lateinit var currentPhotoPath: String
+
+    private lateinit var photoFile: Uri
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,9 +70,13 @@ class SignInFragment: Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_signin, container, false)
     }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
+        photoFile = FileProvider.getUriForFile(requireContext(), "com.example.yourapp.fileprovider", outputDirectory)
 
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
@@ -77,48 +110,109 @@ class SignInFragment: Fragment() {
             }
             // TODO("Aggiungere il controllo tra password e reqpassword tramite l'onchange")
         } else if(this.requireView().id == R.id.signin_img_fragment){
+
+            val file = requireContext().createImageFile()
+            val uri = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().packageName + ".provider", file
+            )
             val btn_img: Button = requireView().findViewById(R.id.fottinn)
             val imgview: ImageView = requireView().findViewById(R.id.fottimi)
             var capturedImageUri = mutableSetOf<Uri>(Uri.EMPTY)
 
-            ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf<String>(READ_EXTERNAL_STORAGE), 1
-            )
-            if (ActivityCompat.checkSelfPermission(requireContext(), READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
-            }
-            val photo = Intent()
-            val pickIntent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            )
-            pickIntent.type = "image/*"
-
-            val chooserIntent = Intent.createChooser(photo, "Select Image")
-            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
-
-            startActivityForResult(chooserIntent, GALLERY_IMAGE)
+            //// Inizializza l'output directory per salvare le foto
+            //outputDirectory = getOutputDirectory()
+//
+            //// Inizializza il thread executor per l'uso con CameraX
+            //cameraExecutor = Executors.newSingleThreadExecutor()
 
 
 
-            val cameraLauncher = rememberLauncherForActivityResult
+            // Imposta il gestore di eventi di click per il tuo bottone
             btn_img.setOnClickListener {
-                if(context?.let { it1 -> ContextCompat.checkSelfPermission(it1, Manifest.permission.CAMERA) } == PackageManager.PERMISSION_GRANTED){
-                    camer
+                val myAlertDialog = MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                myAlertDialog.setTitle("Upload Pictures Option")
+                myAlertDialog.setMessage("How do you want to set your picture?")
+                myAlertDialog.setPositiveButton(
+                    "Gallery"
+                ) { arg0: DialogInterface?, arg1: Int ->
+                    ActivityCompat.requestPermissions(
+                        requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), 1
+                    )
+                    if (ActivityCompat.checkSelfPermission(requireContext(), READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        return@setPositiveButton
+                    }
+                    val photo = Intent()
+                    val pickIntent = Intent(
+                        Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                    )
+                    pickIntent.type = "image/*"
+                    val chooserIntent = Intent.createChooser(photo, "Select Image")
+                    chooserIntent.putExtra(
+                        Intent.EXTRA_INITIAL_INTENTS,
+                        arrayOf(pickIntent)
+                    )
+                    startActivityForResult(chooserIntent, GALLERY_IMAGE)
                 }
+
+                myAlertDialog.setNegativeButton(
+                    "Camera"
+                ) { arg0: DialogInterface?, arg1: Int ->
+                    val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    // Ensure that there's a camera activity to handle the intent
+                    if (takePictureIntent.resolveActivity(
+                            requireActivity()
+                                .packageManager
+                        ) != null
+                    ) {
+                        // Create the File where the photo should go
+                        var photoFile: File? = null
+                        try {
+                            photoFile = createImageFile()
+                        } catch (ex: IOException) {
+                            // Error occurred while creating the File
+                        }
+                        // Continue only if the File was successfully created
+                        if (photoFile != null) {
+                            val photoURI = FileProvider.getUriForFile(
+                                requireContext(),
+                                "com.example.android.fileprovider",
+                                photoFile!!
+                            )
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                        }
+                    }
+                }
+                myAlertDialog.show()
             }
-
-
         }
 
-
-
-        //
-        //
-
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Throws(IOException::class)
+    private fun createImageFile(): File? {
+        // Create an image file name
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "JPEG_" + timeStamp + "_"
+        val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val image = File.createTempFile(
+            imageFileName,  /* prefix */
+            ".jpg",  /* suffix */
+            storageDir /* directory */
+        )
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.absolutePath
+        //this.image.setBackground(Drawable.createFromPath(currentPhotoPath));
+        return image
     }
 
     fun addUser(user: User) {
@@ -181,4 +275,51 @@ class SignInFragment: Fragment() {
          */
 
     }
+
+
+
+
+
+    fun saveImage(contentResolver: ContentResolver, capturedImageUri: Uri) {
+        val bitmap = getBitmap(capturedImageUri, contentResolver)
+
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, "IMG_${SystemClock.uptimeMillis()}")
+
+        val imageUri =
+            contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
+        val outputStream = imageUri?.let { contentResolver.openOutputStream(it) }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream?.close()
+    }
+
+
+
+    private fun getBitmap(selectedPhotoUri: Uri, contentResolver: ContentResolver): Bitmap {
+        val bitmap = when {
+            Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
+                contentResolver,
+                selectedPhotoUri
+            )
+            else -> {
+                val source = ImageDecoder.createSource(contentResolver, selectedPhotoUri)
+                ImageDecoder.decodeBitmap(source)
+            }
+        }
+        return bitmap
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraExecutor.shutdown()
+    }
+
+    companion object {
+        private const val TAG = "CameraXExample"
+    }
+
+
+
 }

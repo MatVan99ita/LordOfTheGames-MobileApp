@@ -1,41 +1,62 @@
 package com.example.lordofthegames
 
-import android.app.Activity
 import android.app.UiModeManager
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.os.SystemClock
+import android.provider.MediaStore
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
-import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedInFragment
 import com.google.android.material.navigation.NavigationView
-import kotlinx.coroutines.flow.Flow
+import java.io.File
 import java.security.MessageDigest
 import java.security.SecureRandom
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class Utilities {
     companion object{
 
         const val REQUEST_IMAGE_CAPTURE = 1
+        const val GALLERY_IMAGE = 0
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
 
@@ -269,5 +290,95 @@ class Utilities {
         }
 
 
+
+        @Composable
+        fun TakePhoto(context: Context) {
+            val file = context.createImageFile()
+            val uri = FileProvider.getUriForFile(
+                context, context.packageName + ".provider", file
+            )
+
+            var capturedImageUri by remember {
+                mutableStateOf<Uri>(Uri.EMPTY)
+            }
+
+            val cameraLauncher =
+                rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
+                    capturedImageUri = uri
+                }
+
+            val permissionLauncher = rememberLauncherForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) {
+                if (it) {
+                    cameraLauncher.launch(uri)
+                } else {
+                    Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            val permissionCheckResult =
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
+            if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
+                cameraLauncher.launch(uri)
+            } else {
+                permissionLauncher.launch(android.Manifest.permission.CAMERA)
+            }
+
+            if (capturedImageUri.path?.isNotEmpty() == true) {
+                AsyncImage(model = ImageRequest.Builder(context)
+                    .data(capturedImageUri)
+                    .crossfade(true)
+                    .build(), contentDescription = "image taken")
+
+                saveImage(context.applicationContext.contentResolver, capturedImageUri)
+            }
+        }
+
+        fun saveImage(contentResolver: ContentResolver, capturedImageUri: Uri) {
+            val bitmap = getBitmap(capturedImageUri, contentResolver)
+
+            val values = ContentValues()
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+            values.put(MediaStore.Images.Media.DISPLAY_NAME, "IMG_${SystemClock.uptimeMillis()}")
+
+            val imageUri =
+                contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+
+            val outputStream = imageUri?.let { contentResolver.openOutputStream(it) }
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+            outputStream?.close()
+        }
+
+        fun Context.createImageFile(): File {
+            val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+            val imageFileName = "JPEG_" + timeStamp + "_"
+            return File.createTempFile(
+                imageFileName,
+                ".jpg",
+                externalCacheDir
+            )
+        }
+
+        fun getBitmap(selectedPhotoUri: Uri, contentResolver: ContentResolver): Bitmap {
+            val bitmap = when {
+                Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
+                    contentResolver,
+                    selectedPhotoUri
+                )
+                else -> {
+                    val source = ImageDecoder.createSource(contentResolver, selectedPhotoUri)
+                    ImageDecoder.decodeBitmap(source)
+                }
+            }
+            return bitmap
+        }
+
+
     }
+
+
+
+
+
 }
