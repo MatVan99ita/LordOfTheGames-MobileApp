@@ -34,8 +34,6 @@ import androidx.core.content.FileProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
@@ -291,49 +289,6 @@ class Utilities {
 
 
 
-        @Composable
-        fun TakePhoto(context: Context) {
-            val file = context.createImageFile()
-            val uri = FileProvider.getUriForFile(
-                context, context.packageName + ".provider", file
-            )
-
-            var capturedImageUri by remember {
-                mutableStateOf<Uri>(Uri.EMPTY)
-            }
-
-            val cameraLauncher =
-                rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) {
-                    capturedImageUri = uri
-                }
-
-            val permissionLauncher = rememberLauncherForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) {
-                if (it) {
-                    cameraLauncher.launch(uri)
-                } else {
-                    Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            val permissionCheckResult =
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.CAMERA)
-            if (permissionCheckResult == PackageManager.PERMISSION_GRANTED) {
-                cameraLauncher.launch(uri)
-            } else {
-                permissionLauncher.launch(android.Manifest.permission.CAMERA)
-            }
-
-            if (capturedImageUri.path?.isNotEmpty() == true) {
-                AsyncImage(model = ImageRequest.Builder(context)
-                    .data(capturedImageUri)
-                    .crossfade(true)
-                    .build(), contentDescription = "image taken")
-
-                saveImage(context.applicationContext.contentResolver, capturedImageUri)
-            }
-        }
 
         fun saveImage(contentResolver: ContentResolver, capturedImageUri: Uri) {
             val bitmap = getBitmap(capturedImageUri, contentResolver)
