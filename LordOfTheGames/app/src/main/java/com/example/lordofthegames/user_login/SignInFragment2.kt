@@ -31,6 +31,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities.Companion.CAMERA_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_REQUEST_CODE
@@ -60,6 +61,8 @@ class SignInFragment2: Fragment() {
 
     private lateinit var currentPhotoPath: String
 
+    private lateinit var imageView: ImageView
+
     private lateinit var photoFile: Uri
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,7 +80,7 @@ class SignInFragment2: Fragment() {
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
          val btn_img: Button = requireView().findViewById(R.id.fottinn)
-         val imgview: ImageView = requireView().findViewById(R.id.fottimi)
+         imageView = requireView().findViewById(R.id.fottimi)
          var capturedImageUri = mutableSetOf<Uri>(Uri.EMPTY)
 
         btn_img.setOnClickListener {
@@ -255,6 +258,47 @@ class SignInFragment2: Fragment() {
         private const val TAG = "CameraXExample"
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            CAMERA_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera()
+                } else {
+                    // L'utente ha negato il permesso per la fotocamera, gestisci di conseguenza
+                    // Ad esempio, mostra un messaggio all'utente
+                }
+            }
+            GALLERY_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery()
+                } else {
+                    // L'utente ha negato il permesso per la galleria, gestisci di conseguenza
+                    // Ad esempio, mostra un messaggio all'utente
+                }
+            }
+        }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                CAMERA_REQUEST_CODE -> {
+                    // L'immagine è stata catturata con successo dalla fotocamera
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
+                    imageView.setImageBitmap(imageBitmap)
+                }
+                GALLERY_REQUEST_CODE -> {
+                    // L'immagine è stata selezionata dalla galleria
+                    val selectedImageUri = data?.data
+                    // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
+                }
+            }
+        }
+    }
 
 }
