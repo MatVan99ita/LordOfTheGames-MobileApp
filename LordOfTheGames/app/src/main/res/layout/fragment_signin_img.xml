@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/signin_img_fragment"
-    tools:context=".user_login.SignInFragment"
+    tools:context=".user_login.SignInFragment2"
     android:background="@drawable/rainbow_background">
     <TextView
 

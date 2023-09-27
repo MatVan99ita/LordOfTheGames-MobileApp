@@ -52,9 +52,10 @@ import java.util.Locale
 
 class Utilities {
     companion object{
-
+        const val GALLERY_IMAGE = 1 // Costante per identificare l'azione di selezione di un'immagine dalla galleria
         const val REQUEST_IMAGE_CAPTURE = 1
-        const val GALLERY_IMAGE = 0
+        const val REQUEST_GALLERY_PERMISSION = 1
+        const val REQUEST_CAMERA_PERMISSION = 1
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
 
