@@ -8,7 +8,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,12 +21,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.example.lordofthegames.R
@@ -131,7 +128,7 @@ class SignInFragment2: Fragment() {
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
     }
 
-    fun openGallery() {
+    private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
@@ -154,23 +151,7 @@ class SignInFragment2: Fragment() {
         return image
     }
 
-    fun addUser(user: User) {
-        //repository.insertUser(user)
-    }
 
-    fun isValidPassword(password: String): Boolean {
-        // Controlla se la password ha almeno 6 caratteri e contiene almeno una lettera minuscola,
-        // una lettera maiuscola, un numero e un carattere speciale.
-        val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$")
-        return password.matches(regex)
-    }
-
-    fun isValidMail(email: String): Boolean {
-        // Controlla se la password ha almeno 6 caratteri e contiene almeno una lettera minuscola,
-        // una lettera maiuscola, un numero e un carattere speciale.
-        val emailPattern = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
-        return emailPattern.matches(email)
-    }
 
     fun signin(nickn: String, passw: String, c_passw: String, email: String) {
 
@@ -215,11 +196,13 @@ class SignInFragment2: Fragment() {
     }
 
 
-
-
-
-    fun saveImage(contentResolver: ContentResolver, capturedImageUri: Uri) {
-        val bitmap = getBitmap(capturedImageUri, contentResolver)
+    fun saveImage(
+        contentResolver: ContentResolver,
+        capturedImageBitmap: Bitmap?
+    ) {
+        /***
+         * TODO: Aggiungere il salvataggio dell'immagine ache nel db
+         */
 
         val values = ContentValues()
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
@@ -229,24 +212,8 @@ class SignInFragment2: Fragment() {
             contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
         val outputStream = imageUri?.let { contentResolver.openOutputStream(it) }
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        capturedImageBitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         outputStream?.close()
-    }
-
-
-
-    private fun getBitmap(selectedPhotoUri: Uri, contentResolver: ContentResolver): Bitmap {
-        val bitmap = when {
-            Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
-                contentResolver,
-                selectedPhotoUri
-            )
-            else -> {
-                val source = ImageDecoder.createSource(contentResolver, selectedPhotoUri)
-                ImageDecoder.decodeBitmap(source)
-            }
-        }
-        return bitmap
     }
 
     override fun onDestroy() {
@@ -294,8 +261,9 @@ class SignInFragment2: Fragment() {
                 }
                 GALLERY_REQUEST_CODE -> {
                     // L'immagine è stata selezionata dalla galleria
-                    val selectedImageUri = data?.data
+                    val selectedImageBitmap = data?.extras?.get("data") as Bitmap
                     // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
+                    imageView.setImageBitmap(selectedImageBitmap)
                 }
             }
         }
