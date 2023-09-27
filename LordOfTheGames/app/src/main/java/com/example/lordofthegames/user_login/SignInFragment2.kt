@@ -2,6 +2,7 @@ package com.example.lordofthegames.user_login
 
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Intent
@@ -21,7 +22,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,11 +31,9 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities.Companion.GALLERY_IMAGE
-import com.example.lordofthegames.Utilities.Companion.REQUEST_CAMERA_PERMISSION
-import com.example.lordofthegames.Utilities.Companion.REQUEST_GALLERY_PERMISSION
-import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
-import com.example.lordofthegames.Utilities.Companion.createImageFile
+import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
+import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
+import com.example.lordofthegames.Utilities.Companion.GALLERY_REQUEST_CODE
 import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -71,6 +71,7 @@ class SignInFragment2: Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
@@ -80,6 +81,12 @@ class SignInFragment2: Fragment() {
          var capturedImageUri = mutableSetOf<Uri>(Uri.EMPTY)
 
         btn_img.setOnClickListener {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_EXTERNAL_STORAGE),
+                1
+            )
+
             val myAlertDialog = MaterialAlertDialogBuilder(
                 requireContext()
             )
@@ -88,19 +95,12 @@ class SignInFragment2: Fragment() {
             myAlertDialog.setPositiveButton(
                 "Gallery"
             ) { _, _ ->
-                // Controlla e richiedi i permessi per accedere alla galleria
+
                 if (ContextCompat.checkSelfPermission(
                         requireContext(),
                         Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    //ActivityResultLauncher()
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        REQUEST_GALLERY_PERMISSION
-                    )
-                } else {
                     openGallery()
                 }
             }
@@ -112,14 +112,8 @@ class SignInFragment2: Fragment() {
                 if (ContextCompat.checkSelfPermission(
                         requireContext(),
                         Manifest.permission.CAMERA
-                    ) != PackageManager.PERMISSION_GRANTED
+                    ) == PackageManager.PERMISSION_GRANTED
                 ) {
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.CAMERA),
-                        REQUEST_CAMERA_PERMISSION
-                    )
-                } else {
                     openCamera()
                 }
             }
@@ -128,6 +122,17 @@ class SignInFragment2: Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
     }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, CAMERA_REQUEST_CODE)
+    }
+
+    fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+    }
+
     @Throws(IOException::class)
     private fun createImageFile(): File? {
         // Create an image file name
@@ -185,7 +190,6 @@ class SignInFragment2: Fragment() {
          *    lbl_error.requestFocus();
          *}
          */
-        parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment2()).addToBackStack(null).commit()
 
         Log.w("SIGNIN", "$nickn $email $passw")
         /**
@@ -251,40 +255,6 @@ class SignInFragment2: Fragment() {
         private const val TAG = "CameraXExample"
     }
 
-    private fun openGallery() {
-        val photo = Intent()
-        val photoPickerIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        photoPickerIntent.type = "image/*"
-        startActivityForResult(photoPickerIntent, GALLERY_IMAGE)
-        val chooserIntent = Intent.createChooser(photo, "Select Image")
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(photoPickerIntent))
-
-        startActivityForResult(chooserIntent, GALLERY_IMAGE)
-
-    }
-
-    private fun openCamera() {
-        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if (takePictureIntent.resolveActivity(requireContext().packageManager) != null) {
-            var photoFile: File? = null
-            try {
-                photoFile = createImageFile()
-            } catch (ex: IOException) {
-                Log.e("Errore nella fotocamera", ex.toString())
-            }
-            if (photoFile != null) {
-                val photoURI = FileProvider.getUriForFile(
-                    requireContext(),
-                    "com.example.android.fileprovider",
-                    photoFile
-                )
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-            } else {
-                Log.e("IMMAGGINA PUAOI", "IMMAGGINA PUAOI")
-            }
-        }
-    }
 
 
 }

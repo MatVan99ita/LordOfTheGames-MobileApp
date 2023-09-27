@@ -29,7 +29,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.Settings.SettingsActivity
-import com.example.lordofthegames.Utilities.Companion.REQUEST_IMAGE_CAPTURE
 
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
@@ -291,13 +290,13 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val bundle = data!!.extras
-            if (bundle != null) {
-                val imageBitmap = bundle["data"] as Bitmap?
-                //addViewModel!!.setImageBitmap(imageBitmap!!)
-            }
-        }
+        //if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        //    val bundle = data!!.extras
+        //    if (bundle != null) {
+        //        val imageBitmap = bundle["data"] as Bitmap?
+        //        //addViewModel!!.setImageBitmap(imageBitmap!!)
+        //    }
+        //}
 
     }
 
