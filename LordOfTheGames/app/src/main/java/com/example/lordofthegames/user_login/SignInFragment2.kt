@@ -5,10 +5,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -40,6 +42,7 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import java.util.concurrent.ExecutorService
 
 
@@ -167,7 +170,7 @@ class SignInFragment2: Fragment() {
 
 
 
-    fun signin(nickn: String, passw: String, c_passw: String, email: String) {
+    fun signin(nickn: String, passw: String, c_passw: String, email: String, img: Bitmap) {
 
         /**TODO: Riattivare questi una volta sistemata la foto
          *if(!isValidMail(email)){
@@ -251,6 +254,11 @@ class SignInFragment2: Fragment() {
                 } else {
                     // L'utente ha negato il permesso per la fotocamera, gestisci di conseguenza
                     // Ad esempio, mostra un messaggio all'utente
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    )
+                        .setTitle("Permissione Denied")
+                        .setMessage("How is possible for you to face your enemy without a face")
                 }
             }
             GALLERY_PERMISSION_REQUEST_CODE -> {
@@ -259,6 +267,11 @@ class SignInFragment2: Fragment() {
                 } else {
                     // L'utente ha negato il permesso per la galleria, gestisci di conseguenza
                     // Ad esempio, mostra un messaggio all'utente
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    )
+                        .setTitle("Permissione Denied")
+                        .setMessage("How is possible for you to face your enemy without a face")
                 }
             }
         }
@@ -281,6 +294,31 @@ class SignInFragment2: Fragment() {
                 }
             }
         }
+    }
+
+
+    private fun getBitmap(selectedPhotoUri: Uri, contentResolver: ContentResolver): Bitmap {
+        val bitmap = when {
+            Build.VERSION.SDK_INT < 28 -> MediaStore.Images.Media.getBitmap(
+                contentResolver,
+                selectedPhotoUri
+            )
+            else -> {
+                val source = ImageDecoder.createSource(contentResolver, selectedPhotoUri)
+                ImageDecoder.decodeBitmap(source)
+            }
+        }
+        return bitmap
+    }
+
+    fun Context.createImageFile(): File {
+        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFileName = "JPEG_" + timeStamp + "_"
+        return File.createTempFile(
+            imageFileName,
+            ".jpg",
+            externalCacheDir
+        )
     }
 
 }
