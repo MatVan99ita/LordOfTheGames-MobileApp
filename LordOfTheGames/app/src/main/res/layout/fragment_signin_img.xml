@@ -35,15 +35,15 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="241dp"
-            android:layout_height="189dp"
+            android:layout_width="244dp"
+            android:layout_height="292dp"
 
             android:src="@mipmap/gabibbo_blade_of_striscia_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fottimi2"
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
@@ -57,32 +57,42 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.522" />
+            app:layout_constraintVertical_bias="0.687" />
 
         <Button
             android:id="@+id/fottinn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="137dp"
+            android:layout_marginTop="52dp"
             android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.418"
+            app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fottimi"
-            app:layout_constraintVertical_bias="0.841" />
+            app:layout_constraintTop_toBottomOf="@+id/fottimi2" />
 
-        <ImageView
-            android:id="@+id/fottimi"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="34dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fottimi2"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_centerHorizontal="true"
+
+
+            android:layout_marginBottom="80dp"
+            android:elevation="12dp"
+            app:cardCornerRadius="200dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@sample/loghi lotg" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/fottimi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                
+                android:src="@mipmap/yo_listen_foreground" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

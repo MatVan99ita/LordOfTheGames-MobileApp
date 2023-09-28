@@ -19,6 +19,7 @@ import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -40,6 +41,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.IOException
+import java.lang.Math.sqrt
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -78,10 +80,51 @@ class SignInFragment2: Fragment() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        var scaleFactor = 1f
+        var previousX = 0f
+        var previousY = 0f
+
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
          val btnImg: Button = requireView().findViewById(R.id.fottinn)
          imageView = requireView().findViewById(R.id.fottimi)
+
+        imageView.setOnTouchListener { _, event ->
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    previousX = event.x
+                    previousY = event.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val deltaX = event.x - previousX
+                    val deltaY = event.y - previousY
+
+                    imageView.translationX += deltaX
+                    imageView.translationY += deltaY
+
+                    previousX = event.x
+                    previousY = event.y
+                }
+                MotionEvent.ACTION_POINTER_DOWN -> {
+                    val distance = getDistance(event)
+                    scaleFactor = distance / imageView.width
+                }
+                MotionEvent.ACTION_POINTER_UP -> {
+                    scaleFactor = 1f
+                }
+                MotionEvent.ACTION_UP -> {
+                    // Gestisci il click sull'immagine, se necessario
+                }
+            }
+
+            imageView.scaleX = scaleFactor
+            imageView.scaleY = scaleFactor
+
+            true
+        }
+
+
          btnImg.setOnClickListener {
             ActivityCompat.requestPermissions(
                 requireActivity(),
@@ -168,7 +211,11 @@ class SignInFragment2: Fragment() {
         return image
     }
 
-
+    private fun getDistance(event: MotionEvent): Float {
+        val x = event.getX(0) - event.getX(1)
+        val y = event.getY(0) - event.getY(1)
+        return kotlin.math.sqrt((x * x + y * y).toDouble()).toFloat()
+    }
 
     fun signin(nickn: String, passw: String, c_passw: String, email: String, img: Bitmap) {
 
@@ -275,6 +322,7 @@ class SignInFragment2: Fragment() {
                 }
             }
         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
