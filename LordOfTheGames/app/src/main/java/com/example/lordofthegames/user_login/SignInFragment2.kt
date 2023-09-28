@@ -141,11 +141,11 @@ class SignInFragment2: Fragment() {
 
     private fun openGallery() {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, 3)
+        startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
 
     }
 
-    
+
 
     @Throws(IOException::class)
     private fun createImageFile(): File? {
@@ -275,9 +275,9 @@ class SignInFragment2: Fragment() {
                 }
                 GALLERY_REQUEST_CODE -> {
                     // L'immagine è stata selezionata dalla galleria
-                    val selectedImageBitmap = data?.extras?.get("data") as Bitmap
+                    val selectedImageBitmap = data?.data //.extras?.get("data") as Bitmap
                     // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
-                    imageView.setImageBitmap(selectedImageBitmap)
+                    imageView.setImageURI(selectedImageBitmap)
                 }
             }
         }
