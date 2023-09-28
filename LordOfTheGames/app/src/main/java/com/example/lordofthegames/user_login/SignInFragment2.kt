@@ -5,6 +5,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -21,8 +22,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
@@ -30,11 +29,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities.Companion.CAMERA_AND_GALLERY_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_REQUEST_CODE
-import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
@@ -78,50 +77,60 @@ class SignInFragment2: Fragment() {
 
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
-         val btn_img: Button = requireView().findViewById(R.id.fottinn)
+         val btnImg: Button = requireView().findViewById(R.id.fottinn)
          imageView = requireView().findViewById(R.id.fottimi)
-         var capturedImageUri = mutableSetOf<Uri>(Uri.EMPTY)
-
-        btn_img.setOnClickListener {
+         btnImg.setOnClickListener {
             ActivityCompat.requestPermissions(
                 requireActivity(),
-                arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_EXTERNAL_STORAGE),
+                arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                ),
                 1
             )
 
-            val myAlertDialog = MaterialAlertDialogBuilder(
-                requireContext()
-            )
-            myAlertDialog.setTitle("Upload Pictures Option")
-            myAlertDialog.setMessage("How do you want to set your picture?")
-            myAlertDialog.setPositiveButton(
-                "Gallery"
-            ) { _, _ ->
 
-                if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openGallery()
-                }
-            }
 
-            myAlertDialog.setNegativeButton(
-                "Camera"
-            ) { _, _ ->
-                // Controlla e richiedi i permessi per accedere alla fotocamera
-                if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.CAMERA
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    openCamera()
-                }
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_MEDIA_IMAGES
+                ) == PackageManager.PERMISSION_GRANTED
+                &&
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                    .setTitle("Upload Pictures Option")
+                    .setMessage("How do you want to set your picture?")
+                    .setPositiveButton(
+                        "Gallery"
+                    ) { _: DialogInterface?, _: Int ->
+                        openGallery()
+                    }
+                    .setNegativeButton(
+                        "Camera"
+                    ) { _: DialogInterface?, _: Int ->
+                        openCamera()
+                    }
+                    .show()
             }
-            myAlertDialog.show()
+            else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_MEDIA_IMAGES,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                    ),
+                    1
+                )
+            }
         }
-
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -131,22 +140,12 @@ class SignInFragment2: Fragment() {
     }
 
     private fun openGallery() {
-        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-            // Callback is invoked after the user selects a media item or closes the
-            // photo picker.
-            if (uri != null) {
-                Log.d("PhotoPicker", "Selected URI: $uri")
-            } else {
-                Log.d("PhotoPicker", "No media selected")
-            }
-        }
-        //val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        //startActivityForResult(intent, GALLERY_REQUEST_CODE)
-        // Include only one of the following calls to launch(), depending on the types
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, 3)
 
-        // Launch the photo picker and let the user choose only images.
-        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
+
+    
 
     @Throws(IOException::class)
     private fun createImageFile(): File? {

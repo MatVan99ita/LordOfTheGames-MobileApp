@@ -56,6 +56,8 @@ class Utilities {
         const val GALLERY_PERMISSION_REQUEST_CODE = 102
         const val CAMERA_REQUEST_CODE = 103
         const val GALLERY_REQUEST_CODE = 104
+        const val CAMERA_AND_GALLERY_REQUEST_CODE = 123
+        const val REQUEST_WRITE_STORAGE = 106
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
 
