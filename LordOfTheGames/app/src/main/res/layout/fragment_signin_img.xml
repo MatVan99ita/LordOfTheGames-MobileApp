@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="244dp"
-            android:layout_height="292dp"
+            android:layout_width="201dp"
+            android:layout_height="253dp"
 
             android:src="@mipmap/gabibbo_blade_of_striscia_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,19 +54,31 @@
             android:src="@mipmap/gabibbonsoon_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.99"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.687" />
+            app:layout_constraintVertical_bias="0.808" />
 
         <Button
             android:id="@+id/fottinn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:text="Button"
+            android:layout_marginTop="32dp"
+            android:text="Aggiungi volto"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintHorizontal_bias="0.328"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fottimi2" />
+
+        <Button
+            android:id="@+id/fottinn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="FIGHT!"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.841"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fottimi2" />
 
@@ -77,19 +89,19 @@
             android:layout_centerHorizontal="true"
 
 
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="120dp"
             android:elevation="12dp"
             app:cardCornerRadius="200dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/fottimi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
 
                 android:src="@mipmap/yo_listen_foreground" />
         </androidx.cardview.widget.CardView>

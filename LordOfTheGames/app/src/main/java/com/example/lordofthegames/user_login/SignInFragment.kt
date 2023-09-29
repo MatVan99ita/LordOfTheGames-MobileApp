@@ -1,46 +1,23 @@
 package com.example.lordofthegames.user_login
 
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.annotation.SuppressLint
-import android.content.ContentResolver
-import android.content.ContentValues
-import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.os.SystemClock
-import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.fragment.app.add
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities.Companion.createImageFile
 import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import java.util.concurrent.ExecutorService
 
 
@@ -91,84 +68,115 @@ class SignInFragment: Fragment() {
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LogInFragment()).commit()
         }
 
-        signin_btn.setOnClickListener {
-            //Utilities.login(LoggedActivity(), "", "", "");
-            ////requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit().putString("logged", "").apply()
-            //val intent = Intent(context, MainActivity::class.java)
-            ////intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
-            //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            //this.startActivity(intent)
-
-            //this.signin(nick.text.toString(), password.text.toString(), reqpassword.text.toString(), mail.text.toString())
-            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, SignInFragment2()).commit()
-
-
-        //signin(nick.text.toString(), password.text.toString(), mail.text.toString());
-        // TODO("Aggiungere l'if sul controllo della password")
+        mail.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                // Qui puoi eseguire il tuo controllo quando il focus è perso
+                if (!isValidMail(mail.text.toString())) {
+                    // Esempio di controllo: se il campo è vuoto, mostra un messaggio di errore
+                    mail.error = "email must be like example@domain.exm"
+                }
+            }
         }
-        // TODO("Aggiungere il controllo tra password e reqpassword tramite l'onchange")
 
+        password.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                // Qui puoi eseguire il tuo controllo quando il focus è perso
+                if (!isValidMail(mail.text.toString())) {
+                    // Esempio di controllo: se il campo è vuoto, mostra un messaggio di errore
+                    mail.error = "password must be composed of almost 6 char, a lowercase and a uppercase letter, a number and a special char"
+                }
+            }
+        }
+
+        reqpassword.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                // Qui puoi eseguire il tuo controllo quando il focus è perso
+                if (!isValidMail(mail.text.toString())) {
+                    // Esempio di controllo: se il campo è vuoto, mostra un messaggio di errore
+                    mail.error = "Different confirmation password"
+                }
+            }
+        }
+
+
+        signin_btn.setOnClickListener {
+
+            if(!isValidMail(mail.text.toString())){
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                .setTitle("Error email")
+                .setMessage("email must be like example@domain.exm")
+                .setPositiveButton(
+                    "Ok"
+                ) { _: DialogInterface?, _: Int ->
+                }
+
+                .show()
+            } else if(!isValidPassword(password.text.toString())){
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                    .setTitle("Error password")
+                    .setMessage("password must be composed of almost 6 char, a lowercase and a uppercase letter, a number and a special char")
+                    .setPositiveButton(
+                        "Ok"
+                    ) { _: DialogInterface?, _: Int ->
+                    }
+
+                    .show()
+            } else if(reqpassword.text.toString() != password.text.toString()){
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                    .setTitle("Error password")
+                    .setMessage("Different confirmation password")
+                    .setPositiveButton(
+                        "Ok"
+                    ) { _: DialogInterface?, _: Int ->
+                    }
+                    .show()
+            } else {
+                val bundle = Bundle()
+                //bundle.putStringArrayList("signin_val", arrayListOf(nick.text.toString(), reqpassword.text.toString(), mail.text.toString()))
+                bundle.putString("nick", nick.text.toString())
+                bundle.putString("passw", reqpassword.text.toString())
+                bundle.putString("mail", mail.text.toString())
+
+                val fragment2: SignInFragment2 = SignInFragment2()
+                fragment2.arguments = bundle
+
+
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, fragment2).commit()
+                //signin(mail.text.toString(), reqpassword.text.toString(), nick.text.toString())
+            }
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun addUser(user: User) {
-        //repository.insertUser(user)
-    }
-
-    fun isValidPassword(password: String): Boolean {
+    private fun isValidPassword(password: String): Boolean {
         // Controlla se la password ha almeno 6 caratteri e contiene almeno una lettera minuscola,
         // una lettera maiuscola, un numero e un carattere speciale.
         val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,}$")
         return password.matches(regex)
     }
 
-    fun isValidMail(email: String): Boolean {
+    private fun isValidMail(email: String): Boolean {
         // Controlla se la password ha almeno 6 caratteri e contiene almeno una lettera minuscola,
         // una lettera maiuscola, un numero e un carattere speciale.
         val emailPattern = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
         return emailPattern.matches(email)
     }
 
-    fun signin(nickn: String, passw: String, c_passw: String, email: String) {
+    private fun signin(nickn: String, c_passw: String, email: String) {
 
- /**TODO: Riattivare questi una volta sistemata la foto
-        *if(!isValidMail(email)){
-        *    lbl_error.error = "Mail is required. Must be name@domain.net"
-        *    lbl_error.requestFocus()
-        *} else if(nickn.length < 6){
-        *    lbl_error.error = "Nickname must be 6(or more) character ";
-        *    lbl_error.requestFocus();
-        *    return;
-        *}
-        *
-        *if(!isValidPassword(passw)) {
-        *    lbl_error.error = "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
-        *    lbl_error.requestFocus();
-        *    return;
-        *} else if(c_passw != passw){
-        *    lbl_error.error = "Password must be the same";
-        *    lbl_error.requestFocus();
-        *}
-        */
+        val bundle = Bundle()
+        bundle.putStringArrayList("signin_value", arrayListOf(nickn, c_passw, email))
+
+        val fragment2 = SignInFragment2()
+        fragment2.arguments = bundle
+
         parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment2()).addToBackStack(null).commit()
-
-        Log.w("SIGNIN", "$nickn $email $passw")
-        /**
-         *
-         *     TODO: aggiungere i dati al db e il log nelle shared pref
-         *              val salt = Utilities.generateSalt()
-         *              val hashedPassword = Utilities.hashPassword(passw, salt)
-         *              val check = 10// repository.insertUser(User(email, nickn, passw))
-         *              if(check > 0){
-         *                  val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-         *                  val editor = sharedPrefs.edit()
-         *                  editor.putString("logged", "")
-         *                  editor.putString("mail", email)
-         *                  editor.putString("nick", nickn)
-         *                  editor.apply()
-         *                  //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
-         *              }
-         */
 
     }
 

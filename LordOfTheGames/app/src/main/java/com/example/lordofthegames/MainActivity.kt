@@ -32,6 +32,7 @@ import com.example.lordofthegames.Settings.SettingsActivity
 
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
+import com.example.lordofthegames.home.HomeViewModel
 import com.example.lordofthegames.home.SearchFragment
 import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.example.lordofthegames.user_login.LogInFragment
@@ -107,6 +108,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
 
     private lateinit var connectivityManager: ConnectivityManager
+    private lateinit var homeViewModel: HomeViewModel
     // private var connectSnackBar = mutableStateOf(false)
     // private var requestingData = false
     // private lateinit var networkCallback: ConnectivityManager.NetworkCallback
@@ -146,6 +148,7 @@ class MainActivity : AppCompatActivity() {
          *       intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
          *       this.startActivity(intent)
          */
+        homeViewModel = HomeViewModel(application)
 
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)

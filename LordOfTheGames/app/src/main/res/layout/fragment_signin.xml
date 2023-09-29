@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/nickname_textinput"
             android:hint="@string/nickname"
+            android:text="MatVan99it"
             android:imeOptions="flagNoExtractUi"
             android:maxLength="12"
             android:inputType="textPersonName"/>
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/mail_textinput"
             android:hint="@string/email"
+            android:text="vannicraft@gmail.com"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textEmailAddress"/>
 
@@ -70,6 +72,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/password_textinput"
             android:hint="@string/password"
+            android:text="Banana33!"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textPassword"/>
 
@@ -86,6 +89,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/confirm_password_textinput"
             android:hint="@string/confirm_password"
+            android:text="Banana33!"
             android:imeOptions="flagNoExtractUi"
             android:inputType="textPassword"/>
 

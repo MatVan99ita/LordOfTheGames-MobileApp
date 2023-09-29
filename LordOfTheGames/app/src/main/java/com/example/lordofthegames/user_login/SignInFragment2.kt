@@ -11,9 +11,11 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.graphics.PointF
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -29,9 +31,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -42,7 +41,6 @@ import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_REQUEST_CODE
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -54,13 +52,9 @@ import kotlin.math.sqrt
 
 class SignInFragment2: Fragment(){
 
-    private lateinit var nick: TextInputEditText
-    private lateinit var mail: TextInputEditText
-    private lateinit var password: TextInputEditText
-    private lateinit var reqpassword: TextInputEditText
-    private lateinit var lbl_error: TextView
-
-    private lateinit var imageCapture: ImageCapture
+    private lateinit var nick: String
+    private lateinit var mail: String
+    private lateinit var password: String
 
     private lateinit var cameraExecutor: ExecutorService
 
@@ -71,6 +65,8 @@ class SignInFragment2: Fragment(){
     private lateinit var imageView: ImageView
 
     private lateinit var photoFile: Uri
+
+    private lateinit var btnImg2: Button
 
 
     private var mScaleGestureDetector: ScaleGestureDetector? = null
@@ -97,8 +93,6 @@ class SignInFragment2: Fragment(){
         return inflater.inflate(R.layout.fragment_signin_img, container, false)
     }
 
-
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -107,14 +101,14 @@ class SignInFragment2: Fragment(){
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
         val btnImg: Button = requireView().findViewById(R.id.fottinn)
+
+        btnImg2 = requireView().findViewById(R.id.fottinn2)
         imageView = requireView().findViewById(R.id.fottimi)
 
 
         imageView.setOnTouchListener { _, event ->
             mScaleGestureDetector!!.onTouchEvent(event)
-
         }
-
 
          btnImg.setOnClickListener {
             ActivityCompat.requestPermissions(
@@ -167,7 +161,7 @@ class SignInFragment2: Fragment(){
                     1
                 )
             }
-        }
+        } // */
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -261,7 +255,7 @@ class SignInFragment2: Fragment(){
     }
 
 
-    fun signin(nickn: String, passw: String, c_passw: String, email: String, img: Bitmap) {
+    fun signin(nickn: String, passw: String, email: String, img: Bitmap) {
 
         /**TODO: Riattivare questi una volta sistemata la foto
          *if(!isValidMail(email)){
@@ -283,7 +277,8 @@ class SignInFragment2: Fragment(){
          *}
          */
 
-        Log.w("SIGNIN", "$nickn $email $passw")
+
+        Log.w("TAGGHETE", "$nick $password $mail")
         /**
          *
          *     TODO: aggiungere i dati al db e il log nelle shared pref
@@ -370,11 +365,17 @@ class SignInFragment2: Fragment(){
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //val drawable: Drawable? = ContextCompat.getDrawable(requireContext(),
+        //    this.resources.getIdentifier("yo_listen_foreground", "mipmap", ""))
+        var img: Bitmap? = null
+
         if (resultCode == Activity.RESULT_OK) {
+            btnImg2.visibility = View.VISIBLE
             when (requestCode) {
                 CAMERA_REQUEST_CODE -> {
                     // L'immagine è stata catturata con successo dalla fotocamera
                     val imageBitmap = data?.extras?.get("data") as Bitmap
+                    img = imageBitmap
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
                     imageView.setImageBitmap(imageBitmap)
                 }
@@ -382,7 +383,21 @@ class SignInFragment2: Fragment(){
                     // L'immagine è stata selezionata dalla galleria
                     val selectedImageBitmap = data?.data //.extras?.get("data") as Bitmap
                     // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
+                    img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
+
                     imageView.setImageURI(selectedImageBitmap)
+                }
+            }
+
+            btnImg2.setOnClickListener {
+                val bundle: Bundle? = arguments
+
+                // Now you have your ArrayList<String>
+                if (bundle != null && img != null) {
+                    this.nick = bundle.getString("nick", "Gabibbo")
+                    this.password = bundle.getString("passw", "Gabibbo")
+                    this.mail = bundle.getString("mail", "Gabibbo")
+                    signin(nick, password, mail, img)
                 }
             }
         }
