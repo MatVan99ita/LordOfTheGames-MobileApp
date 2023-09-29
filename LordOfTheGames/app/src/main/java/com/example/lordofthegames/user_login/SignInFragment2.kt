@@ -2,6 +2,7 @@ package com.example.lordofthegames.user_login
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.ContentValues
@@ -11,6 +12,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.graphics.Matrix
+import android.graphics.PointF
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -20,19 +23,20 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ImageCapture
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Utilities.Companion.CAMERA_AND_GALLERY_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
@@ -41,14 +45,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
 import java.io.IOException
-import java.lang.Math.sqrt
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.ExecutorService
+import kotlin.math.sqrt
 
 
-class SignInFragment2: Fragment() {
+class SignInFragment2: Fragment(){
 
     private lateinit var nick: TextInputEditText
     private lateinit var mail: TextInputEditText
@@ -67,6 +71,24 @@ class SignInFragment2: Fragment() {
     private lateinit var imageView: ImageView
 
     private lateinit var photoFile: Uri
+
+
+    private var mScaleGestureDetector: ScaleGestureDetector? = null
+
+    private var oldDist = 1f
+    private val MIN_SCALE = 0.5f
+    private val MAX_SCALE = 2f
+    private val MIN_SIZE = 100f
+    private val MAX_SIZE = 400f
+    private var mScaleFactor = 1.0f
+    private var mPosX = 0f
+    private var mPosY = 0f
+    private var mLastTouchX = 0f
+    private var mLastTouchY = 0f
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,51 +99,20 @@ class SignInFragment2: Fragment() {
 
 
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        var scaleFactor = 1f
-        var previousX = 0f
-        var previousY = 0f
+        mScaleGestureDetector = ScaleGestureDetector(requireContext(), ScaleListener())
 
         fragmentContainerView = requireActivity().findViewById(R.id.fragment_container_view)
 
-         val btnImg: Button = requireView().findViewById(R.id.fottinn)
-         imageView = requireView().findViewById(R.id.fottimi)
+        val btnImg: Button = requireView().findViewById(R.id.fottinn)
+        imageView = requireView().findViewById(R.id.fottimi)
+
 
         imageView.setOnTouchListener { _, event ->
+            mScaleGestureDetector!!.onTouchEvent(event)
 
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN -> {
-                    previousX = event.x
-                    previousY = event.y
-                }
-                MotionEvent.ACTION_MOVE -> {
-                    val deltaX = event.x - previousX
-                    val deltaY = event.y - previousY
-
-                    imageView.translationX += deltaX
-                    imageView.translationY += deltaY
-
-                    previousX = event.x
-                    previousY = event.y
-                }
-                MotionEvent.ACTION_POINTER_DOWN -> {
-                    val distance = getDistance(event)
-                    scaleFactor = distance / imageView.width
-                }
-                MotionEvent.ACTION_POINTER_UP -> {
-                    scaleFactor = 1f
-                }
-                MotionEvent.ACTION_UP -> {
-                    // Gestisci il click sull'immagine, se necessario
-                }
-            }
-
-            imageView.scaleX = scaleFactor
-            imageView.scaleY = scaleFactor
-
-            true
         }
 
 
@@ -180,6 +171,9 @@ class SignInFragment2: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
+
+
+
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
@@ -190,6 +184,61 @@ class SignInFragment2: Fragment() {
         startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE)
 
     }
+
+
+    private fun spacing(event: MotionEvent): Float {
+        val x = event.getX(0) - event.getX(1)
+        val y = event.getY(0) - event.getY(1)
+        return sqrt((x * x + y * y).toDouble()).toFloat()
+    }
+
+    private fun midPoint(point: PointF, event: MotionEvent) {
+        val x = event.getX(0) + event.getX(1)
+        val y = event.getY(0) + event.getY(1)
+        point[x / 2] = y / 2
+    }
+
+    private fun limitTranslation(m: Matrix) {
+        val values = FloatArray(9)
+        m.getValues(values)
+        val transX = values[Matrix.MTRANS_X]
+        val transY = values[Matrix.MTRANS_Y]
+        val scaleX = values[Matrix.MSCALE_X]
+        val scaleY = values[Matrix.MSCALE_Y]
+        if (transX > 0) values[Matrix.MTRANS_X] = 0f
+        if (transY > 0) values[Matrix.MTRANS_Y] = 0f
+        if (transX < -(imageView.width * (scaleX - 1))) values[Matrix.MTRANS_X] =
+            -(imageView.width * (scaleX - 1))
+        if (transY < -(imageView.height * (scaleY - 1))) values[Matrix.MTRANS_Y] =
+            -(imageView.height * (scaleY - 1))
+        m.setValues(values)
+    }
+
+    private fun limitScaling(m: Matrix) {
+        val values = FloatArray(9)
+        m.getValues(values)
+        val scaleX = values[Matrix.MSCALE_X]
+        val scaleY = values[Matrix.MSCALE_Y]
+        if (scaleX < MIN_SCALE) values[Matrix.MSCALE_X] = MIN_SCALE
+        if (scaleY < MIN_SCALE) values[Matrix.MSCALE_Y] = MIN_SCALE
+        if (scaleX > MAX_SCALE) values[Matrix.MSCALE_X] = MAX_SCALE
+        if (scaleY > MAX_SCALE) values[Matrix.MSCALE_Y] = MAX_SCALE
+        val scaledWidth: Float =
+            imageView.drawable.intrinsicWidth * values[Matrix.MSCALE_X]
+        val scaledHeight: Float =
+            imageView.drawable.intrinsicHeight * values[Matrix.MSCALE_Y]
+        if (scaledWidth < MIN_SIZE) values[Matrix.MSCALE_X] =
+            MIN_SIZE / imageView.drawable.intrinsicWidth
+        if (scaledHeight < MIN_SIZE) values[Matrix.MSCALE_Y] =
+            MIN_SIZE / imageView.drawable.intrinsicHeight
+        if (scaledWidth > MAX_SIZE) values[Matrix.MSCALE_X] =
+            MAX_SIZE / imageView.drawable.intrinsicWidth
+        if (scaledHeight > MAX_SIZE) values[Matrix.MSCALE_Y] =
+            MAX_SIZE / imageView.drawable.intrinsicHeight
+        m.setValues(values)
+    }
+
+
 
 
 
@@ -211,11 +260,6 @@ class SignInFragment2: Fragment() {
         return image
     }
 
-    private fun getDistance(event: MotionEvent): Float {
-        val x = event.getX(0) - event.getX(1)
-        val y = event.getY(0) - event.getY(1)
-        return kotlin.math.sqrt((x * x + y * y).toDouble()).toFloat()
-    }
 
     fun signin(nickn: String, passw: String, c_passw: String, email: String, img: Bitmap) {
 
@@ -368,5 +412,16 @@ class SignInFragment2: Fragment() {
             externalCacheDir
         )
     }
+
+    private inner class ScaleListener : SimpleOnScaleGestureListener() {
+        // when a scale gesture is detected, use it to resize the image
+        override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            mScaleFactor *= scaleGestureDetector.scaleFactor
+            imageView.scaleX = mScaleFactor
+            imageView.scaleY = mScaleFactor
+            return true
+        }
+    }
+
 
 }
