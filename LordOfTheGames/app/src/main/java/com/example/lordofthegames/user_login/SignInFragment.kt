@@ -14,6 +14,7 @@ import androidx.camera.core.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.add
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,6 +29,7 @@ class SignInFragment: Fragment() {
     private lateinit var password: TextInputEditText
     private lateinit var reqpassword: TextInputEditText
     private lateinit var lbl_error: TextView
+    private lateinit var loggedViewModel: LoggedViewModel
 
     private lateinit var imageCapture: ImageCapture
 
@@ -43,6 +45,8 @@ class SignInFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        loggedViewModel = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
         return inflater.inflate(R.layout.fragment_signin, container, false)
     }
 
@@ -147,8 +151,8 @@ class SignInFragment: Fragment() {
                 fragment2.arguments = bundle
 
 
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, fragment2).commit()
                 //signin(mail.text.toString(), reqpassword.text.toString(), nick.text.toString())
+                parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, fragment2).commit()
             }
         }
         super.onViewCreated(view, savedInstanceState)
@@ -169,14 +173,40 @@ class SignInFragment: Fragment() {
     }
 
     private fun signin(nickn: String, c_passw: String, email: String) {
+        if(loggedViewModel.getUsrByNick(nickn).value != null){
+            if(loggedViewModel.getUsrByMailPass(email, c_passw).value != null){
+                val bundle = Bundle()
+                bundle.putStringArrayList("signin_value", arrayListOf(nickn, c_passw, email))
 
-        val bundle = Bundle()
-        bundle.putStringArrayList("signin_value", arrayListOf(nickn, c_passw, email))
+                val fragment2 = SignInFragment2()
+                fragment2.arguments = bundle
 
-        val fragment2 = SignInFragment2()
-        fragment2.arguments = bundle
+                parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment2()).addToBackStack(null).commit()
 
-        parentFragmentManager.beginTransaction().replace(R.id.signin_fragment, SignInFragment2()).addToBackStack(null).commit()
+            } else {
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                    .setTitle("User already exists")
+                    .setMessage("Please retry login")
+                    .setPositiveButton(
+                        "Ok"
+                    ){ _: DialogInterface?, _: Int ->
+                    }
+                    .show()
+            }
+        } else {
+            MaterialAlertDialogBuilder(
+                requireContext()
+            )
+                .setTitle("Nickname already exists")
+                .setPositiveButton(
+                    "Ok"
+                ){ _: DialogInterface?, _: Int ->
+                }
+                .show()
+        }
+
 
     }
 

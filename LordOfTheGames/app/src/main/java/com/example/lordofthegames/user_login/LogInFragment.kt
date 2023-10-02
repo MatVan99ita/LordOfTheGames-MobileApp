@@ -63,7 +63,7 @@ class LogInFragment: Fragment() {
     private fun login(passw: String, email: String) {
 
         if(passw != "" && email != ""){
-            loggedViewModel.getUsr(email, passw).observe(viewLifecycleOwner) {users ->
+            loggedViewModel.getUsrByMailPass(email, passw).observe(viewLifecycleOwner) {users ->
                 users?.forEach{ user ->
                     if (user != null) {
                         requireActivity()

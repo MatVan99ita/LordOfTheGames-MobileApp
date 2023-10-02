@@ -5,8 +5,8 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
@@ -17,20 +17,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -42,7 +33,10 @@ import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedInFragment
 import com.google.android.material.navigation.NavigationView
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
+import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.text.SimpleDateFormat
@@ -332,7 +326,51 @@ class Utilities {
             return bitmap
         }
 
+        /**
+         * Converts bitmap to byte array in PNG format
+         * @param bitmap source bitmap
+         * @return result byte array
+         */
+        fun convertBitmapToByteArray(bitmap: Bitmap): ByteArray? {
+            var baos: ByteArrayOutputStream? = null
+            return try {
+                baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                baos.toByteArray()
+            } finally {
+                if (baos != null) {
+                    try {
+                        baos.close()
+                    } catch (e: IOException) {
+                        Log.e(
+                            "BitmapUtils",
+                            "ByteArrayOutputStream was not closed"
+                        )
+                    }
+                }
+            }
+        }
 
+        /**
+         * Converts bitmap to the byte array without compression
+         * @param bitmap source bitmap
+         * @return result byte array
+         */
+        fun convertBitmapToByteArrayUncompressed(bitmap: Bitmap): ByteArray? {
+            val byteBuffer = ByteBuffer.allocate(bitmap.byteCount)
+            bitmap.copyPixelsToBuffer(byteBuffer)
+            byteBuffer.rewind()
+            return byteBuffer.array()
+        }
+
+        /**
+         * Converts compressed byte array to bitmap
+         * @param src source array
+         * @return result bitmap
+         */
+        fun convertCompressedByteArrayToBitmap(src: ByteArray): Bitmap? {
+            return BitmapFactory.decodeByteArray(src, 0, src.size)
+        }
     }
 
 

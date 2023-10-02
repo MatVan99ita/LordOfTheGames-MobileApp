@@ -9,6 +9,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -35,11 +36,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.Utilities.Companion.CAMERA_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.CAMERA_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_PERMISSION_REQUEST_CODE
 import com.example.lordofthegames.Utilities.Companion.GALLERY_REQUEST_CODE
+import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 import java.io.IOException
@@ -83,6 +88,9 @@ class SignInFragment2: Fragment(){
     private var mLastTouchY = 0f
 
 
+    private lateinit var loggedViewModel: LoggedViewModel
+
+
 
 
     override fun onCreateView(
@@ -90,6 +98,7 @@ class SignInFragment2: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        loggedViewModel = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
         return inflater.inflate(R.layout.fragment_signin_img, container, false)
     }
 
@@ -257,28 +266,13 @@ class SignInFragment2: Fragment(){
 
     fun signin(nickn: String, passw: String, email: String, img: Bitmap) {
 
-        /**TODO: Riattivare questi una volta sistemata la foto
-         *if(!isValidMail(email)){
-         *    lbl_error.error = "Mail is required. Must be name@domain.net"
-         *    lbl_error.requestFocus()
-         *} else if(nickn.length < 6){
-         *    lbl_error.error = "Nickname must be 6(or more) character ";
-         *    lbl_error.requestFocus();
-         *    return;
-         *}
-         *
-         *if(!isValidPassword(passw)) {
-         *    lbl_error.error = "Password is required. Must be 6 character. Must have a special character, a number and a Uppercase chapter(Ex.:Banana33!)";
-         *    lbl_error.requestFocus();
-         *    return;
-         *} else if(c_passw != passw){
-         *    lbl_error.error = "Password must be the same";
-         *    lbl_error.requestFocus();
-         *}
-         */
-
-
-        Log.w("TAGGHETE", "$nick $password $mail")
+        val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val res = loggedViewModel.insertNewUsr(User(mail, nick, passw, Utilities.convertBitmapToByteArray(img)))
+        if(res > 0){
+            sp.edit().putString("logged", "logged").putString("nickname", nickn).putString("email", mail).apply()
+            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LoggedInFragment()).addToBackStack(null).commit()
+        }
+        // Log.w("TAGGHETE", "$nick $password $mail")
         /**
          *
          *     TODO: aggiungere i dati al db e il log nelle shared pref
@@ -295,6 +289,8 @@ class SignInFragment2: Fragment(){
          *                  //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
          *              }
          */
+
+
 
     }
 

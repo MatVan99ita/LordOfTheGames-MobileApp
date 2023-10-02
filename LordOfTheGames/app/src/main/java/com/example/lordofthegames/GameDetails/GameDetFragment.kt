@@ -8,20 +8,36 @@ import android.view.*
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Achievement
+import com.example.lordofthegames.db_entities.Categories
+import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.user_login.LoggedViewModel
 
 
 class GameDetFragment: Fragment() {
     private lateinit var imagePath: String
     private var bundle: Bundle? = null
+    private lateinit var gameDetViewModel: GameDetViewModel
+    private lateinit var achievementList: List<Achievement?>
+    private lateinit var categoryList: List<Categories?>
+    private lateinit var platformList: List<Platform?>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
+        val game_title = requireActivity().intent.getStringExtra("game_title").toString()
+        achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
+        categoryList = gameDetViewModel.getGameCategory(game_title).value!!
+        platformList = gameDetViewModel.getGamePlatform(game_title).value!!
 
         bundle = savedInstanceState
+
         Log.e("onCreateView", savedInstanceState.toString())
         return inflater.inflate(R.layout.fragment_game_details, container, false)
     }
