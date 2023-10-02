@@ -28,4 +28,6 @@ class GameDetViewModel(application: Application): AbstractViewModel(application)
         return repository.getGameCategory(game_title)
     }
 
+
+
 }

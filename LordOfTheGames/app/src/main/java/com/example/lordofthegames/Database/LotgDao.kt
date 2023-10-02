@@ -1,5 +1,6 @@
 package com.example.lordofthegames.Database
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -103,9 +104,20 @@ interface LotgDao {
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
 
+    @Query("SELECT game_title, game_cover, game_status FROM game ORDER BY game_title DESC")
+    fun getAllGameSimpleDet(): LiveData<List<Game?>?>
 
 
-
+    @Query("SELECT (\n" +
+        "SELECT COUNT(*)\n" +
+        "FROM achievement INNER JOIN game\n" +
+        "ON achievement.game_ref = game.game_id\n" +
+        "WHERE game.game_title = :game_title) As total_count,\n" +
+        "(SELECT COUNT(*)\n" +
+        "FROM achievement INNER JOIN game\n" +
+        "ON achievement.game_ref = game.game_id\n" +
+        "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count)")
+    fun getAchievementCount(game_title: String): LiveData<List<Cursor?>?>
 
 
 

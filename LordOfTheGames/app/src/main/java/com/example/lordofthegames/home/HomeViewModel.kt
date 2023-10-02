@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lordofthegames.Database.LotgRepo
+import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 
 
@@ -19,5 +21,15 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     fun getCurrentUser(user_name: String, passw: String): LiveData<List<User?>?> {
         return repository.getCurrentUser(user_name, passw)
     }
+
+    fun getAllGameSimpleDet(): LiveData<List<Game?>?>{
+        return repository.getAllGameSimpleDet()
+    }
+
+    fun getGamePlatform(game_title: String): LiveData<List<Platform?>?>{
+        return repository.getGamePlatform(game_title)
+    }
+
+
 
 }

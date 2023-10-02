@@ -1,6 +1,7 @@
 package com.example.lordofthegames.Database
 
 import android.app.Application
+import android.database.Cursor
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.db_entities.Achievement
@@ -50,5 +51,14 @@ class LotgRepo(application: Application) {
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>{
         return lotgDao.getGameCategory(game_title)
     }
+
+    fun getAllGameSimpleDet(): LiveData<List<Game?>?>{
+        return lotgDao.getAllGameSimpleDet()
+    }
+
+    fun getAchievementCount(game_title: String): LiveData<List<Cursor?>?>{
+        return lotgDao.getAchievementCount(game_title)
+    }
+
 
 }
