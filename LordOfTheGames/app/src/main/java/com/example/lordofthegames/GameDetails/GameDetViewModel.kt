@@ -28,6 +28,10 @@ class GameDetViewModel(application: Application): AbstractViewModel(application)
         return repository.getGameCategory(game_title)
     }
 
+    fun gameExists(game_title: String): LiveData<Boolean?>{
+        return repository.gameExists(game_title)
+    }
+
 
 
 }

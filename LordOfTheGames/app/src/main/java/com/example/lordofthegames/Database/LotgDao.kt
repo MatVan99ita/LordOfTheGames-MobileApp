@@ -104,7 +104,7 @@ interface LotgDao {
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
 
-    @Query("SELECT game_title, game_cover, game_status FROM game ORDER BY game_title DESC")
+    @Query("SELECT * FROM game ORDER BY game_title DESC")
     fun getAllGameSimpleDet(): LiveData<List<Game?>?>
 
 
@@ -116,8 +116,11 @@ interface LotgDao {
         "(SELECT COUNT(*)\n" +
         "FROM achievement INNER JOIN game\n" +
         "ON achievement.game_ref = game.game_id\n" +
-        "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count)")
-    fun getAchievementCount(game_title: String): LiveData<List<Cursor?>?>
+        "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
+    fun getAchievementCount(game_title: String): Cursor
+
+    @Query("SELECT COUNT(*) > 0 FROM game WHERE game_title = :game_title")
+    fun gameExists(game_title: String): LiveData<Boolean?>
 
 
 

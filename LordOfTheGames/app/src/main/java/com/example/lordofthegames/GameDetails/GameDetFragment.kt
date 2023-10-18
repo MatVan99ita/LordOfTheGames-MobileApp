@@ -9,20 +9,29 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.recyclerView.CardAdapter
+import com.example.lordofthegames.recyclerView.CategoryCardAdapter
+import com.example.lordofthegames.recyclerView.CategoryCardItem
+import com.example.lordofthegames.recyclerView.GameCardItem
+import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.user_login.LoggedViewModel
 
 
-class GameDetFragment: Fragment() {
+class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var imagePath: String
     private var bundle: Bundle? = null
     private lateinit var gameDetViewModel: GameDetViewModel
     private lateinit var achievementList: List<Achievement?>
     private lateinit var categoryList: List<Categories?>
     private lateinit var platformList: List<Platform?>
+    private var adapter: CategoryCardAdapter? = null
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,9 +41,20 @@ class GameDetFragment: Fragment() {
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         val game_title = requireActivity().intent.getStringExtra("game_title").toString()
-        achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
-        categoryList = gameDetViewModel.getGameCategory(game_title).value!!
-        platformList = gameDetViewModel.getGamePlatform(game_title).value!!
+        val gmEx = gameDetViewModel.gameExists(game_title).value
+
+        if (gmEx != null){
+            if(!gmEx) {
+                achievementList = listOf(Achievement(1, "b", "c", game_ref = 1))
+                categoryList = listOf(Categories(1, "b"), Categories(1, "b"), Categories(1, "b"), Categories(1, "b"))
+                platformList = listOf(Platform(1, "b"))
+            } else {
+                achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
+                categoryList = gameDetViewModel.getGameCategory(game_title).value!!
+                platformList = gameDetViewModel.getGamePlatform(game_title).value!!
+            }
+
+        }
 
         bundle = savedInstanceState
 
@@ -45,6 +65,7 @@ class GameDetFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,8 +90,22 @@ class GameDetFragment: Fragment() {
             }
 
             selectedImage.setImageDrawable(drawable)
+            setRecyclerView(requireActivity())
 
         }
+    }
+
+    private fun setRecyclerView(activity: Activity) {
+        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
+        val listener: OnItemListener = this
+        recyclerView = activity.findViewById(R.id.recycler_view_game_det)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = CategoryCardAdapter(listener, catItems, activity)
+    }
+
+    override fun onItemClick(position: Int) {
+        TODO("Not yet implemented")
     }
 
 }

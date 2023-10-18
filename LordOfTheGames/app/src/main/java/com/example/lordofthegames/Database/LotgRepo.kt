@@ -56,8 +56,12 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllGameSimpleDet()
     }
 
-    fun getAchievementCount(game_title: String): LiveData<List<Cursor?>?>{
+    fun getAchievementCount(game_title: String): Cursor{
         return lotgDao.getAchievementCount(game_title)
+    }
+
+    fun gameExists(game_title: String): LiveData<Boolean?>{
+        return lotgDao.gameExists(game_title)
     }
 
 
