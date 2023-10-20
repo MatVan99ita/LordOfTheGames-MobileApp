@@ -101,7 +101,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         recyclerView = activity.findViewById(R.id.recycler_view_game_det)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = CategoryCardAdapter(listener, catItems, activity)
+        recyclerView.adapter = CategoryCardAdapter(catItems)
     }
 
     override fun onItemClick(position: Int) {
