@@ -98,6 +98,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private fun setRecyclerView(activity: Activity) {
         val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
         val listener: OnItemListener = this
+        //Non va quindi skippa male, si farà una lista di merda senza click
+        
         recyclerView = activity.findViewById(R.id.recycler_view_game_det)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
