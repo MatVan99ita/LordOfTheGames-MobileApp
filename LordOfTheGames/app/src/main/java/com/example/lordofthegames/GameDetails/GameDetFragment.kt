@@ -99,11 +99,14 @@ class GameDetFragment: Fragment(), OnItemListener  {
         val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
         val listener: OnItemListener = this
         //Non va quindi skippa male, si farà una lista di merda senza click
-        
+
         recyclerView = activity.findViewById(R.id.recycler_view_game_det)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = CategoryCardAdapter(catItems)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        linearLayoutManager.stackFromEnd = true
+        recyclerView.layoutManager = linearLayoutManager
+        val adapter = CategoryCardAdapter(catItems)
+        recyclerView.adapter = adapter
     }
 
     override fun onItemClick(position: Int) {
