@@ -14,14 +14,15 @@ class CategoryCardAdapter(cardItemList: List<CategoryCardItem>): RecyclerView.Ad
 
     private var cardItemList2: List<CategoryCardItem> = ArrayList()
 
-
+    init {
+        cardItemList2 = cardItemList
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryCardViewHolder {
-        return CategoryCardViewHolder(
-            LayoutInflater.from(parent.context).
-                inflate(R.layout.category_element, parent, false)
-        )
+        val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.category_element, parent, false)
+        return CategoryCardViewHolder(layoutView)
     }
+
 
     override fun onBindViewHolder(holder: CategoryCardViewHolder, position: Int) {
         val currentCardItem: CategoryCardItem = this.cardItemList2[position]
