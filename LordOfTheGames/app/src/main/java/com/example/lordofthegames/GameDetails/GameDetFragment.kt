@@ -79,6 +79,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             imagePath = arguments?.getString("game_cover").toString()
 
+            setRecyclerView(activity)
             var drawable: Drawable? = null
 
             if (imagePath.contains("ic_")){
@@ -90,7 +91,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
             }
 
             selectedImage.setImageDrawable(drawable)
-            setRecyclerView(requireActivity())
 
         }
     }

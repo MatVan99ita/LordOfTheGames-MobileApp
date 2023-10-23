@@ -5,30 +5,22 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/category_item"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="2dp"
+    android:layout_margin="2dp"
     app:cardBackgroundColor="@color/verde3"
-    app:cardElevation="20dp"
-    app:cardMaxElevation="10dp">
-
-    <LinearLayout
-        android:id="@+id/linearItemLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+    app:cardElevation="20dp">
 
         <TextView
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="@color/verde3"
+            app:cardElevation="20dp"
             android:id="@+id/cat_name_itm"
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.6"
             android:text="@string/belandih"
             android:textAlignment="center"
-            android:textColor="@mipmap/yo_listen_foreground"
+            android:textColor="@color/black"
             tools:text="@string/belandih" />
 
-    </LinearLayout>
 </androidx.cardview.widget.CardView>
