@@ -72,6 +72,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
         super.onViewCreated(view, savedInstanceState)
         val activity: Activity? = activity
         if (activity != null) {
+
+            setRecyclerView(activity)
+
             //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )
 
             //Utilities.setUpDrawer(activity.findViewById(R.id.game_det_drawer), activity, activity.supportActionBar)
@@ -79,7 +82,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             imagePath = arguments?.getString("game_cover").toString()
 
-            setRecyclerView(activity)
             var drawable: Drawable? = null
 
             if (imagePath.contains("ic_")){
@@ -92,22 +94,26 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             selectedImage.setImageDrawable(drawable)
 
+
+
         }
     }
 
     private fun setRecyclerView(activity: Activity) {
+        recyclerView = activity.findViewById(R.id.recycler_view_game_det)
         val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
         val listener: OnItemListener = this
+        this.adapter = CategoryCardAdapter(listener, catItems, activity)
+        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         //Non va quindi skippa male, si farà una lista di merda senza click
 
-        recyclerView = activity.findViewById(R.id.recycler_view_game_det)
         recyclerView.setHasFixedSize(true)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         linearLayoutManager.stackFromEnd = true
         recyclerView.layoutManager = linearLayoutManager
-        val adapter = CategoryCardAdapter(catItems)
         recyclerView.adapter = adapter
     }
+
+
 
     override fun onItemClick(position: Int) {
         TODO("Not yet implemented")

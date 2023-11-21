@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.lordofthegames.R
 
-class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, private var catItems: List<CategoryCardItem>, private var platItems: List<PlatformCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item2, parent, false)
@@ -34,10 +36,43 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
 
         holder.gameTitle.text = currentCardItem.gameTitle
 
+
+        val catList: MutableList<TextView> = mutableListOf()
+        val platList: MutableList<TextView> = mutableListOf()
+
+        val listCat = holder.itemView.findViewById<LinearLayout>(R.id.category_linear_home)
+        listCat.removeAllViews()
+        val listPlat = holder.itemView.findViewById<LinearLayout>(R.id.platform_linear_home)
+        listPlat.removeAllViews()
+
+        catItems.forEach { x ->
+            val t = TextView(holder.itemView.context)
+            t.text = x.category_name
+            catList.add(t)
+        }
+
+        platItems.forEach { x ->
+            val t = TextView(holder.itemView.context)
+            t.text = x.platFormName
+            platList.add(t)
+        }
+
+        catList.forEach { el ->
+            listCat.addView(el)
+        }
+
+        platList.forEach { el ->
+            listPlat.addView(el)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return cardItemList.size
+    }
+
+    fun update(list: List<TextView>){
+
     }
 
 }

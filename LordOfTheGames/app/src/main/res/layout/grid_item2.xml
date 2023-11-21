@@ -51,34 +51,49 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- TODO: ############## LORO 2 DEVONO DIVENTARE 2 ULTERIORI RECYCLER CON DENTRO SOLO DEI TEXTVIEW ###################-->
-            <TextView
-                android:id="@+id/game_category"
+            <LinearLayout
+                android:id="@+id/category_linear_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:padding="4dp"
-                android:text="GDR"
-                android:textColor="@color/black"
-                app:layout_constraintLeft_toRightOf="@id/game_img"
-                app:layout_constraintTop_toBottomOf="@+id/game_title2"
                 android:backgroundTint="@color/green_light_variant"
-                android:background="@color/green_light_variant"/>
+                android:background="@color/green_light_variant"
+                app:layout_constraintLeft_toRightOf="@id/game_img"
+                app:layout_constraintTop_toBottomOf="@+id/game_title2">
+                <TextView
+                    android:id="@+id/game_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="GDR"
+                    android:backgroundTint="@color/green_light_variant"
+                    android:background="@color/green_light_variant"/>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/game_playable"
+            <LinearLayout
+                android:id="@+id/platform_linear_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:layout_marginStart="20dp"
                 android:padding="4dp"
-                android:text="PS5"
-                android:textColor="@color/black"
                 app:layout_constraintLeft_toRightOf="@id/game_img"
-                app:layout_constraintTop_toBottomOf="@+id/game_category"
+                app:layout_constraintTop_toBottomOf="@+id/category_linear_home"
                 android:backgroundTint="@color/green_light_variant"
-                android:background="@color/green_light_variant" />
+                android:background="@color/green_light_variant" >
+                <TextView
+                    android:id="@+id/game_playable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="PS5"
+                    />
+            </LinearLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button"
@@ -101,7 +116,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/button"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/game_playable" />
+                app:layout_constraintStart_toEndOf="@+id/platform_linear_home" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

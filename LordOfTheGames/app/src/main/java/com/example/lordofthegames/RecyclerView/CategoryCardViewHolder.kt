@@ -6,18 +6,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 
-class CategoryCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CategoryCardViewHolder(itemView: View, lister: OnItemListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener  {
 
     val catTitle: TextView
-    //private val onItemListener: OnItemListener
+    private val onItemListener: OnItemListener
 
     init {
         catTitle = itemView.findViewById(R.id.cat_name_itm)
-        //onItemListener = lister
+        onItemListener = lister
         //itemView.setOnClickListener(this)
     }
 
-    //override fun onClick(v: View?) {
-    //    onItemListener.onItemClick(adapterPosition)
-    //}
+    override fun onClick(v: View?) {
+        onItemListener.onItemClick(adapterPosition)
+    }
 }
