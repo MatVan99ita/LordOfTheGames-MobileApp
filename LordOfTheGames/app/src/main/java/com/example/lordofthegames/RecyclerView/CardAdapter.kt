@@ -57,23 +57,29 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         lp.setMargins(0, 0, 5, 0)
-
+        var conta = 0
         catItems.forEach { x ->
-            val t = TextView(holder.itemView.context)
-            t.text = x.category_name
-            t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
-            t.layoutParams = lp
-            t.setPadding(5, 5, 5, 5)
-            catList.add(t)
+            if(conta < 3){
+                val t = TextView(holder.itemView.context)
+                t.text = x.category_name
+                t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
+                t.layoutParams = lp
+                t.setPadding(5, 5, 5, 5)
+                catList.add(t)
+                conta++
+            }
         }
-
+        conta = 0
         platItems.forEach { x ->
-            val t = TextView(holder.itemView.context)
-            t.text = x.platFormName
-            t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
-            t.layoutParams = lp
-            t.setPadding(5, 5, 5, 5)
-            platList.add(t)
+            if(conta < 3){
+                val t = TextView(holder.itemView.context)
+                t.text = x.platFormName
+                t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
+                t.layoutParams = lp
+                t.setPadding(5, 5, 5, 5)
+                platList.add(t)
+                conta++
+            }
         }
 
         catList.forEach { el ->

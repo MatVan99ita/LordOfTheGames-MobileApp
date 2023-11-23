@@ -110,8 +110,8 @@ class HomeFragment: Fragment(), OnItemListener {
     }
 
     private fun setRecyclerView(act: Activity) {
-        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
-        val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS5"), PlatformCardItem("XBOX"), PlatformCardItem("STEAM") ) as MutableList<PlatformCardItem>
+        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
+        val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS5"), PlatformCardItem("XBOX"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM") ) as MutableList<PlatformCardItem>
 
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this

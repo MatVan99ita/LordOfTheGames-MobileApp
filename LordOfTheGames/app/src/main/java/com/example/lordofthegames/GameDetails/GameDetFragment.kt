@@ -101,7 +101,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private fun setRecyclerView(activity: Activity) {
         recyclerView = activity.findViewById(R.id.recycler_view_game_det)
-        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG") ) as MutableList<CategoryCardItem>
+        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
         val listener: OnItemListener = this
         this.adapter = CategoryCardAdapter(listener, catItems, activity)
         val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
