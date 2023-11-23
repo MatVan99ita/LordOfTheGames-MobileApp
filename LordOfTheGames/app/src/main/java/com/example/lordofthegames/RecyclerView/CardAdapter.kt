@@ -1,15 +1,21 @@
 package com.example.lordofthegames.recyclerView
 
+import android.R.attr.bottom
+import android.R.attr.left
+import android.R.attr.right
+import android.R.attr.top
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginEnd
+import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+
 
 class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, private var catItems: List<CategoryCardItem>, private var platItems: List<PlatformCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
 
@@ -45,15 +51,28 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
         val listPlat = holder.itemView.findViewById<LinearLayout>(R.id.platform_linear_home)
         listPlat.removeAllViews()
 
+
+        val lp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.setMargins(0, 0, 5, 0)
+
         catItems.forEach { x ->
             val t = TextView(holder.itemView.context)
             t.text = x.category_name
+            t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
+            t.layoutParams = lp
+            t.setPadding(5, 5, 5, 5)
             catList.add(t)
         }
 
         platItems.forEach { x ->
             val t = TextView(holder.itemView.context)
             t.text = x.platFormName
+            t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
+            t.layoutParams = lp
+            t.setPadding(5, 5, 5, 5)
             platList.add(t)
         }
 
