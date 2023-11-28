@@ -1,4 +1,4 @@
 package com.example.lordofthegames.recyclerView
 
-class PlatformCardAdapter {
+class PlatformCardAdapter(listener: OnItemListener, ) {
 }

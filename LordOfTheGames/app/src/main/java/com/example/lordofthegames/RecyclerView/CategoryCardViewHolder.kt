@@ -14,7 +14,7 @@ class CategoryCardViewHolder(itemView: View, lister: OnItemListener) : RecyclerV
     init {
         catTitle = itemView.findViewById(R.id.cat_name_itm)
         onItemListener = lister
-        //itemView.setOnClickListener(this)
+        itemView.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {

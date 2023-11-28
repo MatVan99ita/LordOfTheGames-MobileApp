@@ -1,6 +1,8 @@
 package com.example.lordofthegames.GameDetails
 
+import android.R.attr
 import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -15,15 +17,18 @@ import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Platform
-import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
-import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
-import com.example.lordofthegames.user_login.LoggedViewModel
+import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
+    // Imposta MY_REQUEST_CODE a un valore univoco
+    private val MY_REQUEST_CODE = 12345
+
+    // Imposta RESULT_OK a un valore diverso da RESULT_CANCELED
+    private val RESULT_OK = 1
     private lateinit var imagePath: String
     private var bundle: Bundle? = null
     private lateinit var gameDetViewModel: GameDetViewModel
@@ -34,12 +39,15 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var recyclerViewPlatform: RecyclerView
     private lateinit var recyclerViewAchievement: RecyclerView
+    private val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
+    private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4"), PlatformCardItem("STEAM"), PlatformCardItem("EPIC"), PlatformCardItem("XBOX ONE"), PlatformCardItem("Game Pass")) as MutableList<PlatformCardItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val view = inflater.inflate(R.layout.fragment_game_details, container, false)
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         val game_title = requireActivity().intent.getStringExtra("game_title").toString()
@@ -59,9 +67,12 @@ class GameDetFragment: Fragment(), OnItemListener  {
         }
 
         bundle = savedInstanceState
-
+        recyclerViewCategory    = view.findViewById(R.id.recycler_view_game_details_category)
+        recyclerViewPlatform    = view.findViewById(R.id.recycler_view_game_details_platform)
+        recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_platform)
+        adapter = CategoryCardAdapter(this, catItems)
         Log.e("onCreateView", savedInstanceState.toString())
-        return inflater.inflate(R.layout.fragment_game_details, container, false)
+        return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,16 +81,29 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     }
 
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val activity: Activity? = activity
         if (activity != null) {
+            val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-            setRecyclerView(activity)
+            recyclerViewCategory.layoutManager = linearLayoutManagerCategory
+            recyclerViewPlatform.layoutManager = linearLayoutManagerPlatform
+
+            recyclerViewCategory.setHasFixedSize(true)
+            recyclerViewPlatform.setHasFixedSize(true)
+
+            recyclerViewCategory.adapter = adapter
+            recyclerViewPlatform.adapter = adapter
+
 
             //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )
 
             //Utilities.setUpDrawer(activity.findViewById(R.id.game_det_drawer), activity, activity.supportActionBar)
+
             val selectedImage: ImageView = view.findViewById(R.id.selectedImage)
 
             imagePath = arguments?.getString("game_cover").toString()
@@ -87,38 +111,25 @@ class GameDetFragment: Fragment(), OnItemListener  {
             var drawable: Drawable? = null
 
             if (imagePath.contains("ic_")){
-                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
+                drawable = ContextCompat.getDrawable(requireActivity(), requireActivity().resources.getIdentifier(imagePath, "drawable", requireContext().packageName))
             } else if(imagePath.contains("gabibbo")) {
-                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
+                drawable = ContextCompat.getDrawable(requireActivity(), requireActivity().resources.getIdentifier("ic_gabibbo_test", "mipmap", requireContext().packageName))
             } else if(imagePath.contains("yee")){
-                drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
+                drawable = ContextCompat.getDrawable(requireActivity(), requireActivity().resources.getIdentifier("ic_yeee_foreground", "mipmap", requireContext().packageName))
             }
 
             selectedImage.setImageDrawable(drawable)
 
-
-
         }
     }
 
-    private fun setRecyclerView(activity: Activity) {
-        recyclerViewCategory = activity.findViewById(R.id.recycler_view_game_det)
-        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
-        val listener: OnItemListener = this
-        this.adapter = CategoryCardAdapter(listener, catItems, activity)
-        val linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        //Non va quindi skippa male, si farà una lista di merda senza click
 
-        recyclerViewCategory.setHasFixedSize(true)
-        linearLayoutManager.stackFromEnd = true
-        recyclerViewCategory.layoutManager = linearLayoutManager
-        recyclerViewCategory.adapter = adapter
-    }
+
 
 
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
+        Log.w("Belandi", "Belandi")
     }
 
 }
