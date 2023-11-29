@@ -15,6 +15,8 @@ import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.recyclerView.AchievementCardAdapter
+import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
@@ -37,6 +39,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private var categoryCardAdapter: CategoryCardAdapter? = null
     private var platformCardAdapter: PlatformCardAdapter? = null
+    private var achievementCardAdapter: AchievementCardAdapter? = null
 
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var recyclerViewPlatform: RecyclerView
@@ -44,7 +47,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
     private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
-
+    private val achieveItems: MutableList<AchievementCardItem> = listOf(AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), ) as MutableList<AchievementCardItem>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,10 +77,11 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         recyclerViewCategory    = view.findViewById(R.id.recycler_view_game_details_category)
         recyclerViewPlatform    = view.findViewById(R.id.recycler_view_game_details_platform)
-        //recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_achievement)
+        recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_achievement)
 
         categoryCardAdapter = CategoryCardAdapter(this, catItems)
         platformCardAdapter = PlatformCardAdapter(this, platItems)
+        achievementCardAdapter = AchievementCardAdapter(this, achieveItems, requireActivity())
         Log.e("onCreateView", savedInstanceState.toString())
         return view
     }
@@ -96,15 +100,19 @@ class GameDetFragment: Fragment(), OnItemListener  {
         if (activity != null) {
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val linearLayoutManagerAchievement = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
             recyclerViewCategory.layoutManager = linearLayoutManagerCategory
             recyclerViewPlatform.layoutManager = linearLayoutManagerPlatform
+            recyclerViewAchievement.layoutManager = linearLayoutManagerAchievement
 
             recyclerViewCategory.setHasFixedSize(true)
             recyclerViewPlatform.setHasFixedSize(true)
+            recyclerViewAchievement.setHasFixedSize(true)
 
             recyclerViewCategory.adapter = categoryCardAdapter
             recyclerViewPlatform.adapter = platformCardAdapter
+            recyclerViewAchievement.adapter = achievementCardAdapter
 
 
             //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )

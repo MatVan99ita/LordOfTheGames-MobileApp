@@ -9,7 +9,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,6 +82,7 @@
                 android:id="@+id/platform_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintTop_toBottomOf="@id/recycler_view_game_details_category"
                 android:text="@string/belandih" />
             <androidx.recyclerview.widget.RecyclerView
@@ -98,22 +99,30 @@
             <TextView
                 android:id="@+id/game_description"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:text="@string/long_text"
 
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_game_details_platform"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.918"
                 app:layout_constraintStart_toEndOf="@id/selectedImage"
                 app:layout_constraintVertical_bias="1.0" />
 
+            <TextView
+                android:id="@+id/label_achievement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/game_description"
+                android:text="@string/belandih" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_game_details_achievement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="?attr/actionBarSize"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/game_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_achievement"
                 tools:listitem="@layout/achievement_list_item" />
 
 

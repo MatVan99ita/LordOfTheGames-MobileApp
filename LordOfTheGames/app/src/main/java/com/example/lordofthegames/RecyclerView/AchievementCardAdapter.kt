@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 
-class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
+class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<AchievementCardItem>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementCardHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.achievement_list_item, parent, false)
         return AchievementCardHolder(layoutView, listener)
@@ -16,14 +16,13 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
 
     override fun onBindViewHolder(holder: AchievementCardHolder, position: Int) {
 
-        val currentCardItem: GameCardItem = this.cardItemList[position]
-        val imagePath: String = currentCardItem.imageResource
+        val currentCardItem: AchievementCardItem = this.cardItemList[position]
+        //val imagePath: String = currentCardItem.img
+        holder.title.text = currentCardItem.name
 
         val drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("yo_listen_foreground", "mipmap", activity.packageName))
 
         holder.achievementImg.setImageDrawable(drawable)
-
-
 
     }
 

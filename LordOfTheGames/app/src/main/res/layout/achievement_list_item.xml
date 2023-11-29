@@ -19,10 +19,10 @@
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/rainbow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/rainbow"
         android:orientation="horizontal">
 
         <!--on below line we are creating
@@ -42,8 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            />
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/achievement_title"
@@ -57,45 +56,35 @@
             app:layout_constraintLeft_toRightOf="@id/game_img"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/achievement_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_margin="5dp"
-            android:padding="4dp"
-            android:text="@string/app_name"
-
-            app:layout_constraintLeft_toRightOf="@id/game_img"
-            app:layout_constraintTop_toBottomOf="@id/achievement_title"/>
-
 
         <TextView
             android:id="@+id/achievement_completetion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
+            android:layout_gravity="bottom"
             android:layout_margin="5dp"
             android:padding="4dp"
             android:text="0/?"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
 
             app:layout_constraintLeft_toRightOf="@id/game_img"
-            app:layout_constraintTop_toBottomOf="@id/achievement_description"/>
-
+            app:layout_constraintStart_toEndOf="@id/game_img"
+            app:layout_constraintTop_toBottomOf="@+id/achievement_title" />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_gravity="bottom"
             android:layout_marginEnd="2.3dp"
             android:layout_marginBottom="2dp"
-            android:layout_gravity="bottom"
             android:background="@drawable/controller_modifica_4"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/achievement_title" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
