@@ -1,13 +1,11 @@
 package com.example.lordofthegames.GameDetails
 
-import android.R.attr
-import android.app.Activity
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
+import android.graphics.Color
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +18,7 @@ import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
+import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 
@@ -35,12 +34,16 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var achievementList: List<Achievement?>
     private lateinit var categoryList: List<Categories?>
     private lateinit var platformList: List<Platform?>
-    private var adapter: CategoryCardAdapter? = null
+
+    private var categoryCardAdapter: CategoryCardAdapter? = null
+    private var platformCardAdapter: PlatformCardAdapter? = null
+
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var recyclerViewPlatform: RecyclerView
     private lateinit var recyclerViewAchievement: RecyclerView
+
     private val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
-    private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4"), PlatformCardItem("STEAM"), PlatformCardItem("EPIC"), PlatformCardItem("XBOX ONE"), PlatformCardItem("Game Pass")) as MutableList<PlatformCardItem>
+    private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,10 +70,14 @@ class GameDetFragment: Fragment(), OnItemListener  {
         }
 
         bundle = savedInstanceState
+
+
         recyclerViewCategory    = view.findViewById(R.id.recycler_view_game_details_category)
         recyclerViewPlatform    = view.findViewById(R.id.recycler_view_game_details_platform)
-        recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_platform)
-        adapter = CategoryCardAdapter(this, catItems)
+        //recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_achievement)
+
+        categoryCardAdapter = CategoryCardAdapter(this, catItems)
+        platformCardAdapter = PlatformCardAdapter(this, platItems)
         Log.e("onCreateView", savedInstanceState.toString())
         return view
     }
@@ -96,8 +103,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
             recyclerViewCategory.setHasFixedSize(true)
             recyclerViewPlatform.setHasFixedSize(true)
 
-            recyclerViewCategory.adapter = adapter
-            recyclerViewPlatform.adapter = adapter
+            recyclerViewCategory.adapter = categoryCardAdapter
+            recyclerViewPlatform.adapter = platformCardAdapter
 
 
             //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )

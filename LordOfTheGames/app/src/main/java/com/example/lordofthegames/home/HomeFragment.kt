@@ -6,6 +6,7 @@ package com.example.lordofthegames.home
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -111,7 +112,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private fun setRecyclerView(act: Activity) {
         val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
-        val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS5"), PlatformCardItem("XBOX"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM"), PlatformCardItem("STEAM") ) as MutableList<PlatformCardItem>
+        val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
 
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this

@@ -92,7 +92,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@id/game_description"
                 app:layout_constraintTop_toBottomOf="@id/platform_title"
-                tools:listitem="@layout/category_element" />
+                tools:listitem="@layout/platform_item" />
             <!--
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
             <TextView
@@ -107,14 +107,14 @@
                 app:layout_constraintStart_toEndOf="@id/selectedImage"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <!--androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_game_details_achievement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="?attr/actionBarSize"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/game_description"
-                tools:listitem="@layout/achievement_list_item" /-->
+                tools:listitem="@layout/achievement_list_item" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

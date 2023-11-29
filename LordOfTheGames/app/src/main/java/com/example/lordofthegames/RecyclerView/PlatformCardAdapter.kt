@@ -1,4 +1,31 @@
 package com.example.lordofthegames.recyclerView
 
-class PlatformCardAdapter(listener: OnItemListener, ) {
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.R
+
+class PlatformCardAdapter(var listener: OnItemListener, var cardItemList: List<PlatformCardItem>) : RecyclerView.Adapter<PlatformCardViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatformCardViewHolder {
+        val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.platform_item, parent, false)
+        return PlatformCardViewHolder(layoutView, listener)
+    }
+
+    override fun onBindViewHolder(holder: PlatformCardViewHolder, position: Int) {
+        val currentCardItem: PlatformCardItem = this.cardItemList[position]
+        holder.platTitle.text = currentCardItem.platFormName
+        holder.parentPlat.setBackgroundColor(currentCardItem.color)
+        val contrast = ColorUtils.calculateContrast(Color.BLACK, currentCardItem.color)
+        if(contrast <= 2f){
+            holder.platTitle.setTextColor(Color.WHITE)
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return cardItemList.size
+    }
 }
