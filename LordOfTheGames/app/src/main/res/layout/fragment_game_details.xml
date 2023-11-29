@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context=".GameDetails.GameDetActivity">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayoutCompat"
@@ -19,12 +14,10 @@
             app:layout_constraintBottom_toTopOf="@+id/game_description"
             app:layout_constraintTop_toTopOf="@+id/game_description">
 
-
             <ImageButton
                 android:id="@+id/add_to_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="?attr/actionBarSize"
                 android:contentDescription="@string/belandih"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_videogame_30"
@@ -34,9 +27,9 @@
 
             <ImageView
                 android:id="@+id/selectedImage"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="230dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="25dp"
                 android:contentDescription="@string/game_title"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toStartOf="@id/description_short"
@@ -47,8 +40,8 @@
                 android:id="@+id/description_short"
                 android:layout_width="0dp"
                 android:layout_height="300dp"
-                android:layout_marginTop="?attr/actionBarSize"
                 android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
                 android:ems="3"
                 android:gravity="clip_vertical"
                 android:lines="15"
@@ -128,7 +121,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-    </ScrollView>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
