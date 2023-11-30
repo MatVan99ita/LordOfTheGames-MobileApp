@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.graphics.Color
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.NumberPicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +25,7 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
+import com.google.android.material.textfield.TextInputEditText
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -44,6 +48,11 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var recyclerViewPlatform: RecyclerView
     private lateinit var recyclerViewAchievement: RecyclerView
+
+    private lateinit var frameLayout: FrameLayout
+
+    private lateinit var numberPicker: NumberPicker
+    private lateinit var editText: EditText
 
     private val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
     private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
@@ -79,10 +88,15 @@ class GameDetFragment: Fragment(), OnItemListener  {
         recyclerViewPlatform    = view.findViewById(R.id.recycler_view_game_details_platform)
         recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_achievement)
 
+        frameLayout = view.findViewById(R.id.achievement_edit)
+
+        editText = view.findViewById(R.id.numberPicker)
+
+
         categoryCardAdapter = CategoryCardAdapter(this, catItems)
         platformCardAdapter = PlatformCardAdapter(this, platItems)
         achievementCardAdapter = AchievementCardAdapter(this, achieveItems, requireActivity())
-        Log.e("onCreateView", savedInstanceState.toString())
+
         return view
     }
 
@@ -114,6 +128,16 @@ class GameDetFragment: Fragment(), OnItemListener  {
             recyclerViewPlatform.adapter = platformCardAdapter
             recyclerViewAchievement.adapter = achievementCardAdapter
 
+
+            /** TODO:
+             *      sistemare il framelayout con l'edit sia del gioco che con l'edit degli achievement
+             *      fare in modo che compaia il framelayout con il tipo di edit desiderato quando premuti 2 bottoni diversi
+             *      bloccaggio della scrollview quando aperta
+             *      inserire vari input event funzionanti
+             * */
+
+            //numberPicker.minValue=0
+            //numberPicker.maxValue=10
 
             //Utilities.setUpToolBar( activity as AppCompatActivity, arguments?.getString("game_title").toString() )
 
