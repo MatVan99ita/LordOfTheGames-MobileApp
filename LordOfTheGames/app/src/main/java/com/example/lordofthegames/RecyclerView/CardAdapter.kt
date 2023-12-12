@@ -1,9 +1,6 @@
 package com.example.lordofthegames.recyclerView
 
-import android.R.attr.bottom
-import android.R.attr.left
-import android.R.attr.right
-import android.R.attr.top
+import android.R.attr.data
 import android.app.Activity
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -12,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Game
 
 
 class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardItem>, private var catItems: List<CategoryCardItem>, private var platItems: List<PlatformCardItem>, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
+
+
+    private var originalData: MutableList<GameCardItem> = cardItemList as MutableList<GameCardItem>
+    private var filteredData: MutableList<GameCardItem> = ArrayList(cardItemList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item2, parent, false)
@@ -25,7 +26,7 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val currentCardItem: GameCardItem = this.cardItemList[position]
+        val currentCardItem: GameCardItem = this.filteredData[position]
         val imagePath: String = currentCardItem.imageResource
 
         var drawable: Drawable? = null
@@ -93,7 +94,14 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
     }
 
     override fun getItemCount(): Int {
-        return cardItemList.size
+        return filteredData.size
+    }
+
+
+    fun setFilter(newData: Collection<GameCardItem>) {
+        filteredData = ArrayList(newData)
+
+        this.notifyDataSetChanged() // Notifica la RecyclerView che i dati sono cambiati
     }
 
     fun update(list: List<TextView>){

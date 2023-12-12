@@ -11,25 +11,21 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.TextView
-import androidx.camera.core.impl.utils.ContextUtil.getApplicationContext
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.Database.LotgViewModel
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.ViewModel.UserViewModel
-import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
+import java.util.Locale
 
 
 class HomeFragment: Fragment(), OnItemListener {
@@ -176,33 +172,47 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        /*val item = menu.findItem(R.id.app_bar_search)
+        inflater.inflate(R.menu.search_fragment_menu, menu)
+
+        val item = menu.findItem(R.id.search_fragment_item)
         val searchView: SearchView = item.actionView as SearchView
-        searchView.setOnQueryTextListener(object : OnQueryTextListener {
-            /**
-             * Called when the user submits the query. This could be due to a key press on the keyboard
-             * or due to pressing a submit button.
-             * @param query the query text that is to be submitted
-             * @return true if the query has been handled by the listener, false to let the
-             * SearchView perform the default action.
-             */
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return false
             }
 
-            /**
-             * Called when the query text is changed by the user.
-             * @param newText the new content of the query text field.
-             * @return false if the SearchView should perform the default action of showing any
-             * suggestions if available, true if the action was handled by the listener.
-             */
             override fun onQueryTextChange(newText: String): Boolean {
-                //adapter.getFilter().filter(newText);
+                // Aggiorna la RecyclerView con i dati filtrati in base al testo di ricerca
+                Log.w("search", newText)
+                filterData(newText)
                 return true
             }
-        }) // */
+        })
+
 
     }
+
+
+    private fun filterData(query: String) {
+        val filteredList: MutableList<GameCardItem> = ArrayList<GameCardItem>()
+        // Filtra la lista in base alla query di ricerca
+        for (game in gameItems) {
+            if (game.gameTitle.contains(query, ignoreCase = true)) {
+                filteredList.add(game)
+            }
+        }
+
+        for(el in filteredList){
+            Log.w("filtered", el.gameTitle)
+        }
+
+        // Aggiorna l'adapter con la lista filtrata
+        adapter?.setFilter(filteredList)
+        //recyclerView.adapter = adapter
+    }
+
+
 }
 
 
