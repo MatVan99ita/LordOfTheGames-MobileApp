@@ -170,6 +170,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Descrizione achievement"
+                android:ems="17"
+                android:singleLine="false"
                 app:layout_constraintStart_toEndOf="@id/achievement_image_edit"
                 app:layout_constraintTop_toBottomOf="@id/achievement_title_edit" />
 

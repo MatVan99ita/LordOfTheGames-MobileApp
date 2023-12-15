@@ -19,6 +19,6 @@ class CardViewHolder(itemView: View, lister: OnItemListener) : RecyclerView.View
     }
 
     override fun onClick(v: View?) {
-        onItemListener.onItemClick(adapterPosition)
+        onItemListener.onItemClick(itemView, adapterPosition)
     }
 }

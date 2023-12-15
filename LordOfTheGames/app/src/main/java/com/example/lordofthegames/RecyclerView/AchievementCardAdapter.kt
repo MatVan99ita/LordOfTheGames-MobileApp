@@ -19,6 +19,7 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
         val currentCardItem: AchievementCardItem = this.cardItemList[position]
         //val imagePath: String = currentCardItem.img
         holder.title.text = currentCardItem.name
+        holder.completation.text = "${currentCardItem.actual_count}/${currentCardItem.total_count}"
 
         val drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("yo_listen_foreground", "mipmap", activity.packageName))
 

@@ -1,9 +1,12 @@
 package com.example.lordofthegames.recyclerView
 
+import android.content.Intent
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 
 class AchievementCardHolder(itemView: View, lister: OnItemListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -19,7 +22,8 @@ class AchievementCardHolder(itemView: View, lister: OnItemListener) : RecyclerVi
         this.onItemListener = lister
         itemView.setOnClickListener(this)
     }
+
     override fun onClick(p0: View?) {
-        onItemListener.onItemClick(adapterPosition)
+        onItemListener.onItemClick(itemView, adapterPosition)
     }
 }

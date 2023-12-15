@@ -1,14 +1,21 @@
 package com.example.lordofthegames.GameDetails
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.service.autofill.CustomDescription
+import android.service.autofill.OnClickAction
+import android.text.Editable
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.graphics.Color
+import android.view.View.OnLongClickListener
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.EditText
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.NumberPicker
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +32,7 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
-import com.google.android.material.textfield.TextInputEditText
+import org.w3c.dom.Text
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -51,12 +58,40 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private lateinit var frameLayout: FrameLayout
 
-    private lateinit var numberPicker: NumberPicker
+    private lateinit var achievementImgEdit: ImageView
+    private lateinit var achievementTitleEdit: TextView
+    private lateinit var achievementDescription: TextView
+    private lateinit var maxNum: TextView
     private lateinit var editText: EditText
 
-    private val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
-    private val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
-    private val achieveItems: MutableList<AchievementCardItem> = listOf(AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), AchievementCardItem("", "sesso"), ) as MutableList<AchievementCardItem>
+    private val catItems: MutableList<CategoryCardItem> = listOf(
+        CategoryCardItem("GDR"),
+        CategoryCardItem("Terza persona"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG")
+    ) as MutableList<CategoryCardItem>
+
+    val platItems: MutableList<PlatformCardItem> = listOf(
+        PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
+        PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
+        PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
+        PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
+        PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
+        PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
+    ) as MutableList<PlatformCardItem>
+
+    val achieveItems: MutableList<AchievementCardItem> = listOf(
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 0, 1, true),
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 3, 10),
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 0, 4),
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 1, 1, true),
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 1, 10),
+        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 2, 8),
+    ) as MutableList<AchievementCardItem>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,7 +113,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 categoryList = gameDetViewModel.getGameCategory(game_title).value!!
                 platformList = gameDetViewModel.getGamePlatform(game_title).value!!
             }
-
         }
 
         bundle = savedInstanceState
@@ -90,7 +124,11 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         frameLayout = view.findViewById(R.id.achievement_edit)
 
+        achievementDescription = view.findViewById(R.id.achievement_description_edit)
+        achievementTitleEdit = view.findViewById(R.id.achievement_title_edit)
+        achievementImgEdit = view.findViewById(R.id.achievement_image_edit)
         editText = view.findViewById(R.id.numberPicker)
+        maxNum = view.findViewById(R.id.achievement_max_edit)
 
 
         categoryCardAdapter = CategoryCardAdapter(this, catItems)
@@ -133,7 +171,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
              *      sistemare il framelayout con l'edit sia del gioco che con l'edit degli achievement
              *      fare in modo che compaia il framelayout con il tipo di edit desiderato quando premuti 2 bottoni diversi
              *      bloccaggio della scrollview quando aperta
+             *      bloccare tutta la view sotto quando aperto l'achievement/game edit
              *      inserire vari input event funzionanti
+             *      disattivare l'onclick delle recycler
              * */
 
             //numberPicker.minValue=0
@@ -163,12 +203,39 @@ class GameDetFragment: Fragment(), OnItemListener  {
     }
 
 
+    fun checkAchievementCompletation(achievement: AchievementCardItem, status: Int){
+        if(status >= achievement.total_count){
+            achievement.actual_count = achievement.total_count
+            achievement.completed = true
+            //disable achievement edit
+        }
+    }
 
 
 
+    override fun onItemClick(view: View, position: Int) {
 
-    override fun onItemClick(position: Int) {
-        Log.w("Belandi", "Belandi")
+        Log.w("Belandi", "Belandi ${view.resources.getResourceEntryName(view.id)}")
+        when(view.id){
+
+            //Achievement
+            R.id.single_card2 -> {
+                val item = achieveItems[position]
+                achievementTitleEdit.text = item.name
+                achievementDescription.text = item.descr
+                maxNum.text = "/${item.total_count}"
+                editText.text = Editable.Factory.getInstance().newEditable("${item.actual_count}")
+            //
+            }
+            //Category
+            R.id.category_item -> Log.w("Belandi", "b")
+
+            //Platform
+            R.id.platform_item -> Log.w("Belandi", "c")
+
+        }
     }
 
 }
+
+

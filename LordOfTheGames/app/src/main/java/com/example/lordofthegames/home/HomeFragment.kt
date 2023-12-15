@@ -156,7 +156,7 @@ class HomeFragment: Fragment(), OnItemListener {
         }
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClick(view: View, position: Int) {
         val act: Activity? = activity
         if(act != null){
 
