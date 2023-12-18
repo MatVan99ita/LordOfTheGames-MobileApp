@@ -18,6 +18,12 @@
             android:id="@+id/nav_usr"
             android:icon="@drawable/rainbow_background"
             android:title="User" />
+
+        <item
+            android:id="@+id/myswitch"
+            android:title=""
+            android:actionLayout="@layout/switch_layout"
+            app:showAsAction="always" />
     </group>
 
 </menu>

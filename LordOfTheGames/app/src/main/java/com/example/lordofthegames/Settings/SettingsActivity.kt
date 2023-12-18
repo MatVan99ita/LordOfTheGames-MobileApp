@@ -24,6 +24,7 @@ class SettingsActivity: AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var savedInstanceState: Bundle? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         this.setTheme(R.style.Theme_LordOfTheGames)
