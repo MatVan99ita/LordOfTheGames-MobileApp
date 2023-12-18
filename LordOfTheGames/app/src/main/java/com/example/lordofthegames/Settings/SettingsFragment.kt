@@ -88,6 +88,12 @@ class SettingsFragment: Fragment() {
                 }
             })
 
+
+            /***
+             * TODO:
+             *      sistemare il salvataggio del tema scelto a prescindere dal dispositivo
+             *      migliorare il tema chiaro
+             */
             switchThemeButton.setOnCheckedChangeListener { buttonView, isChecked ->
                 // Post the check to the main thread to ensure that the switch's state is updated
                 val handler = Handler(Looper.getMainLooper())
