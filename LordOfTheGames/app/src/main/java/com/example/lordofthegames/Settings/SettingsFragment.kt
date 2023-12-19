@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputLayout
+import java.lang.Thread.sleep
 import java.lang.reflect.Field
 
 
@@ -60,6 +61,7 @@ class SettingsFragment: Fragment() {
 
         if(activity != null){
 
+
             val switchThemeButton: SwitchCompat = view.findViewById(R.id.material_switch_theme)
             val textInputLayout: TextInputLayout = view.findViewById(R.id.username_textinput)
             val editText: EditText? = textInputLayout.editText
@@ -88,7 +90,9 @@ class SettingsFragment: Fragment() {
                 }
             })
 
+            if(sharedPreferences.getString("Theme", "NoTheme").equals("Night")) { switchThemeButton.isChecked = true }
 
+            val editor = sharedPreferences.edit()
             /***
              * TODO:
              *      sistemare il salvataggio del tema scelto a prescindere dal dispositivo
@@ -98,18 +102,21 @@ class SettingsFragment: Fragment() {
                 // Post the check to the main thread to ensure that the switch's state is updated
                 val handler = Handler(Looper.getMainLooper())
                 handler.post {
-                    Log.w("TEMATICO1", isChecked.toString())
                     if (isChecked) {
                         // setting theme to night mode
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                        Log.w("TEMATICO2", getThemeName(requireContext(), requireContext().theme))
                         buttonView.text = "Night Mode"
+                        editor.putString("Theme", "Night")
+                        editor.apply()
                     } else {
                         // setting theme to light theme
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                        Log.w("TEMATICO2", getThemeName(requireContext(), requireContext().theme))
+                        editor.putString("Theme", "Light")
                         buttonView.text = "Light Mode"
+                        editor.apply()
                     }
+
+                    Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
                 }
             }
 

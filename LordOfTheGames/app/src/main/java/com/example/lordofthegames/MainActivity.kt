@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.ContextCompat
@@ -132,11 +133,31 @@ class MainActivity : AppCompatActivity() {
         //     }
         // }
 
+        /*
+
+        */
+
         Utilities.createDatabase(this)
 
-        val banana=this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         Log.e("NOME", banana.getString("nickname", "BANANA").toString())
         Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
+
+        if(banana.contains("Theme")){
+            if(banana.getString("Theme", "NoTheme").equals("Night")){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+
+            Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
+        } else {
+            banana.edit().putString("Theme", "Night").apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
+        }
+
         // si può startare con l'app
         /**
          * TODO: Togliere questo if per far partire l'app direttamente con la lista di giochi
