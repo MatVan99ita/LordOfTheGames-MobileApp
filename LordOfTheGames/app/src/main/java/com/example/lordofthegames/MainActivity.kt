@@ -149,13 +149,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-
-            Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
         } else {
             banana.edit().putString("Theme", "Night").apply()
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
-            Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
         }
 
         // si può startare con l'app

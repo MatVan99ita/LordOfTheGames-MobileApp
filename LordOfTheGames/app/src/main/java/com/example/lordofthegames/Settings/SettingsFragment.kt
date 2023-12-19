@@ -115,8 +115,6 @@ class SettingsFragment: Fragment() {
                         buttonView.text = "Light Mode"
                         editor.apply()
                     }
-
-                    Log.w("TEMATICO", "${AppCompatDelegate.getDefaultNightMode()} 0 ${AppCompatDelegate.MODE_NIGHT_NO}")
                 }
             }
 

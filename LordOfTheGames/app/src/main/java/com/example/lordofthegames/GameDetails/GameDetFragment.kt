@@ -9,8 +9,10 @@ import android.text.Editable
 import android.util.Log
 import android.view.*
 import android.view.View.OnLongClickListener
+import android.view.View.VISIBLE
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
+import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -57,6 +59,10 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var recyclerViewAchievement: RecyclerView
 
     private lateinit var frameLayout: FrameLayout
+    private lateinit var btnFLAnnulla: Button
+    private lateinit var btnFLSalva: Button
+    private var selectedItem: AchievementCardItem? = null
+
 
     private lateinit var achievementImgEdit: ImageView
     private lateinit var achievementTitleEdit: TextView
@@ -123,6 +129,10 @@ class GameDetFragment: Fragment(), OnItemListener  {
         recyclerViewAchievement = view.findViewById(R.id.recycler_view_game_details_achievement)
 
         frameLayout = view.findViewById(R.id.achievement_edit)
+        btnFLAnnulla = view.findViewById(R.id.btn_annulla1)
+        btnFLSalva = view.findViewById(R.id.btn_salva1)
+
+        frameLayout.visibility = View.GONE
 
         achievementDescription = view.findViewById(R.id.achievement_description_edit)
         achievementTitleEdit = view.findViewById(R.id.achievement_title_edit)
@@ -200,6 +210,15 @@ class GameDetFragment: Fragment(), OnItemListener  {
             selectedImage.setImageDrawable(drawable)
 
         }
+
+        btnFLAnnulla.setOnClickListener { frameLayout.visibility = View.GONE }
+        btnFLSalva.setOnClickListener {
+            if(selectedItem != null){
+                selectedItem!!.actual_count = "${editText.text}".toInt()
+            }
+        }
+
+
     }
 
 
@@ -220,7 +239,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             //Achievement
             R.id.single_card2 -> {
+                frameLayout.visibility = View.VISIBLE
                 val item = achieveItems[position]
+                selectedItem = item
                 achievementTitleEdit.text = item.name
                 achievementDescription.text = item.descr
                 maxNum.text = "/${item.total_count}"
