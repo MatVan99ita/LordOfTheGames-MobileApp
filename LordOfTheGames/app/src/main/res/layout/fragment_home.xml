@@ -16,6 +16,8 @@
         tools:listitem="@layout/grid_item2"
         />
 
+
+
         <!--
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

@@ -178,7 +178,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
 
             /** TODO:
-             *      sistemare il framelayout con l'edit sia del gioco che con l'edit degli achievement
+             *      edit del gioco(<-to be spiegare)
              *      fare in modo che compaia il framelayout con il tipo di edit desiderato quando premuti 2 bottoni diversi
              *      bloccaggio della scrollview quando aperta
              *      bloccare tutta la view sotto quando aperto l'achievement/game edit
