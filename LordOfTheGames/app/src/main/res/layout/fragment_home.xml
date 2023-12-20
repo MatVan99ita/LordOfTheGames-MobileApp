@@ -16,6 +16,8 @@
         tools:listitem="@layout/grid_item2"
         />
 
+    <include layout="@layout/filter_frame_layout"/>
+
 
 
         <!--
