@@ -7,12 +7,15 @@ package com.example.lordofthegames.home
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +28,6 @@ import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
-import java.util.Locale
 
 
 class HomeFragment: Fragment(), OnItemListener {
@@ -64,14 +66,18 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var filterFRameLayout: FrameLayout
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        filterFRameLayout = view.findViewById(R.id.filter_home)
+        return view
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -174,8 +180,9 @@ class HomeFragment: Fragment(), OnItemListener {
 
         inflater.inflate(R.menu.search_fragment_menu, menu)
 
-        val item = menu.findItem(R.id.search_fragment_item)
-        val searchView: SearchView = item.actionView as SearchView
+        val searchItem = menu.findItem(R.id.search_fragment_item)
+        val filterItem = menu.findItem(R.id.filter_fragment_item)
+        val searchView: SearchView = searchItem.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -183,13 +190,17 @@ class HomeFragment: Fragment(), OnItemListener {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                // Aggiorna la RecyclerView con i dati filtrati in base al testo di ricerca
-                Log.w("search", newText)
                 filterData(newText)
                 return true
             }
         })
 
+        filterItem.setOnMenuItemClickListener {
+
+            filterFRameLayout.visibility = if(filterFRameLayout.isVisible) View.GONE else View.VISIBLE
+
+            true
+        }
 
     }
 
@@ -203,14 +214,11 @@ class HomeFragment: Fragment(), OnItemListener {
             }
         }
 
-        for(el in filteredList){
-            Log.w("filtered", el.gameTitle)
-        }
-
         // Aggiorna l'adapter con la lista filtrata
         adapter?.setFilter(filteredList)
-        //recyclerView.adapter = adapter
     }
+
+
 
 
 }

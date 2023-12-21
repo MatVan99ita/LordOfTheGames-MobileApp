@@ -16,7 +16,171 @@
         tools:listitem="@layout/grid_item2"
         />
 
-    <include layout="@layout/filter_frame_layout"/>
+
+    <FrameLayout
+        android:id="@+id/filter_home"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_weight=".70"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/rainbow">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_annulla1"
+            app:layout_constraintStart_toEndOf="@+id/btn_annulla1">
+
+
+
+            <Button
+                android:id="@+id/btn_order"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ordine su/giu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Ok così non va -->
+
+
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/btn_order"
+                android:id="@+id/Rgroup">
+
+                <RadioButton
+                    android:id="@+id/r1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="banana" />
+
+                <RadioButton
+                    android:id="@+id/r2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mela" />
+
+                <RadioButton
+                    android:id="@+id/r3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-180dp"
+                    android:layout_marginTop="40dp"
+                    android:text="pompelmo" />
+
+                <RadioButton
+                    android:id="@+id/r4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="40dp"
+                    android:text="scemo" />
+
+            </RadioGroup>
+
+
+            <Button
+                android:id="@+id/btn_annulla2222"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Platform"
+                app:layout_constraintTop_toBottomOf="@id/Rgroup"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteX="41dp"
+                tools:layout_editor_absoluteY="211dp" />
+
+            <Button
+                android:id="@+id/btn_annulla222222"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Rgroup"
+                tools:layout_editor_absoluteX="237dp"
+                tools:layout_editor_absoluteY="211dp" />
+
+            <Button
+                android:id="@+id/btn_salva1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cerca"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_annulla1" />
+
+
+            <Button
+                android:id="@+id/btn_annulla1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cancella"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_salva1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <FrameLayout
+            android:visibility="visible"
+            android:id="@+id/achievement_edit2"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_weight=".70"
+            android:layout_gravity="center"
+            android:background="@drawable/rainbow">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioGroup
+                    android:id="@+id/radio_group2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"
+                    android:divider="@drawable/card_item_background_gradient"
+                    android:textColor="@color/white"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/radio_pirates"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Full match" />
+
+                    <RadioButton
+                        android:id="@+id/radio_ninjas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Partial match" />
+                </RadioGroup>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/category_element"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/radio_group2"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </FrameLayout>
 
 
 
