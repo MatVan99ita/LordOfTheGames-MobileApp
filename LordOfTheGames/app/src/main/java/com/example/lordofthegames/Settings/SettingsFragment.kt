@@ -95,7 +95,6 @@ class SettingsFragment: Fragment() {
             val editor = sharedPreferences.edit()
             /***
              * TODO:
-             *      sistemare il salvataggio del tema scelto a prescindere dal dispositivo
              *      migliorare il tema chiaro
              */
             switchThemeButton.setOnCheckedChangeListener { buttonView, isChecked ->

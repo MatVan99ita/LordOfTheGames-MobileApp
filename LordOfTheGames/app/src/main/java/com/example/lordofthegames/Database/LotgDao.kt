@@ -17,6 +17,9 @@ import com.example.lordofthegames.db_entities.GamePlatform
 import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
+import okio.AsyncTimeout.Companion.condition
+import java.nio.ByteOrder
+import java.util.concurrent.locks.Condition
 
 @Dao
 interface LotgDao {
@@ -79,7 +82,7 @@ interface LotgDao {
     @Query("SELECT * FROM game WHERE game_title = :game_title")
     fun getGameDetail(game_title: String): LiveData<List<Game?>?>
 
-    @Query("SELECT platform.*\n" +
+    @Query( "SELECT platform.*\n" +
             "FROM platform INNER JOIN gameplatform\n" +
             "ON platform.platform_id = gameplatform.platform_ref\n" +
             "INNER JOIN game\n" +
@@ -104,8 +107,27 @@ interface LotgDao {
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
 
-    @Query("SELECT * FROM game ORDER BY game_title DESC")
-    fun getAllGameSimpleDet(): LiveData<List<Game?>?>
+    @Query("SELECT * FROM game WHERE game_title LIKE :condition ORDER BY :order DESC")
+    fun getAllGameSimpleDet(condition: String = "", order: String = "game_title"): LiveData<List<Game?>?>
+
+
+    @Query( "SELECT * FROM platform \n" +
+            "INNER JOIN gameplatform ON platform.platform_id = gameplatform.platform_ref " +
+            "INNER JOIN game ON gameplatform.game_ref = game.game_id " +
+            "WHERE game.game_title LIKE :condition " +
+            "GROUP BY game.game_title " +
+            "ORDER BY platform.nome;")
+    fun getAllGameSimpleDetP(condition: String): LiveData<List<Game?>?>
+
+    @Query("SELECT * \n" +
+            "FROM categories INNER JOIN gamecategory\n" +
+            "ON categories.category_id = gamecategory.category_ref\n" +
+            "INNER JOIN game\n" +
+            "ON gamecategory.game_ref = game.game_id\n" +
+            "WHERE Game.game_title LIKE :condition \n" +
+            "GROUP BY Game.game_title \n" +
+            "ORDER BY category_name")
+    fun getAllGameSimpleDetC(condition: String): LiveData<List<Game?>?>
 
 
     @Query("SELECT (\n" +
@@ -121,11 +143,6 @@ interface LotgDao {
 
     @Query("SELECT COUNT(*) > 0 FROM game WHERE game_title = :game_title")
     fun gameExists(game_title: String): LiveData<Boolean?>
-
-
-
-
-
 
 
 
