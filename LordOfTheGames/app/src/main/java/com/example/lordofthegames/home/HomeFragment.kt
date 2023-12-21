@@ -7,7 +7,6 @@ package com.example.lordofthegames.home
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -66,7 +65,8 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var filterFRameLayout: FrameLayout
+
+    private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +76,7 @@ class HomeFragment: Fragment(), OnItemListener {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
-        filterFRameLayout = view.findViewById(R.id.filter_home)
+        filterFrameLayout = view.findViewById(R.id.filter_home)
         return view
     }
 
@@ -197,7 +197,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
         filterItem.setOnMenuItemClickListener {
 
-            filterFRameLayout.visibility = if(filterFRameLayout.isVisible) View.GONE else View.VISIBLE
+            filterFrameLayout.visibility = if(filterFrameLayout.isVisible) View.GONE else View.VISIBLE
 
             true
         }
