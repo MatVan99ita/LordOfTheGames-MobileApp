@@ -28,10 +28,4 @@ class NotificaitonFragment: Fragment() {
 
         return view
     }
-
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_fragment_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
 }
