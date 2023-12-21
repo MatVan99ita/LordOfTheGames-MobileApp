@@ -14,8 +14,8 @@
 
     <item
         android:id="@+id/bottom_nav_search"
-        android:icon="@drawable/ic__search_white_24"
-        android:title="@string/search" />
+        android:icon="@drawable/baseline_notifications_24_white"
+        android:title="@string/notification" />
 
     <item
         android:id="@+id/bottom_my_game_list"
