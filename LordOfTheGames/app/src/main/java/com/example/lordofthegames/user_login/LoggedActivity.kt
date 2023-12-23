@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.room.Room.databaseBuilder
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -38,7 +40,7 @@ class LoggedActivity: AppCompatActivity() {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
 
-        //val db: LOTGDatabase = databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
+        val db: LOTGDatabase = databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
         //val userViewModel by viewModels<UserViewModel> {
         //    UserViewModelFactory(repository = (application as UserApplication).repository)
         //}

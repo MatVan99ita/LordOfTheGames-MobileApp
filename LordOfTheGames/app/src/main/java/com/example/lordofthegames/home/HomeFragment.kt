@@ -16,11 +16,17 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
@@ -65,6 +71,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
+    private var gameListdb: MutableList<Game> = mutableListOf()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE
 
@@ -74,7 +81,7 @@ class HomeFragment: Fragment(), OnItemListener {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+
         ///userViewModel.addItem(User("", "", ""))
         filterFrameLayout = view.findViewById(R.id.filter_home)
         return view
@@ -82,6 +89,9 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!).get(
+            HomeViewModel::class.java
+        )
         setHasOptionsMenu(true)
     }
 
@@ -93,8 +103,34 @@ class HomeFragment: Fragment(), OnItemListener {
 
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
-            //val cardItems: LiveData<List<Game>> = repository.getGame()
+
             //print(cardItems)
+            //homeViewModel.getAllGameSimpleDet().value?.forEach { el ->
+            //    Log.w("PORCADDIO", el.toString())
+            //}
+
+            homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!).get(
+                HomeViewModel::class.java
+            )
+            (activity as LifecycleOwner?)?.let {
+                homeViewModel.getAllGameSimpleDet()
+                    .observe(it) { el ->
+                        el?.forEach { e ->
+                            if (e != null) {
+                                val p = gameListdb.add(e)
+                                Log.w("LISTONE", p.toString())
+                            }
+                        }
+                        //adapter.setData(cardItems)
+                    }
+            }
+
+            val r = homeViewModel.getAllGame().value
+            Log.w("CIAONE", r?.size.toString())
+
+
+
+            Log.w("PORCADDIO", gameListdb.size.toString())
 
             //val db: LOTGDatabase = Room.databaseBuilder(
             //    requireContext(),
@@ -102,8 +138,16 @@ class HomeFragment: Fragment(), OnItemListener {
             //    "lotgdb"
             //).build()
 
+            //db.lotgdao().getAllGameSimpleDet().value?.forEach {
+            //        e -> Log.e("PORCADDIO", e.toString())
+            //}
 
-            homeViewModel.getAllGameSimpleDet().value?.forEach { e -> Log.w("GIUCO", e.toString()) }
+            //val db: LOTGDatabase = Room.databaseBuilder(
+            //    requireContext(),
+            //    LOTGDatabase::class.java,
+            //    "lotgdb"
+            //).build()
+
             //val userViewModel by viewModels<UserViewModel> {
             //    UserViewModelFactory((application as UserApplication).repository)
             //}
@@ -121,6 +165,21 @@ class HomeFragment: Fragment(), OnItemListener {
 
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this
+
+
+        (activity as LifecycleOwner?)?.let {
+            //QUesta è eseguitra dopo che è stato inizilizzato tutto quindi credo si possano generare i GameCardItem per ogni elemento ottenuto e poi sistemare l'adapter
+            homeViewModel.getAllGameSimpleDet()
+                .observe(it) { el ->
+                    el?.forEach { e ->
+                        if (e != null) {
+                            val p = gameListdb.add(e)
+                            Log.w("LISTONE", p.toString())
+                        }
+                    }
+                    //adapter.setData(cardItems)
+                }
+        }
         adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)

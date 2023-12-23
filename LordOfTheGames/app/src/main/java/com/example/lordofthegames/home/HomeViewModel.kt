@@ -25,10 +25,10 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): LiveData<List<Game?>?>{
         return when(order){
-            "Name" -> repository.getAllGameSimpleDet(game_title)
-            "Platform" -> repository.getAllGameSimpleDetP(game_title)
-            "Categories" -> repository.getAllGameSimpleDetC(game_title)
-            else -> repository.getAllGameSimpleDet(game_title)
+            "Name" -> repository.getAllGameSimpleDet("%${game_title}%")
+            "Platform" -> repository.getAllGameSimpleDetP("%${game_title}%")
+            "Categories" -> repository.getAllGameSimpleDetC("%${game_title}%")
+            else -> repository.getAllGameSimpleDet("%${game_title}%")
         }
     }
 

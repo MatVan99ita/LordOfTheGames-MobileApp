@@ -37,7 +37,7 @@ abstract class LOTGDatabase: RoomDatabase() {
 
         fun getDatabase(context: Context): LOTGDatabase {
 
-            return INSTANCE ?: synchronized(this){
+            return synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     LOTGDatabase::class.java,
@@ -45,10 +45,8 @@ abstract class LOTGDatabase: RoomDatabase() {
                     )
                     .createFromAsset("lotgdb.db")
                     //.addMigrations(LOTGDatabase.MIGRATION_1_2)
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .build()
-
-                INSTANCE = instance
 
                 instance
             }

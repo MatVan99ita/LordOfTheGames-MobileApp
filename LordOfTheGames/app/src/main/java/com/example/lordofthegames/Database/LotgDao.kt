@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -101,28 +102,27 @@ interface LotgDao {
             "WHERE Game.game_title = :game_title")
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
-
-    @Query("SELECT * FROM game WHERE game_title=:game_title ORDER BY :order DESC")
-    fun getAllGameSimpleDet(game_title: String = "", order: String = "game_title"): LiveData<List<Game?>?>
+    @Query("SELECT * FROM game WHERE game_title LIKE '%' || :game_title || '%' ORDER BY game_title DESC")
+    fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game?>?>
 
 
     @Query( "SELECT * FROM platform \n" +
             "INNER JOIN gameplatform ON platform.platform_id = gameplatform.platform_ref " +
             "INNER JOIN game ON gameplatform.game_ref = game.game_id " +
-            "WHERE game.game_title LIKE :condition " +
+            "WHERE game.game_title LIKE '%' || :game_title || '%' " +
             "GROUP BY game.game_title " +
             "ORDER BY platform.nome;")
-    fun getAllGameSimpleDetP(condition: String): LiveData<List<Game?>?>
+    fun getAllGameSimpleDetP(game_title: String): LiveData<List<Game?>?>
 
     @Query("SELECT * \n" +
             "FROM categories INNER JOIN gamecategory\n" +
             "ON categories.category_id = gamecategory.category_ref\n" +
             "INNER JOIN game\n" +
             "ON gamecategory.game_ref = game.game_id\n" +
-            "WHERE Game.game_title LIKE :condition \n" +
+            "WHERE Game.game_title LIKE '%' || :game_title || '%' \n" +
             "GROUP BY Game.game_title \n" +
             "ORDER BY category_name")
-    fun getAllGameSimpleDetC(condition: String): LiveData<List<Game?>?>
+    fun getAllGameSimpleDetC(game_title: String): LiveData<List<Game?>?>
 
 
     @Query("SELECT (\n" +

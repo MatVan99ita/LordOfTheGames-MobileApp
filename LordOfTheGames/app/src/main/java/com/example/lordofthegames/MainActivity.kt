@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.room.Room
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Settings.SettingsActivity
 
 import com.example.lordofthegames.home.CommunityFragment
@@ -90,8 +92,8 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
-
     //private var addViewModel: AddViewModel? = null
+
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
@@ -101,6 +103,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var connectivityManager: ConnectivityManager
     private lateinit var homeViewModel: HomeViewModel
+
     // private var connectSnackBar = mutableStateOf(false)
     // private var requestingData = false
     // private lateinit var networkCallback: ConnectivityManager.NetworkCallback
@@ -156,6 +159,9 @@ class MainActivity : AppCompatActivity() {
          *       intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
          *       this.startActivity(intent)
          */
+
+
+
         homeViewModel = HomeViewModel(application)
 
         setContentView(R.layout.activity_main)
