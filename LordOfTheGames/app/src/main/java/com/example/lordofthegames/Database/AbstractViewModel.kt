@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.lordofthegames.Database.LotgRepo
 
 abstract class AbstractViewModel(application: Application): AndroidViewModel(application) {
 

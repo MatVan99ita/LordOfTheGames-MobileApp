@@ -3,27 +3,25 @@ package com.example.lordofthegames.GameDetails
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.service.autofill.CustomDescription
-import android.service.autofill.OnClickAction
 import android.text.Editable
 import android.util.Log
 import android.view.*
-import android.view.View.OnLongClickListener
-import android.view.View.VISIBLE
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.R
+import com.example.lordofthegames.ViewModel.GameDetViewModel
+import com.example.lordofthegames.ViewModel.GameDetViewModel2
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Platform
@@ -34,7 +32,6 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
-import org.w3c.dom.Text
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -45,7 +42,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private val RESULT_OK = 1
     private lateinit var imagePath: String
     private var bundle: Bundle? = null
-    private lateinit var gameDetViewModel: GameDetViewModel
+    private lateinit var gameDetViewModel: GameDetViewModel2
     private lateinit var achievementList: List<Achievement?>
     private lateinit var categoryList: List<Categories?>
     private lateinit var platformList: List<Platform?>
@@ -104,22 +101,19 @@ class GameDetFragment: Fragment(), OnItemListener  {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_game_details, container, false)
-        gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel::class.java]
+        gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         val game_title = requireActivity().intent.getStringExtra("game_title").toString()
-        val gmEx = gameDetViewModel.gameExists(game_title).value
 
-        if (gmEx != null){
-            if(!gmEx) {
-                achievementList = listOf(Achievement(1, "b", "c", game_ref = 1))
-                categoryList = listOf(Categories(1, "b"), Categories(1, "b"), Categories(1, "b"), Categories(1, "b"))
-                platformList = listOf(Platform(1, "b"))
-            } else {
-                achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
-                categoryList = gameDetViewModel.getGameCategory(game_title).value!!
-                platformList = gameDetViewModel.getGamePlatform(game_title).value!!
-            }
-        }
+        this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g -> Log.w("GIUOCO", g.toString()) }
+
+
+
+        //achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
+        //categoryList = gameDetViewModel.getGameCategory(game_title).value!!
+        //platformList = gameDetViewModel.getGamePlatform(game_title).value!!
+
+
 
         bundle = savedInstanceState
 

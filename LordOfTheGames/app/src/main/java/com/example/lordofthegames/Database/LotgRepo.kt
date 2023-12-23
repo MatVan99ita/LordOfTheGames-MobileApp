@@ -12,7 +12,6 @@ import com.example.lordofthegames.db_entities.User
 
 class LotgRepo(application: Application) {
 
-
     private var db: LOTGDatabase = LOTGDatabase.getDatabase(application)
     private var lotgDao: LotgDao = db.lotgdao()
     //val allItems: LiveData<List<User?>?> = userDao.getItems()
@@ -60,9 +59,7 @@ class LotgRepo(application: Application) {
         return lotgDao.getAchievementCount(game_title)
     }
 
-    fun gameExists(game_title: String): LiveData<Boolean?>{
-        return lotgDao.gameExists(game_title)
-    }
+
 
     fun getAllGameSimpleDetP(condition: String): LiveData<List<Game?>?> {
         return lotgDao.getAllGameSimpleDetP(condition)
@@ -70,6 +67,11 @@ class LotgRepo(application: Application) {
 
     fun getAllGameSimpleDetC(condition: String): LiveData<List<Game?>?> {
         return lotgDao.getAllGameSimpleDetC(condition)
+    }
+
+
+    fun addUserItem(userItem: User) {
+        LOTGDatabase.executor.execute { lotgDao.insertUser(userItem) }
     }
 
 

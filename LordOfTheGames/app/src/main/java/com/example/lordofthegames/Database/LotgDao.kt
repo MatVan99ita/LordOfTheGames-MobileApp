@@ -6,7 +6,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -17,13 +16,9 @@ import com.example.lordofthegames.db_entities.GamePlatform
 import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
-import okio.AsyncTimeout.Companion.condition
-import java.nio.ByteOrder
-import java.util.concurrent.locks.Condition
 
 @Dao
 interface LotgDao {
-
     /**
      * INSERT
      */
@@ -131,18 +126,16 @@ interface LotgDao {
 
 
     @Query("SELECT (\n" +
-        "SELECT COUNT(*)\n" +
-        "FROM achievement INNER JOIN game\n" +
-        "ON achievement.game_ref = game.game_id\n" +
-        "WHERE game.game_title = :game_title) As total_count,\n" +
-        "(SELECT COUNT(*)\n" +
-        "FROM achievement INNER JOIN game\n" +
-        "ON achievement.game_ref = game.game_id\n" +
-        "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
+            "SELECT COUNT(*)\n" +
+            "FROM achievement INNER JOIN game\n" +
+            "ON achievement.game_ref = game.game_id\n" +
+            "WHERE game.game_title = :game_title) As total_count,\n" +
+            "(SELECT COUNT(*)\n" +
+            "FROM achievement INNER JOIN game\n" +
+            "ON achievement.game_ref = game.game_id\n" +
+            "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
     fun getAchievementCount(game_title: String): Cursor
 
-    @Query("SELECT COUNT(*) > 0 FROM game WHERE game_title = :game_title")
-    fun gameExists(game_title: String): LiveData<Boolean?>
 
 
 

@@ -1,5 +1,21 @@
 package com.example.lordofthegames.Database
 
+import android.database.Cursor
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.example.lordofthegames.db_entities.Achievement
+import com.example.lordofthegames.db_entities.Categories
+import com.example.lordofthegames.db_entities.Comments
+import com.example.lordofthegames.db_entities.Discussion
+import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.db_entities.GameCategory
+import com.example.lordofthegames.db_entities.GamePlatform
+import com.example.lordofthegames.db_entities.Notes
+import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.db_entities.User
 import java.security.MessageDigest
 import java.security.SecureRandom
 

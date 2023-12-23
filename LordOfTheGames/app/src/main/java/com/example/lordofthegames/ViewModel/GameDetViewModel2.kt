@@ -1,18 +1,16 @@
-package com.example.lordofthegames.GameDetails
+package com.example.lordofthegames.ViewModel
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Database.AbstractViewModel
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
-import com.example.lordofthegames.db_entities.User
 
-class GameDetViewModel(application: Application): AbstractViewModel(application) {
+class GameDetViewModel2(application: Application): AbstractViewModel(application) {
 
-    fun getGameDetail(game_name: String): LiveData<List<Game?>?> {
+    fun getGameDetails(game_name: String): LiveData<List<Game?>?> {
         return repository.getGameDetail(game_name)
     }
 
@@ -26,10 +24,6 @@ class GameDetViewModel(application: Application): AbstractViewModel(application)
 
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>{
         return repository.getGameCategory(game_title)
-    }
-
-    fun gameExists(game_title: String): LiveData<Boolean?>{
-        return repository.gameExists(game_title)
     }
 
 

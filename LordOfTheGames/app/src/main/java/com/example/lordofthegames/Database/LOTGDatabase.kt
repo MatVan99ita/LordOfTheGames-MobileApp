@@ -2,10 +2,8 @@ package com.example.lordofthegames.Database
 
 import android.content.Context
 import androidx.room.*
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.lordofthegames.Database.LotgDao
 import com.example.lordofthegames.db_entities.*
-import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

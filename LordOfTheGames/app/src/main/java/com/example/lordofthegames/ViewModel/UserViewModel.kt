@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.lordofthegames.EntityRepo.UserRepo
+import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.User
 import kotlinx.coroutines.launch
 
@@ -14,22 +14,12 @@ import kotlinx.coroutines.launch
 class UserViewModel(application: Application): AndroidViewModel(
     application
 ) {
-    private var repository: UserRepo = UserRepo(application)
+    private var repository: LotgRepo = LotgRepo(application)
     fun addItem(item: User) = viewModelScope.launch {
-        repository.insertItem(item)
+        repository.insertUser(item)
     }
 
-    fun deleteItem(item: User) = viewModelScope.launch {
-        repository.deleteItem(item)
-    }
 
-    fun clearItems() = viewModelScope.launch {
-        repository.deleteAllItems()
-    }
-
-    fun getCurrentUser(): LiveData<List<User?>?> {
-        return repository.getAllUser()
-    }
 
 }
 /*

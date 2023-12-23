@@ -15,12 +15,10 @@ class CategoryCardAdapter(var listener: OnItemListener, var cardItemList: List<C
         val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.category_element, parent, false)
         return CategoryCardViewHolder(layoutView, listener)
     }
-
     override fun onBindViewHolder(holder: CategoryCardViewHolder, position: Int) {
         val currentCardItem: CategoryCardItem = this.cardItemList[position]
         holder.catTitle.text = currentCardItem.category_name
     }
-
     override fun getItemCount(): Int {
         return cardItemList.size
     }
