@@ -19,8 +19,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.recyclerView.CardAdapter
@@ -92,20 +90,20 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
+
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
             //val cardItems: LiveData<List<Game>> = repository.getGame()
             //print(cardItems)
 
-            val db: LOTGDatabase = Room.databaseBuilder(
-                requireContext(),
-                LOTGDatabase::class.java,
-                "lotgdb"
-            ).build()
+            //val db: LOTGDatabase = Room.databaseBuilder(
+            //    requireContext(),
+            //    LOTGDatabase::class.java,
+            //    "lotgdb"
+            //).build()
 
 
-            this.homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner) { g -> Log.w("GIUCO", g.toString())}
-
+            homeViewModel.getAllGameSimpleDet().value?.forEach { e -> Log.w("GIUCO", e.toString()) }
             //val userViewModel by viewModels<UserViewModel> {
             //    UserViewModelFactory((application as UserApplication).repository)
             //}

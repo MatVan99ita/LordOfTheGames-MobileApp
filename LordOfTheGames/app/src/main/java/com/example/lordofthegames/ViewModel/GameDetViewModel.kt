@@ -3,16 +3,16 @@ package com.example.lordofthegames.ViewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.lordofthegames.EntityRepo.GameDetRepo
+import com.example.lordofthegames.Database.LotgRepo
 import kotlinx.coroutines.launch
 
 class GameDetViewModel(application: Application): AndroidViewModel(
     application
 ) {
-    private var repository: GameDetRepo = GameDetRepo(application)
+    private var repository: LotgRepo = LotgRepo(application)
 
     fun getGameDetails(game_title: String) = viewModelScope.launch {
-        repository.getGameDetails(game_title)
+        repository.getGameDetail(game_title)
     }
 
     fun getGameAchievement(game_title: String) = viewModelScope.launch {
@@ -20,7 +20,7 @@ class GameDetViewModel(application: Application): AndroidViewModel(
     }
 
     fun getGameCategories(game_title: String) = viewModelScope.launch {
-        repository.getGameCategories(game_title)
+        repository.getGameCategory(game_title)
     }
 
     fun getGamePlatform(game_title: String) = viewModelScope.launch {

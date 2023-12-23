@@ -23,12 +23,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getCurrentUser(user_name, passw)
     }
 
-    fun getAllGameSimpleDet(condition: String = "", order: String = "Name"): LiveData<List<Game?>?>{
+    fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): LiveData<List<Game?>?>{
         return when(order){
-            "Name" -> repository.getAllGameSimpleDet(condition)
-            "Platform" -> repository.getAllGameSimpleDetP(condition)
-            "Categories" -> repository.getAllGameSimpleDetC(condition)
-            else -> repository.getAllGameSimpleDet(condition)
+            "Name" -> repository.getAllGameSimpleDet(game_title)
+            "Platform" -> repository.getAllGameSimpleDetP(game_title)
+            "Categories" -> repository.getAllGameSimpleDetC(game_title)
+            else -> repository.getAllGameSimpleDet(game_title)
         }
     }
 
@@ -38,6 +38,10 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>{
         return repository.getGameCategory(game_title)
+    }
+
+    fun getAllGame(): LiveData<List<Game?>?> {
+        return repository.getAllGames()
     }
 
 

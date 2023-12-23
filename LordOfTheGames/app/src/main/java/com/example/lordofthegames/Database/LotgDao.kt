@@ -102,8 +102,8 @@ interface LotgDao {
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
 
-    @Query("SELECT * FROM game WHERE game_title LIKE :condition ORDER BY :order DESC")
-    fun getAllGameSimpleDet(condition: String = "", order: String = "game_title"): LiveData<List<Game?>?>
+    @Query("SELECT * FROM game WHERE game_title=:game_title ORDER BY :order DESC")
+    fun getAllGameSimpleDet(game_title: String = "", order: String = "game_title"): LiveData<List<Game?>?>
 
 
     @Query( "SELECT * FROM platform \n" +

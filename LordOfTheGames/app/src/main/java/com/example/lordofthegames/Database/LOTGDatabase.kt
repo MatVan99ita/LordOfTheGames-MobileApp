@@ -42,11 +42,12 @@ abstract class LOTGDatabase: RoomDatabase() {
                     context.applicationContext,
                     LOTGDatabase::class.java,
                     "lotgdb"
-                )
+                    )
                     .createFromAsset("lotgdb.db")
                     //.addMigrations(LOTGDatabase.MIGRATION_1_2)
                     .fallbackToDestructiveMigration()
                     .build()
+
                 INSTANCE = instance
 
                 instance
