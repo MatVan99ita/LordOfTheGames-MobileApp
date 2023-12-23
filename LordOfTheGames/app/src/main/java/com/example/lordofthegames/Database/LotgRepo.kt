@@ -51,7 +51,7 @@ class LotgRepo(application: Application) {
         return lotgDao.getGameCategory(game_title)
     }
 
-    fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game?>?>{
+    fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game>>{
         return lotgDao.getAllGameSimpleDet(game_title)
     }
 
@@ -61,11 +61,11 @@ class LotgRepo(application: Application) {
 
 
 
-    fun getAllGameSimpleDetP(condition: String): LiveData<List<Game?>?> {
+    fun getAllGameSimpleDetP(condition: String): LiveData<List<Game>> {
         return lotgDao.getAllGameSimpleDetP(condition)
     }
 
-    fun getAllGameSimpleDetC(condition: String): LiveData<List<Game?>?> {
+    fun getAllGameSimpleDetC(condition: String): LiveData<List<Game>> {
         return lotgDao.getAllGameSimpleDetC(condition)
     }
 

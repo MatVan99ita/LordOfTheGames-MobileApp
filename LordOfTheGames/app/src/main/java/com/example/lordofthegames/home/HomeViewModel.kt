@@ -23,7 +23,7 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getCurrentUser(user_name, passw)
     }
 
-    fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): LiveData<List<Game?>?>{
+    fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): LiveData<List<Game>>{
         return when(order){
             "Name" -> repository.getAllGameSimpleDet("%${game_title}%")
             "Platform" -> repository.getAllGameSimpleDetP("%${game_title}%")

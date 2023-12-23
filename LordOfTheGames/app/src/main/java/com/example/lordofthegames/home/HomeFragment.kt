@@ -17,13 +17,10 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Game
@@ -71,7 +68,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
-    private var gameListdb: MutableList<Game> = mutableListOf()
+    private var gameListdb: MutableList<GameCardItem> = mutableListOf()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE
 
@@ -89,9 +86,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!).get(
-            HomeViewModel::class.java
-        )
+        homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!)[HomeViewModel::class.java]
         setHasOptionsMenu(true)
     }
 
@@ -109,21 +104,21 @@ class HomeFragment: Fragment(), OnItemListener {
             //    Log.w("PORCADDIO", el.toString())
             //}
 
-            homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!).get(
-                HomeViewModel::class.java
-            )
-            (activity as LifecycleOwner?)?.let {
-                homeViewModel.getAllGameSimpleDet()
-                    .observe(it) { el ->
-                        el?.forEach { e ->
-                            if (e != null) {
-                                val p = gameListdb.add(e)
-                                Log.w("LISTONE", p.toString())
-                            }
-                        }
-                        //adapter.setData(cardItems)
-                    }
-            }
+            //homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!).get(
+            //    HomeViewModel::class.java
+            //)
+            //(activity as LifecycleOwner?)?.let {
+            //    homeViewModel.getAllGameSimpleDet()
+            //        .observe(it) { el ->
+            //            el?.forEach { e ->
+            //                if (e != null) {
+            //                    val p = gameListdb.add(GameCardItem(e.game_cover, e.game_title))
+            //                    Log.w("LISTONE", p.toString())
+            //                }
+            //            }
+            //            //adapter.setData(cardItems)
+            //        }
+            //}
 
             val r = homeViewModel.getAllGame().value
             Log.w("CIAONE", r?.size.toString())
@@ -160,8 +155,23 @@ class HomeFragment: Fragment(), OnItemListener {
     }
 
     private fun setRecyclerView(act: Activity) {
-        val catItems: MutableList<CategoryCardItem> = listOf(CategoryCardItem("GDR"), CategoryCardItem("Terza persona"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG"), CategoryCardItem("JRPG")) as MutableList<CategoryCardItem>
-        val platItems: MutableList<PlatformCardItem> = listOf(PlatformCardItem("PS4", Color.rgb(19, 44, 116)), PlatformCardItem("STEAM", Color.rgb(41, 41, 41)), PlatformCardItem("EPIC", Color.rgb(58, 58, 56)), PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)), PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)), PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))) as MutableList<PlatformCardItem>
+        val catItems: MutableList<CategoryCardItem> = listOf(
+            CategoryCardItem("GDR"),
+            CategoryCardItem("Terza persona"),
+            CategoryCardItem("JRPG"),
+            CategoryCardItem("JRPG"),
+            CategoryCardItem("JRPG"),
+            CategoryCardItem("JRPG"),
+            CategoryCardItem("JRPG")
+        ) as MutableList<CategoryCardItem>
+        val platItems: MutableList<PlatformCardItem> = listOf(
+            PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
+            PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
+            PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
+            PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
+            PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
+            PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
+        ) as MutableList<PlatformCardItem>
 
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this
@@ -169,17 +179,23 @@ class HomeFragment: Fragment(), OnItemListener {
 
         (activity as LifecycleOwner?)?.let {
             //QUesta è eseguitra dopo che è stato inizilizzato tutto quindi credo si possano generare i GameCardItem per ogni elemento ottenuto e poi sistemare l'adapter
-            homeViewModel.getAllGameSimpleDet()
-                .observe(it) { el ->
+            homeViewModel.getAllGameSimpleDet().observe(it) { el ->
+                if(el.isNotEmpty()){
                     el?.forEach { e ->
-                        if (e != null) {
-                            val p = gameListdb.add(e)
-                            Log.w("LISTONE", p.toString())
-                        }
+                        Log.w("LISTONE", e.game_title)
+                        gameListdb.add(GameCardItem(e.game_cover, e.game_title))
                     }
-                    //adapter.setData(cardItems)
+                } else {
+                    Log.w("LISTONE", "VUOTP")
                 }
+
+                //adapter.setData(cardItems)
+            }
         }
+
+
+        gameItems.addAll(gameListdb)
+
         adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
@@ -187,8 +203,9 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView.adapter = adapter
         val itemCount: Int = (adapter!!.itemCount) as Int
 
-        for(i in 0 until itemCount){
-            val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
+        for (i in 0 until itemCount) {
+            val viewHolder =
+                recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
             viewHolder?.let {
                 val catList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
                 val platList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
@@ -199,25 +216,25 @@ class HomeFragment: Fragment(), OnItemListener {
                 listPlat.removeAllViews()
                 // Ora puoi aggiungere TextView dinamicamente al LinearLayout
 
-                catItems.forEach{ x ->
+                catItems.forEach { x ->
                     val t = TextView(requireContext())
                     t.text = x.category_name
                     viewHolder.catTitle.text = x.category_name
                     catList.add(t)
                 }
 
-                platItems.forEach{ x ->
+                platItems.forEach { x ->
                     val t = TextView(requireContext())
                     t.text = x.platFormName
                     platList.add(t)
                 }
 
-                catList.forEach{
-                        el -> listCat.addView(el)
+                catList.forEach { el ->
+                    listCat.addView(el)
                 }
 
-                platList.forEach{
-                        el -> listPlat.addView(el)
+                platList.forEach { el ->
+                    listPlat.addView(el)
                 }
 
             }
