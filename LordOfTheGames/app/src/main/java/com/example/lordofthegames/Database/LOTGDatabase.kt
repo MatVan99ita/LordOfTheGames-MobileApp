@@ -44,8 +44,6 @@ abstract class LOTGDatabase: RoomDatabase() {
                     "lotgdb"
                     )
                     .createFromAsset("lotgdb.db")
-                    //.addMigrations(LOTGDatabase.MIGRATION_1_2)
-                    //.fallbackToDestructiveMigration()
                     .build()
 
                 instance

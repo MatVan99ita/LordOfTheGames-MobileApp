@@ -37,6 +37,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
     private var gameItems: MutableList<GameCardItem> = listOf(
+        GameCardItem("gabibbo",             "Bloodborne"),
         GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
         GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
         GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),

@@ -94,7 +94,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 1, 10),
         AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 2, 8),
     ) as MutableList<AchievementCardItem>
-
+    private lateinit var game_title: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,9 +103,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
         val view = inflater.inflate(R.layout.fragment_game_details, container, false)
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
-        val game_title = requireActivity().intent.getStringExtra("game_title").toString()
+        this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
 
-        this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g -> Log.w("GIUOCO", g.toString()) }
 
 
 
@@ -154,6 +153,19 @@ class GameDetFragment: Fragment(), OnItemListener  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+
+
+            this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g ->
+
+                Log.w("GIUOCAMENDI", g.toString())
+
+                g?.forEach { e ->
+                    if (e != null) {
+                        Log.w("GIUOCAMENDI", e.game_title)
+                    }
+                }
+            }
+
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerAchievement = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
