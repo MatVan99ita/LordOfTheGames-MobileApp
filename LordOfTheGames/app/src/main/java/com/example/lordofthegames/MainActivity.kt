@@ -5,6 +5,8 @@ package com.example.lordofthegames
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.database.DatabaseErrorHandler
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -366,6 +368,7 @@ class MainActivity : AppCompatActivity() {
         val conn = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         return conn?.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) == true || conn?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
     }
+
 
 
 }

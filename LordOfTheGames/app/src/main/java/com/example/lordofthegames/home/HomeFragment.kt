@@ -15,15 +15,16 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
@@ -327,6 +328,8 @@ class HomeFragment: Fragment(), OnItemListener {
         }
         Log.w("GiuochiMale", newGameList.toString())
         //this.filterData("")
+
+
     }
 
 
