@@ -4,6 +4,7 @@ package com.example.lordofthegames.home
 //import com.example.lordofthegames.Database.LOTGRepository
 //import com.example.lordofthegames.db_entities.Game
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -23,7 +24,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
@@ -80,7 +80,7 @@ class HomeFragment: Fragment(), OnItemListener {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
+        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
         filterFrameLayout = view.findViewById(R.id.filter_home)
         return view
@@ -88,7 +88,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!)[HomeViewModel::class.java]
+        //homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!)[HomeViewModel::class.java]
         setHasOptionsMenu(true)
     }
 
@@ -97,7 +97,9 @@ class HomeFragment: Fragment(), OnItemListener {
         val activity: Activity? = activity
         if(activity != null) {
             setRecyclerView(activity)
-
+            if(adapter != null){
+                displayGame()
+            }
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
 
@@ -180,35 +182,35 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
 
-        val newGameList: MutableList<GameCardItem> = mutableListOf()
-        homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
-            list ->
-            if(list.isNotEmpty()){
-                list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
-                //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
-            }
-        }
-
-
-        (context as LifecycleOwner?)?.let {
-            //QUesta è eseguitra dopo che è stato inizilizzato tutto quindi credo si possano generare i GameCardItem per ogni elemento ottenuto e poi sistemare l'adapter
-            homeViewModel.getAllGameSimpleDet().observe(it) { el ->
-                if(el.isNotEmpty()){
-                    el?.forEach { e ->
-                        Log.w("LISTONE", e.game_title)
-                        gameListdb.add(GameCardItem(e.game_cover, e.game_title))
-                    }
-                } else {
-                    Log.w("LISTONE", "VUOTP")
-                }
-                //adapter.setData(cardItems)
-            }
-        }
-
-        Log.w("Giuochi1", gameListdb.toString()); Log.w("Giuochi2", newGameList.toString())
-
-
-        gameItems.addAll(newGameList)
+        //val newGameList: MutableList<GameCardItem> = mutableListOf()
+        //homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
+        //    list ->
+        //    if(list.isNotEmpty()){
+        //        list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
+        //        //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+        //    }
+        //}
+//
+//
+        //(context as LifecycleOwner?)?.let {
+        //    //QUesta è eseguitra dopo che è stato inizilizzato tutto quindi credo si possano generare i GameCardItem per ogni elemento ottenuto e poi sistemare l'adapter
+        //    homeViewModel.getAllGameSimpleDet().observe(it) { el ->
+        //        if(el.isNotEmpty()){
+        //            el?.forEach { e ->
+        //                Log.w("LISTONE", e.game_title)
+        //                gameListdb.add(GameCardItem(e.game_cover, e.game_title))
+        //            }
+        //        } else {
+        //            Log.w("LISTONE", "VUOTP")
+        //        }
+        //        //adapter.setData(cardItems)
+        //    }
+        //}
+//
+        //Log.w("Giuochi1", gameListdb.toString()); Log.w("Giuochi2", newGameList.toString())
+//
+//
+        //gameItems.addAll(newGameList)
 
         adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
         val gridLayout = LinearLayoutManager(activity)
@@ -311,6 +313,23 @@ class HomeFragment: Fragment(), OnItemListener {
         // Aggiorna l'adapter con la lista filtrata
         adapter?.setFilter(filteredList)
     }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun displayGame(){
+        val newGameList: MutableList<GameCardItem> = mutableListOf()
+        homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
+            list ->
+                if(list.isNotEmpty()){
+                    list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
+                    //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+                }
+        }
+        Log.w("GiuochiMale", newGameList.toString())
+        //this.filterData("")
+    }
+
+
 
 
 

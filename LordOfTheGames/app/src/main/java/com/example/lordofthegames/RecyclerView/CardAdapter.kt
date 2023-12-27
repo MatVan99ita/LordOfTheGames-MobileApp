@@ -104,8 +104,5 @@ class CardAdapter(var listener: OnItemListener, var cardItemList: List<GameCardI
         this.notifyDataSetChanged() // Notifica la RecyclerView che i dati sono cambiati
     }
 
-    fun update(list: List<TextView>){
-
-    }
 
 }
