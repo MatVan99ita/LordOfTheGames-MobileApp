@@ -185,7 +185,7 @@ class HomeFragment: Fragment(), OnItemListener {
             list ->
             if(list.isNotEmpty()){
                 list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
-                adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+                //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
             }
         }
 
@@ -197,33 +197,6 @@ class HomeFragment: Fragment(), OnItemListener {
                     el?.forEach { e ->
                         Log.w("LISTONE", e.game_title)
                         gameListdb.add(GameCardItem(e.game_cover, e.game_title))
-
-                        homeViewModel.getGameCategory(e.game_title).observe(it) {
-                            el -> el?.forEach { e ->
-                                if (e != null) {
-                                    categoriesdb.add(CategoryCardItem(e.category_name))
-                                }
-                            }
-                        }
-                        homeViewModel.getGamePlatform(e.game_title).observe(it) {
-                            el -> el?.forEach { e ->
-                                if (e != null) {
-                                    platformdb.add(
-                                        PlatformCardItem(e.nome, when(e.nome){
-                                            "PS4" -> Color.rgb(19, 44, 116)
-                                            "STEAM" -> Color.rgb(41, 41, 41)
-                                            "EPIC" -> Color.rgb(58, 58, 56)
-                                            "XBOX ONE" -> Color.rgb(24, 128, 24)
-                                            "Game Pass" -> Color.rgb(24, 128, 24)
-                                            "Nintendo" -> Color.rgb(231, 8, 25)
-                                            else -> Color.rgb(24, 128, 24)
-                                        })
-                                    )
-                                }
-                            }
-                        }
-                        val c = homeViewModel.getAchievementCount(e.game_title)
-
                     }
                 } else {
                     Log.w("LISTONE", "VUOTP")
@@ -232,10 +205,12 @@ class HomeFragment: Fragment(), OnItemListener {
             }
         }
 
+        Log.w("Giuochi1", gameListdb.toString()); Log.w("Giuochi2", newGameList.toString())
 
-        gameItems.addAll(gameListdb)
 
-        //adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
+        gameItems.addAll(newGameList)
+
+        adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
