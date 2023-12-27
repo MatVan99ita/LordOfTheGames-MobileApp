@@ -80,5 +80,9 @@ class LotgRepo(application: Application) {
         LOTGDatabase.executor.execute { lotgDao.insertUser(userItem) }
     }
 
+    fun getSimp(): Cursor {
+        return lotgDao.getSIMP()
+    }
+
 
 }

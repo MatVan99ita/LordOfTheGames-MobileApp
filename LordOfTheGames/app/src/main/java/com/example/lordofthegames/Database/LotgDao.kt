@@ -146,6 +146,9 @@ interface LotgDao {
             "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
     fun getAchievementCount(game_title: String): Cursor
 
+    @Query("SELECT game_cover, game_title FROM game")
+    fun getSIMP(): Cursor
+
 
 
 

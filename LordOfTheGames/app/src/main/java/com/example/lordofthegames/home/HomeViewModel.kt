@@ -1,7 +1,7 @@
 package com.example.lordofthegames.home
 
 import android.app.Application
-import android.database.Cursor
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +11,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
+import com.example.lordofthegames.recyclerView.GameCardItem
 
 
 class HomeViewModel(application: Application): AndroidViewModel(application) {
@@ -46,6 +47,20 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getAchievementCount(game_title)
     }
 
+    fun getSIMP(): List<GameCardItem> {
+        val l = repository.getSimp()
+        Log.w("POCODIO1", l.columnCount.toString())
+        Log.w("POCODIO2", "${l.getColumnName(0)} - ${l.getColumnName(1)}")
+        Log.w("POCODIO3", l.count.toString())
+        val s = mutableListOf<GameCardItem>()
 
+
+        while (l.moveToNext()){
+            s.add(GameCardItem(l.getString(0).toString(), l.getString(1).toString()))
+        }
+        s.forEach{el -> Log.w("POCODIO4", el.toString())}
+
+        return s
+    }
 
 }

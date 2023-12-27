@@ -44,6 +44,7 @@ abstract class LOTGDatabase: RoomDatabase() {
                     "lotgdb"
                     )
                     .createFromAsset("lotgdb.db")
+                    .allowMainThreadQueries()
                     .build()
 
                 instance

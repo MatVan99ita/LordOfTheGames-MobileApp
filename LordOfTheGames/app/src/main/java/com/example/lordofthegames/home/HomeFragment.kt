@@ -15,16 +15,14 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.SearchView
 import android.widget.TextView
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
-import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
@@ -36,7 +34,7 @@ import com.example.lordofthegames.recyclerView.PlatformCardItem
 class HomeFragment: Fragment(), OnItemListener {
 
 
-    private var gameItems: MutableList<GameCardItem> = listOf(
+    private val gameItems: MutableList<GameCardItem> = listOf(
         GameCardItem("gabibbo",             "Bloodborne"),
         GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
         GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
@@ -66,6 +64,24 @@ class HomeFragment: Fragment(), OnItemListener {
         GameCardItem("gabibbo",             "Bloodborne"),
     ) as MutableList<GameCardItem>
 
+    private val catItems: MutableList<CategoryCardItem> = listOf(
+        CategoryCardItem("GDR"),
+        CategoryCardItem("Terza persona"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG"),
+        CategoryCardItem("JRPG")
+    ) as MutableList<CategoryCardItem>
+
+    private val platItems: MutableList<PlatformCardItem> = listOf(
+        PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
+        PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
+        PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
+        PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
+        PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
+        PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
+    ) as MutableList<PlatformCardItem>
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
@@ -161,23 +177,6 @@ class HomeFragment: Fragment(), OnItemListener {
     }
 
     private fun setRecyclerView(act: Activity) {
-        val catItems: MutableList<CategoryCardItem> = listOf(
-            CategoryCardItem("GDR"),
-            CategoryCardItem("Terza persona"),
-            CategoryCardItem("JRPG"),
-            CategoryCardItem("JRPG"),
-            CategoryCardItem("JRPG"),
-            CategoryCardItem("JRPG"),
-            CategoryCardItem("JRPG")
-        ) as MutableList<CategoryCardItem>
-        val platItems: MutableList<PlatformCardItem> = listOf(
-            PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
-            PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
-            PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
-            PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
-            PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
-            PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
-        ) as MutableList<PlatformCardItem>
 
         recyclerView = act.findViewById(R.id.recycler_view)
         val listener: OnItemListener = this
@@ -213,8 +212,12 @@ class HomeFragment: Fragment(), OnItemListener {
 //
 //
         //gameItems.addAll(newGameList)
+        //(context as LifecycleOwner?)?.let {
+        //    homeViewModel.getSIMP()
+        //}
 
-        adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
+
+        adapter = CardAdapter(listener, homeViewModel.getSIMP(), act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
