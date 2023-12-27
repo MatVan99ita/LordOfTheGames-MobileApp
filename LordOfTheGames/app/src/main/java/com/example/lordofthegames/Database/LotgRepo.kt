@@ -4,6 +4,7 @@ import android.app.Application
 import android.database.Cursor
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.lordofthegames.Pair
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
@@ -55,8 +56,13 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllGameSimpleDet(game_title)
     }
 
-    fun getAchievementCount(game_title: String): Cursor{
-        return lotgDao.getAchievementCount(game_title)
+    fun getAchievementCount(game_title: String): Pair<Int, Int>{
+        return CursorToPair(game_title)
+    }
+
+    fun CursorToPair(game_title: String): Pair<Int, Int>{
+        val c = lotgDao.getAchievementCount(game_title)
+        return Pair(c.getInt(0), c.getInt(1))
     }
 
 

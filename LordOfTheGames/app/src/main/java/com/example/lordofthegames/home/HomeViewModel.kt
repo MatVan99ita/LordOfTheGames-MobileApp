@@ -1,6 +1,7 @@
 package com.example.lordofthegames.home
 
 import android.app.Application
+import android.database.Cursor
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.Pair
 
 
 class HomeViewModel(application: Application): AndroidViewModel(application) {
@@ -42,6 +44,10 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     fun getAllGame(): LiveData<List<Game?>?> {
         return repository.getAllGames()
+    }
+
+    fun getAchievementCount(game_title: String): Pair<Int, Int> {
+        return repository.getAchievementCount(game_title)
     }
 
 

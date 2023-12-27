@@ -69,6 +69,8 @@ class HomeFragment: Fragment(), OnItemListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
     private var gameListdb: MutableList<GameCardItem> = mutableListOf()
+    private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
+    private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE
 
@@ -177,18 +179,55 @@ class HomeFragment: Fragment(), OnItemListener {
         val listener: OnItemListener = this
 
 
-        (activity as LifecycleOwner?)?.let {
+
+        val newGameList: MutableList<GameCardItem> = mutableListOf()
+        homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
+            list ->
+            if(list.isNotEmpty()){
+                list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
+                adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+            }
+        }
+
+
+        (context as LifecycleOwner?)?.let {
             //QUesta è eseguitra dopo che è stato inizilizzato tutto quindi credo si possano generare i GameCardItem per ogni elemento ottenuto e poi sistemare l'adapter
             homeViewModel.getAllGameSimpleDet().observe(it) { el ->
                 if(el.isNotEmpty()){
                     el?.forEach { e ->
                         Log.w("LISTONE", e.game_title)
                         gameListdb.add(GameCardItem(e.game_cover, e.game_title))
+
+                        homeViewModel.getGameCategory(e.game_title).observe(it) {
+                            el -> el?.forEach { e ->
+                                if (e != null) {
+                                    categoriesdb.add(CategoryCardItem(e.category_name))
+                                }
+                            }
+                        }
+                        homeViewModel.getGamePlatform(e.game_title).observe(it) {
+                            el -> el?.forEach { e ->
+                                if (e != null) {
+                                    platformdb.add(
+                                        PlatformCardItem(e.nome, when(e.nome){
+                                            "PS4" -> Color.rgb(19, 44, 116)
+                                            "STEAM" -> Color.rgb(41, 41, 41)
+                                            "EPIC" -> Color.rgb(58, 58, 56)
+                                            "XBOX ONE" -> Color.rgb(24, 128, 24)
+                                            "Game Pass" -> Color.rgb(24, 128, 24)
+                                            "Nintendo" -> Color.rgb(231, 8, 25)
+                                            else -> Color.rgb(24, 128, 24)
+                                        })
+                                    )
+                                }
+                            }
+                        }
+                        val c = homeViewModel.getAchievementCount(e.game_title)
+
                     }
                 } else {
                     Log.w("LISTONE", "VUOTP")
                 }
-
                 //adapter.setData(cardItems)
             }
         }
@@ -196,47 +235,48 @@ class HomeFragment: Fragment(), OnItemListener {
 
         gameItems.addAll(gameListdb)
 
-        adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
+        //adapter = CardAdapter(listener, gameItems, catItems, platItems, act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
         val itemCount: Int = (adapter!!.itemCount) as Int
+        if(itemCount > 0){
+            for (i in 0 until itemCount) {
+                val viewHolder =
+                    recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
+                viewHolder?.let {
+                    val catList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
+                    val platList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
 
-        for (i in 0 until itemCount) {
-            val viewHolder =
-                recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
-            viewHolder?.let {
-                val catList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
-                val platList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
+                    val listCat = it.itemView.findViewById<LinearLayout>(R.id.category_linear_home)
+                    listCat.removeAllViews()
+                    val listPlat = it.itemView.findViewById<LinearLayout>(R.id.platform_linear_home)
+                    listPlat.removeAllViews()
+                    // Ora puoi aggiungere TextView dinamicamente al LinearLayout
 
-                val listCat = it.itemView.findViewById<LinearLayout>(R.id.category_linear_home)
-                listCat.removeAllViews()
-                val listPlat = it.itemView.findViewById<LinearLayout>(R.id.platform_linear_home)
-                listPlat.removeAllViews()
-                // Ora puoi aggiungere TextView dinamicamente al LinearLayout
+                    catItems.forEach { x ->
+                        val t = TextView(requireContext())
+                        t.text = x.category_name
+                        viewHolder.catTitle.text = x.category_name
+                        catList.add(t)
+                    }
 
-                catItems.forEach { x ->
-                    val t = TextView(requireContext())
-                    t.text = x.category_name
-                    viewHolder.catTitle.text = x.category_name
-                    catList.add(t)
+                    platItems.forEach { x ->
+                        val t = TextView(requireContext())
+                        t.text = x.platFormName
+                        platList.add(t)
+                    }
+
+                    catList.forEach { el ->
+                        listCat.addView(el)
+                    }
+
+                    platList.forEach { el ->
+                        listPlat.addView(el)
+                    }
+
                 }
-
-                platItems.forEach { x ->
-                    val t = TextView(requireContext())
-                    t.text = x.platFormName
-                    platList.add(t)
-                }
-
-                catList.forEach { el ->
-                    listCat.addView(el)
-                }
-
-                platList.forEach { el ->
-                    listPlat.addView(el)
-                }
-
             }
         }
     }

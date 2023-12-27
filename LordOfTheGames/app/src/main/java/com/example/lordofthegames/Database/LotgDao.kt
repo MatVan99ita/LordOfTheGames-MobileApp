@@ -4,9 +4,11 @@ import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.lordofthegames.Pair
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -65,23 +67,23 @@ interface LotgDao {
      * QUERY VARIE
      */
 
-    @Transaction
+
     @Query("SELECT * FROM game")
     fun getAllGames(): LiveData<List<Game?>?>
 
-    @Transaction
+
     @Query("SELECT * FROM user WHERE mail = :email AND password = :passw")
     fun getCurrentUser(email: String, passw: String): LiveData<List<User?>?>
 
-    @Transaction
+
     @Query("SELECT * FROM user WHERE nickname = :nick")
     fun getUsrByNick(nick: String): LiveData<List<User?>?>
 
-    @Transaction
+
     @Query("SELECT * FROM game WHERE game_title = :game_title")
     fun getGameDetail(game_title: String): LiveData<List<Game?>?>
 
-    @Transaction
+
     @Query( "SELECT platform.*\n" +
             "FROM platform INNER JOIN gameplatform\n" +
             "ON platform.platform_id = gameplatform.platform_ref\n" +
@@ -91,14 +93,14 @@ interface LotgDao {
     fun getGamePlatform(game_title: String): LiveData<List<Platform?>?>
 
 
-    @Transaction
+
     @Query("SELECT achievement.*\n" +
             "FROM achievement INNER JOIN game\n" +
             "ON achievement.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title")
     fun getGameAchievement(game_title: String): LiveData<List<Achievement?>?>
 
-    @Transaction
+
     @Query("SELECT categories.*\n" +
             "FROM categories INNER JOIN gamecategory\n" +
             "ON categories.category_id = gamecategory.category_ref\n" +
@@ -107,12 +109,12 @@ interface LotgDao {
             "WHERE Game.game_title = :game_title")
     fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
 
-    @Transaction
+
     @Query("SELECT * FROM game WHERE game_title LIKE '%' || :game_title || '%' ORDER BY game_title DESC")
     fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game>>
 
 
-    @Transaction
+
     @Query( "SELECT * FROM platform \n" +
             "INNER JOIN gameplatform ON platform.platform_id = gameplatform.platform_ref " +
             "INNER JOIN game ON gameplatform.game_ref = game.game_id " +
@@ -121,7 +123,7 @@ interface LotgDao {
             "ORDER BY platform.nome;")
     fun getAllGameSimpleDetP(game_title: String): LiveData<List<Game>>
 
-    @Transaction
+
     @Query("SELECT * \n" +
             "FROM categories INNER JOIN gamecategory\n" +
             "ON categories.category_id = gamecategory.category_ref\n" +
@@ -133,7 +135,6 @@ interface LotgDao {
     fun getAllGameSimpleDetC(game_title: String): LiveData<List<Game>>
 
 
-    @Transaction
     @Query("SELECT (\n" +
             "SELECT COUNT(*)\n" +
             "FROM achievement INNER JOIN game\n" +
