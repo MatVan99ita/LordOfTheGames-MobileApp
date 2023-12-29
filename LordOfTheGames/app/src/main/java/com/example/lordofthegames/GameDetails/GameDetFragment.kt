@@ -155,16 +155,16 @@ class GameDetFragment: Fragment(), OnItemListener  {
         if (activity != null) {
 
 
-            this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g ->
-
-                Log.w("GIUOCAMENDI", g.toString())
-
-                g?.forEach { e ->
-                    if (e != null) {
-                        Log.w("GIUOCAMENDI", e.game_title)
-                    }
-                }
-            }
+            //this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g ->
+//
+            //    Log.w("GIUOCAMENDI", g.toString())
+//
+            //    g?.forEach { e ->
+            //        if (e != null) {
+            //            Log.w("GIUOCAMENDI", e.game_title)
+            //        }
+            //    }
+            //}
 
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

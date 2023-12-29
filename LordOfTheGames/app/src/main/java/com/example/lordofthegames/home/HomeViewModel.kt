@@ -1,6 +1,7 @@
 package com.example.lordofthegames.home
 
 import android.app.Application
+import android.database.Cursor
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -22,7 +23,7 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getCurrentUser(user_name, passw)
     }
 
-    fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): LiveData<List<Game>>{
+    fun getAllGameSimpleDet(game_title: String = "", order: String = "Name"): Cursor {
         return when(order){
             "Name" -> repository.getAllGameSimpleDet("%${game_title}%")
             "Platform" -> repository.getAllGameSimpleDetP("%${game_title}%")
@@ -31,11 +32,15 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun getGamePlatform(game_title: String): LiveData<List<Platform?>?>{
+    fun getGameAchievementCount(game_title: String): Cursor {
+        return repository.getAchievementCount(game_title)
+    }
+
+    fun getGamePlatform(game_title: String): Cursor {
         return repository.getGamePlatform(game_title)
     }
 
-    fun getGameCategory(game_title: String): LiveData<List<Categories?>?>{
+    fun getGameCategory(game_title: String): Cursor {
         return repository.getGameCategory(game_title)
     }
 
@@ -43,7 +48,7 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getAllGames()
     }
 
-    fun getAchievementCount(game_title: String): Pair<Int, Int> {
+    fun getAchievementCount(game_title: String): Cursor {
         return repository.getAchievementCount(game_title)
     }
 

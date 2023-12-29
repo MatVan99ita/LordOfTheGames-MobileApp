@@ -35,43 +35,38 @@ class LotgRepo(application: Application) {
         return lotgDao.getUsrByNick(nick)
     }
 
-    fun getGameDetail(game_title: String): LiveData<List<Game?>?> {
+    fun getGameDetail(game_title: String): Cursor {
         return lotgDao.getGameDetail(game_title)
     }
 
 
-    fun getGamePlatform(game_title: String): LiveData<List<Platform?>?>{
+    fun getGamePlatform(game_title: String): Cursor {
         return lotgDao.getGamePlatform(game_title)
     }
 
-    fun getGameAchievement(game_title: String): LiveData<List<Achievement?>?>{
+    fun getGameAchievement(game_title: String): Cursor {
         return lotgDao.getGameAchievement(game_title)
     }
 
-    fun getGameCategory(game_title: String): LiveData<List<Categories?>?>{
+    fun getGameCategory(game_title: String): Cursor {
         return lotgDao.getGameCategory(game_title)
     }
 
-    fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game>>{
+    fun getAllGameSimpleDet(game_title: String = ""): Cursor {
         return lotgDao.getAllGameSimpleDet(game_title)
     }
 
-    fun getAchievementCount(game_title: String): Pair<Int, Int>{
-        return CursorToPair(game_title)
-    }
-
-    fun CursorToPair(game_title: String): Pair<Int, Int>{
-        val c = lotgDao.getAchievementCount(game_title)
-        return Pair(c.getInt(0), c.getInt(1))
+    fun getAchievementCount(game_title: String): Cursor{
+        return lotgDao.getAchievementCount(game_title)
     }
 
 
 
-    fun getAllGameSimpleDetP(condition: String): LiveData<List<Game>> {
+    fun getAllGameSimpleDetP(condition: String): Cursor {
         return lotgDao.getAllGameSimpleDetP(condition)
     }
 
-    fun getAllGameSimpleDetC(condition: String): LiveData<List<Game>> {
+    fun getAllGameSimpleDetC(condition: String): Cursor {
         return lotgDao.getAllGameSimpleDetC(condition)
     }
 

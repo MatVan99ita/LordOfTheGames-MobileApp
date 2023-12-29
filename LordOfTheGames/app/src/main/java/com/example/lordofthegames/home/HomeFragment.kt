@@ -217,7 +217,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //}
 
 
-        adapter = CardAdapter(listener, homeViewModel.getSIMP(), act)
+        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
@@ -322,15 +322,15 @@ class HomeFragment: Fragment(), OnItemListener {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayGame(){
-        val newGameList: MutableList<GameCardItem> = mutableListOf()
-        homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
-            list ->
-                if(list.isNotEmpty()){
-                    list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
-                    //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
-                }
-        }
-        Log.w("GiuochiMale", newGameList.toString())
+        //val newGameList: MutableList<GameCardItem> = mutableListOf()
+        //homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
+        //    list ->
+        //        if(list.isNotEmpty()){
+        //            list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
+        //            //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+        //        }
+        //}
+        //Log.w("GiuochiMale", newGameList.toString())
         //this.filterData("")
 
 

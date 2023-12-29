@@ -81,7 +81,7 @@ interface LotgDao {
 
     @Transaction
     @Query("SELECT * FROM game WHERE game_title = :game_title")
-    fun getGameDetail(game_title: String): LiveData<List<Game?>?>
+    fun getGameDetail(game_title: String): Cursor
 
     @Transaction
     @Query( "SELECT platform.*\n" +
@@ -90,7 +90,7 @@ interface LotgDao {
             "INNER JOIN game\n" +
             "ON gameplatform.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title")
-    fun getGamePlatform(game_title: String): LiveData<List<Platform?>?>
+    fun getGamePlatform(game_title: String): Cursor
 
 
     @Transaction
@@ -98,7 +98,7 @@ interface LotgDao {
             "FROM achievement INNER JOIN game\n" +
             "ON achievement.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title")
-    fun getGameAchievement(game_title: String): LiveData<List<Achievement?>?>
+    fun getGameAchievement(game_title: String): Cursor
 
     @Transaction
     @Query("SELECT categories.*\n" +
@@ -107,11 +107,11 @@ interface LotgDao {
             "INNER JOIN game\n" +
             "ON gamecategory.game_ref = game.game_id\n" +
             "WHERE Game.game_title = :game_title")
-    fun getGameCategory(game_title: String): LiveData<List<Categories?>?>
+    fun getGameCategory(game_title: String): Cursor
 
     @Transaction
     @Query("SELECT * FROM game WHERE game_title LIKE '%' || :game_title || '%' ORDER BY game_title DESC")
-    fun getAllGameSimpleDet(game_title: String = ""): LiveData<List<Game>>
+    fun getAllGameSimpleDet(game_title: String = ""): Cursor
 
 
     @Transaction
@@ -121,7 +121,7 @@ interface LotgDao {
             "WHERE game.game_title LIKE '%' || :game_title || '%' " +
             "GROUP BY game.game_title " +
             "ORDER BY platform.nome;")
-    fun getAllGameSimpleDetP(game_title: String): LiveData<List<Game>>
+    fun getAllGameSimpleDetP(game_title: String): Cursor
 
     @Transaction
     @Query("SELECT * \n" +
@@ -132,7 +132,7 @@ interface LotgDao {
             "WHERE Game.game_title LIKE '%' || :game_title || '%' \n" +
             "GROUP BY Game.game_title \n" +
             "ORDER BY category_name")
-    fun getAllGameSimpleDetC(game_title: String): LiveData<List<Game>>
+    fun getAllGameSimpleDetC(game_title: String): Cursor
 
     @Transaction
     @Query("SELECT (\n" +
