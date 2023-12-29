@@ -322,6 +322,9 @@ class HomeFragment: Fragment(), OnItemListener {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayGame(){
+        /**
+         * TODO: RISCRIVERLA SAPENDO CHE ORA C'E' UN CURSOR CON I DATI
+         * */
         //val newGameList: MutableList<GameCardItem> = mutableListOf()
         //homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
         //    list ->

@@ -154,7 +154,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-
+            /**
+             * TODO: DA RISCRIVERE PENSANDO DI AVERE UN CURSOR
+             * */
             //this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g ->
 //
             //    Log.w("GIUOCAMENDI", g.toString())
