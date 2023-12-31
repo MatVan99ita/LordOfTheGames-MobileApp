@@ -322,19 +322,34 @@ class HomeFragment: Fragment(), OnItemListener {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayGame(){
-        /**
-         * TODO: RISCRIVERLA SAPENDO CHE ORA C'E' UN CURSOR CON I DATI
-         * */
         //val newGameList: MutableList<GameCardItem> = mutableListOf()
-        //homeViewModel.getAllGameSimpleDet().observe(viewLifecycleOwner){
-        //    list ->
-        //        if(list.isNotEmpty()){
+        //homeViewModel.getGameSimpleDet().observe(viewLifecycleOwner){
+        //    gamlist ->
+        //        if(gamlist.isNotEmpty()){
+        //            for (el in gamlist){
+        //                homeViewModel.getAllGameCategory(el.game_title).observe(viewLifecycleOwner) {
+        //                    cattlist ->
+        //                        if(cattlist.isNotEmpty()){
+        //                            homeViewModel.getGamePlatform(el.game_title).observe(viewLifecycleOwner){
+        //                                plattlist -> {
+        //                                    if(plattlist.isNotEmpty()){
+        //                                        adapter.setData()
+        //                                    }
+        //                                }
+        //                            }
+        //                        }
+        //                    }
+        //                if(l)
+        //                adapter.setData(el.game_title, , homeViewModel.getGamePlatform(el.game_title)
+//
+        //            }
+//
         //            list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
         //            //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
         //        }
         //}
         //Log.w("GiuochiMale", newGameList.toString())
-        //this.filterData("")
+        this.filterData("")
 
 
     }

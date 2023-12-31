@@ -114,6 +114,33 @@ interface LotgDao {
     fun getAllGameSimpleDet(game_title: String = ""): Cursor
 
 
+    @MapInfo(keyColumn = "game_title", valueColumn = "category_name")
+    @Query("SELECT DISTINCT game.game_title, categories.category_name\n" +
+            "FROM categories, gamecategory, game\n" +
+            "WHERE categories.category_id = gamecategory.category_ref\n" +
+            "AND gamecategory.game_ref = game.game_id\n")
+    fun getAllGameCategories(): LiveData<Map<String, String>>
+
+    @MapInfo(keyColumn = "game_title")
+    @Query("SELECT DISTINCT game.game_title, platform.*\n" +
+            "FROM platform, gameplatform, game\n" +
+            "WHERE platform.platform_id = gameplatform.platform_ref\n" +
+            "AND gameplatform.game_ref = game.game_id\n")
+    fun getAllGamePlatforms(): LiveData<Map<String, Platform>>
+
+
+
+    //@Query("SELECT game.game_title, (" +
+    //"SELECT COUNT(*)\n" +
+    //"FROM achievement, game\n" +
+    //"WHERE achievement.game_ref = game.game_id\n) As total_count, \n" +
+    //"(SELECT COUNT(*)\n" +
+    //"FROM achievement, game\n" +
+    //"WHERE achievement.game_ref = game.game_id\n"+
+    // "AND achievement.status=1) as completed_count FROM game")
+    //fun getAllGameAchievementCounts(): LiveData<Map<String, kotlin.Pair<Int, Int>>>
+
+
     @Transaction
     @Query( "SELECT * FROM platform \n" +
             "INNER JOIN gameplatform ON platform.platform_id = gameplatform.platform_ref " +
@@ -122,6 +149,10 @@ interface LotgDao {
             "GROUP BY game.game_title " +
             "ORDER BY platform.nome;")
     fun getAllGameSimpleDetP(game_title: String): Cursor
+
+
+    @Query("SELECT game_title FROM game")
+    fun getGameSimpleDet(): LiveData<List<String>>
 
     @Transaction
     @Query("SELECT * \n" +

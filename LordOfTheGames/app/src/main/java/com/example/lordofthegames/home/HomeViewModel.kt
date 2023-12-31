@@ -32,6 +32,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun getGameSimpleDet(): LiveData<List<String>> {
+        return repository.getGameSimpleDet()
+    }
+
+
+
     fun getGameAchievementCount(game_title: String): Cursor {
         return repository.getAchievementCount(game_title)
     }
