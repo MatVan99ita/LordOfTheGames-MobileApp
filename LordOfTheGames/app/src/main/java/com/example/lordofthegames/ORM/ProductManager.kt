@@ -23,7 +23,7 @@ class ProductManager(context: Context) {
 
     private val TAG = this@ProductManager.javaClass.simpleName
     private var INSTANCE: ProductManager? = ProductManager(context)
-    private var productDBHelper: LotgDB_orm? = OpenHelperManager.getHelper(context, LotgDB_orm::class.java)
+    private var productDBHelper: LotgDB_Orm? = OpenHelperManager.getHelper(context, LotgDB_Orm::class.java)
 
     private var productItemDao: Dao<Prodotto, *>? = productDBHelper?.productDao
 
