@@ -1,14 +1,7 @@
 package com.example.lordofthegames
 
 
-class Pair<X, Y>(x: X, y: Y) {
-    val x: X?
-    val y: Y?
-
-    init {
-        this.x = x
-        this.y = y
-    }
+class Pair<X, Y>(var x: X?, var y: Y?) {
 
     override fun hashCode(): Int {
         val prime = 31

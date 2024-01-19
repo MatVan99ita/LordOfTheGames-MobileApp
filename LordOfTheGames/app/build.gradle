@@ -37,6 +37,13 @@ android {
 }
 
 dependencies {
+
+
+    implementation ("joda-time:joda-time:2.12.6")
+    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("com.j256.ormlite:ormlite-android:6.1")
+
+
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
