@@ -1,5 +1,6 @@
 package com.example.lordofthegames.ORM
 
+
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -8,15 +9,10 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper
 import com.j256.ormlite.dao.Dao
 import com.j256.ormlite.support.ConnectionSource
 import com.j256.ormlite.table.TableUtils
-import prodotticondb.Prodotto
-import prodotticondb.ProductDB
 import java.sql.SQLException
 
 
-const val DB_NAME = "lotgdb"
-const val DB_VERSION = 2
-
-class LotgDB_orm(context: Context) : OrmLiteSqliteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class LotgDB_Orm(context: Context) : OrmLiteSqliteOpenHelper(context, "lotgdb", null, 2) {
 
     var productDao: Dao<Prodotto, *>? = getDao(Prodotto::class.java)
 
@@ -37,9 +33,9 @@ class LotgDB_orm(context: Context) : OrmLiteSqliteOpenHelper(context, DB_NAME, n
     ) {
         try {
             if (isTableExisting(database, "prodotto")) {
-                TableUtils.dropTable(
+                TableUtils.dropTable<_, Prodotto>(
                     connectionSource,
-                    LotgDB_orm::class.java,
+                    LotgDB_Orm::class.java,
                     false
                 )
             }
@@ -63,7 +59,7 @@ class LotgDB_orm(context: Context) : OrmLiteSqliteOpenHelper(context, DB_NAME, n
     }
 
     fun clearTable(){
-        TableUtils.clearTable(connectionSource, LotgDB_orm::class.java)
+        TableUtils.clearTable(connectionSource, LotgDB_Orm::class.java)
     }
 
     override fun close() {

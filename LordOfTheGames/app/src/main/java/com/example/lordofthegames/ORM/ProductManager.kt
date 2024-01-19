@@ -22,39 +22,23 @@ class ProductManager(context: Context) {
 
 
     private val TAG = this@ProductManager.javaClass.simpleName
-    private val context: Context? = null
-    private val INSTANCE: ProductManager? = null
-    private var productDBHelper: LotgDB_orm? = null
+    private var INSTANCE: ProductManager? = ProductManager(context)
+    private var productDBHelper: LotgDB_orm? = OpenHelperManager.getHelper(context, LotgDB_orm::class.java)
 
-    private var productItemDao: Dao<Prodotto, *>? = null
+    private var productItemDao: Dao<Prodotto, *>? = productDBHelper?.productDao
 
-    init {
-        initializeAll()
-    }
-
-    private fun initializeAll() {
-        productItemDao = productDBHelper?.productDao;
-
-    }
-
-
-    fun getINSTANCE(con: Context?): ProductManager? {
-        return if (ProductManager.INSTANCE == null) ProductManager(con!!).also {
-            ProductManager.INSTANCE = it
-        } else ProductManager.INSTANCE
-    }
 
     fun releaseDB() {
         if (productDBHelper != null) {
             OpenHelperManager.releaseHelper()
             productDBHelper = null
-            ProductManager.INSTANCE = null
+            INSTANCE = null
         }
     }
 
     fun clearAllData(): Int {
         return if (productDBHelper == null) -1 else try {
-            productDBHelper.clearTable()
+            productDBHelper!!.clearTable()
             0
         } catch (e: SQLException) {
             e.printStackTrace()
@@ -64,7 +48,7 @@ class ProductManager(context: Context) {
 
     fun insertProduct(p: Prodotto?, isEdit: Boolean): Int {
         if (productItemDao == null) return -2
-        val updateBuilder: UpdateBuilder<Prodotto, Long> = productItemDao!!.updateBuilder()
+        val updateBuilder: UpdateBuilder<Prodotto, out Any>? = productItemDao!!.updateBuilder()
         return try {
             productItemDao!!.createIfNotExists(p)
             0
@@ -77,12 +61,12 @@ class ProductManager(context: Context) {
 
     fun deleteProductByID(id: Int): Int {
         if (productItemDao == null) return -2
-        val deleteBuilder: DeleteBuilder<Prodotto, Long> = productItemDao!!.deleteBuilder()
+        val deleteBuilder: DeleteBuilder<Prodotto, out Any>? = productItemDao!!.deleteBuilder()
         return try {
             if (id >= 0) {
-                deleteBuilder.where().eq(ProductManager.INDEX, id)
+                deleteBuilder?.where()?.eq(INDEX, id)
             }
-            deleteBuilder.delete()
+            deleteBuilder?.delete()
             0
         } catch (e: SQLException) {
             e.printStackTrace()
@@ -92,31 +76,24 @@ class ProductManager(context: Context) {
 
     fun deleteProductByExpirationTime(expirationTime: DateTime?): Int {
         if (productItemDao == null) return -2
-        val deleteBuilder: DeleteBuilder<Prodotto, Long> = productItemDao!!.deleteBuilder()
+        
+        val deleteBuilder: DeleteBuilder<Prodotto, out Any>? = productItemDao!!.deleteBuilder()
         return try {
-            val t = deleteBuilder.where().lt(ProductManager.END, DateTime.now()).query()
-            t.forEach(Consumer<Prodotto> { prodotto: Prodotto ->
-                try {
-                    deleteBuilder.where().eq(ProductManager.INDEX, prodotto.getId())
-                    deleteBuilder.delete()
-                } catch (e: SQLException) {
-                    e.printStackTrace()
-                    return@forEach
+            deleteBuilder?.where()?.lt(END, DateTime.now())?.query()
+                ?.forEach { prod: Prodotto ->
+                    try {
+                        deleteBuilder.where()?.eq(INDEX, prod.id)
+                        deleteBuilder.delete()
+                    } catch (e: SQLException) {
+                        e.printStackTrace()
+                    }
                 }
-            })
             0
         } catch (e: SQLException) {
             e.printStackTrace()
             -1
         }
     }
-
-
-    @Throws(SQLException::class)
-    fun checkTime(): String? {
-        return productItemDao.queryRaw("SELECT strftime('%s', 'now');", null).toString()
-    }
-
 
     @Throws(SQLException::class)
     fun getAllProduct(): List<Prodotto?>? {
@@ -126,50 +103,34 @@ class ProductManager(context: Context) {
     @Throws(SQLException::class)
     fun getProdotto(id: Int): Prodotto? {
         return if (productItemDao == null) null else productItemDao!!.queryBuilder().where()
-            .eq(ProductManager.INDEX, id).query()[0]
+            .eq(INDEX, id).query()[0]
     }
 
     @Throws(SQLException::class)
     fun getAllNonExpiredProduct(): List<Prodotto>? {
-        if (productItemDao == null) return null
-        val queryBuilder: QueryBuilder<Prodotto, Long> = productItemDao!!.queryBuilder()
-        return queryBuilder.where().ge(ProductManager.START, DateTime.now()).and()
-            .ge(ProductManager.END, DateTime.now()).query()
+        return if (productItemDao == null) return null else productItemDao!!
+            .queryBuilder()
+            .where()
+            .ge(START, DateTime.now())
+            .and()
+            .ge(END, DateTime.now())
+            .query()
     }
 
 
-    @Throws(SQLException::class)
-    fun updateProduct(
-        id: Int,
-        nome: Optional<String?>,
-        price: Optional<Double?>,
-        img: Optional<ByteArray?>,
-        start: Optional<DateTime?>,
-        end: Optional<DateTime?>
-    ): Int {
-        if (productItemDao == null) return -2
-        val updateBuilder: UpdateBuilder<Prodotto, Long> = productItemDao!!.updateBuilder()
-        updateBuilder.where().eq(ProductManager.INDEX, id)
-        if (nome.isPresent) updateBuilder.updateColumnValue(ProductManager.NAME, nome.get())
-        if (price.isPresent) updateBuilder.updateColumnValue(ProductManager.PRICE, price.get())
-        if (img.isPresent) updateBuilder.updateColumnValue(ProductManager.IMG, img.get())
-        if (start.isPresent) updateBuilder.updateColumnValue(ProductManager.START, start.get())
-        if (end.isPresent) updateBuilder.updateColumnValue(ProductManager.END, end.get())
-        updateBuilder.update()
-        return 0
-    }
+
 
     @Throws(SQLException::class)
     fun updateProduct(p: Prodotto, isEdit: Boolean): Int {
         if (productItemDao == null) return -2
-        val updateBuilder: UpdateBuilder<Prodotto, Long> = productItemDao!!.updateBuilder()
-        updateBuilder.where().eq(ProductManager.INDEX, p.getId())
-        updateBuilder.updateColumnValue(ProductManager.NAME, p.getName())
-        updateBuilder.updateColumnValue(ProductManager.PRICE, p.getPrice())
-        updateBuilder.updateColumnValue(ProductManager.IMG, p.getImageBytes())
-        updateBuilder.updateColumnValue(ProductManager.START, p.getStartTime())
-        updateBuilder.updateColumnValue(ProductManager.END, p.getEndTime())
-        updateBuilder.update()
+        val updateBuilder: UpdateBuilder<Prodotto, out Any>? = productItemDao!!.updateBuilder()
+        updateBuilder?.where()?.eq(INDEX, p.id)
+        updateBuilder?.updateColumnValue(NAME, p.name)
+        updateBuilder?.updateColumnValue(PRICE, p.price)
+        updateBuilder?.updateColumnValue(IMG, p.imageBytes)
+        updateBuilder?.updateColumnValue(START, p.startTime)
+        updateBuilder?.updateColumnValue(END, p.endTime)
+        updateBuilder?.update()
         return 0
     }
 
