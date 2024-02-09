@@ -21,4 +21,8 @@ class CategoryCardViewHolder(itemView: View, lister: OnItemListener) : RecyclerV
     override fun onClick(v: View?) {
         onItemListener.onItemClick(itemView, adapterPosition)
     }
+
+    override fun toString(): String {
+        return catTitle.text.toString();
+    }
 }

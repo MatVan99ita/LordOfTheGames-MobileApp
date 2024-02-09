@@ -37,8 +37,8 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentCardItem: GameCardItem = this.filteredData[position]
         val imagePath: String = currentCardItem.imageResource
-        val catItems: MutableList<CategoryCardItem> = mutableListOf()
-        val platItems: MutableList<PlatformCardItem> = mutableListOf()
+        //val catItems: MutableList<CategoryCardItem> = mutableListOf()
+        //val platItems: MutableList<PlatformCardItem> = mutableListOf()
 
         var drawable: Drawable? = null
 
@@ -69,37 +69,12 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         )
         lp.setMargins(0, 0, 5, 0)
 
-        val c = this.viuvve.getGameCategory(currentCardItem.gameTitle)
-        val p = this.viuvve.getGamePlatform(currentCardItem.gameTitle)
+        val catItems = this.viuvve.getGameCategory(currentCardItem.gameTitle)
+        val platItems = this.viuvve.getGamePlatform(currentCardItem.gameTitle)
         val a = this.viuvve.getAchievementCount(currentCardItem.gameTitle)
 
-        /**
-         * Categories   W  category_id
-         * Categories   W  category_name
-         * */
-        for(col in 0 until c.columnCount){
-            Log.w("Categories", c.getColumnName(col))
-        }
 
 
-        /**
-         * Platform W  platform_id
-         * Platform W  nome
-         * Platform W  icona
-         * */
-        for(col in 0 until p.columnCount){
-            Log.w("Platform", p.getColumnName(col))
-        }
-
-
-
-        /**
-         * Count W  total_count
-         * Count W  completed_count
-         * */
-        for(col in 0 until a.columnCount){
-            Log.w("Count", a.getColumnName(col))
-        }
 
         //val catItems: MutableList<CategoryCardItem> = listOf(
         //    CategoryCardItem("GDR"),

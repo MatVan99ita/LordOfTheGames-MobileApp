@@ -12,7 +12,10 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
+import com.example.lordofthegames.recyclerView.AchievementCardItem
+import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
+import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 
 class HomeViewModel(application: Application): AndroidViewModel(application) {
@@ -42,20 +45,55 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getAchievementCount(game_title)
     }
 
-    fun getGamePlatform(game_title: String): Cursor {
-        return repository.getGamePlatform(game_title)
+    /**
+     * Platform W  platform_id
+     * Platform W  nome
+     * Platform W  icona
+     * */
+    fun getGamePlatform(game_title: String): MutableList<PlatformCardItem> {
+        val l = repository.getGamePlatform(game_title)
+        val p : MutableList<PlatformCardItem> = mutableListOf()
+
+        while (l.moveToNext()){
+            p.add(
+                PlatformCardItem(
+                    l.getString(1),
+                    l.getInt(2)
+                )
+            )
+        }
+
+        return p
     }
 
-    fun getGameCategory(game_title: String): Cursor {
-        return repository.getGameCategory(game_title)
+    /**
+     * Categories   W  category_id
+     * Categories   W  category_name
+     * */
+    fun getGameCategory(game_title: String): MutableList<CategoryCardItem> {
+        val c : MutableList<CategoryCardItem> = mutableListOf()
+
+        val l = repository.getGameCategory(game_title)
+
+        while (l.moveToNext()){
+            c.add(CategoryCardItem(l.getString(1)))
+        }
+
+        return c
     }
 
     fun getAllGame(): LiveData<List<Game?>?> {
         return repository.getAllGames()
     }
 
-    fun getAchievementCount(game_title: String): Cursor {
-        return repository.getAchievementCount(game_title)
+    /**
+     * Count W  total_count
+     * Count W  completed_count
+     * */
+    fun getAchievementCount(game_title: String): Pair<Int, Int> {
+        val l = repository.getAchievementCount(game_title)
+        l.moveToFirst()
+        return Pair(l.getInt(1), l.getInt(0));
     }
 
     fun getSIMP(): List<GameCardItem> {

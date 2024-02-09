@@ -37,8 +37,8 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private val gameItemsss: MutableList<GameCardItem> = listOf(
         //GameCardItem("gabibbo",             "Bloodborne"),
-        //GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        //GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
+        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
+        GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
         //GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
         //GameCardItem("ic_t_pose",           "Dark Souls 3"),
         //GameCardItem("ic_t_pose",           "MARVEL Spider-Man"),
@@ -223,11 +223,10 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
-        val itemCount: Int = (adapter!!.itemCount) as Int
+        val itemCount: Int = gameItems.size
         if(itemCount > 0){
             for (i in 0 until itemCount) {
-                val viewHolder =
-                    recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
+                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
                 viewHolder?.let {
                     val catList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
                     val platList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
