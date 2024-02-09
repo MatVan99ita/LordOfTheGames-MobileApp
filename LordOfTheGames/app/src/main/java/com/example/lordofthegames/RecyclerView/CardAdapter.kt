@@ -115,7 +115,7 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
             if(conta < 3){
                 val t = TextView(holder.itemView.context)
                 t.text = x.platFormName
-                t.setBackgroundColor(activity.resources.getColor(R.color.green_light_variant))
+                t.setBackgroundColor(x.color)
                 t.layoutParams = lp
                 t.setPadding(5, 5, 5, 5)
                 platList.add(t)

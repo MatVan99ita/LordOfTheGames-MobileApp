@@ -2,6 +2,7 @@ package com.example.lordofthegames.home
 
 import android.app.Application
 import android.database.Cursor
+import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -12,6 +13,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
+import com.example.lordofthegames.R
 import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
@@ -55,10 +57,20 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         val p : MutableList<PlatformCardItem> = mutableListOf()
 
         while (l.moveToNext()){
+            val el  = l.getString(1);
             p.add(
                 PlatformCardItem(
-                    l.getString(1),
-                    l.getInt(2)
+                    el,
+                    when(el){
+                        "Steam" -> Color.rgb(41, 41, 41)
+                        "Epic" -> Color.rgb(58, 58, 56)
+                        "XBOX ONE" -> Color.rgb(24, 128, 24)
+                        "Game Pass" -> Color.rgb(24, 128, 24)
+                        "Nintendo" -> Color.rgb(231, 8, 25)
+                        "Playstation 4" -> Color.rgb(19, 44, 116)
+                        "Playstation 5" -> Color.rgb(19, 44, 116)
+                        else -> R.color.green_light_variant
+                    }
                 )
             )
         }
