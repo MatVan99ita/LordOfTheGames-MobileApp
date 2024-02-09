@@ -130,16 +130,16 @@ interface LotgDao {
 
 
 
-    @MapInfo(keyColumn = "game_title")
-    @Query("SELECT game.game_title, (" +
-    "SELECT COUNT(*)\n" +
-    "FROM achievement, game\n" +
-    "WHERE achievement.game_ref = game.game_id\n) As total_count, \n" +
-    "(SELECT COUNT(*)\n" +
-    "FROM achievement, game\n" +
-    "WHERE achievement.game_ref = game.game_id\n"+
-     "AND achievement.status=1) as completed_count FROM game")
-    fun getAllGameAchievementCounts(): LiveData<Map<String, Cursor>>
+    //@MapInfo(keyColumn = "game_title")
+    //@Query("SELECT game.game_title, (" +
+    //"SELECT COUNT(*)\n" +
+    //"FROM achievement, game\n" +
+    //"WHERE achievement.game_ref = game.game_id\n) As total_count, \n" +
+    //"(SELECT COUNT(*)\n" +
+    //"FROM achievement, game\n" +
+    //"WHERE achievement.game_ref = game.game_id\n"+
+    //"AND achievement.status=1) as completed_count FROM game")
+    //fun getAllGameAchievementCounts(): LiveData<Map<String, Cursor>>
 
 
     @Transaction

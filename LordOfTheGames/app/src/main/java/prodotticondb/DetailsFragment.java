@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.prodotticondb.databinding.ActivityDetailsBinding;
-import com.example.prodotticondb.databinding.FragmentDetailsBinding;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 
@@ -22,6 +20,7 @@ import org.joda.time.format.DateTimeFormatter;
 import java.sql.SQLException;
 
 public class DetailsFragment extends Fragment {
+/*
 
     FragmentDetailsBinding binding;
     ActivityDetailsBinding activityBinding;
@@ -89,5 +88,6 @@ public class DetailsFragment extends Fragment {
         }
     }
 
+*/
 
 }

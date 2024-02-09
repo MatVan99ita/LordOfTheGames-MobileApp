@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lordofthegames.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +73,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         public ProductHolder(@NonNull View itemView, OnItemListener listener) {
             super(itemView);
             this.onItemListener = listener;
-            img = itemView.findViewById(R.id.immagine);
-            nome = itemView.findViewById(R.id.product_name);
-            price = itemView.findViewById(R.id.product_price);
-            timestamp = itemView.findViewById(R.id.product_valid_time);
+            //img = itemView.findViewById(R.id.immagine);
+            //nome = itemView.findViewById(R.id.product_name);
+            //price = itemView.findViewById(R.id.product_price);
+            //timestamp = itemView.findViewById(R.id.product_valid_time);
             itemView.setOnClickListener(this);
         }
 

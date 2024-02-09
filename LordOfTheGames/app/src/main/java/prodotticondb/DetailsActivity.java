@@ -6,10 +6,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.prodotticondb.databinding.ActivityDetailsBinding;
-
 
 public class DetailsActivity extends AppCompatActivity {
+/*
 
     ActivityDetailsBinding binding;
 
@@ -58,6 +57,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+*/
 
 
 

@@ -28,5 +28,5 @@ data class Notes(
     var content: String,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
     var last_modified: Date,
-
+    @ColumnInfo(index = true)
     var game_ref: Int )

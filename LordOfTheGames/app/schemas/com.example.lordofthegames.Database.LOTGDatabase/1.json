@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ba47f8483de3b86628d144329d2aa1c0",
+    "identityHash": "9c0e1a2cbf1ad12d7edf6decf6a2b59b",
     "entities": [
       {
         "tableName": "achievement",
@@ -63,7 +63,17 @@
             "achievement_id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_achievement_game_ref",
+            "unique": false,
+            "columnNames": [
+              "game_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_achievement_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "game",
@@ -133,7 +143,17 @@
             "comment_id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_comment_discussion_ref",
+            "unique": false,
+            "columnNames": [
+              "discussion_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_comment_discussion_ref` ON `${TABLE_NAME}` (`discussion_ref`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "discussion",
@@ -183,7 +203,17 @@
             "discussion_id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_discussion_game_ref",
+            "unique": false,
+            "columnNames": [
+              "game_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_discussion_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "game",
@@ -422,7 +452,17 @@
             "note_id"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_notes_game_ref",
+            "unique": false,
+            "columnNames": [
+              "game_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_notes_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "game",
@@ -521,7 +561,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba47f8483de3b86628d144329d2aa1c0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9c0e1a2cbf1ad12d7edf6decf6a2b59b')"
     ]
   }
 }

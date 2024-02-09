@@ -19,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.prodotticondb.databinding.FragmentEditBinding;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 
@@ -31,9 +30,9 @@ import org.joda.time.format.DateTimeFormatter;
 import java.io.ByteArrayOutputStream;
 import java.sql.SQLException;
 
-public class EditFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
-
-    FragmentEditBinding binding;
+public class EditFragment/* extends Fragment implements DatePickerDialog.OnDateSetListener*/{
+/*
+    //FragmentEditBinding binding;
     DateTime start;
     DateTime end;
     private Integer id;
@@ -124,10 +123,10 @@ public class EditFragment extends Fragment implements DatePickerDialog.OnDateSet
 
                                     Double.parseDouble(binding.detailEditPrice.getText().toString()),
 
-                        /*binding.btnEditImg.getBackground() != null ?
+                        *//*binding.btnEditImg.getBackground() != null ?
                                 getImageForDB(requireContext(), binding.btnEditImg.getBackground())
                                 :
-                                */
+                                *//*
                                     getImageForDB(requireContext(), R.drawable.ic_launcher_foreground),
                                     timestamp.getX(), timestamp.getY()
                             ),
@@ -142,10 +141,10 @@ public class EditFragment extends Fragment implements DatePickerDialog.OnDateSet
 
                                         Double.parseDouble(binding.detailEditPrice.getText().toString()),
 
-                            /*binding.btnEditImg.getBackground() != null ?
+                            *//*binding.btnEditImg.getBackground() != null ?
                                     getImageForDB(requireContext(), binding.btnEditImg.getBackground())
                                     :
-                                    */
+                                    *//*
                                         getImageForDB(requireContext(), R.drawable.baseline_add_to_photos_24),
                                         timestamp.getX(), timestamp.getY()
                                 ),
@@ -228,5 +227,5 @@ public class EditFragment extends Fragment implements DatePickerDialog.OnDateSet
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
-    }
+    }*/
 }

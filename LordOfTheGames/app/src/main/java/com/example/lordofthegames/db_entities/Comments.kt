@@ -16,6 +16,7 @@ data class Comments(
 
     @PrimaryKey(autoGenerate = true)
     var comment_id: Int,
+    @ColumnInfo(index = true)
     var discussion_ref: Int,
     var content: String,
 

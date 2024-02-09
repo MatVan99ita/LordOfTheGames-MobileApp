@@ -17,6 +17,7 @@ data class Discussion(
     var discussion_id: Int,
     var title: String,
     var content: String,
+    @ColumnInfo(index = true)
     var game_ref: Int
 
 )
