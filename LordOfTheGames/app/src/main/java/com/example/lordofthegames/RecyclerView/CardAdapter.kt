@@ -42,10 +42,10 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
 
         var drawable: Drawable? = null
 
-        when((0..2).random()){
-            0 -> drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier(imagePath, "drawable", activity.packageName))
-            1 -> drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_gabibbo_test", "mipmap", activity.packageName))
-            2 -> drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("ic_yeee_foreground", "mipmap", activity.packageName))
+        when((0..2).random()) {
+            0 -> drawable = ContextCompat.getDrawable(activity, R.drawable.ic_t_pose)
+            1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
+            2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
 
         holder.gameImg.setImageDrawable(drawable)

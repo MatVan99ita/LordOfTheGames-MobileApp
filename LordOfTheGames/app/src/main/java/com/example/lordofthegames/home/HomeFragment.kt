@@ -33,35 +33,36 @@ import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 class HomeFragment: Fragment(), OnItemListener {
 
+    private var gameItems: MutableList<GameCardItem> = mutableListOf()
 
-    private val gameItems: MutableList<GameCardItem> = listOf(
-        GameCardItem("gabibbo",             "Bloodborne"),
-        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
-        GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
-        GameCardItem("ic_t_pose",           "Dark Souls 3"),
-        GameCardItem("ic_t_pose",           "MARVEL Spider-Man"),
-        GameCardItem("ic_t_pose",           "Bloodborne"),
-        GameCardItem("ic_t_pose",           "God of War: Ragnarok"),
-        GameCardItem("ic_t_pose",           "Gabibbo"), // */
-        GameCardItem("yee",                 "Dark Souls 3"),
+    private val gameItemsss: MutableList<GameCardItem> = listOf(
+        //GameCardItem("gabibbo",             "Bloodborne"),
+        //GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
+        //GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
+        //GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
+        //GameCardItem("ic_t_pose",           "Dark Souls 3"),
+        //GameCardItem("ic_t_pose",           "MARVEL Spider-Man"),
+        //GameCardItem("ic_t_pose",           "Bloodborne"),
+        //GameCardItem("ic_t_pose",           "God of War: Ragnarok"),
+        //GameCardItem("ic_t_pose",           "Gabibbo"), // */
+        //GameCardItem("yee",                 "Dark Souls 3"),
+        //GameCardItem("yee",                 "MARVEL Spider-Man"),
+        //GameCardItem("gabibbo",             "Dark Souls 3"),
+        //GameCardItem("gabibbo",             "MARVEL Spider-Man"),
+        //GameCardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West"),
+        //GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
+        //GameCardItem("gabibbo",             "Dark Souls 3"),
+        //GameCardItem("yee",                 "MARVEL Spider-Man"),
+        //GameCardItem("gabibbo",             "Bloodborne"),
+        //GameCardItem("gabibbo",             "Dark Souls 3"),
         GameCardItem("yee",                 "MARVEL Spider-Man"),
-        GameCardItem("gabibbo",             "Dark Souls 3"),
-        GameCardItem("gabibbo",             "MARVEL Spider-Man"),
-        GameCardItem("gabibbo",             "Horizon Zero Dawn: Forbidden West"),
-        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("yee",                 "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("gabibbo",             "Gabibbo BELAAAAAAAAAN"),
-        GameCardItem("gabibbo",             "Dark Souls 3"),
-        GameCardItem("yee",                 "MARVEL Spider-Man"),
-        GameCardItem("gabibbo",             "Bloodborne"),
-        GameCardItem("gabibbo",             "Dark Souls 3"),
-        GameCardItem("yee",                 "MARVEL Spider-Man"),
-        GameCardItem("gabibbo",             "Bloodborne"),
+        //GameCardItem("gabibbo",             "Bloodborne"),
     ) as MutableList<GameCardItem>
 
     private val catItems: MutableList<CategoryCardItem> = listOf(
@@ -86,7 +87,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
-    private var gameListdb: MutableList<GameCardItem> = mutableListOf()
+    //private var gameListdb: MutableList<GameCardItem> = mutableListOf()
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
     private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
 
@@ -142,12 +143,12 @@ class HomeFragment: Fragment(), OnItemListener {
             //        }
             //}
 
-            val r = homeViewModel.getAllGame().value
-            Log.w("CIAONE", r?.size.toString())
+            //val r = homeViewModel.getAllGame().value
+            //Log.w("CIAONE", r?.size.toString())
 
 
 
-            Log.w("PORCADDIO", gameListdb.size.toString())
+            //Log.w("PORCADDIO", gameListdb.size.toString())
 
             //val db: LOTGDatabase = Room.databaseBuilder(
             //    requireContext(),
@@ -216,7 +217,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //    homeViewModel.getSIMP()
         //}
 
-
+        gameItems.addAll(homeViewModel.getSIMP());
         adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
