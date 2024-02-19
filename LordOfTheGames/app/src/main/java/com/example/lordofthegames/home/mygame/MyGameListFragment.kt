@@ -42,7 +42,7 @@ class MyGameListFragment: Fragment() {
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java].apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
-        gameList
+        gameList = pageViewModel.getFilt()
 
     }
 
@@ -79,7 +79,7 @@ class MyGameListFragment: Fragment() {
                     val j = tabLayout.tabCount
                     // textView.text = "$i/$j"
                     // textView.append(tab.text)
-                    when(i){
+                    when(i){//TODO: EH ELALE metti la lista dei giuochi
                         1 -> {
                             textView.text = "$i/$j"
                             textView.append(tab.text)
