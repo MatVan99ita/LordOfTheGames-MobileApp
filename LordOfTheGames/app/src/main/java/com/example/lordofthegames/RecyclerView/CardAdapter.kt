@@ -74,7 +74,13 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         val a = this.viuvve.getAchievementCount(currentCardItem.gameTitle)
         holder.achieText.text = "${a.x}/${a.y}"
 
+        holder.modifyBtn.setOnClickListener {
+            this.viuvve.modifyGameStatus("playing", currentCardItem.gameId)
+        }
 
+        holder.addBtn.setOnClickListener {
+            this.viuvve.modifyGameStatus("Wanted to play", currentCardItem.gameId)
+        }
 
         //val catItems: MutableList<CategoryCardItem> = listOf(
         //    CategoryCardItem("GDR"),

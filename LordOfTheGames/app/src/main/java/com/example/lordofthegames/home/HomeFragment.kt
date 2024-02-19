@@ -12,12 +12,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +22,6 @@ import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
-import com.example.lordofthegames.recyclerView.CategoryCardViewHolder
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
@@ -37,8 +33,8 @@ class HomeFragment: Fragment(), OnItemListener {
 
     private val gameItemsss: MutableList<GameCardItem> = listOf(
         //GameCardItem("gabibbo",             "Bloodborne"),
-        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi"),
-        GameCardItem("ic_menu_24dp",        "Sparo sparo uccidi uccidi"),
+        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi", 1),
+        GameCardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi", 2),
         //GameCardItem("ic_t_pose",           "Matel Gear Rising: Revengence"),
         //GameCardItem("ic_t_pose",           "Dark Souls 3"),
         //GameCardItem("ic_t_pose",           "MARVEL Spider-Man"),
@@ -61,7 +57,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //GameCardItem("yee",                 "MARVEL Spider-Man"),
         //GameCardItem("gabibbo",             "Bloodborne"),
         //GameCardItem("gabibbo",             "Dark Souls 3"),
-        GameCardItem("yee",                 "MARVEL Spider-Man"),
+        GameCardItem("yee", "MARVEL Spider-Man", 15),
         //GameCardItem("gabibbo",             "Bloodborne"),
     ) as MutableList<GameCardItem>
 

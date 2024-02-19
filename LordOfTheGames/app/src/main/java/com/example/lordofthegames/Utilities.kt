@@ -152,7 +152,7 @@ class Utilities {
             }
             activity.setSupportActionBar(toolbar)
 
-            
+
         }
 
         fun createDatabase(context: Context) {

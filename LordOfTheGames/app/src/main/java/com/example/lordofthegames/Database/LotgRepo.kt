@@ -83,5 +83,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getSIMP()
     }
 
+    fun modifyGameStatus(stat: String, id: Int){
+        lotgDao.modifyGameStatus(stat, id)
+    }
+
 
 }

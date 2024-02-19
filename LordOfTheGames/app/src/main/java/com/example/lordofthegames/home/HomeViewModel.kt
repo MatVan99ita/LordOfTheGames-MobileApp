@@ -8,13 +8,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.lordofthegames.Database.LotgRepo
-import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
-import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
 import com.example.lordofthegames.R
-import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.PlatformCardItem
@@ -23,6 +20,10 @@ import com.example.lordofthegames.recyclerView.PlatformCardItem
 class HomeViewModel(application: Application): AndroidViewModel(application) {
     private val mText: MutableLiveData<String> = MutableLiveData<String>()
     private val repository: LotgRepo = LotgRepo(application)
+
+    fun modifyGameStatus(stat: String, id: Int){
+        repository.modifyGameStatus(stat, id)
+    }
 
     fun getCurrentUser(user_name: String, passw: String): LiveData<List<User?>?> {
         return repository.getCurrentUser(user_name, passw)
@@ -111,13 +112,13 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     fun getSIMP(): List<GameCardItem> {
         val l = repository.getSimp()
         Log.w("POCODIO1", l.columnCount.toString())
-        Log.w("POCODIO2", "${l.getColumnName(0)} - ${l.getColumnName(1)}")
+        Log.w("POCODIO2", "${l.getColumnName(0)} - ${l.getColumnName(1)} - ${l.getColumnName(2)}")
         Log.w("POCODIO3", l.count.toString())
         val s = mutableListOf<GameCardItem>()
 
 
         while (l.moveToNext()){
-            s.add(GameCardItem(l.getString(0).toString(), l.getString(1).toString()))
+            s.add(GameCardItem(l.getString(0).toString(), l.getString(1).toString(), l.getInt(2)))
         }
         s.forEach{el -> Log.w("POCODIO4", el.toString())}
 

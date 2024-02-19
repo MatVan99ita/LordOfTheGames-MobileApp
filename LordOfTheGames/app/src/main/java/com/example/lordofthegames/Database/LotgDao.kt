@@ -8,6 +8,7 @@ import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.lordofthegames.Pair
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
@@ -178,8 +179,11 @@ interface LotgDao {
             "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
     fun getAchievementCount(game_title: String): Cursor
 
-    @Query("SELECT game_cover, game_title FROM game")
+    @Query("SELECT game_cover, game_title, game_id FROM game")
     fun getSIMP(): Cursor
+
+    @Query("UPDATE game SET game_status = :new_status WHERE game_id = :id")
+    fun modifyGameStatus(new_status: String, id: Int)
 
 
 

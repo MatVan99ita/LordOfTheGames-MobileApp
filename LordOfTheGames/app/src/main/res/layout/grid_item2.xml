@@ -99,7 +99,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/edit_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
@@ -110,14 +110,14 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button2"
+            android:id="@+id/add_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="2dp"
             android:background="@drawable/ic_esports_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/edit_btn"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/platform_linear_home" />
 
@@ -126,7 +126,7 @@
             android:layout_width="64dp"
             android:layout_height="29dp"
             android:text="8/8"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintBottom_toTopOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/game_title2"
             app:layout_constraintTop_toTopOf="parent"

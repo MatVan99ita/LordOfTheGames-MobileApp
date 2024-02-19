@@ -34,7 +34,7 @@ class LoggedActivity: AppCompatActivity() {
      *  se non c'è accesso bisogna farlo fare e mettere un bundle all'activity sull'activity precedente
      *  se si va sulla lista perosnale senza aver eseguito l'accesso si va al login diretto
      *  e se si torna indoetro bisogna rimettere la home base
-     * */
+     **/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
