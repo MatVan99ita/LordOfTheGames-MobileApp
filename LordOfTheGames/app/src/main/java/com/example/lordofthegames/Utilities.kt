@@ -152,74 +152,18 @@ class Utilities {
             }
             activity.setSupportActionBar(toolbar)
 
-            /*var actionBar: ActionBar? = activity.supportActionBar
-            //val navController: NavController = NavController(context = activity)
-            //val appBarConfiguration = AppBarConfiguration(navController.graph)
-            if (actionBar == null) {
-                val toolBar = Toolbar(activity)
-                activity.setSupportActionBar(toolBar)
-                actionBar = activity.supportActionBar
-            }
-            actionBar?.title = title
-            //actionBar?.displayOptions = DISPLAY_USE_LOGO
-            actionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_24dp)
-            actionBar?.setDisplayHomeAsUpEnabled(true)
-            //supportActionBar?.setDisplayHomeAsUpEnabled(true)1
-            //toolBar.setNavigationIcon(R.drawable.ic_menu_24dp)
-
-            Log.e("UTIL SETUP", actionBar.toString())*/
+            
         }
 
-        fun createDatabase(context: Context) {/*
-            val lotgViewModel: LOTGViewModel = ViewModelProvider(owner)[LOTGViewModel::class.java]
+        fun createDatabase(context: Context) {
 
-            val LOTGViewModel by viewModels<LOTGViewModel> {
-                LOTGViewModelFactory(repository = (application as GameApplication).repository)
-            }
-            lotgViewModel.addItem(Game(1, "banana", "", ""))
-            // */
-            /** TODO Aggiungere questo tipo di cosa ad Utilities
-             *      lotgViewModel.addGame(Game(1, "banana", "", "")) <- fare in modo che quando parte prende e genera direttamente il database dal file "*.db" in modo da non doverlo scrivere qui
-             */
-
-
-            //val db: LOTGDatabase = LOTGDatabase.getDatabase(context)
             val database by lazy { LOTGDatabase.getDatabase(context) }
-            //val repository by lazy { LOTGRepository(database.lotgdao()) }
 
-            //val myDao: LOTGDAO = database.lotgdao()
-            //val myRepository = LOTGRepository(myDao)
-            //val myEntities: Flow<List<Game>> = repository.getAllGame()
-
-
-
-            //Log.e("POCODIODROPLET", myEntities.toString())
 
         }
 
-        /*fun fillRoomDatabase(context: Context, vararg databaseNames: String) {
-            for (databaseName in databaseNames) {
-                val dbFile = File(context.getDatabasePath(databaseName).path)
-                val db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READONLY)
-                val query = "SELECT * FROM game"
-                val cursor = db.rawQuery(query, null)
-                val list = mutableListOf<Game>()
-                while (cursor.moveToNext()) {
-                    val data = Game(
-                        cursor.getInt(cursor.getColumnIndex("id")),
-                        cursor.getString(cursor.getColumnIndex("title")),
-                        cursor.getString(cursor.getColumnIndex("img")),
-                        cursor.getLong(cursor.getColumnIndex("status"))
-                    )
-                    list.add(data)
-                }
-                cursor.close()
-                db.close()
-                val roomDb = Room.databaseBuilder(context, LOTGDatabase::class.java, "my-db-name").build()
-                roomDb.lotgdao().fillGame(list)
-                roomDb.close()
-            }
-        } // */
+
+
         fun darkThemeSwitch(context: Context, sharedPreferences: SharedPreferences): Boolean{
             val uiModeManager = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
             val mode = uiModeManager.nightMode
