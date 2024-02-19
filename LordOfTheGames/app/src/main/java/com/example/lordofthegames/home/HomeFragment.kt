@@ -213,7 +213,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //    homeViewModel.getSIMP()
         //}
 
-        gameItems.addAll(homeViewModel.getSIMP());
+        gameItems.addAll(homeViewModel.getSIMP())
         adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act)
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)

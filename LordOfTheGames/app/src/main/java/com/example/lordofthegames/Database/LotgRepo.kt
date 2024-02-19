@@ -87,5 +87,9 @@ class LotgRepo(application: Application) {
         lotgDao.modifyGameStatus(stat, id)
     }
 
+    fun getFilt(): List<Game> {
+        return lotgDao.getAllFilteredGame()
+    }
+
 
 }

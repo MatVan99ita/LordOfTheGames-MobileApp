@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Game
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,6 +23,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MyGameListFragment: Fragment() {
 
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
+    private var gameList: List<Game?>? = null
     private lateinit var pageViewModel: MyGameListViewModel
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
@@ -40,6 +42,7 @@ class MyGameListFragment: Fragment() {
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java].apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
+        gameList
 
     }
 

@@ -185,7 +185,8 @@ interface LotgDao {
     @Query("UPDATE game SET game_status = :new_status WHERE game_id = :id")
     fun modifyGameStatus(new_status: String, id: Int)
 
-
+    @Query("SELECT * FROM game WHERE game_status != \"NP\" ")
+    fun getAllFilteredGame(): List<Game>
 
 
 }
