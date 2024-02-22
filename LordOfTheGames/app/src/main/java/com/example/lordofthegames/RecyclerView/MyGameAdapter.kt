@@ -33,7 +33,8 @@ class MyGameAdapter(
             holder.id.text = "${g.game_id}"
             holder.nome.text = g.game_title
             holder.stat.text = g.game_status
-            holder.ach.text = "8/8"
+
+            holder.ach.text = "8/8" // TODO: Query degli achievement
         }
     }
 
