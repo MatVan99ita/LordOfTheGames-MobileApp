@@ -109,6 +109,11 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return Pair(l.getInt(1), l.getInt(0));
     }
 
+    fun getPrintableAchivement(game_title: String): String {
+        val l = repository.getAchievementCount(game_title)
+        return "${l.getInt(0)}/${l.getInt(1)}"
+    }
+
     fun getSIMP(): List<GameCardItem> {
         val l = repository.getSimp()
         Log.w("POCODIO1", l.columnCount.toString())

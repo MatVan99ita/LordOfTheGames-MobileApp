@@ -1,20 +1,22 @@
 package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.Pair
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
 
 class MyGameAdapter(
     var listener: OnItemListener,
-    viewModel: HomeViewModel,
-    var mygamelist: List<Game>?,
+    var viewModel: HomeViewModel,
+    var mygamelist: List<Game>,
     var activity: Activity
 ) : RecyclerView.Adapter<MyGameAdapter.MyGameHolder>() {
 
@@ -23,19 +25,22 @@ class MyGameAdapter(
     }
 
     override fun getItemCount(): Int {
-        return mygamelist?.size ?: 0
+        return mygamelist.size ?: 0
     }
 
     override fun onBindViewHolder(holder: MyGameHolder, position: Int) {
-        val g: Game? = mygamelist?.get(position)
-
-        if (g != null) {
-            holder.id.text = "${g.game_id}"
-            holder.nome.text = g.game_title
-            holder.stat.text = g.game_status
-
-            holder.ach.text = "8/8" // TODO: Query degli achievement
+        mygamelist.forEach {
+            Log.i("MANNACC", "${it.game_title} - ${it.game_status}")
         }
+        val g: Game = mygamelist[position]
+
+        holder.id.text = "${g.game_id}"
+        holder.nome.text = g.game_title
+        holder.stat.text = g.game_status
+
+        //holder.ach.text = "8/8"
+        val p: Pair<Int, Int> = viewModel.getAchievementCount(game_title = g.game_title)
+        holder.ach.text = "${p.y}/${p.x}"
     }
 
     class MyGameHolder(itemView: View, listener: OnItemListener): RecyclerView.ViewHolder(itemView), View.OnClickListener{
@@ -54,7 +59,7 @@ class MyGameAdapter(
         }
 
         override fun onClick(p0: View?) {
-            onItemListener.onItemClick(itemView, adapterPosition);
+            onItemListener.onItemClick(itemView, adapterPosition)
         }
 
     }

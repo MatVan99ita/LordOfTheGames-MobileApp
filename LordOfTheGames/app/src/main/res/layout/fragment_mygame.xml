@@ -32,22 +32,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mg_list"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/mygame_item" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/mygame_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/belandih"
-            android:textColor="@color/purple_200"
-            android:textSize="60sp"
-            android:textStyle="bold" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="200dp"
+                android:id="@+id/mg_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/mygame_item" />
+
+            <TextView
+                android:id="@+id/mygame_textview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/belandih"
+                android:textColor="@color/purple_200"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mg_list" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

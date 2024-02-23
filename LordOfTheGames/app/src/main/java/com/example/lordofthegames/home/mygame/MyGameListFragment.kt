@@ -12,22 +12,31 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.home.HomeViewModel
+import com.example.lordofthegames.recyclerView.MyGameAdapter
+import com.example.lordofthegames.recyclerView.OnItemListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.streams.toList
 
 
-class MyGameListFragment: Fragment() {
+class MyGameListFragment: Fragment(), OnItemListener{
 
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
-    private var gameList: List<Game?>? = null
+    private lateinit var gameList: List<Game>
     private lateinit var pageViewModel: MyGameListViewModel
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var textView: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: MyGameAdapter
+    private lateinit var adapter2: MyGameAdapter
 
     private val TAB_TITLES = arrayOf(
         R.string.all,
@@ -39,11 +48,21 @@ class MyGameListFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java].apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
+        pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java]
         gameList = pageViewModel.getFilt()
 
+        adapter = MyGameAdapter(
+            this,
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+            gameList,
+            requireActivity()
+        )
+        adapter2 = MyGameAdapter(
+            this,
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+            gameList.stream().filter { it.game_status == "playing" }.toList(),
+            requireActivity()
+        )
     }
 
     @SuppressLint("MissingInflatedId")
@@ -59,6 +78,9 @@ class MyGameListFragment: Fragment() {
 
         viewPager2 = view.findViewById(R.id.view_pager)
         tabLayout = view.findViewById(R.id.tab_mygame)
+        recyclerView = view.findViewById(R.id.mg_list)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         viewPager2.adapter = sectionsPagerAdapter
 
         //viewPager2.addView(viewModel)
@@ -83,10 +105,12 @@ class MyGameListFragment: Fragment() {
                         1 -> {
                             textView.text = "$i/$j"
                             textView.append(tab.text)
+                            recyclerView.adapter = adapter
                         }
                         2 -> {
                             textView.text = "$i/$j"
                             textView.append(tab.text)
+                            recyclerView.adapter = adapter2
                         }
                         3 -> {
                             textView.text = "$i/$j"
@@ -154,6 +178,10 @@ class MyGameListFragment: Fragment() {
                 }
             }
         }
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        TODO("Not yet implemented")
     }
 
 }
