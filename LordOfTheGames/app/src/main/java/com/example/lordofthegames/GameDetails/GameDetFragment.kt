@@ -1,26 +1,26 @@
 package com.example.lordofthegames.GameDetails
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.*
+import android.view.View.OnTouchListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.R
-import com.example.lordofthegames.ViewModel.GameDetViewModel
 import com.example.lordofthegames.ViewModel.GameDetViewModel2
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
@@ -32,6 +32,7 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -60,7 +61,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var btnFLSalva: Button
     private var selectedItem: AchievementCardItem? = null
 
-
+    private lateinit var sgrull: ScrollView
     private lateinit var achievementImgEdit: ImageView
     private lateinit var achievementTitleEdit: TextView
     private lateinit var achievementDescription: TextView
@@ -116,6 +117,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         bundle = savedInstanceState
 
+        sgrull = view.findViewById(R.id.sgrullatina)
 
         recyclerViewCategory    = view.findViewById(R.id.recycler_view_game_details_category)
         recyclerViewPlatform    = view.findViewById(R.id.recycler_view_game_details_platform)
@@ -247,7 +249,30 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             //Achievement
             R.id.single_card2 -> {
+                if(frameLayout.isVisible){ // TODO: Bloccare il touch o fare in modo che sto dialog blocchi tutte cose
+
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    )
+                        .setTitle("Error email")
+                        .setMessage("email must be like example@domain.exm")
+                        .setPositiveButton(
+                            "Salva"
+                        )
+                        { _: DialogInterface?, _: Int ->
+                        }
+                        .setNegativeButton(
+                            "Cancel"
+                        )
+                        { _: DialogInterface?, _: Int ->
+                            return@setNegativeButton
+                        }
+                        .show()
+                }
                 frameLayout.visibility = View.VISIBLE
+
+                sgrull.setOnTouchListener(OnTouchListener { v, event -> false })
+
                 val item = achieveItems[position]
                 selectedItem = item
                 achievementTitleEdit.text = item.name
@@ -261,6 +286,22 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             //Platform
             R.id.platform_item -> Log.w("Belandi", "c")
+
+            R.id.achievement_item_button_edit, R.id.recycler_view_game_details_achievement -> {
+
+            }
+
+            R.id.btn_annulla1 -> {
+                frameLayout.visibility = View.GONE
+
+                sgrull.setOnTouchListener(OnTouchListener { v, event -> true })
+
+
+            }
+            R.id.btn_salva1 -> {
+                frameLayout.visibility = View.GONE
+                sgrull.setOnTouchListener(OnTouchListener { v, event -> true })
+            }
 
         }
     }

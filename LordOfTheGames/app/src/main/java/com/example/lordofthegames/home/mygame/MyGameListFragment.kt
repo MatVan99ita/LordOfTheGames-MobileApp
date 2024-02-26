@@ -142,21 +142,6 @@ class MyGameListFragment: Fragment(), OnItemListener{
      *
      *      EXTRA: fare in modo che alla creazione della view la prima tab venga selezionata automaticamente
      */
-    private fun AllGame(){
-
-    }
-    private fun CompletedGame(){
-
-    }
-    private fun PlayingGame(){
-
-    }
-    private fun AbandonedGame(){
-
-    }
-    private fun PlanToPlayGame(){
-
-    }
 
 
     companion object {
