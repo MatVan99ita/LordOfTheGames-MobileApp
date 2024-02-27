@@ -130,6 +130,13 @@
             app:layout_constraintTop_toBottomOf="@id/label_achievement"
             tools:listitem="@layout/achievement_list_item" />
 
+        <TextView
+            android:id="@+id/FL_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="218dp"
+            tools:layout_editor_absoluteY="389dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -206,7 +213,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/achievement_image_edit" />
 
             <Button
-                android:id="@+id/btn_salva1"
+                android:id="@+id/btn_salva_frml"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Salva"
@@ -221,7 +228,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Annulla"
-                app:layout_constraintEnd_toStartOf="@id/btn_salva1"
+                app:layout_constraintEnd_toStartOf="@id/btn_salva_frml"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />

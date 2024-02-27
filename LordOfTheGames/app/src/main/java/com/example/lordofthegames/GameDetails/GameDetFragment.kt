@@ -1,13 +1,11 @@
 package com.example.lordofthegames.GameDetails
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.*
-import android.view.View.OnTouchListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
@@ -32,7 +30,6 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
 import com.example.lordofthegames.recyclerView.PlatformCardItem
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -59,6 +56,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var frameLayout: FrameLayout
     private lateinit var btnFLAnnulla: Button
     private lateinit var btnFLSalva: Button
+    private lateinit var positionT: TextView
     private var selectedItem: AchievementCardItem? = null
 
     private lateinit var sgrull: ScrollView
@@ -125,7 +123,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         frameLayout = view.findViewById(R.id.achievement_edit)
         btnFLAnnulla = view.findViewById(R.id.btn_annulla1)
-        btnFLSalva = view.findViewById(R.id.btn_salva1)
+        btnFLSalva = view.findViewById(R.id.btn_salva_frml)
 
         frameLayout.visibility = View.GONE
 
@@ -134,7 +132,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         achievementImgEdit = view.findViewById(R.id.achievement_image_edit)
         editText = view.findViewById(R.id.numberPicker)
         maxNum = view.findViewById(R.id.achievement_max_edit)
-
+        positionT = view.findViewById(R.id.FL_position)
 
         categoryCardAdapter = CategoryCardAdapter(this, catItems)
         platformCardAdapter = PlatformCardAdapter(this, platItems)
@@ -223,9 +221,14 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         btnFLAnnulla.setOnClickListener { frameLayout.visibility = View.GONE }
         btnFLSalva.setOnClickListener {
+            val num: Int = if ("${editText.text}".toInt() > selectedItem!!.total_count) selectedItem!!.total_count else "${editText.text}".toInt()
+
             if(selectedItem != null){
-                selectedItem!!.actual_count = "${editText.text}".toInt()
+                selectedItem!!.actual_count = num
             }
+            achievementCardAdapter!!.updateActualCount(Integer.valueOf(positionT.text.toString()), num)
+            recyclerViewAchievement.adapter = achievementCardAdapter
+            frameLayout.visibility = View.GONE
         }
 
 
@@ -245,40 +248,23 @@ class GameDetFragment: Fragment(), OnItemListener  {
     override fun onItemClick(view: View, position: Int) {
 
         Log.w("Belandi", "Belandi ${view.resources.getResourceEntryName(view.id)}")
+
         when(view.id){
 
             //Achievement
-            R.id.single_card2 -> {
-                if(frameLayout.isVisible){ // TODO: Bloccare il touch o fare in modo che sto dialog blocchi tutte cose
+            R.id.single_card2, R.id.achievement_item_button_edit -> {
+                if(!frameLayout.isVisible){
+                    frameLayout.visibility = View.VISIBLE
 
-                    MaterialAlertDialogBuilder(
-                        requireContext()
-                    )
-                        .setTitle("Error email")
-                        .setMessage("email must be like example@domain.exm")
-                        .setPositiveButton(
-                            "Salva"
-                        )
-                        { _: DialogInterface?, _: Int ->
-                        }
-                        .setNegativeButton(
-                            "Cancel"
-                        )
-                        { _: DialogInterface?, _: Int ->
-                            return@setNegativeButton
-                        }
-                        .show()
+
+                    val item = achieveItems[position]
+                    selectedItem = item
+                    positionT.text = "${position}"
+                    achievementTitleEdit.text = item.name
+                    achievementDescription.text = item.descr
+                    maxNum.text = "/${item.total_count}"
+                    editText.text = Editable.Factory.getInstance().newEditable("${item.actual_count}")
                 }
-                frameLayout.visibility = View.VISIBLE
-
-                sgrull.setOnTouchListener(OnTouchListener { v, event -> false })
-
-                val item = achieveItems[position]
-                selectedItem = item
-                achievementTitleEdit.text = item.name
-                achievementDescription.text = item.descr
-                maxNum.text = "/${item.total_count}"
-                editText.text = Editable.Factory.getInstance().newEditable("${item.actual_count}")
             //
             }
             //Category
@@ -287,21 +273,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
             //Platform
             R.id.platform_item -> Log.w("Belandi", "c")
 
-            R.id.achievement_item_button_edit, R.id.recycler_view_game_details_achievement -> {
-
-            }
-
-            R.id.btn_annulla1 -> {
-                frameLayout.visibility = View.GONE
-
-                sgrull.setOnTouchListener(OnTouchListener { v, event -> true })
-
-
-            }
-            R.id.btn_salva1 -> {
-                frameLayout.visibility = View.GONE
-                sgrull.setOnTouchListener(OnTouchListener { v, event -> true })
-            }
 
         }
     }

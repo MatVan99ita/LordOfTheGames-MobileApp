@@ -10,14 +10,6 @@
     android:layout_marginTop="5dp"
     android:layout_marginBottom="2dp"
     >
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/achievement_item_img"
-        android:src="@mipmap/yo_listen_foreground"
-        />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,24 +17,18 @@
         android:background="@drawable/rainbow"
         android:orientation="horizontal">
 
-        <!--on below line we are creating
-             a simple image view-->
-
-        <!--on below line we are creating
-            a simple text view-->
-
         <ImageView
-            android:id="@+id/game_img"
+            android:id="@+id/achievement_item_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
+            android:layout_marginStart="8dp"
             android:contentDescription="img"
             android:src="@mipmap/yo_listen_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/achievement_title"
@@ -53,7 +39,7 @@
             android:padding="4dp"
             android:text="@string/app_name"
 
-            app:layout_constraintLeft_toRightOf="@id/game_img"
+            app:layout_constraintLeft_toRightOf="@id/achievement_item_img"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -65,12 +51,12 @@
             android:layout_margin="5dp"
             android:padding="4dp"
             android:text="0/?"
-            android:textSize="30dp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/achievement_item_button_edit"
 
-            app:layout_constraintLeft_toRightOf="@id/game_img"
-            app:layout_constraintStart_toEndOf="@id/game_img"
+            app:layout_constraintLeft_toRightOf="@id/achievement_item_img"
+            app:layout_constraintStart_toEndOf="@id/achievement_item_img"
             app:layout_constraintTop_toBottomOf="@+id/achievement_title" />
 
 

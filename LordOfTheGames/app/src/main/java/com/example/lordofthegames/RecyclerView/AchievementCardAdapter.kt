@@ -31,4 +31,9 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
         return cardItemList.size
     }
 
+    fun updateActualCount(position: Int, num: Int) {
+        val currentCardItem: AchievementCardItem = this.cardItemList[position]
+        currentCardItem.actual_count = num
+    }
+
 }
