@@ -21,8 +21,15 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.getGamePlatform(game_title)
     }
 
-    fun getGameAchievement(game_title: String): Cursor {
-        return repository.getGameAchievement(game_title)
+    fun getGameAchievement(game_title: String): List<Achievement> {
+        val a = repository.getGameAchievement(game_title)
+        val l: MutableList<Achievement> = mutableListOf()
+        while (a.moveToNext()) {
+            l.add(
+                Achievement(a.getInt(0), a.getString(1), a.getString(2), a.getString(3), a.getInt(4), a.getInt(5), a.getInt(6), a.getInt(7))
+            )
+        }
+        return l
     }
 
     fun getGameCategory(game_title: String): Cursor {

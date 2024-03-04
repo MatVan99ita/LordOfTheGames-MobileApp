@@ -1,5 +1,6 @@
 package com.example.lordofthegames.GameDetails
 
+import android.database.Cursor
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -104,7 +105,10 @@ class GameDetFragment: Fragment(), OnItemListener  {
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
 
-        gameDetViewModel.getGameDetails("giuoco test")
+        val game = gameDetViewModel.getGameDetails(game_title)
+
+        val achieve: List<Achievement> = this.parseAchievementCursor(gameDetViewModel.getGameAchievement(game_title))
+
         gameDetViewModel.getGamePlatform("Cyberpunk 2077")
         Log.e("GIUOCO", gameDetViewModel.getGameAchievement("Euro Truck Simulator 2").toString())
 
@@ -278,6 +282,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         }
     }
+
 
 }
 
