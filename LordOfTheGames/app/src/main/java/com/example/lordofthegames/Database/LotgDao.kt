@@ -82,31 +82,29 @@ interface LotgDao {
 
     @Transaction
     @Query("SELECT * FROM game WHERE game_title = :game_title")
-    fun getGameDetail(game_title: String): Cursor
+    fun getGameDetail(game_title: String): Game
 
     @Transaction
     @Query( "SELECT platform.*\n" +
-            "FROM platform INNER JOIN gameplatform\n" +
-            "ON platform.platform_id = gameplatform.platform_ref\n" +
-            "INNER JOIN game\n" +
-            "ON gameplatform.game_ref = game.game_id\n" +
+            "FROM platform\n" +
+            "JOIN gameplatform ON platform.platform_id = gameplatform.platform_ref\n" +
+            "JOIN game ON gameplatform.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title")
     fun getGamePlatform(game_title: String): Cursor
 
 
     @Transaction
     @Query("SELECT achievement.*\n" +
-            "FROM achievement INNER JOIN game\n" +
+            "FROM achievement, game\n" +
             "ON achievement.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title")
     fun getGameAchievement(game_title: String): Cursor
 
     @Transaction
     @Query("SELECT categories.*\n" +
-            "FROM categories INNER JOIN gamecategory\n" +
-            "ON categories.category_id = gamecategory.category_ref\n" +
-            "INNER JOIN game\n" +
-            "ON gamecategory.game_ref = game.game_id\n" +
+            "FROM categories \n" +
+            "JOIN gamecategory ON categories.category_id = gamecategory.category_ref\n" +
+            "JOIN game ON gamecategory.game_ref = game.game_id\n" +
             "WHERE Game.game_title = :game_title")
     fun getGameCategory(game_title: String): Cursor
 
@@ -170,11 +168,11 @@ interface LotgDao {
     @Transaction
     @Query("SELECT (\n" +
             "SELECT COUNT(*)\n" +
-            "FROM achievement INNER JOIN game\n" +
+            "FROM achievement JOIN game\n" +
             "ON achievement.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title) As total_count,\n" +
             "(SELECT COUNT(*)\n" +
-            "FROM achievement INNER JOIN game\n" +
+            "FROM achievement JOIN game\n" +
             "ON achievement.game_ref = game.game_id\n" +
             "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
     fun getAchievementCount(game_title: String): Cursor

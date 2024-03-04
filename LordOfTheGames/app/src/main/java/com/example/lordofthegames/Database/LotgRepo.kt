@@ -35,7 +35,7 @@ class LotgRepo(application: Application) {
         return lotgDao.getUsrByNick(nick)
     }
 
-    fun getGameDetail(game_title: String): Cursor {
+    fun getGameDetail(game_title: String): Game {
         return lotgDao.getGameDetail(game_title)
     }
 

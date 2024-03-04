@@ -104,7 +104,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
 
-
+        gameDetViewModel.getGameDetails("giuoco test")
+        gameDetViewModel.getGamePlatform("Cyberpunk 2077")
+        Log.e("GIUOCO", gameDetViewModel.getGameAchievement("Euro Truck Simulator 2").toString())
 
 
         //achievementList = gameDetViewModel.getGameAchievement(game_title).value!!

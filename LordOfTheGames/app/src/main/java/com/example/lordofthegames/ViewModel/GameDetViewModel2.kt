@@ -2,6 +2,7 @@ package com.example.lordofthegames.ViewModel
 
 import android.app.Application
 import android.database.Cursor
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.Database.AbstractViewModel
 import com.example.lordofthegames.db_entities.Achievement
@@ -11,7 +12,8 @@ import com.example.lordofthegames.db_entities.Platform
 
 class GameDetViewModel2(application: Application): AbstractViewModel(application) {
 
-    fun getGameDetails(game_name: String): Cursor {
+
+    fun getGameDetails(game_name: String): Game {
         return repository.getGameDetail(game_name)
     }
 
