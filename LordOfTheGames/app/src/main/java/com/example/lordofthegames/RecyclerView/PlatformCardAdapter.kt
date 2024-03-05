@@ -21,7 +21,7 @@ class PlatformCardAdapter(var listener: OnItemListener, var cardItemList: List<P
         Log.i("PORCO", cardItemList[position].toString())
         holder.platTitle.text = currentCardItem.platFormName
 
-        holder.parentPlat.setCardBackgroundColor(currentCardItem.color)
+        holder.parentPlat.setCardBackgroundColor(Color.rgb(24, 128, 24)/*currentCardItem.color*/)
         val contrast = ColorUtils.calculateContrast(Color.BLACK, currentCardItem.color)
         if(contrast <= 2f){
             holder.platTitle.setTextColor(Color.WHITE)

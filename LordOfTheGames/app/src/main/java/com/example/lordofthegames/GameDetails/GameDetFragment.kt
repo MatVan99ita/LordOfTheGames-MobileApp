@@ -95,13 +95,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
         PlatformCardItem("Game Pass"        , Color.rgb(24, 128, 24)),
         PlatformCardItem("Nintendo"         , Color.rgb(231, 8, 25)),
 
-        //PlatformCardItem("Steam"            ,  Color.rgb(41, 41, 41) ),
-        //PlatformCardItem("Epic"             ,  Color.rgb(58, 58, 56) ),
-        //PlatformCardItem("Xbox One"         ,  Color.rgb(24, 128, 24) ),
-        //PlatformCardItem("Game Pass"        ,  Color.rgb(24, 128, 24) ),
-        //PlatformCardItem("Playstation 4"    ,  Color.rgb(19, 44, 116) ),
-        //PlatformCardItem("Playstation 5"    ,  Color.rgb(19, 44, 116) ),
-
 
     ) as MutableList<PlatformCardItem>
 
