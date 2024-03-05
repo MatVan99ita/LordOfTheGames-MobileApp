@@ -153,8 +153,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_annulla1"
+            app:layout_constraintStart_toEndOf="@+id/btn_annulla1">
 
 
             <ImageView
@@ -163,10 +164,10 @@
                 android:layout_height="wrap_content"
                 android:src="@mipmap/yo_listen_foreground"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/achievement_title_edit" />
+                app:layout_constraintTop_toBottomOf="@id/FL_achievement_title_edit" />
 
             <TextView
-                android:id="@+id/achievement_title_edit"
+                android:id="@+id/FL_achievement_title_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Nome achievement"
@@ -174,30 +175,23 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/achievement_description_edit"
+                android:id="@+id/FL_achievement_description_edit"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Descrizione achievement"
                 android:ems="17"
                 android:singleLine="false"
+                android:text="Descrizione achievement"
                 app:layout_constraintStart_toEndOf="@id/achievement_image_edit"
-                app:layout_constraintTop_toBottomOf="@id/achievement_title_edit" />
+                app:layout_constraintTop_toBottomOf="@id/FL_achievement_title_edit" />
 
-            <!--NumberPicker
-                android:id="@+id/numberPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/achievement_max_edit"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/achievement_image_edit" /-->
 
             <EditText
                 android:id="@+id/numberPicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="29dp"
+                android:layout_height="45dp"
+                android:hint="0"
                 android:inputType="number"
                 android:maxLength="4"
-                android:hint="0"
                 app:layout_constraintEnd_toStartOf="@+id/achievement_max_edit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/achievement_image_edit" />
@@ -213,14 +207,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/achievement_image_edit" />
 
             <Button
+                android:id="@+id/btn_plus"
+                android:layout_width="65dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:text="+1"
+                app:layout_constraintTop_toTopOf="@id/achievement_max_edit"
+                app:layout_constraintStart_toEndOf="@id/achievement_max_edit" />
+
+            <Button
                 android:id="@+id/btn_salva_frml"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Salva"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_annulla1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_annulla1" />
 
 
             <Button
@@ -228,10 +230,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Annulla"
-                app:layout_constraintEnd_toStartOf="@id/btn_salva_frml"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toStartOf="@id/btn_salva_frml"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

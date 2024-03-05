@@ -2,13 +2,17 @@ package com.example.lordofthegames.ViewModel
 
 import android.app.Application
 import android.database.Cursor
+import android.graphics.Color
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.Database.AbstractViewModel
+import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.recyclerView.CategoryCardItem
+import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 class GameDetViewModel2(application: Application): AbstractViewModel(application) {
 
@@ -17,8 +21,30 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.getGameDetail(game_name)
     }
 
-    fun getGamePlatform(game_title: String): Cursor {
-        return repository.getGamePlatform(game_title)
+    fun getGamePlatform(game_title: String): List<PlatformCardItem> {
+        val c = repository.getGamePlatform(game_title)
+        val l = mutableListOf<PlatformCardItem>()
+
+        while (c.moveToNext()){
+            val el  = c.getString(1);
+            Log.i("GIOOG", el)
+            l.add(
+                PlatformCardItem(
+                    el,
+                    when(el){
+                        "Steam" -> Color.rgb(41, 41, 41)
+                        "Epic" -> Color.rgb(58, 58, 56)
+                        "Xbox One" -> Color.rgb(24, 128, 24)
+                        "Game Pass" -> Color.rgb(24, 128, 24)
+                        "Playstation 4" -> Color.rgb(19, 44, 116)
+                        "Playstation 5" -> Color.rgb(19, 44, 116)
+                        else -> R.color.green_light_variant
+                    }
+                )
+            )
+        }
+
+        return l
     }
 
     fun getGameAchievement(game_title: String): List<Achievement> {
@@ -32,8 +58,18 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return l
     }
 
-    fun getGameCategory(game_title: String): Cursor {
-        return repository.getGameCategory(game_title)
+    fun getGameCategory(game_title: String): List<CategoryCardItem> {
+        val c = repository.getGameCategory(game_title)
+        val l = mutableListOf<CategoryCardItem>()
+        while(c.moveToNext()){
+            l.add(
+                CategoryCardItem(
+                    c.getString(1)
+                )
+            )
+        }
+
+        return l
     }
 
 

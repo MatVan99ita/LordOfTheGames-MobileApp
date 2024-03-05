@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Achievement
 
-class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<AchievementCardItem>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
+class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<Achievement>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementCardHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.achievement_list_item, parent, false)
         return AchievementCardHolder(layoutView, listener)
@@ -16,7 +17,7 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
 
     override fun onBindViewHolder(holder: AchievementCardHolder, position: Int) {
 
-        val currentCardItem: AchievementCardItem = this.cardItemList[position]
+        val currentCardItem = this.cardItemList[position]
         //val imagePath: String = currentCardItem.img
         holder.title.text = currentCardItem.name
         holder.completation.text = "${currentCardItem.actual_count}/${currentCardItem.total_count}"
@@ -32,7 +33,7 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
     }
 
     fun updateActualCount(position: Int, num: Int) {
-        val currentCardItem: AchievementCardItem = this.cardItemList[position]
+        val currentCardItem = this.cardItemList[position]
         currentCardItem.actual_count = num
     }
 

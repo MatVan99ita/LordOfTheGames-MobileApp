@@ -1,6 +1,5 @@
 package com.example.lordofthegames.GameDetails
 
-import android.database.Cursor
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -40,9 +39,19 @@ class GameDetFragment: Fragment(), OnItemListener  {
     // Imposta RESULT_OK a un valore diverso da RESULT_CANCELED
     private val RESULT_OK = 1
     private lateinit var imagePath: String
+
+    //####################################################################
+    private lateinit var short_descr: TextView
+    private lateinit var long_descr: TextView
+    private lateinit var game_img: ImageView
+
+    private lateinit var frame_button_plus_one: Button
+
+
+    //####################################################################
+
     private var bundle: Bundle? = null
     private lateinit var gameDetViewModel: GameDetViewModel2
-    private lateinit var achievementList: List<Achievement?>
     private lateinit var categoryList: List<Categories?>
     private lateinit var platformList: List<Platform?>
 
@@ -58,7 +67,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var btnFLAnnulla: Button
     private lateinit var btnFLSalva: Button
     private lateinit var positionT: TextView
-    private var selectedItem: AchievementCardItem? = null
+    private var selectedItem: Achievement? = null
 
     private lateinit var sgrull: ScrollView
     private lateinit var achievementImgEdit: ImageView
@@ -66,6 +75,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var achievementDescription: TextView
     private lateinit var maxNum: TextView
     private lateinit var editText: EditText
+
 
     private val catItems: MutableList<CategoryCardItem> = listOf(
         CategoryCardItem("GDR"),
@@ -86,14 +96,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
         PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
     ) as MutableList<PlatformCardItem>
 
-    val achieveItems: MutableList<AchievementCardItem> = listOf(
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 0, 1, true),
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 3, 10),
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 0, 4),
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 1, 1, true),
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 1, 10),
-        AchievementCardItem("", "sesso", "JULIANA!! VIENI A VEDERE UN PO' QUESTO PISELLO", 2, 8),
-    ) as MutableList<AchievementCardItem>
+    private var achieve: List<Achievement?> = mutableListOf()
+
     private lateinit var game_title: String
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,18 +109,11 @@ class GameDetFragment: Fragment(), OnItemListener  {
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
 
-        val game = gameDetViewModel.getGameDetails(game_title)
 
-        val achieve: List<Achievement> = this.parseAchievementCursor(gameDetViewModel.getGameAchievement(game_title))
+        achieve = gameDetViewModel.getGameAchievement(game_title)
 
-        gameDetViewModel.getGamePlatform("Cyberpunk 2077")
-        Log.e("GIUOCO", gameDetViewModel.getGameAchievement("Euro Truck Simulator 2").toString())
-
-
-        //achievementList = gameDetViewModel.getGameAchievement(game_title).value!!
-        //categoryList = gameDetViewModel.getGameCategory(game_title).value!!
-        //platformList = gameDetViewModel.getGamePlatform(game_title).value!!
-
+        val plat = gameDetViewModel.getGamePlatform(game_title)
+        val cate = gameDetViewModel.getGameCategory(game_title)
 
 
         bundle = savedInstanceState
@@ -130,19 +127,25 @@ class GameDetFragment: Fragment(), OnItemListener  {
         frameLayout = view.findViewById(R.id.achievement_edit)
         btnFLAnnulla = view.findViewById(R.id.btn_annulla1)
         btnFLSalva = view.findViewById(R.id.btn_salva_frml)
+        short_descr = view.findViewById(R.id.description_short)
+        long_descr = view.findViewById(R.id.game_description)
+        game_img = view.findViewById(R.id.selectedImage)
+
+        frame_button_plus_one = view.findViewById(R.id.btn_plus)
 
         frameLayout.visibility = View.GONE
 
-        achievementDescription = view.findViewById(R.id.achievement_description_edit)
-        achievementTitleEdit = view.findViewById(R.id.achievement_title_edit)
+        achievementDescription = view.findViewById(R.id.FL_achievement_description_edit)
+        achievementTitleEdit = view.findViewById(R.id.FL_achievement_title_edit)
         achievementImgEdit = view.findViewById(R.id.achievement_image_edit)
         editText = view.findViewById(R.id.numberPicker)
         maxNum = view.findViewById(R.id.achievement_max_edit)
         positionT = view.findViewById(R.id.FL_position)
 
-        categoryCardAdapter = CategoryCardAdapter(this, catItems)
-        platformCardAdapter = PlatformCardAdapter(this, platItems)
-        achievementCardAdapter = AchievementCardAdapter(this, achieveItems, requireActivity())
+        categoryCardAdapter = CategoryCardAdapter(this, cate)
+        platformCardAdapter = PlatformCardAdapter(this, plat)
+        achievementCardAdapter = AchievementCardAdapter(this,
+            achieve as List<Achievement>, requireActivity())
 
         return view
     }
@@ -160,19 +163,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-            /**
-             * TODO: DA RISCRIVERE PENSANDO DI AVERE UN CURSOR
-             * */
-            //this.gameDetViewModel.getGameDetails(game_title).observe(viewLifecycleOwner){ g ->
-//
-            //    Log.w("GIUOCAMENDI", g.toString())
-//
-            //    g?.forEach { e ->
-            //        if (e != null) {
-            //            Log.w("GIUOCAMENDI", e.game_title)
-            //        }
-            //    }
-            //}
+
+            val game = gameDetViewModel.getGameDetails(game_title)
 
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -189,6 +181,17 @@ class GameDetFragment: Fragment(), OnItemListener  {
             recyclerViewCategory.adapter = categoryCardAdapter
             recyclerViewPlatform.adapter = platformCardAdapter
             recyclerViewAchievement.adapter = achievementCardAdapter
+
+
+            /*
+            short_descr             =   R.id.description_short
+            long_descr              =   R.id.game_description
+            game_img                =   R.id.selectedImage
+            */
+
+            short_descr.text = game.game_description
+            long_descr.text = game.game_description
+
 
 
             /** TODO:
@@ -262,14 +265,33 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 if(!frameLayout.isVisible){
                     frameLayout.visibility = View.VISIBLE
 
+                    /*
+                    frame_button_plus_one   =   R.id.btn_plus
+                    */
 
-                    val item = achieveItems[position]
+
+
+
+                    val item = achieve[position]
                     selectedItem = item
-                    positionT.text = "${position}"
-                    achievementTitleEdit.text = item.name
-                    achievementDescription.text = item.descr
-                    maxNum.text = "/${item.total_count}"
-                    editText.text = Editable.Factory.getInstance().newEditable("${item.actual_count}")
+
+                    if(item != null)
+                    {
+                        positionT.text = "$position"
+                        achievementTitleEdit.text = item.name
+                        achievementDescription.text = item.description
+                        maxNum.text = "/${item.total_count}"
+                        editText.text =
+                            Editable.Factory.getInstance().newEditable("${item.actual_count}")
+                        frame_button_plus_one.setOnClickListener {
+                            if (item.actual_count < item.total_count) {
+                                item.actual_count++
+                                editText.text =
+                                    Editable.Factory.getInstance()
+                                        .newEditable("${item.actual_count}")
+                            }
+                        }
+                    }
                 }
             //
             }
