@@ -67,7 +67,7 @@
             android:id="@+id/category_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/belandih"
+            android:text="Categories"
             app:layout_constraintTop_toBottomOf="@id/description_short" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/belandih"
+            android:text="Playable platform"
             app:layout_constraintTop_toBottomOf="@id/recycler_view_game_details_category" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/belandih"
+            android:text="Achievements"
             app:layout_constraintTop_toBottomOf="@id/game_description" />
 
         <androidx.recyclerview.widget.RecyclerView

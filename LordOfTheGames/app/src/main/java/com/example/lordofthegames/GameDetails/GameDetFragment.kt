@@ -87,13 +87,22 @@ class GameDetFragment: Fragment(), OnItemListener  {
         CategoryCardItem("JRPG")
     ) as MutableList<CategoryCardItem>
 
-    val platItems: MutableList<PlatformCardItem> = listOf(
-        PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
-        PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
-        PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
-        PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
-        PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
-        PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
+    private val platItems: MutableList<PlatformCardItem> = listOf(
+        PlatformCardItem("PS4"              , Color.rgb(19, 44, 116)),
+        PlatformCardItem("STEAM"            , Color.rgb(41, 41, 41)),
+        PlatformCardItem("EPIC"             , Color.rgb(58, 58, 56)),
+        PlatformCardItem("XBOX ONE"         , Color.rgb(24, 128, 24)),
+        PlatformCardItem("Game Pass"        , Color.rgb(24, 128, 24)),
+        PlatformCardItem("Nintendo"         , Color.rgb(231, 8, 25)),
+
+        //PlatformCardItem("Steam"            ,  Color.rgb(41, 41, 41) ),
+        //PlatformCardItem("Epic"             ,  Color.rgb(58, 58, 56) ),
+        //PlatformCardItem("Xbox One"         ,  Color.rgb(24, 128, 24) ),
+        //PlatformCardItem("Game Pass"        ,  Color.rgb(24, 128, 24) ),
+        //PlatformCardItem("Playstation 4"    ,  Color.rgb(19, 44, 116) ),
+        //PlatformCardItem("Playstation 5"    ,  Color.rgb(19, 44, 116) ),
+
+
     ) as MutableList<PlatformCardItem>
 
     private var achieve: List<Achievement?> = mutableListOf()
@@ -142,8 +151,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
         maxNum = view.findViewById(R.id.achievement_max_edit)
         positionT = view.findViewById(R.id.FL_position)
 
-        categoryCardAdapter = CategoryCardAdapter(this, cate)
         platformCardAdapter = PlatformCardAdapter(this, plat)
+
+        categoryCardAdapter = CategoryCardAdapter(this, cate)
         achievementCardAdapter = AchievementCardAdapter(this,
             achieve as List<Achievement>, requireActivity())
 

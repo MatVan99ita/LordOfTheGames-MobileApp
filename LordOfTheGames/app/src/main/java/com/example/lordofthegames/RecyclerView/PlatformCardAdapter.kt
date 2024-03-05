@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import okhttp3.internal.toHexString
 
 class PlatformCardAdapter(var listener: OnItemListener, var cardItemList: List<PlatformCardItem>) : RecyclerView.Adapter<PlatformCardViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlatformCardViewHolder {
@@ -17,8 +18,10 @@ class PlatformCardAdapter(var listener: OnItemListener, var cardItemList: List<P
 
     override fun onBindViewHolder(holder: PlatformCardViewHolder, position: Int) {
         val currentCardItem: PlatformCardItem = this.cardItemList[position]
+        Log.i("PORCO", cardItemList[position].toString())
         holder.platTitle.text = currentCardItem.platFormName
-        holder.parentPlat.setBackgroundColor(currentCardItem.color)
+
+        holder.parentPlat.setCardBackgroundColor(currentCardItem.color)
         val contrast = ColorUtils.calculateContrast(Color.BLACK, currentCardItem.color)
         if(contrast <= 2f){
             holder.platTitle.setTextColor(Color.WHITE)

@@ -65,9 +65,9 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
                     when(el){
                         "Steam" -> Color.rgb(41, 41, 41)
                         "Epic" -> Color.rgb(58, 58, 56)
-                        "XBOX ONE" -> Color.rgb(24, 128, 24)
+                        "Xbox One" -> Color.rgb(24, 128, 24)
                         "Game Pass" -> Color.rgb(24, 128, 24)
-                        "Nintendo" -> Color.rgb(231, 8, 25)
+                        "Nintendo switch" -> Color.rgb(231, 8, 25)
                         "Playstation 4" -> Color.rgb(19, 44, 116)
                         "Playstation 5" -> Color.rgb(19, 44, 116)
                         else -> R.color.green_light_variant

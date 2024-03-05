@@ -151,7 +151,9 @@ INSERT INTO `gameplatform` (`platform_ref`, `game_ref`) VALUES
 (3, 16),
 (4, 16),
 (9, 14),
-(9, 15);
+(9, 15)
+(1,1),(2,1),(3,1),(5,1),(7,1)
+;
 
 
 INSERT INTO `platform` (`platform_id`, `nome`, `icona`) VALUES

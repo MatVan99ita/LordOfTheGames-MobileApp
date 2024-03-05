@@ -26,7 +26,7 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         val l = mutableListOf<PlatformCardItem>()
 
         while (c.moveToNext()){
-            val el  = c.getString(1);
+            val el  = c.getString(1)
             Log.i("GIOOG", el)
             l.add(
                 PlatformCardItem(
@@ -36,6 +36,7 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
                         "Epic" -> Color.rgb(58, 58, 56)
                         "Xbox One" -> Color.rgb(24, 128, 24)
                         "Game Pass" -> Color.rgb(24, 128, 24)
+                        "Nintendo switch" -> Color.rgb(231, 8, 25)
                         "Playstation 4" -> Color.rgb(19, 44, 116)
                         "Playstation 5" -> Color.rgb(19, 44, 116)
                         else -> R.color.green_light_variant
