@@ -1,16 +1,18 @@
 package com.example.lordofthegames.GameDetails
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ScrollView
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -26,10 +28,8 @@ import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.recyclerView.AchievementCardAdapter
 import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
-import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
-import com.example.lordofthegames.recyclerView.PlatformCardItem
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -75,28 +75,15 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var achievementDescription: TextView
     private lateinit var maxNum: TextView
     private lateinit var editText: EditText
+    private lateinit var spinner_GS: Spinner
 
-
-    private val catItems: MutableList<CategoryCardItem> = listOf(
-        CategoryCardItem("GDR"),
-        CategoryCardItem("Terza persona"),
-        CategoryCardItem("JRPG"),
-        CategoryCardItem("JRPG"),
-        CategoryCardItem("JRPG"),
-        CategoryCardItem("JRPG"),
-        CategoryCardItem("JRPG")
-    ) as MutableList<CategoryCardItem>
-
-    private val platItems: MutableList<PlatformCardItem> = listOf(
-        PlatformCardItem("PS4"              , Color.argb(255, 19, 44, 116)),
-        PlatformCardItem("STEAM"            , Color.argb(255, 41, 41, 41)),
-        PlatformCardItem("EPIC"             , Color.argb(255, 58, 58, 56)),
-        PlatformCardItem("XBOX ONE"         , Color.argb(255, 24, 128, 24)),
-        PlatformCardItem("Game Pass"        , Color.argb(255, 24, 128, 24)),
-        PlatformCardItem("Nintendo"         , Color.argb(255, 231, 8, 25)),
-
-
-    ) as MutableList<PlatformCardItem>
+    private val statuss = listOf(
+        "Not played",
+        "Playing",
+        "Played",
+        "Abandoned",
+        "Wanted to play",
+    )
 
     private var achieve: List<Achievement?> = mutableListOf()
 
@@ -118,6 +105,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         val cate = gameDetViewModel.getGameCategory(game_title)
 
 
+
         bundle = savedInstanceState
 
         sgrull = view.findViewById(R.id.sgrullatina)
@@ -136,6 +124,13 @@ class GameDetFragment: Fragment(), OnItemListener  {
         frame_button_plus_one = view.findViewById(R.id.btn_plus)
 
         frameLayout.visibility = View.GONE
+
+        spinner_GS = view.findViewById(R.id.spinner)
+
+        val spinnerAdapter = ArrayAdapter<String>(requireContext(), R.layout.row)
+        spinnerAdapter.addAll(statuss)
+        spinner_GS.adapter = spinnerAdapter
+
 
         achievementDescription = view.findViewById(R.id.FL_achievement_description_edit)
         achievementTitleEdit = view.findViewById(R.id.FL_achievement_title_edit)
@@ -196,6 +191,23 @@ class GameDetFragment: Fragment(), OnItemListener  {
             long_descr.text = game.game_description
 
 
+            spinner_GS.setSelection(
+                if (game.game_status != "NP") statuss.indexOf(game.game_status) else 0
+            )
+
+            spinner_GS.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View,
+                    pos: Int,
+                    id: Long
+                ) {
+                    val item = parent.getItemAtPosition(pos)
+                    println("it works...   ")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
 
             /** TODO:
              *      edit del gioco(<-to be spiegare)

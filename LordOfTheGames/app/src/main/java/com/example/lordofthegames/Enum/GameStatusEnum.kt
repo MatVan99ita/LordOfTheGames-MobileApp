@@ -5,5 +5,5 @@ enum class GameStatusEnum(status: String) {
     Playing    ("PL"),
     Dropped    ("DP"),
     Finished   ("FS"),
-    NotPlayed ("NP"),
+    NotPlayed  ("NP"),
 }

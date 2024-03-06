@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string-array name="game_statuses" xmlns:android="http://schemas.android.com/apk/res/android">
+    <Item>Not played</Item>
+    <Item>Playing</Item>
+    <Item>Played</Item>
+    <Item>Abandoned</Item>
+    <Item>Wanted to play</Item>
+</string-array>

@@ -75,4 +75,5 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
 
 
 
+
 }
