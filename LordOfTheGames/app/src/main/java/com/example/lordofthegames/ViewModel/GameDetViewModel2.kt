@@ -32,13 +32,13 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
                 PlatformCardItem(
                     el,
                     when(el){
-                        "Steam" -> Color.rgb(41, 41, 41)
-                        "Epic" -> Color.rgb(58, 58, 56)
-                        "Xbox One" -> Color.rgb(24, 128, 24)
-                        "Game Pass" -> Color.rgb(24, 128, 24)
-                        "Nintendo switch" -> Color.rgb(231, 8, 25)
-                        "Playstation 4" -> Color.rgb(19, 44, 116)
-                        "Playstation 5" -> Color.rgb(19, 44, 116)
+                        "Steam"             -> Color.argb(255, 41, 41, 41)
+                        "Epic"              -> Color.argb(255, 58, 58, 56)
+                        "Xbox One"          -> Color.argb(255, 24, 128, 24)
+                        "Game Pass"         -> Color.argb(255, 24, 128, 24)
+                        "Nintendo switch"   -> Color.argb(255, 231, 8, 25)
+                        "Playstation 4"     -> Color.argb(255, 19, 44, 116)
+                        "Playstation 5"     -> Color.argb(255, 19, 44, 116)
                         else -> R.color.green_light_variant
                     }
                 )

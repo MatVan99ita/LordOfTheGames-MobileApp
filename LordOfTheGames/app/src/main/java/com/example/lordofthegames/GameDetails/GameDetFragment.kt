@@ -88,12 +88,12 @@ class GameDetFragment: Fragment(), OnItemListener  {
     ) as MutableList<CategoryCardItem>
 
     private val platItems: MutableList<PlatformCardItem> = listOf(
-        PlatformCardItem("PS4"              , Color.rgb(19, 44, 116)),
-        PlatformCardItem("STEAM"            , Color.rgb(41, 41, 41)),
-        PlatformCardItem("EPIC"             , Color.rgb(58, 58, 56)),
-        PlatformCardItem("XBOX ONE"         , Color.rgb(24, 128, 24)),
-        PlatformCardItem("Game Pass"        , Color.rgb(24, 128, 24)),
-        PlatformCardItem("Nintendo"         , Color.rgb(231, 8, 25)),
+        PlatformCardItem("PS4"              , Color.argb(255, 19, 44, 116)),
+        PlatformCardItem("STEAM"            , Color.argb(255, 41, 41, 41)),
+        PlatformCardItem("EPIC"             , Color.argb(255, 58, 58, 56)),
+        PlatformCardItem("XBOX ONE"         , Color.argb(255, 24, 128, 24)),
+        PlatformCardItem("Game Pass"        , Color.argb(255, 24, 128, 24)),
+        PlatformCardItem("Nintendo"         , Color.argb(255, 231, 8, 25)),
 
 
     ) as MutableList<PlatformCardItem>

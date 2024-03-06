@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import okhttp3.internal.toHexString
@@ -21,8 +24,18 @@ class PlatformCardAdapter(var listener: OnItemListener, var cardItemList: List<P
         Log.i("PORCO", cardItemList[position].toString())
         holder.platTitle.text = currentCardItem.platFormName
 
-        holder.parentPlat.setCardBackgroundColor(Color.rgb(24, 128, 24)/*currentCardItem.color*/)
-        val contrast = ColorUtils.calculateContrast(Color.BLACK, currentCardItem.color)
+        //val colore = Color.toArgb(currentCardItem.color.toLong())
+
+        holder.parentPlat.setCardBackgroundColor(currentCardItem.color)
+        val contrast = ColorUtils.calculateContrast(
+            Color.BLACK,
+            Color.argb(
+                255,
+                currentCardItem.color.red,
+                currentCardItem.color.green,
+                currentCardItem.color.blue
+            )
+        )
         if(contrast <= 2f){
             holder.platTitle.setTextColor(Color.WHITE)
         }
