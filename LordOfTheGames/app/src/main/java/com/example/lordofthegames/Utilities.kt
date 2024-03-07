@@ -19,6 +19,7 @@ import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -315,10 +316,18 @@ class Utilities {
         fun convertCompressedByteArrayToBitmap(src: ByteArray): Bitmap? {
             return BitmapFactory.decodeByteArray(src, 0, src.size)
         }
+
+        fun showaToast(context: Context, testo: String){
+            val duration = Toast.LENGTH_SHORT
+
+            Toast.makeText(context, testo, duration).show()
+
+        }
+
+
+
+
+
+
     }
-
-
-
-
-
 }

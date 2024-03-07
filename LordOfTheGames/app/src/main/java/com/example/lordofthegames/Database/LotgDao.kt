@@ -3,6 +3,7 @@ package com.example.lordofthegames.Database
 import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
@@ -60,9 +61,30 @@ interface LotgDao {
      * DELETE
      */
 
+
     /**
      * UPDATE
      */
+    @Query("UPDATE game SET game_status = :game_status WHERE game_title = :game_title")
+    fun updateGameStatus(game_title: String, game_status: String): Int
+
+
+    @Query("UPDATE achievement \n" +
+            "SET actual_count = :actual\n" +
+            "WHERE game_ref IN (SELECT game.game_id FROM game WHERE game.game_title = :game_ref)\n" +
+            "AND achievement_id  = :id;"
+    )
+    fun updateAchievement(game_ref: String, id: Int, actual: Int): Int
+
+    @Query("UPDATE achievement \n" +
+            "SET status = :status\n" +
+            "WHERE game_ref IN (SELECT game.game_id FROM game WHERE game.game_title = :game_ref) \n" +
+            "AND achievement_id = :id"
+    )
+    fun completeAchievement(game_ref: String, id: Int, status: Int): Int
+
+
+
 
     /**
      * QUERY VARIE
@@ -126,19 +148,6 @@ interface LotgDao {
             "WHERE platform.platform_id = gameplatform.platform_ref\n" +
             "AND gameplatform.game_ref = game.game_id\n")
     fun getAllGamePlatforms(): LiveData<Map<String, Platform>>
-
-
-
-    //@MapInfo(keyColumn = "game_title")
-    //@Query("SELECT game.game_title, (" +
-    //"SELECT COUNT(*)\n" +
-    //"FROM achievement, game\n" +
-    //"WHERE achievement.game_ref = game.game_id\n) As total_count, \n" +
-    //"(SELECT COUNT(*)\n" +
-    //"FROM achievement, game\n" +
-    //"WHERE achievement.game_ref = game.game_id\n"+
-    //"AND achievement.status=1) as completed_count FROM game")
-    //fun getAllGameAchievementCounts(): LiveData<Map<String, Cursor>>
 
 
     @Transaction

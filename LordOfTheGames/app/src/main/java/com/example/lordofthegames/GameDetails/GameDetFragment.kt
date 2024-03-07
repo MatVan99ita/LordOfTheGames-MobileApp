@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.ViewModel.GameDetViewModel2
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
@@ -202,8 +203,17 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     pos: Int,
                     id: Long
                 ) {
-                    val item = parent.getItemAtPosition(pos)
-                    println("it works...   ")
+                    val item = parent.getItemAtPosition(pos).toString()
+                    if(item != game.game_status){
+                        val i = gameDetViewModel.updateGameStatus(game.game_title, item)
+                        if(i > 0){
+                            //toast positivo
+                            Utilities.showaToast(requireContext(), "Gioco aggiornato")
+                        } else {
+                            //toast negativo
+                            Utilities.showaToast(requireContext(), "Errore nell'aggiornamento")
+                        }
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -251,7 +261,18 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 selectedItem!!.actual_count = num
             }
             achievementCardAdapter!!.updateActualCount(Integer.valueOf(positionT.text.toString()), num)
+
             recyclerViewAchievement.adapter = achievementCardAdapter
+            var i = gameDetViewModel.updateAchievement(game_title, selectedItem!!.achievement_id, selectedItem!!.actual_count)
+            if(selectedItem!!.actual_count >= selectedItem!!.total_count){
+                i += gameDetViewModel.completeAchievement(game_title, selectedItem!!.achievement_id, 1)
+            }
+
+            if (i >= 1) {
+                Utilities.showaToast(requireContext(), "Achievement aggiornato")
+            } else {
+                Utilities.showaToast(requireContext(), "Errore update")
+            }
             frameLayout.visibility = View.GONE
         }
 
@@ -259,13 +280,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     }
 
 
-    fun checkAchievementCompletation(achievement: AchievementCardItem, status: Int){
-        if(status >= achievement.total_count){
-            achievement.actual_count = achievement.total_count
-            achievement.completed = true
-            //disable achievement edit
-        }
-    }
+
 
 
 

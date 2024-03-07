@@ -351,8 +351,13 @@ class HomeFragment: Fragment(), OnItemListener {
     }
 
 
+    override fun onResume() {
+        super.onResume()
 
-
+        val listener: OnItemListener = this
+        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), requireActivity())
+        recyclerView.adapter = adapter
+    }
 
 
 }
