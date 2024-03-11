@@ -48,7 +48,7 @@
         <activity android:name=".GameDetails.GameDetActivity"/>
         <activity android:name=".Settings.SettingsActivity"/>
         <activity android:name=".user_login.LoggedActivity" />
-        <activity android:name="com.example.lordofthegames.GameNotes.GameNoteActivity" />
+        <activity android:name=".GameNotes.GameNoteActivity" />
     </application>
 
 

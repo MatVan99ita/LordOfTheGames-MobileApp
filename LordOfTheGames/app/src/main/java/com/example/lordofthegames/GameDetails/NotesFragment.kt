@@ -70,10 +70,6 @@ class NotesFragment : Fragment() {
         menu.clear()
     }
 
-    companion object{
-        fun saveNotes(){
-            Log.i("BANANA", "BANANA")
-        }
-    }
+
 
 }

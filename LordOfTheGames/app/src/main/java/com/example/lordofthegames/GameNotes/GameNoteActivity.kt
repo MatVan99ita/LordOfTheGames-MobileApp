@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,21 +25,20 @@ class GameNoteActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+
         setContentView(R.layout.activity_game_notes)
 
+        val titile = intent.getStringExtra("game_titile")
+
+        Log.i("PORCODDIO", titile!!)
         Utilities.setUpToolBar(
             this,
             findViewById(R.id.toolbar),
-            intent.getStringExtra("game_titile"),
+            titile,
             null,
             null
         )
 
-
-    }
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

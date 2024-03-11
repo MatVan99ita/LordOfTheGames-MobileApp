@@ -14,13 +14,14 @@ import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.GameDetails.NotesFragment
+import com.example.lordofthegames.GameNotes.GameNoteActivity
 
 
 class GameDetActivity: AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-
+    private lateinit var game_det_intent: Intent
     private var actualFragment: String = GameDetFragment::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class GameDetActivity: AppCompatActivity() {
         setContentView(R.layout.activity_gamedet)
         //actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), )
 
-        val intent: Intent = intent
+        game_det_intent = intent
         val bundle = Bundle()
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
@@ -84,22 +85,10 @@ class GameDetActivity: AppCompatActivity() {
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
 
-            /*val intent = Intent(this, NotesActivity::class.java)
-            intent.putExtra()
-            this.startActivity(intent)*/
-            if(actualFragment != NotesFragment::class.java.simpleName) {
-                val bundle: Bundle = Bundle()
-                bundle.putString("game_title", intent.getStringExtra("game_title").toString())
+            val intent = Intent(this, GameNoteActivity::class.java)
+            intent.putExtra("game_title", game_det_intent.getStringExtra("game_title"))
+            this.startActivity(intent)
 
-                actualFragment = NotesFragment::class.java.simpleName
-                Utilities.insertFragment(
-                    this,
-                    NotesFragment(),
-                    NotesFragment::class.java.simpleName, bundle,
-                )
-            } else {
-                NotesFragment.saveNotes()
-            }
             true
         } else {
             super.onOptionsItemSelected(item)
