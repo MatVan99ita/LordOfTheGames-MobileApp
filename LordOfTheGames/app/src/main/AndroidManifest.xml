@@ -48,7 +48,6 @@
         <activity android:name=".GameDetails.GameDetActivity"/>
         <activity android:name=".Settings.SettingsActivity"/>
         <activity android:name=".user_login.LoggedActivity" />
-        <activity android:name=".notes.NotesActivity" />
     </application>
 
 
