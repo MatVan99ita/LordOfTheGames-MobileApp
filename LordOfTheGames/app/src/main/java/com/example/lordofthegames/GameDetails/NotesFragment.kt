@@ -30,11 +30,7 @@ class NotesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                activity?.onBackPressed()
-            }
-        })
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

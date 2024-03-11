@@ -13,7 +13,7 @@ import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.notes.NotesActivity
+import com.example.lordofthegames.GameDetails.NotesFragment
 
 
 class GameDetActivity: AppCompatActivity() {
@@ -21,6 +21,7 @@ class GameDetActivity: AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
 
+    private var actualFragment: String = GameDetFragment::class.java.simpleName
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -83,10 +84,19 @@ class GameDetActivity: AppCompatActivity() {
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
 
-            val intent = Intent(this, NotesActivity::class.java)
-            intent.putExtra("game_title", intent.getStringExtra("game_title").toString())
-            this.startActivity(intent)
+            /*val intent = Intent(this, NotesActivity::class.java)
+            intent.putExtra()
+            this.startActivity(intent)*/
 
+            val bundle: Bundle = Bundle()
+            bundle.putString("game_title", intent.getStringExtra("game_title").toString())
+
+            actualFragment = NotesFragment::class.java.simpleName
+            Utilities.insertFragment(
+                this,
+                NotesFragment(),
+                NotesFragment::class.java.simpleName, bundle,
+            )
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -97,6 +107,15 @@ class GameDetActivity: AppCompatActivity() {
     override fun onBackPressed() {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
+        } else if(actualFragment != GameDetFragment::class.java.simpleName){
+                val bundle: Bundle = Bundle()
+                bundle.putString("game_title", intent.getStringExtra("game_title").toString())
+                actualFragment = GameDetFragment::class.java.simpleName
+                Utilities.insertFragment(
+                    this,
+                    GameDetFragment(),
+                    GameDetFragment::class.java.simpleName, bundle,
+                )
         } else {
             onBackPressedDispatcher.onBackPressed()
         }

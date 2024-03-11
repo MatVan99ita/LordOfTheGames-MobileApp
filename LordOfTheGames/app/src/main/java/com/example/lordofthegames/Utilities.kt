@@ -63,7 +63,12 @@ class Utilities {
             fragment.arguments = bundle
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment && fragment !is LoggedInFragment && fragment !is NotesFragment){
+            if (
+                fragment !is HomeFragment &&
+                fragment !is GameDetFragment &&
+                fragment !is SettingsFragment &&
+                fragment !is LoggedInFragment
+            ) {
                 transaction.addToBackStack(tag);
             }
 
