@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/gn_top_today"
+        android:icon="@drawable/baseline_calendar_today_24"
+        android:title="TUDEI"
+        app:showAsAction="ifRoom"
+        android:contentDescription="TUDEI"
+        />
+
+    <item
+        android:id="@+id/gn_top_save"
+        android:icon="@drawable/baseline_save_24"
+        android:title="Manual save"
+        app:showAsAction="ifRoom"
+        android:contentDescription="Manual Save"
+        />
+</menu>

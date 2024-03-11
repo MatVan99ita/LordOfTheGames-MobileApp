@@ -87,16 +87,19 @@ class GameDetActivity: AppCompatActivity() {
             /*val intent = Intent(this, NotesActivity::class.java)
             intent.putExtra()
             this.startActivity(intent)*/
+            if(actualFragment != NotesFragment::class.java.simpleName) {
+                val bundle: Bundle = Bundle()
+                bundle.putString("game_title", intent.getStringExtra("game_title").toString())
 
-            val bundle: Bundle = Bundle()
-            bundle.putString("game_title", intent.getStringExtra("game_title").toString())
-
-            actualFragment = NotesFragment::class.java.simpleName
-            Utilities.insertFragment(
-                this,
-                NotesFragment(),
-                NotesFragment::class.java.simpleName, bundle,
-            )
+                actualFragment = NotesFragment::class.java.simpleName
+                Utilities.insertFragment(
+                    this,
+                    NotesFragment(),
+                    NotesFragment::class.java.simpleName, bundle,
+                )
+            } else {
+                NotesFragment.saveNotes()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)

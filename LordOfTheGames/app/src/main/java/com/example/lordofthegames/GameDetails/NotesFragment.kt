@@ -6,10 +6,12 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -18,6 +20,8 @@ import com.google.android.material.textfield.TextInputLayout
 
 class NotesFragment : Fragment() {
 
+    private lateinit var editText: EditText
+    private lateinit var game_notes: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,12 +29,27 @@ class NotesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_game_notes, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_game_notes, container, false)
+        editText = view.findViewById(R.id.noteInsert)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        editText.addTextChangedListener {
+            object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
 
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +70,10 @@ class NotesFragment : Fragment() {
         menu.clear()
     }
 
-
+    companion object{
+        fun saveNotes(){
+            Log.i("BANANA", "BANANA")
+        }
+    }
 
 }
