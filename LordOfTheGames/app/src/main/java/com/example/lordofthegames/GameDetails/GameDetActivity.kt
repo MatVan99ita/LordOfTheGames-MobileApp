@@ -13,6 +13,7 @@ import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.notes.NotesActivity
 
 
 class GameDetActivity: AppCompatActivity() {
@@ -74,30 +75,30 @@ class GameDetActivity: AppCompatActivity() {
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             true
         } else if (item.itemId == R.id.gd_app_bar_add) {
-            Utilities.insertFragment(
+            /*Utilities.insertFragment(
                 this,
                 SettingsFragment(),
                 SettingsFragment::class.java.simpleName, null,
-            )
+            )*/
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
-            Utilities.insertFragment(
-                this,
-                NotesFragment(),
-                NotesFragment::class.java.simpleName, null
-            )
+
+            val intent = Intent(this, NotesActivity::class.java)
+            intent.putExtra("game_title", intent.getStringExtra("game_title").toString())
+            this.startActivity(intent)
+
             true
         } else {
             super.onOptionsItemSelected(item)
         }
     }
 
-    @Deprecated("Deprecated in Java")
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

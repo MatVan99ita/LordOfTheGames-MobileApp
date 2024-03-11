@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
+import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.home.HomeFragment
@@ -62,7 +63,7 @@ class Utilities {
             fragment.arguments = bundle
             transaction.replace(R.id.fragment_container_view, fragment, tag)
 
-            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment && fragment !is LoggedInFragment){
+            if (fragment !is HomeFragment && fragment !is GameDetFragment && fragment !is SettingsFragment && fragment !is LoggedInFragment && fragment !is NotesFragment){
                 transaction.addToBackStack(tag);
             }
 

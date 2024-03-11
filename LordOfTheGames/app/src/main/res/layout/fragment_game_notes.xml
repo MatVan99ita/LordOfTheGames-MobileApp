@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context=".GameDetails.GameDetActivity">
+    tools:context=".notes.NotesActivity">
 
         <ScrollView
             android:id="@+id/scrollView2"

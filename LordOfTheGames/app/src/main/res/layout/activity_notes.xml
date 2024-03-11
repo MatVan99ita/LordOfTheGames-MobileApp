@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/game_det_drawer"
+    android:id="@+id/notes_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GameDetails.GameDetActivity"
+    tools:context=".notes.NotesActivity"
     android:fitsSystemWindows="false"
     tools:openDrawer="start"
     tools:ignore="HardcodedText">
@@ -19,7 +19,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
-            android:name="com.example.lordofthegames.GameDetails.GameDetFragment"
+            android:name="com.example.lordofthegames.notes.NotesFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

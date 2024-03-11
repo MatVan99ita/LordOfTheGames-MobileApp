@@ -9,17 +9,15 @@ import android.text.TextWatcher
 import android.view.*
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class NotesFragment : Fragment() {
 
-    /**
-     * TODO:
-     * CREARE DB E FAR SALVARE LE NOTE
-     */
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +30,11 @@ class NotesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                activity?.onBackPressed()
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
