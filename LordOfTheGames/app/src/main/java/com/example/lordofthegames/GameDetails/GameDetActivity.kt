@@ -22,7 +22,7 @@ class GameDetActivity: AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var game_det_intent: Intent
-    private var actualFragment: String = GameDetFragment::class.java.simpleName
+    private lateinit var string: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +33,7 @@ class GameDetActivity: AppCompatActivity() {
         val bundle = Bundle()
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
+        string = title
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
         drawerLayout = findViewById(R.id.game_det_drawer)
@@ -88,7 +89,7 @@ class GameDetActivity: AppCompatActivity() {
         } else if (item.itemId == R.id.gd_app_bar_note) {
 
             val intent = Intent(this, GameNoteActivity::class.java)
-            intent.putExtra("game_title", game_det_intent.getStringExtra("game_title"))
+            intent.putExtra("game_title", string)
             this.startActivity(intent)
 
             true
@@ -101,15 +102,6 @@ class GameDetActivity: AppCompatActivity() {
     override fun onBackPressed() {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else if(actualFragment != GameDetFragment::class.java.simpleName){
-                val bundle: Bundle = Bundle()
-                bundle.putString("game_title", intent.getStringExtra("game_title").toString())
-                actualFragment = GameDetFragment::class.java.simpleName
-                Utilities.insertFragment(
-                    this,
-                    GameDetFragment(),
-                    GameDetFragment::class.java.simpleName, bundle,
-                )
         } else {
             onBackPressedDispatcher.onBackPressed()
         }

@@ -2,9 +2,7 @@ package com.example.lordofthegames.GameNotes
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -15,15 +13,12 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.R
-import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
-import com.google.android.material.textfield.TextInputLayout.OnEditTextAttachedListener
-import java.util.Calendar
+
 
 class GameNoteActivity: AppCompatActivity() {
 
@@ -37,13 +32,13 @@ class GameNoteActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
-        Log.i("PORCADDIO", "PORCADDIO")
+
         setContentView(R.layout.activity_game_notes)
 
 
-        noteViewModel = ViewModelProvider(this)[GameNoteViewModel::class.java]
+        //noteViewModel = ViewModelProvider(this)[GameNoteViewModel::class.java]
         drawerLayout = findViewById(R.id.gn_drawer)
-        game_title = intent.getStringExtra("game_titile").toString()
+        game_title = intent.getStringExtra("game_title").toString()
         editText  = findViewById(R.id.gn_Insert)
         Utilities.setUpToolBar(
             this,
@@ -58,10 +53,6 @@ class GameNoteActivity: AppCompatActivity() {
             navigationView = findViewById(R.id.nav_view),
             this,
         )
-
-    }
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -72,8 +63,8 @@ class GameNoteActivity: AppCompatActivity() {
             }
 
         })
-        return super.onCreateView(name, context, attrs)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.game_notes_menu, menu)
@@ -89,7 +80,11 @@ class GameNoteActivity: AppCompatActivity() {
                 true
         } else if (item.itemId == R.id.gn_top_today) {
             /*TODO: AGGIUNTA DELLA DATA CON DATE PICKER PER SEGNARE LE COSE*/
-            DatePickerDialog(this).show()
+            val dpd = DatePickerDialog(
+                this
+            )
+
+            dpd.show()
             true
         } else {
             super.onOptionsItemSelected(item)
