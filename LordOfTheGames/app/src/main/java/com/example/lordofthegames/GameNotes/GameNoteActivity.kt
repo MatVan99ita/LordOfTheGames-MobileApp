@@ -1,5 +1,6 @@
 package com.example.lordofthegames.GameNotes
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
@@ -36,7 +37,7 @@ class GameNoteActivity: AppCompatActivity() {
         setContentView(R.layout.activity_game_notes)
 
 
-        //noteViewModel = ViewModelProvider(this)[GameNoteViewModel::class.java]
+        noteViewModel = GameNoteViewModel(application)
         drawerLayout = findViewById(R.id.gn_drawer)
         game_title = intent.getStringExtra("game_title").toString()
         editText  = findViewById(R.id.gn_Insert)
@@ -71,6 +72,7 @@ class GameNoteActivity: AppCompatActivity() {
         return true
     }
 
+    @SuppressLint("Range")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.gn_top_save) {
             /*TODO: SALVATAGGIO MANUALE SUL DB*/

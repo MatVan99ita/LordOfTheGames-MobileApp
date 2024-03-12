@@ -195,6 +195,8 @@ interface LotgDao {
     @Query("SELECT * FROM game WHERE game_status != \"NP\" ")
     fun getAllFilteredGame(): List<Game>
 
+    @Query("SELECT * FROM notes")
+    fun getNotes(): Cursor
 
 
 }

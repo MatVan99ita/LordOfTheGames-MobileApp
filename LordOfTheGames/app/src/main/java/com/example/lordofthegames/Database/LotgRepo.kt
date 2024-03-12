@@ -102,4 +102,8 @@ class LotgRepo(application: Application) {
         return lotgDao.completeAchievement(game_title, id, status)
     }
 
+    fun getNotes(): Cursor {
+        return lotgDao.getNotes()
+    }
+
 }
