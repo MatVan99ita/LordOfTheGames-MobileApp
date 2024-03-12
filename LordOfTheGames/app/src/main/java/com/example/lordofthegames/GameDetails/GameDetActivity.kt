@@ -82,6 +82,8 @@ class GameDetActivity: AppCompatActivity() {
                 SettingsFragment(),
                 SettingsFragment::class.java.simpleName, null,
             )*/
+            val intent = Intent(this, SettingsActivity::class.java)
+            this.startActivity(intent)
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
 

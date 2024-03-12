@@ -40,7 +40,7 @@ class SettingsActivity: AppCompatActivity() {
                 SettingsFragment(),
                 SettingsFragment::class.java.simpleName, null,
             )
-        } // */
+        }
 
         Utilities.setUpToolBar(
             this,
@@ -75,7 +75,7 @@ class SettingsActivity: AppCompatActivity() {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

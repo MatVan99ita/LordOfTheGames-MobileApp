@@ -10,7 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModel
 import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.R
@@ -22,27 +24,41 @@ class GameNoteActivity: AppCompatActivity() {
     private lateinit var noteViewModel: ViewModel
     private lateinit var editText: EditText
 
+    private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private var savedInstanceState: Bundle? = null
 
+    private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
+        this.savedInstanceState = savedInstanceState
 
         setContentView(R.layout.activity_game_notes)
 
+        drawerLayout = findViewById(R.id.setting_drawer)
         val titile = intent.getStringExtra("game_titile")
 
-        Log.i("PORCODDIO", titile!!)
         Utilities.setUpToolBar(
             this,
             findViewById(R.id.toolbar),
             titile,
-            null,
-            null
+            drawerLayout,
+            R.menu.game_notes_menu
+        )
+
+        actionBarDrawerToggle = Utilities.setUpDrawer(
+            drawerLayout,
+            navigationView = findViewById(R.id.nav_view),
+            this,
         )
 
     }
 
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        return super.onCreateView(name, context, attrs)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.game_notes_menu, menu)
+        //menuInflater.inflate(R.menu.game_notes_menu, menu)
         return true
     }
 
