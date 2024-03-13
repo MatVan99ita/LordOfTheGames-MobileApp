@@ -15,7 +15,6 @@ import java.sql.Timestamp
         childColumns = ["game_ref"],
     )],
 )
-@TypeConverters(DateConverter::class)
 data class Notes(
     /**
      * ##Le note dell'utente per un gioco
@@ -27,6 +26,6 @@ data class Notes(
     var title: String,
     var content: String,
     @ColumnInfo(defaultValue = "CURRENT_TIMESTAMP")
-    var last_modified: Date,
+    var last_modified: String,
     @ColumnInfo(index = true)
     var game_ref: Int )

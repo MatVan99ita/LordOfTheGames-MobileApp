@@ -26,9 +26,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
-import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.home.HomeFragment
@@ -329,11 +330,5 @@ class Utilities {
             Toast.makeText(context, testo, duration).show()
 
         }
-
-
-
-
-
-
     }
 }

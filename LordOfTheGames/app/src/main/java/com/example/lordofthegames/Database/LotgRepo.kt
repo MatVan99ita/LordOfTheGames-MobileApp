@@ -4,11 +4,8 @@ import android.app.Application
 import android.database.Cursor
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
-import com.example.lordofthegames.Pair
-import com.example.lordofthegames.db_entities.Achievement
-import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
-import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.User
 
 class LotgRepo(application: Application) {
@@ -102,8 +99,12 @@ class LotgRepo(application: Application) {
         return lotgDao.completeAchievement(game_title, id, status)
     }
 
-    fun getNotes(): Cursor {
-        return lotgDao.getNotes()
+    fun getNotes(game_ref: Int): Cursor {
+        return lotgDao.getNotes(game_ref)
+    }
+
+    fun newNote(notes: Notes): Long {
+        return lotgDao.insertNotes(notes.title, notes.content, notes.last_modified, notes.game_ref)
     }
 
 }

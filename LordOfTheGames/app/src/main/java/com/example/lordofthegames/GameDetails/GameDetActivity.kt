@@ -23,6 +23,7 @@ class GameDetActivity: AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var game_det_intent: Intent
     private lateinit var string: String
+    private var game_ref: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +35,7 @@ class GameDetActivity: AppCompatActivity() {
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
         string = title
+        game_ref = intent.getIntExtra("game_ref", -1)
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
         drawerLayout = findViewById(R.id.game_det_drawer)
@@ -90,6 +92,7 @@ class GameDetActivity: AppCompatActivity() {
 
             val intent = Intent(this, GameNoteActivity::class.java)
             intent.putExtra("game_title", string)
+            intent.putExtra("game_id", game_ref)
             this.startActivity(intent)
 
             true

@@ -3,14 +3,11 @@ package com.example.lordofthegames.Database
 import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
-import com.example.lordofthegames.Pair
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -48,8 +45,8 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGamePlatform(gamePlatform: GamePlatform): Long
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNotes(notes: Notes): Long
+    @Query("INSERT INTO notes (title, content, last_modified, game_ref) VALUES (:title, :content, :last_mod, :game_ref)")
+    fun insertNotes(title: String, content: String, last_mod: String, game_ref: Int): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPlatform(platform: Platform): Long
@@ -195,8 +192,11 @@ interface LotgDao {
     @Query("SELECT * FROM game WHERE game_status != \"NP\" ")
     fun getAllFilteredGame(): List<Game>
 
-    @Query("SELECT * FROM notes")
-    fun getNotes(): Cursor
+    @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
+    fun getNotes(game_ref: Int): Cursor
+
+
+
 
 
 }

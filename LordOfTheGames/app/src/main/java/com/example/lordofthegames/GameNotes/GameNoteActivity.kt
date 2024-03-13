@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -30,6 +31,11 @@ class GameNoteActivity: AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var savedInstanceState: Bundle? = null
     private lateinit var game_title: String
+
+    private var game_ref: Int  =-1
+    private var note_id: Int = -1
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
@@ -40,6 +46,7 @@ class GameNoteActivity: AppCompatActivity() {
         noteViewModel = GameNoteViewModel(application)
         drawerLayout = findViewById(R.id.gn_drawer)
         game_title = intent.getStringExtra("game_title").toString()
+        game_ref = intent.getIntExtra("game_ref", -1)
         editText  = findViewById(R.id.gn_Insert)
         Utilities.setUpToolBar(
             this,
@@ -54,6 +61,11 @@ class GameNoteActivity: AppCompatActivity() {
             navigationView = findViewById(R.id.nav_view),
             this,
         )
+
+        assert(game_ref > 0)
+        val noteContent = noteViewModel.getNotes(game_ref)
+
+
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
