@@ -1,6 +1,7 @@
 package com.example.lordofthegames.GameNotes
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.Notes
@@ -16,9 +17,13 @@ class GameNoteViewModel(application: Application): ViewModel() {
     private var repository: LotgRepo = LotgRepo(application)
 
     fun getNotes(game_title: String = "", game_ref: Int): Notes {
+        Log.i("LO REFFO", "$game_ref")
         val c = repository.getNotes(game_ref)
 
         if(c.count > 0){
+            c.moveToNext()
+            Log.i("LO CONTO", c.getString(2))
+
             return Notes(
                 c.getInt(0),        //note_id"
                 c.getString(1),     //title"

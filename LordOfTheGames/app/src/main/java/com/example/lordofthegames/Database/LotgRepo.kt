@@ -2,6 +2,7 @@ package com.example.lordofthegames.Database
 
 import android.app.Application
 import android.database.Cursor
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.db_entities.Game
@@ -104,6 +105,7 @@ class LotgRepo(application: Application) {
     }
 
     fun newNote(notes: Notes): Long {
+        Log.i("LO NOTO", notes.toString())
         return lotgDao.insertNotes(notes.title, notes.content, notes.last_modified, notes.game_ref)
     }
 

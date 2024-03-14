@@ -48,7 +48,7 @@ class GameNoteActivity: AppCompatActivity() {
         noteViewModel = GameNoteViewModel(application)
         drawerLayout = findViewById(R.id.gn_drawer)
         game_title = intent.getStringExtra("game_title").toString()
-        game_ref = intent.getIntExtra("game_ref", -1)
+        game_ref = intent.getIntExtra("game_id", -1)
         editText  = findViewById(R.id.gn_Insert)
         Utilities.setUpToolBar(
             this,

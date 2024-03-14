@@ -2,6 +2,7 @@ package com.example.lordofthegames.GameDetails
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
@@ -35,7 +36,7 @@ class GameDetActivity: AppCompatActivity() {
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
         string = title
-        game_ref = intent.getIntExtra("game_ref", -1)
+        game_ref = intent.getIntExtra("game_id", -1)
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
         drawerLayout = findViewById(R.id.game_det_drawer)
@@ -89,11 +90,13 @@ class GameDetActivity: AppCompatActivity() {
             this.startActivity(intent)
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
-
-            val intent = Intent(this, GameNoteActivity::class.java)
-            intent.putExtra("game_title", string)
-            intent.putExtra("game_id", game_ref)
-            this.startActivity(intent)
+            Log.i("LO REFER", "$game_ref")
+            if(game_ref > 0){
+                val intent = Intent(this, GameNoteActivity::class.java)
+                intent.putExtra("game_title", string)
+                intent.putExtra("game_id", game_ref)
+                this.startActivity(intent)
+            }
 
             true
         } else {
