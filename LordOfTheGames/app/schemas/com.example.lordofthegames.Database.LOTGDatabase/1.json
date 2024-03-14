@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9c0e1a2cbf1ad12d7edf6decf6a2b59b",
+    "identityHash": "ba596e3f6c6bae2898912caa12ab2e24",
     "entities": [
       {
         "tableName": "achievement",
@@ -412,7 +412,7 @@
       },
       {
         "tableName": "notes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `last_modified` INTEGER NOT NULL DEFAULT CURRENT_TIMESTAMP, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `last_modified` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "note_id",
@@ -435,9 +435,8 @@
           {
             "fieldPath": "last_modified",
             "columnName": "last_modified",
-            "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "CURRENT_TIMESTAMP"
+            "affinity": "TEXT",
+            "notNull": true
           },
           {
             "fieldPath": "game_ref",
@@ -561,7 +560,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9c0e1a2cbf1ad12d7edf6decf6a2b59b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba596e3f6c6bae2898912caa12ab2e24')"
     ]
   }
 }

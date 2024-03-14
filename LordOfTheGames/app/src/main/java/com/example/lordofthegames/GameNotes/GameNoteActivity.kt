@@ -64,7 +64,7 @@ class GameNoteActivity: AppCompatActivity() {
             this,
         )
 
-        assert(game_ref > 0)
+
         val noteContent = noteViewModel.getNotes(game_title, game_ref)
         editText.hint = noteContent.title
         editText.setText(noteContent.content)
