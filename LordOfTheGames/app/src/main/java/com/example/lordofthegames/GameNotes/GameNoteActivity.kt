@@ -20,6 +20,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 
 
 class GameNoteActivity: AppCompatActivity() {
@@ -63,8 +65,9 @@ class GameNoteActivity: AppCompatActivity() {
         )
 
         assert(game_ref > 0)
-        val noteContent = noteViewModel.getNotes(game_ref)
-
+        val noteContent = noteViewModel.getNotes(game_title, game_ref)
+        editText.hint = noteContent.title
+        editText.setText(noteContent.content)
 
         editText.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -72,7 +75,11 @@ class GameNoteActivity: AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
-
+                val ib = noteViewModel.saveNotes(p0.toString(), TUDEI(), game_ref)
+                if(ib > 0)
+                    Utilities.showaToast(applicationContext, "Autosave Completed")
+                else
+                    Utilities.showaToast(applicationContext, "Error autosaving try manual")
             }
 
         })
@@ -88,7 +95,11 @@ class GameNoteActivity: AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.gn_top_save) {
             /*TODO: SALVATAGGIO MANUALE SUL DB*/
-            noteViewModel.saveNotes(game_title)
+            val i = noteViewModel.saveNotes(editText.text.toString(), TUDEI(), game_ref)
+            if(i > 0)
+                Utilities.showaToast(applicationContext, "Save completed")
+            else
+                Utilities.showaToast(applicationContext, "Data save error")
             true
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
                 true
@@ -105,4 +116,15 @@ class GameNoteActivity: AppCompatActivity() {
         }
     }
 
+
+    fun TUDEI(): String {
+        return DateTimeFormat
+            .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            .parseLocalDateTime(
+                DateTime
+                    .now()
+                    .toString()
+            )
+            .toString()
+    }
 }

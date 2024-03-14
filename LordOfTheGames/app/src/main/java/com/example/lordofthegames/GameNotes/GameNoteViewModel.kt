@@ -36,14 +36,14 @@ class GameNoteViewModel(application: Application): ViewModel() {
                 )
                 .toString()
 
-            val n = Notes(0, game_title, "", startTime.toString(), game_ref)
+            val n = Notes(0, game_title, "", startTime, game_ref)
             val i = repository.newNote(n)
             return n
         }
 
     }
 
-    fun saveNotes(game_title: String){
-
+    fun saveNotes(content: String, last_mod:String, game_ref: Int): Int{
+        return repository.saveNotes(content, last_mod, game_ref)
     }
 }

@@ -80,7 +80,10 @@ interface LotgDao {
     )
     fun completeAchievement(game_ref: String, id: Int, status: Int): Int
 
-
+    @Query("UPDATE notes \n" +
+            "SET content = :content, last_modified=:lastMod \n" +
+            "WHERE game_ref = :gameRef")
+    fun saveNotes(content: String, lastMod: String, gameRef: Int): Int
 
 
     /**
@@ -194,7 +197,6 @@ interface LotgDao {
 
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
     fun getNotes(game_ref: Int): Cursor
-
 
 
 

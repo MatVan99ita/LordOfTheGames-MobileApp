@@ -192,6 +192,7 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
         val itemCount: Int = gameItems.size
+
         /*if(itemCount > 0){
             for (i in 0 until itemCount) {
                 val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
@@ -229,6 +230,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 }
             }
         }*/
+
     }
 
     override fun onItemClick(view: View, position: Int) {
