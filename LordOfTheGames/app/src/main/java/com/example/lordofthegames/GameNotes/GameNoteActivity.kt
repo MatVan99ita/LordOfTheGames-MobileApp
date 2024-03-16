@@ -2,25 +2,19 @@ package com.example.lordofthegames.GameNotes
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.AttributeSet
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import org.joda.time.DateTime
+import org.joda.time.DateTimeFieldType.dayOfMonth
 import org.joda.time.format.DateTimeFormat
 
 
@@ -94,7 +88,6 @@ class GameNoteActivity: AppCompatActivity() {
     @SuppressLint("Range")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.gn_top_save) {
-            /*TODO: SALVATAGGIO MANUALE SUL DB*/
             val i = noteViewModel.saveNotes(editText.text.toString(), TUDEI(), game_ref)
             if(i > 0)
                 Utilities.showaToast(applicationContext, "Save completed")
@@ -104,12 +97,14 @@ class GameNoteActivity: AppCompatActivity() {
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
                 true
         } else if (item.itemId == R.id.gn_top_today) {
-            /*TODO: AGGIUNTA DELLA DATA CON DATE PICKER PER SEGNARE LE COSE*/
-            val dpd = DatePickerDialog(
-                this
-            )
+            /*AGGIUNTA DELLA DATA CON DATE PICKER PER SEGNARE LE COSE, si ma no*/
+            //val dpd = DatePickerDialog(
+            //    this
+            //)
+            //dpd.show()
 
-            dpd.show()
+            editText.append(TUDEI())
+
             true
         } else {
             super.onOptionsItemSelected(item)
@@ -118,13 +113,20 @@ class GameNoteActivity: AppCompatActivity() {
 
 
     fun TUDEI(): String {
-        return DateTimeFormat
+        val d = DateTimeFormat
             .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            //.forPattern("dd/MM/yyyy'T'HH:mm:ssZ")
             .parseLocalDateTime(
                 DateTime
                     .now()
                     .toString()
             )
-            .toString()
+
+        return "${d.dayOfMonth}/${d.monthOfYear}/${d.year} - ${d.hourOfDay+1}:${d.minuteOfHour}:${d.secondOfMinute}"
     }
+
+
+
+
+
 }
