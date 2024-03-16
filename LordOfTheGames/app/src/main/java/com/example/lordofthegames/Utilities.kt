@@ -1,10 +1,12 @@
 package com.example.lordofthegames
 
+import android.app.Activity
 import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -23,11 +25,12 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
@@ -45,7 +48,11 @@ import java.security.SecureRandom
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
+import android.Manifest.permission.*
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.graphics.Color
+import androidx.annotation.RequiresApi
 
 class Utilities {
     companion object{
@@ -330,5 +337,54 @@ class Utilities {
             Toast.makeText(context, testo, duration).show()
 
         }
+
+
+
+        fun generaNotifiche(context: Context, textTitle: String, textContent: String, CHANNEL_ID: String) {
+
+            // Verifica se l'applicazione ha il permesso di inviare notifiche
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Richiedi il permesso all'utente
+                ActivityCompat.requestPermissions(context as Activity,
+                    arrayOf(POST_NOTIFICATIONS), 500)
+                return
+            }
+
+            // Costruisci la notifica
+            val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.yo_listen_foreground)
+                .setContentTitle(textTitle)
+                .setContentText(textContent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+            // Se l'API level è 26 o superiore, crea e registra il canale delle notifiche
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channelName = "My Notification Channel"
+                val importance = NotificationManager.IMPORTANCE_DEFAULT
+                val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply {
+                    description = "Description of my notification channel"
+                    // Configura altre opzioni del canale, se necessario
+                    enableLights(true)
+                    lightColor = Color.RED
+                }
+
+                // Registra il canale delle notifiche con il NotificationManager
+                val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            // Invia la notifica utilizzando il NotificationManagerCompat
+            with(NotificationManagerCompat.from(context)) {
+                notify(666, builder.build())
+            }
+        }
+
+
+
+
     }
 }

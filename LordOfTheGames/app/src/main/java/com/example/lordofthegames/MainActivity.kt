@@ -5,8 +5,6 @@ package com.example.lordofthegames
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.database.DatabaseErrorHandler
-import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -24,8 +22,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.room.Room
-import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.Settings.SettingsActivity
 
 import com.example.lordofthegames.home.CommunityFragment
@@ -274,6 +270,9 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         sharedPreferences.getString("Settings", "username")?.let { Log.w("POCODIO", it) }
+
+
+        Utilities.generaNotifiche(this, "Prova", "Prova prova sa sa", MainActivity::class.java.simpleName)
 
     }
 
