@@ -7,6 +7,7 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notes
+import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.User
 
 class LotgRepo(application: Application) {
@@ -111,6 +112,22 @@ class LotgRepo(application: Application) {
 
     fun saveNotes(content: String, lastMod: String, gameRef: Int): Int {
         return lotgDao.saveNotes(content, lastMod, gameRef)
+    }
+
+    fun saveNotes(content: Notification): Long {
+        return lotgDao.saveNotes(content)
+    }
+
+    fun allRead(): Long {
+        return lotgDao.allRead()
+    }
+
+    fun notificationRead(id: Int): Long {
+        return lotgDao.notificationRead(id)
+    }
+
+    fun getNotification(): Cursor {
+        return lotgDao.getNotification()
     }
 
 }

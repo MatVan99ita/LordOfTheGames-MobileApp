@@ -1,5 +1,6 @@
 package com.example.lordofthegames.recyclerView
 
+import android.graphics.Typeface.BOLD
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,7 +24,7 @@ class CardViewHolder(itemView: View, lister: OnItemListener) : RecyclerView.View
         this.achieText = itemView.findViewById(R.id.achieve)
         this.modifyBtn = itemView.findViewById(R.id.edit_btn)
         this.addBtn = itemView.findViewById(R.id.add_btn)
-
+        gameTitle.setTypeface(null, BOLD)
         this.onItemListener = lister
         itemView.setOnClickListener(this)
     }

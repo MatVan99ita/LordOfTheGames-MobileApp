@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.example.lordofthegames.home.NotificaitonFragment"
+        android:name="com.example.lordofthegames.home.NotificationFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_notification" />
 

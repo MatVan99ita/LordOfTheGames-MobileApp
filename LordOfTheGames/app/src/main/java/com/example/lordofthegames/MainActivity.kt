@@ -27,7 +27,7 @@ import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.home.CommunityFragment
 import com.example.lordofthegames.home.HomeFragment
 import com.example.lordofthegames.home.HomeViewModel
-import com.example.lordofthegames.home.NotificaitonFragment
+import com.example.lordofthegames.home.NotificationFragment
 import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -218,14 +218,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.bottom_nav_search -> {
-                    if(this.actualFragment !is NotificaitonFragment) {
+                    if(this.actualFragment !is NotificationFragment) {
                         Utilities.insertFragment(
                             this,
-                            NotificaitonFragment(),
-                            NotificaitonFragment::class.java.simpleName,
+                            NotificationFragment(),
+                            NotificationFragment::class.java.simpleName,
                             null
                         )
-                        this.actualFragment = NotificaitonFragment()
+                        this.actualFragment = NotificationFragment()
                         true
                     } else {
                         Log.e("Bottom", "Search already initialized")

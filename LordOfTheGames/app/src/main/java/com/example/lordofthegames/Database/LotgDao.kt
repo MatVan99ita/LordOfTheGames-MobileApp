@@ -16,6 +16,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.GameCategory
 import com.example.lordofthegames.db_entities.GamePlatform
 import com.example.lordofthegames.db_entities.Notes
+import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
 
@@ -54,6 +55,10 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUser(user: User): Long
 
+
+
+    @Insert(onConflict = OnConflictStrategy.NONE)
+    fun saveNotes(content: Notification): Long
     /**
      * DELETE
      */
@@ -84,6 +89,16 @@ interface LotgDao {
             "SET content = :content, last_modified=:lastMod \n" +
             "WHERE game_ref = :gameRef")
     fun saveNotes(content: String, lastMod: String, gameRef: Int): Int
+
+    @Query("UPDATE notification \n" +
+            "SET read = 1 \n" +
+            "WHERE read = 0")
+    fun allRead(): Long
+
+    @Query("UPDATE notification \n" +
+            "SET read = 1 \n" +
+            "WHERE id = :id")
+    fun notificationRead(id: Int): Long
 
 
     /**
@@ -198,7 +213,8 @@ interface LotgDao {
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
     fun getNotes(game_ref: Int): Cursor
 
-
+    @Query("SELECT * FROM notification")
+    fun getNotification(): Cursor
 
 
 }

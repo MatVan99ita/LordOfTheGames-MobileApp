@@ -17,6 +17,7 @@ import java.util.concurrent.Executors
             GameCategory::class,
             GamePlatform::class,
             Notes::class,
+            Notification::class,
             Platform::class,
             User::class,
         ], version = 1)

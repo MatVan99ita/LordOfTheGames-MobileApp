@@ -31,6 +31,7 @@ class GameNoteViewModel(application: Application): ViewModel() {
                 c.getString(3),     //last_modified"
                 c.getInt(4),        //game_ref"
             )
+
         } else {
             val startTime = DateTimeFormat
                 .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
