@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_notification"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/gridview_item2" />
+        tools:listitem="@layout/notification_obj" />
         <!--
 
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

@@ -57,7 +57,7 @@ interface LotgDao {
 
 
 
-    @Insert(onConflict = OnConflictStrategy.NONE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun saveNotes(content: Notification): Long
     /**
      * DELETE

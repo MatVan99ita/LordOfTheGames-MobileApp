@@ -277,11 +277,11 @@ class MainActivity : AppCompatActivity() {
 
         Utilities.generaNotifiche(
             application,
+            4,
             "Prova",
             "Prova prova sa sa",
             Utilities.TUDEI(),
             Utilities.TUDEI(),
-            "pippo",
             MainActivity::class.java.simpleName)
 
     }

@@ -7,22 +7,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
-import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notification
-import com.example.lordofthegames.home.HomeViewModel
-import com.example.lordofthegames.home.NotificationViewModel
 import com.google.android.material.button.MaterialButton
 
-class NotificationAdapter(var listener: OnItemListener,
-                          var viewModel: NotificationViewModel,
-                          var notification_list: List<Notification>,
-                          var activity: Activity
+class NotificationAdapter(
+    var listener: OnItemListener,
+    var notification_list: List<Notification>,
+    var activity: Activity
 ): RecyclerView.Adapter<NotificationAdapter.NotificationHolder>() {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
         return NotificationHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.mygame_item, parent, false),
+            LayoutInflater.from(parent.context).inflate(R.layout.notification_obj, parent, false),
             listener
         )
     }

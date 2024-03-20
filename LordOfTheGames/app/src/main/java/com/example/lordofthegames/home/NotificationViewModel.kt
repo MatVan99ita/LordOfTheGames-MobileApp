@@ -19,7 +19,7 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
     @SuppressLint("Range")
     fun getNotification(): List<Notification>{
         val c = repository.getNotification()
-        val l: MutableList<Notification> = listOf<Notification>() as MutableList<Notification>
+        val l: MutableList<Notification> = arrayListOf()
 
         while(c.moveToNext()){
 
@@ -31,7 +31,6 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
                     c.getString(c.getColumnIndex("data_inizio")),
                     c.getString(c.getColumnIndex("data_fine")),
                     c.getInt(c.getColumnIndex("read")),
-                    c.getString(c.getColumnIndex("user_ref")),
                 )
             )
         }

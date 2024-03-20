@@ -345,7 +345,7 @@ class Utilities {
 
 
 
-        fun generaNotifiche(context: Context, textTitle: String, textContent: String, data_inizio: String, data_fine: String, user_ref: String, CHANNEL_ID: String) {
+        fun generaNotifiche(context: Context, notification_id:Int, textTitle: String, textContent: String, data_inizio: String, data_fine: String, CHANNEL_ID: String) {
 
             // Verifica se l'applicazione ha il permesso di inviare notifiche
             if (ActivityCompat.checkSelfPermission(
@@ -386,13 +386,12 @@ class Utilities {
 
             n.saveNotification(
                 Notification(
-                    -1,
+                    notification_id,
                     textTitle,
                     textContent,
                     data_inizio,
                     data_fine,
                     0,
-                    user_ref,
                 )
             )
 
