@@ -93,12 +93,12 @@ interface LotgDao {
     @Query("UPDATE notification \n" +
             "SET read = 1 \n" +
             "WHERE read = 0")
-    fun allRead(): Long
+    fun allRead(): Int
 
     @Query("UPDATE notification \n" +
             "SET read = 1 \n" +
             "WHERE id = :id")
-    fun notificationRead(id: Int): Long
+    fun notificationRead(id: Int): Int
 
 
     /**

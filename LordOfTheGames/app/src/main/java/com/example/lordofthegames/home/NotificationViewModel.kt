@@ -19,7 +19,7 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
     @SuppressLint("Range")
     fun getNotification(): List<Notification>{
         val c = repository.getNotification()
-        val l: MutableList<Notification>
+        val l: MutableList<Notification> = listOf<Notification>() as MutableList<Notification>
 
         while(c.moveToNext()){
 
@@ -39,12 +39,12 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
         return l
     }
 
-    fun allRead(): Long{
+    fun allRead(): Int{
         return repository.allRead()
     }
 
 
-    fun notificationRead(id: Int): Long{
+    fun notificationRead(id: Int): Int{
         return repository.notificationRead(id)
     }
 }

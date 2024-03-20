@@ -32,6 +32,9 @@ import com.example.lordofthegames.home.mygame.MyGameListFragment
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 
 /* Struttura del db
@@ -272,7 +275,14 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences.getString("Settings", "username")?.let { Log.w("POCODIO", it) }
 
 
-        Utilities.generaNotifiche(this, "Prova", "Prova prova sa sa", MainActivity::class.java.simpleName)
+        Utilities.generaNotifiche(
+            application,
+            "Prova",
+            "Prova prova sa sa",
+            Utilities.TUDEI(),
+            Utilities.TUDEI(),
+            "pippo",
+            MainActivity::class.java.simpleName)
 
     }
 

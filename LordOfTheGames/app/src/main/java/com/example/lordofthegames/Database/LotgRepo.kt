@@ -118,11 +118,11 @@ class LotgRepo(application: Application) {
         return lotgDao.saveNotes(content)
     }
 
-    fun allRead(): Long {
+    fun allRead(): Int {
         return lotgDao.allRead()
     }
 
-    fun notificationRead(id: Int): Long {
+    fun notificationRead(id: Int): Int {
         return lotgDao.notificationRead(id)
     }
 

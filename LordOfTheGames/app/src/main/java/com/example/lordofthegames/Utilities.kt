@@ -49,10 +49,15 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import android.Manifest.permission.*
+import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
 import androidx.annotation.RequiresApi
+import com.example.lordofthegames.db_entities.Notification
+import com.example.lordofthegames.home.NotificationViewModel
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 
 class Utilities {
     companion object{
@@ -340,7 +345,7 @@ class Utilities {
 
 
 
-        fun generaNotifiche(context: Context, textTitle: String, textContent: String, CHANNEL_ID: String) {
+        fun generaNotifiche(context: Context, textTitle: String, textContent: String, data_inizio: String, data_fine: String, user_ref: String, CHANNEL_ID: String) {
 
             // Verifica se l'applicazione ha il permesso di inviare notifiche
             if (ActivityCompat.checkSelfPermission(
@@ -377,14 +382,40 @@ class Utilities {
                 notificationManager.createNotificationChannel(channel)
             }
 
+            val n = NotificationViewModel(context as Application)
+
+            n.saveNotification(
+                Notification(
+                    -1,
+                    textTitle,
+                    textContent,
+                    data_inizio,
+                    data_fine,
+                    0,
+                    user_ref,
+                )
+            )
+
             // Invia la notifica utilizzando il NotificationManagerCompat
             with(NotificationManagerCompat.from(context)) {
                 notify(666, builder.build())
             }
+
+
+
         }
+        fun TUDEI(): String {
+            val d = DateTimeFormat
+                .forPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                //.forPattern("dd/MM/yyyy'T'HH:mm:ssZ")
+                .parseLocalDateTime(
+                    DateTime
+                        .now()
+                        .toString()
+                )
 
-
-
+            return "${d.dayOfMonth}/${d.monthOfYear}/${d.year} - ${d.hourOfDay+1}:${d.minuteOfHour}:${d.secondOfMinute}"
+        }
 
     }
 }
