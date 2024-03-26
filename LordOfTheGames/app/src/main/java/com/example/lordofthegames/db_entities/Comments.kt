@@ -19,5 +19,7 @@ data class Comments(
     @ColumnInfo(index = true)
     var discussion_ref: Int,
     var content: String,
+    var comment_like: Int?,
+    var comment_dislike: Int?,
 
 )

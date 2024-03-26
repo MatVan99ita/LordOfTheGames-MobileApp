@@ -217,4 +217,64 @@ interface LotgDao {
     fun getNotification(): Cursor
 
 
+    @Query("SELECT\n"+
+    "   g.game_title AS GameTitle,\n"+
+    "   COUNT(d.discussion_id) AS TotalDiscussions,\n"+
+    "   COALESCE(SUM(c.comment_like - c.comment_dislike), 0) AS TotalLike\n"+
+    "FROM\n"+
+    "   game g\n"+
+    "LEFT JOIN\n"+
+    "   discussion d ON g.game_id = d.game_ref\n"+
+    "LEFT JOIN\n"+
+    "   comment c ON d.discussion_id = c.discussion_ref\n"+
+    "GROUP BY\n"+
+    "   g.game_title\n"+
+    "ORDER BY TotalLike DESC;")
+    fun selectAllCommunity(): Cursor /** Cursor(GameTitle, TotalDiscussion, TotalLike) */
+
+    @Query("SELECT \n" +
+    "    d.discussion_id, d.title, d.content,\n" +
+    "    COALESCE(SUM(c.comment_like - c.comment_dislike), 0) AS TotaleLike,\n" +
+    "    COUNT(c.comment_id) AS NumeroCommenti\n" +
+    "FROM \n" +
+    "    game g\n" +
+    "INNER JOIN \n" +
+    "    discussion d ON g.game_id = d.game_ref\n" +
+    "LEFT JOIN \n" +
+    "    comment c ON d.discussion_id = c.discussion_ref\n" +
+    "WHERE\n" +
+    "    g.game_title = :game_title \n" +
+    "GROUP BY \n" +
+    "    g.game_title, d.title;")
+    fun selectAllDiscussion(game_title: String): Cursor
+
+
 }
+
+/*
+TableInfo{name='comment', columns={
+
+    discussion_ref=Column{name='discussion_ref', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+    discussion_ref=Column{name='discussion_ref', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+
+    comment_id=Column{name='comment_id', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=1, defaultValue='undefined'},
+    comment_id=Column{name='comment_id', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=1, defaultValue='undefined'},
+
+    comment_dislike=Column{name='comment_dislike', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+    comment_dislike=Column{name='comment_dislike', type='INTEGER', affinity='3', notNull=false, primaryKeyPosition=0, defaultValue='undefined'}},
+
+    content=Column{name='content', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+    content=Column{name='content', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+
+    comment_like=Column{name='comment_like', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'}},
+    comment_like=Column{name='comment_like', type='INTEGER', affinity='3', notNull=false, primaryKeyPosition=0, defaultValue='undefined'},
+
+foreignKeys=[ForeignKey{referenceTable='discussion', onDelete='NO ACTION +', onUpdate='NO ACTION', columnNames=[discussion_ref], referenceColumnNames=[discussion_id]}], indices=[Index{name='index_comment_discussion_ref', unique=false, columns=[discussion_ref], orders=[ASC]'}]}
+ Found:
+TableInfo{name='comment', columns={
+
+foreignKeys=[ForeignKey{referenceTable='discussion', onDelete='NO ACTION +', onUpdate='NO ACTION', columnNames=[discussion_ref], referenceColumnNames=[discussion_id]}], indices=[Index{name='index_comment_discussion_ref', unique=false, columns=[discussion_ref], orders=[ASC]'}]}
+
+*
+*
+* */

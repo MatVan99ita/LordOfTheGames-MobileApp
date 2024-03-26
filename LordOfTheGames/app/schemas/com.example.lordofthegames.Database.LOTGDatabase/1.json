@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "88d8e103d2b1c5060ed479b2a3d4cb8c",
+    "identityHash": "f0cec3b4f2e161b94694fc6e9d702e60",
     "entities": [
       {
         "tableName": "achievement",
@@ -116,7 +116,7 @@
       },
       {
         "tableName": "comment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL, FOREIGN KEY(`discussion_ref`) REFERENCES `discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL, `comment_like` INTEGER, `comment_dislike` INTEGER, FOREIGN KEY(`discussion_ref`) REFERENCES `discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "comment_id",
@@ -135,6 +135,18 @@
             "columnName": "content",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "comment_like",
+            "columnName": "comment_like",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "comment_dislike",
+            "columnName": "comment_dislike",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -611,7 +623,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '88d8e103d2b1c5060ed479b2a3d4cb8c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f0cec3b4f2e161b94694fc6e9d702e60')"
     ]
   }
 }
