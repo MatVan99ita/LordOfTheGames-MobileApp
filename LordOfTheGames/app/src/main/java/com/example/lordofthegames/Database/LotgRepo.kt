@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
@@ -128,6 +129,22 @@ class LotgRepo(application: Application) {
 
     fun getNotification(): Cursor {
         return lotgDao.getNotification()
+    }
+
+
+    /** Cursor(GameTitle, TotalDiscussion, TotalLike) */
+    fun selectAllCommunity(): Cursor{
+        return lotgDao.selectAllCommunity()
+    }
+
+    /**Cursor(discussion_id, title, content, TotalLike, NumeroCommenti*/
+    fun selectAllDiscussion(game_title: String): Cursor{
+        return lotgDao.selectAllDiscussion(game_title)
+    }
+
+    /**Cursor(comment_id, content, comment_like, comment_dislike)*/
+    fun selectCommentFromDiscussion(discussion_id: Int): Cursor{
+        return lotgDao.selectCommentFromDiscussion(discussion_id)
     }
 
 }

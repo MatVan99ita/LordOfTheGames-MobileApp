@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToOutline="true"
+        android:id="@+id/community_body"
         android:background="@drawable/rounded"
 
         >
