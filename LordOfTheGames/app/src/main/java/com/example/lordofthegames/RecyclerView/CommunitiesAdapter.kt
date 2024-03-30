@@ -44,7 +44,7 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
 
 
 
-        var drawable: Drawable? = when((0..2).random()) {
+        val drawable: Drawable? = when((0..2).random()) {
             0 -> ContextCompat.getDrawable(activity, R.drawable.ic_t_pose)
             1 -> ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground

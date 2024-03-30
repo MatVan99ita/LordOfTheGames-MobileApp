@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.example.lordofthegames.R
 
 class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemListener, var list: List<DiscussionItem>):
