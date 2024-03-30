@@ -38,7 +38,6 @@
         </provider>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
             android:noHistory= "false"
             android:exported="true">
             <intent-filter>
@@ -51,11 +50,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".GameDetails.GameDetActivity"
-            />
+        <activity android:name=".GameDetails.GameDetActivity"/>
         <activity android:name=".Settings.SettingsActivity"/>
         <activity android:name=".user_login.LoggedActivity" />
         <activity android:name=".GameNotes.GameNoteActivity" />
+        <activity android:name=".Community.CommunityActivity" />
     </application>
 
 
