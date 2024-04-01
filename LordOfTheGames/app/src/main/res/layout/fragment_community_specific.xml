@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_notification"
+        android:id="@+id/recycler_view_discussion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"

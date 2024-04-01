@@ -19,7 +19,7 @@ class CommunityViewModel(application: Application): AndroidViewModel(application
             l.add(
                 CommunityItem(
                     c.getString(c.getColumnIndexOrThrow("GameTitle")),
-                    c.getInt(c.getColumnIndexOrThrow("TotalDiscussion")),
+                    c.getInt(c.getColumnIndexOrThrow("TotalDiscussions")),
                     c.getInt(c.getColumnIndexOrThrow("TotalLike"))
                 )
             )
@@ -27,10 +27,7 @@ class CommunityViewModel(application: Application): AndroidViewModel(application
         return l
     }
 
-    /**Cursor(discussion_id, title, content, TotalLike, NumeroCommenti*/
-    fun selectAllDiscussion(game_title: String): Cursor {
-        return repo.selectAllDiscussion(game_title)
-    }
+
 
     /**Cursor(comment_id, content, comment_like, comment_dislike)*/
     fun selectCommentFromDiscussion(discussion_id: Int): Cursor {

@@ -18,6 +18,7 @@
         <androidx.fragment.app.FragmentContainerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:name="com.example.lordofthegames.Community.CommunitySpecificFragment"
             android:id="@+id/fragment_container_view"
             app:layout_constraintBottom_toTopOf="@id/bottom"
             app:layout_constraintEnd_toEndOf="parent"
