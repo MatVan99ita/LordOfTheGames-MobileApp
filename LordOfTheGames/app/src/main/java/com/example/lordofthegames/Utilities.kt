@@ -54,6 +54,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
 import androidx.annotation.RequiresApi
+import com.example.lordofthegames.Community.CommunitySpecificFragment
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.home.NotificationViewModel
 import org.joda.time.DateTime
@@ -80,7 +81,8 @@ class Utilities {
                 fragment !is HomeFragment &&
                 fragment !is GameDetFragment &&
                 fragment !is SettingsFragment &&
-                fragment !is LoggedInFragment
+                fragment !is LoggedInFragment &&
+                fragment !is CommunitySpecificFragment
             ) {
                 transaction.addToBackStack(tag);
             }

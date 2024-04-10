@@ -3,6 +3,7 @@ package com.example.lordofthegames.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,31 +28,24 @@ class CommunityFragment : Fragment(), OnItemListener{
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewm = ViewModelProvider(requireActivity())[CommunityViewModel::class.java]
         bind = FragmentCommunityListBinding.inflate(layoutInflater, container, false)
         list = viewm.selectAllCommunity()
         adapter = CommunitiesAdapter(requireActivity(), this, list)
 
-
         return bind.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         bind.recyclerViewCommunities.adapter = adapter
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val item = list[position]
         val act: Activity? = activity
-        if(act != null){
+        Log.i("LABBANANA", list[position].toString())
+        if(act != null) {
             val intent = Intent(context, CommunityActivity::class.java)
             intent.putExtra("game_title", list[position].GameTitle)
             this.startActivity(intent)

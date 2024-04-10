@@ -50,7 +50,7 @@
             android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="10sp"
-            app:theme="@style/Fontato"
+            android:theme="@style/Fontato"
             app:layout_constraintLeft_toRightOf="@id/game_img"
             app:layout_constraintTop_toTopOf="parent" />
 

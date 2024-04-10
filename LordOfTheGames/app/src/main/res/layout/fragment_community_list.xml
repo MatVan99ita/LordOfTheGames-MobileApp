@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".home.CommunityFragment"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_communities"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
-
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/community_item" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -7,6 +7,7 @@
     android:layout_margin="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/discussion_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

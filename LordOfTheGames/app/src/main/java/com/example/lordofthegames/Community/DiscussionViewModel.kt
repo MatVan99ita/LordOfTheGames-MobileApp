@@ -2,6 +2,7 @@ package com.example.lordofthegames.Community
 
 import android.app.Application
 import android.database.Cursor
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.Discussion
@@ -11,7 +12,7 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
 
     private val repo: LotgRepo = LotgRepo(application)
 
-    /**List<DiscusssionItem(Discussion(id, title, content, game_ref), TotalLike, NumeroCommenti)>*/
+    /**List<DiscusssionItem(Discussion(id, title, content, game_id), TotalLike, NumeroCommenti)>*/
     fun selectAllDiscussion(game_title: String): List<DiscussionItem> {
 
 
@@ -24,14 +25,14 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
                         c.getInt(c.getColumnIndexOrThrow("discussion_id")),
                         c.getString(c.getColumnIndexOrThrow("title")),
                         c.getString(c.getColumnIndexOrThrow("content")),
-                        666
+                        c.getInt(c.getColumnIndexOrThrow("game_id"))
                     ),
-                    c.getInt(c.getColumnIndexOrThrow("TotalLike")),
+                    c.getInt(c.getColumnIndexOrThrow("TotaleLike")),
                     c.getInt(c.getColumnIndexOrThrow("NumeroCommenti")),
                 )
             )
         }
-
+        l.forEach { it -> Log.i("PORCODDIO", it.toString()) }
         return l
     }
 }

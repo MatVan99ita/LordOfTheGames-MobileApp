@@ -30,7 +30,7 @@ class CommunityActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_gamedet)
+        setContentView(R.layout.activity_community)
         //actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), )
 
         discussion_intent = intent
@@ -97,5 +97,4 @@ class CommunityActivity: AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-
 }

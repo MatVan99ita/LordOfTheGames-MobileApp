@@ -2,6 +2,7 @@ package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 
-class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, var cardItemList: List<CommunityItem>): RecyclerView.Adapter<CommunitiesAdapter.CommunitiesHolder>()  {
+class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, var cardItemList: List<CommunityItem>):
+    RecyclerView.Adapter<CommunitiesAdapter.CommunitiesHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunitiesHolder {
         return CommunitiesHolder(LayoutInflater
@@ -66,7 +68,7 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
             9   -> R.color.viola1
             10  -> R.color.viola2
             11  -> R.color.viola3
-            else -> Color.White.toArgb()
+            else -> 0
         })
 
 
@@ -82,8 +84,18 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
         var discussion_count: TextView = itemView.findViewById(R.id.discussion_count)
         var layout: ConstraintLayout = itemView.findViewById(R.id.community_body)
 
+        private val onItemListener: OnItemListener = lister
+
+        init {
+
+            itemView.setOnClickListener(this)
+        }
+
+
         override fun onClick(p0: View?) {
-            TODO("Not yet implemented")
+
+            Log.i("LABBANANA", "LABBANANA")
+            onItemListener.onItemClick(itemView, adapterPosition)
         }
 
     }

@@ -236,7 +236,6 @@ class HomeFragment: Fragment(), OnItemListener {
     override fun onItemClick(view: View, position: Int) {
         val act: Activity? = activity
         if(act != null){
-
             val intent = Intent(context, GameDetActivity::class.java)
             intent.putExtra("game_cover", gameItems[position].imageResource)
             intent.putExtra("game_title", gameItems[position].gameTitle)
