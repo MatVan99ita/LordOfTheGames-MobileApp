@@ -63,7 +63,7 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //recyler.adapter = adapter
-        bind.pippo.text = list.toString() + list2.toString()
+
         bind.recyclerViewDiscussion.adapter = adapter
     }
 

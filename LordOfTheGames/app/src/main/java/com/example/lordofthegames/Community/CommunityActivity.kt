@@ -40,13 +40,12 @@ class CommunityActivity: AppCompatActivity() {
         bundle.putString("game_title", title) // put image data in Intent
         drawerLayout = findViewById(R.id.community_activity_drawer)
 
-        if (savedInstanceState == null) {
-            Utilities.insertFragment(
-                this,
-                CommunitySpecificFragment(),
-                CommunitySpecificFragment::class.java.simpleName, bundle,
-            )
-        }
+
+        Utilities.insertFragment(
+            this,
+            CommunitySpecificFragment(),
+            CommunitySpecificFragment::class.java.simpleName, bundle,
+        )
 
         Utilities.setUpToolBar(
             this,

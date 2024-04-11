@@ -12,6 +12,7 @@
         android:id="@+id/pippo"
         android:layout_width="match_parent"
         android:lines="1000"
+        android:text="@string/long_text"
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
