@@ -1,6 +1,9 @@
 package com.example.lordofthegames.Community
 
+import android.app.Activity
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +18,10 @@ import com.example.lordofthegames.recyclerView.OnItemListener
 
 class CommunitySpecificFragment: Fragment(), OnItemListener {
 
-
+    private lateinit var adapter: DiscussionSpecificAdapter
     private lateinit var viewm: DiscussionViewModel
-    private lateinit var bind: FragmentCommunitySpecificBinding
-    private lateinit var recyler: RecyclerView
     private lateinit var list: List<DiscussionItem>
+    private lateinit var bind: FragmentCommunitySpecificBinding
     private var list2: List<DiscussionItem> = listOf(
         DiscussionItem(
             Discussion(666, "pipo", "ritto", 666), 69, 420
@@ -34,27 +36,22 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
             Discussion(666, "pipo", "ritto", 666), 69, 420
         ),
     )
-    private lateinit var adapter: DiscussionSpecificAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        setHasOptionsMenu(true)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        // val view = inflater.inflate(R.layout.fragment_community_specific, container, false)
-
+        Log.i("LOFRAGMENT", "MARIUOLO")
         viewm = ViewModelProvider(requireActivity())[DiscussionViewModel::class.java]
         bind = FragmentCommunitySpecificBinding.inflate(layoutInflater, container, false);
         list = viewm.selectAllDiscussion(requireActivity().intent.getStringExtra("game_title").toString())
-        adapter = DiscussionSpecificAdapter(requireActivity(), this, list2,)
-        //recycler = view.findViewById(R.id.recycler_view_notification)
+
+        list.forEach { el -> Log.i("OnCreateViewDSF", el.toString()) }
+
+        adapter = DiscussionSpecificAdapter(requireActivity(), this, list,)
 
         return bind.root
     }
@@ -62,13 +59,14 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //recyler.adapter = adapter
 
         bind.recyclerViewDiscussion.adapter = adapter
     }
 
     override fun onItemClick(view: View, position: Int) {
-        TODO("Not yet implemented")
+
+        val act: Activity? = activity
+        Log.i("LABBANANA", list[position].toString())
     }
 
 

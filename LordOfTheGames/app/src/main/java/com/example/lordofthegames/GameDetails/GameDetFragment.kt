@@ -94,6 +94,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        Log.i("LOFRAGMENTDEIDETAILS", "MARIUOLO")
         val view = inflater.inflate(R.layout.fragment_game_details, container, false)
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
@@ -218,15 +220,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
-
-            /** TODO:
-             *      edit del gioco(<-to be spiegare)
-             *      fare in modo che compaia il framelayout con il tipo di edit desiderato quando premuti 2 bottoni diversi
-             *      bloccaggio della scrollview quando aperta
-             *      bloccare tutta la view sotto quando aperto l'achievement/game edit
-             *      inserire vari input event funzionanti
-             *      disattivare l'onclick delle recycler
-             * */
 
             //numberPicker.minValue=0
             //numberPicker.maxValue=10

@@ -16,6 +16,8 @@ import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.GameNotes.GameNoteActivity
+import com.example.lordofthegames.user_login.LoggedActivity
+import com.google.android.material.navigation.NavigationView
 
 
 class GameDetActivity: AppCompatActivity() {
@@ -24,6 +26,7 @@ class GameDetActivity: AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var game_det_intent: Intent
     private lateinit var string: String
+    private lateinit var navigationView: NavigationView
     private var game_ref: Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +60,10 @@ class GameDetActivity: AppCompatActivity() {
             R.menu.game_det_top_bar,
         )
 
+        navigationView = findViewById(R.id.nav_view)
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,
-            navigationView = findViewById(R.id.nav_view),
+            navigationView,
             this
         )
 
@@ -68,10 +72,7 @@ class GameDetActivity: AppCompatActivity() {
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.game_det_top_bar, menu)
-        return true
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.nav_setting) {
@@ -104,6 +105,26 @@ class GameDetActivity: AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.nav_setting -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+                R.id.nav_usr -> {
+                    val intent = Intent(this, LoggedActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+
+            }
+            true
+        }
+        Log.e("CreateOPTMenu", menu.toString())
+        return super.onCreateOptionsMenu(menu)
+    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerVisible(GravityCompat.START)) {

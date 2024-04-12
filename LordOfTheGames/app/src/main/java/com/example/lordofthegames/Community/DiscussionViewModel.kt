@@ -32,7 +32,6 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
                 )
             )
         }
-        l.forEach { it -> Log.i("PORCODDIO", it.toString()) }
         return l
     }
 }
