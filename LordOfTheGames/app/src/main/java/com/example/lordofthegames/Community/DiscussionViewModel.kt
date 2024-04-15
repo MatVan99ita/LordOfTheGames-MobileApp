@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.example.lordofthegames.Database.LotgRepo
+import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.recyclerView.DiscussionItem
 
@@ -34,4 +35,12 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         }
         return l
     }
+
+    fun getDiscussionComments(discussion_id: Int):List<Comments>{
+
+        val c = repo.selectCommentFromDiscussion(discussion_id)
+
+        return TODO("AGGIUNGERE UNA ROBA PER IL NOME DELL'UTENTE LEGATO AL COMMENTO O RIMUOVERLO")
+    }
+
 }
