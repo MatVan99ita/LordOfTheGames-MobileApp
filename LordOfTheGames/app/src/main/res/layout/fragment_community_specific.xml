@@ -15,4 +15,14 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/discussion_item" />
 
+
+    <FrameLayout
+        android:id="@+id/discussion_content_specific_fl"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        >
+
+
+    </FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

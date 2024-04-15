@@ -44,7 +44,6 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.i("LOFRAGMENT", "MARIUOLO")
         viewm = ViewModelProvider(requireActivity())[DiscussionViewModel::class.java]
         bind = FragmentCommunitySpecificBinding.inflate(layoutInflater, container, false);
         list = viewm.selectAllDiscussion(requireActivity().intent.getStringExtra("game_title").toString())
@@ -66,7 +65,7 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
     override fun onItemClick(view: View, position: Int) {
 
         val act: Activity? = activity
-        Log.i("LABBANANA", list[position].toString())
+
     }
 
 
