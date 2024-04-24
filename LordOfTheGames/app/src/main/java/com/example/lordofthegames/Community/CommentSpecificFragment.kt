@@ -1,43 +1,29 @@
 package com.example.lordofthegames.Community
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.databinding.FragmentCommunitySpecificBinding
-import com.example.lordofthegames.databinding.FragmentDiscussionContentSpecificBinding
-import com.example.lordofthegames.db_entities.Discussion
+import com.example.lordofthegames.db_entities.Comments
+import com.example.lordofthegames.recyclerView.CommentCardAdapter
+import com.example.lordofthegames.recyclerView.CommentItem
 import com.example.lordofthegames.recyclerView.DiscussionItem
 import com.example.lordofthegames.recyclerView.DiscussionSpecificAdapter
-import org.w3c.dom.Comment
+import com.example.lordofthegames.recyclerView.OnItemListener
 
-class CommentSpecificFragment(context: Context): FrameLayout(context) {
+class CommentSpecificFragment : Fragment(), OnItemListener {
 
-    private lateinit var adapter: DiscussionSpecificAdapter
+    private lateinit var adapter: CommentCardAdapter
     private lateinit var viewm: DiscussionViewModel
-    private lateinit var list: List<DiscussionItem>
+    private lateinit var list: List<Comments>
     private lateinit var bind: FragmentCommunitySpecificBinding
-    private var list2: List<DiscussionItem> = listOf(
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-    )
+
 
 
 
@@ -48,11 +34,11 @@ class CommentSpecificFragment(context: Context): FrameLayout(context) {
     ): View {
         viewm = ViewModelProvider(requireActivity())[DiscussionViewModel::class.java]
         bind = FragmentCommunitySpecificBinding.inflate(layoutInflater, container, false);
-        list = viewm.selectAllDiscussion(requireActivity().intent.getStringExtra("game_title").toString())
+        list = viewm.getDiscussionComments(requireActivity().intent.getIntExtra("discussion_id", -1))
 
         list.forEach { el -> Log.i("OnCreateViewDSF", el.toString()) }
 
-        adapter = DiscussionSpecificAdapter(requireActivity(), this, list,)
+        adapter = CommentCardAdapter(this, list, "", requireActivity())
 
         return bind.root
     }

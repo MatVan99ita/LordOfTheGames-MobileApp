@@ -9,10 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.databinding.CommentItmBinding
+import com.example.lordofthegames.db_entities.Comments
 
 class CommentCardAdapter(
     var listener: OnItemListener,
-    var cardItemList: List<CommentItem>,
+    var cardItemList: List<Comments>,
     var user: String,
     var activity: Activity
 ) : RecyclerView.Adapter<CommentCardAdapter.CommentCardHolder>() {

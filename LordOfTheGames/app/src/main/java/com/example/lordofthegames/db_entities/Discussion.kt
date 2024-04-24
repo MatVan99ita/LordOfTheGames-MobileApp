@@ -9,7 +9,15 @@ import java.util.Date
         entity = Game::class,
         childColumns = ["game_ref"],
         parentColumns = ["game_id"]
-    )]
+    ),
+    ForeignKey(
+        entity = User::class,
+        childColumns = ["user_ref"],
+        parentColumns = ["nickname"]
+
+    )
+
+]
 )
 data class Discussion(
 
@@ -18,6 +26,7 @@ data class Discussion(
     var title: String,
     var content: String,
     @ColumnInfo(index = true)
-    var game_ref: Int
+    var game_ref: Int,
+    var user_ref: String
 
 )
