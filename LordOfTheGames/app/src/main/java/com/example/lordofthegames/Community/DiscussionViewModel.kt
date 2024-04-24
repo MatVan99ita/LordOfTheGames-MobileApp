@@ -36,11 +36,24 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         return l
     }
 
+    /**Cursor(comment_id, content, comment_like, comment_dislike)*/
     fun getDiscussionComments(discussion_id: Int):List<Comments>{
 
         val c = repo.selectCommentFromDiscussion(discussion_id)
+        val l = arrayListOf<Comments>()
+        while(c.moveToNext()){
+            l.add(
+                Comments(
+                    c.getInt(c.getColumnIndexOrThrow("comment_id")),
+                    discussion_id,
+                    c.getString(c.getColumnIndexOrThrow("content")),
+                    c.getInt(c.getColumnIndexOrThrow("comment_like")),
+                    c.getInt(c.getColumnIndexOrThrow("comment_dislike")),
+                )
+            )
+        }
 
-        return TODO("AGGIUNGERE UNA ROBA PER IL NOME DELL'UTENTE LEGATO AL COMMENTO O RIMUOVERLO")
+        return l
     }
 
 }

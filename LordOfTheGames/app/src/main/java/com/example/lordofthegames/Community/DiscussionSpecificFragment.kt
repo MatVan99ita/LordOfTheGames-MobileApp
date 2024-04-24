@@ -21,7 +21,7 @@ class DiscussionSpecificFragment : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewm = ViewModelProvider(requireActivity())[DiscussionViewModel::class.java]
         binding = FragmentDiscussionContentSpecificBinding.inflate(layoutInflater)
 
