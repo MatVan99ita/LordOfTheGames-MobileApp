@@ -1,6 +1,7 @@
 package com.example.lordofthegames.Community
 
 import android.app.Activity
+import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -63,9 +64,14 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-
         val act: Activity? = activity
-
+        Log.i("LABBANANA", list[position].toString())
+        if(act != null) {
+            val intent = Intent(context, CommunityActivity::class.java)
+            SWITCH DI FRAGMENT
+            intent.putExtra("game_title", list[position].GameTitle)
+            this.startActivity(intent)
+        }
     }
 
 
