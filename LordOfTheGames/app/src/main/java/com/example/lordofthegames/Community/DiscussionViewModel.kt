@@ -23,10 +23,11 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
             l.add(
                 DiscussionItem(
                     Discussion(
-                        c.getInt(c.getColumnIndexOrThrow("discussion_id")),
-                        c.getString(c.getColumnIndexOrThrow("title")),
-                        c.getString(c.getColumnIndexOrThrow("content")),
-                        c.getInt(c.getColumnIndexOrThrow("game_id"))
+                        discussion_id = c.getInt(c.getColumnIndexOrThrow("discussion_id")),
+                        title = c.getString(c.getColumnIndexOrThrow("title")),
+                        content = c.getString(c.getColumnIndexOrThrow("content")),
+                        game_ref = c.getInt(c.getColumnIndexOrThrow("game_id")),
+                        user_ref = c.getString(c.getColumnIndexOrThrow("user_ref"))
                     ),
                     c.getInt(c.getColumnIndexOrThrow("TotaleLike")),
                     c.getInt(c.getColumnIndexOrThrow("NumeroCommenti")),
@@ -44,11 +45,12 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         while(c.moveToNext()){
             l.add(
                 Comments(
-                    c.getInt(c.getColumnIndexOrThrow("comment_id")),
-                    discussion_id,
-                    c.getString(c.getColumnIndexOrThrow("content")),
-                    c.getInt(c.getColumnIndexOrThrow("comment_like")),
-                    c.getInt(c.getColumnIndexOrThrow("comment_dislike")),
+                    comment_id = c.getInt(c.getColumnIndexOrThrow("comment_id")),
+                    discussion_ref = discussion_id,
+                    content = c.getString(c.getColumnIndexOrThrow("content")),
+                    comment_like = c.getInt(c.getColumnIndexOrThrow("comment_like")),
+                    comment_dislike = c.getInt(c.getColumnIndexOrThrow("comment_dislike")),
+                    user_ref = c.getString(c.getColumnIndexOrThrow("user_ref"))
                 )
             )
         }

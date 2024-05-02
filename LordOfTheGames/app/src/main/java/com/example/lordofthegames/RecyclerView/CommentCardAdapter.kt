@@ -34,13 +34,13 @@ class CommentCardAdapter(
     }
 
     override fun onBindViewHolder(holder: CommentCardHolder, position: Int) {
-        val item: CommentItem = cardItemList[position]
+        val item: Comments = cardItemList[position]
 
-        holder.op.visibility = if(item.user == user) View.VISIBLE else View.GONE
-        holder.user_name.text = item.user
+        holder.op.visibility = if(item.user_ref == user) View.VISIBLE else View.GONE
+        holder.user_name.text = item.user_ref
         holder.comment_content.text = item.content
-        holder.likes.text = "${item.like}"
-        holder.dislikes.text = "${item.dislike}"
+        holder.likes.text = "${item.comment_like}"
+        holder.dislikes.text = "${item.comment_dislike}"
     }
 
 

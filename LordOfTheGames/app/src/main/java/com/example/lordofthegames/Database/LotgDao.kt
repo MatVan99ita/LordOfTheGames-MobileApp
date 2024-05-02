@@ -234,7 +234,7 @@ interface LotgDao {
 
     @Query("SELECT \n" +
            "    g.game_id, \n" +
-           "    d.discussion_id, d.title, d.content,\n" +
+           "    d.discussion_id, d.title, d.content, d.user_ref, \n" +
            "    COALESCE(SUM(c.comment_like - c.comment_dislike), 0) AS TotaleLike,\n" +
            "    COUNT(c.comment_id) AS NumeroCommenti\n" +
            "FROM \n" +
@@ -250,11 +250,12 @@ interface LotgDao {
     fun selectAllDiscussion(game_title: String): Cursor
 
 
-    @Query("SELECT " +
-           "    comment_id, " +
-           "    comment.content, " +
-           "    comment_like, " +
-           "    comment_dislike  " +
+    @Query("SELECT \n" +
+           "    comment_id, \n" +
+           "    comment.content, \n" +
+           "    comment_like, \n" +
+           "    comment_dislike,  \n" +
+           "    user_ref  \n" +
            "FROM " +
            "    comment, discussion " +
            "ON discussion_ref = discussion_id " +

@@ -2,6 +2,7 @@ package com.example.lordofthegames.db_entities
 
 import androidx.room.*
 import com.example.lordofthegames.Database.AnyTypeConverter
+import org.jetbrains.annotations.NotNull
 import java.util.Date
 
 @Entity(tableName = "discussion", foreignKeys = [
@@ -27,6 +28,6 @@ data class Discussion(
     var content: String,
     @ColumnInfo(index = true)
     var game_ref: Int,
-    var user_ref: String
+    var user_ref: String,
 
 )

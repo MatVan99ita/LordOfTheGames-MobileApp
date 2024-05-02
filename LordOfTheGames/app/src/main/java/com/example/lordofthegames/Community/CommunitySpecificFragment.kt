@@ -23,21 +23,6 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
     private lateinit var viewm: DiscussionViewModel
     private lateinit var list: List<DiscussionItem>
     private lateinit var bind: FragmentCommunitySpecificBinding
-    private var list2: List<DiscussionItem> = listOf(
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-        DiscussionItem(
-            Discussion(666, "pipo", "ritto", 666), 69, 420
-        ),
-    )
-
 
 
     override fun onCreateView(
@@ -68,8 +53,8 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
         Log.i("LABBANANA", list[position].toString())
         if(act != null) {
             val intent = Intent(context, CommunityActivity::class.java)
-            SWITCH DI FRAGMENT
-            intent.putExtra("game_title", list[position].GameTitle)
+            //SWITCH DI FRAGMENT
+            //intent.putExtra("game_title", list[position].GameTitle)
             this.startActivity(intent)
         }
     }

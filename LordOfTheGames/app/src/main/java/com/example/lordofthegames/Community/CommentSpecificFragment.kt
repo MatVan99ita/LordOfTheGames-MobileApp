@@ -55,7 +55,7 @@ class CommentSpecificFragment : Fragment(), OnItemListener {
         Log.i("LABBANANA", list[position].toString())
         if(act != null) {
             val intent = Intent(context, CommunityActivity::class.java)
-            intent.putExtra("game_title", list[position].GameTitle)
+            //intent.putExtra("game_title", list[position].GameTitle)
             this.startActivity(intent)
         }
     }

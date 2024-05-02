@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f0cec3b4f2e161b94694fc6e9d702e60",
+    "identityHash": "301b692dec6ce4d0213f248c7aa0bc75",
     "entities": [
       {
         "tableName": "achievement",
@@ -116,7 +116,7 @@
       },
       {
         "tableName": "comment",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL, `comment_like` INTEGER, `comment_dislike` INTEGER, FOREIGN KEY(`discussion_ref`) REFERENCES `discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comment_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `discussion_ref` INTEGER NOT NULL, `content` TEXT NOT NULL, `user_ref` TEXT NOT NULL, `comment_like` INTEGER, `comment_dislike` INTEGER, FOREIGN KEY(`discussion_ref`) REFERENCES `discussion`(`discussion_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "comment_id",
@@ -133,6 +133,12 @@
           {
             "fieldPath": "content",
             "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user_ref",
+            "columnName": "user_ref",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -177,12 +183,23 @@
             "referencedColumns": [
               "discussion_id"
             ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_ref"
+            ],
+            "referencedColumns": [
+              "nickname"
+            ]
           }
         ]
       },
       {
         "tableName": "discussion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "discussion_id",
@@ -206,6 +223,12 @@
             "fieldPath": "game_ref",
             "columnName": "game_ref",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user_ref",
+            "columnName": "user_ref",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -236,6 +259,17 @@
             ],
             "referencedColumns": [
               "game_id"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_ref"
+            ],
+            "referencedColumns": [
+              "nickname"
             ]
           }
         ]
@@ -623,7 +657,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f0cec3b4f2e161b94694fc6e9d702e60')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '301b692dec6ce4d0213f248c7aa0bc75')"
     ]
   }
 }
