@@ -1,8 +1,6 @@
 package com.example.lordofthegames.Community
 
 import android.app.Application
-import android.database.Cursor
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.Comments
@@ -56,6 +54,10 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         }
 
         return l
+    }
+
+    fun getDiscussionSpecific(discussion_id: Int): Discussion{
+        return repo.getDiscussionSpecific(discussion_id)
     }
 
 }

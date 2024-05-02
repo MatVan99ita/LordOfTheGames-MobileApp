@@ -24,6 +24,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/discussion_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="5dp"
+            android:textSize="10dp"
+            android:textColor="#595050"
+            android:text="by GinopippoFreebbooter"
+            app:layout_constraintStart_toEndOf="@id/discussion_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/discussion_content"
             android:layout_width="344dp"
             android:layout_height="wrap_content"

@@ -8,9 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentCommunitySpecificBinding
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.recyclerView.DiscussionItem
@@ -52,10 +54,16 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
         val act: Activity? = activity
         Log.i("LABBANANA", list[position].toString())
         if(act != null) {
-            val intent = Intent(context, CommunityActivity::class.java)
-            //SWITCH DI FRAGMENT
-            //intent.putExtra("game_title", list[position].GameTitle)
-            this.startActivity(intent)
+            val bundle = Bundle()
+            bundle.putInt("discussion_id", list[position].discussion.discussion_id)
+
+            Utilities.insertFragment(
+                requireActivity() as AppCompatActivity,
+                DiscussionSpecificFragment(),
+                DiscussionSpecificFragment::class.java.simpleName,
+                bundle,
+            )
+            //this.startActivity(intent)
         }
     }
 

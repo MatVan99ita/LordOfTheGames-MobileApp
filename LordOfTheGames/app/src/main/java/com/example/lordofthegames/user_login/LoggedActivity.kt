@@ -34,7 +34,16 @@ class LoggedActivity: AppCompatActivity() {
      *  se non c'è accesso bisogna farlo fare e mettere un bundle all'activity sull'activity precedente
      *  se si va sulla lista perosnale senza aver eseguito l'accesso si va al login diretto
      *  e se si torna indoetro bisogna rimettere la home base
+     *
+     *  DALLE SPECIFICHE: mappa utente - grafico andamento - achievement
+     *
+     *  -> gi achievement dell'utente possono essere tipo: giochi completati, achievement completati, commenti scritti, discussioni create, like ricevuti(?), dislike ricevuti(?)
+     *  -> il grafico se ne possono fare 1/2 con andamento su tutti i giochi e achievement dei giochi completati
+     *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
      **/
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState

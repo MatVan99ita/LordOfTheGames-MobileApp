@@ -35,6 +35,7 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
         holder.discussion_content.text = item.discussion.content
         holder.discussion_comments.text = "${item.totComment}"
         holder.discussion_likes.text = "${item.totaleLike}"
+        holder.discussion_user.text = "by ${item.discussion.user_ref}"
 
     }
 
@@ -45,6 +46,8 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
         var discussion_content: TextView = itemView.findViewById(R.id.discussion_content)
         var discussion_likes: TextView = itemView.findViewById(R.id.comment_count)
         var discussion_comments: TextView = itemView.findViewById(R.id.like_count)
+        var discussion_user: TextView = itemView.findViewById(R.id.discussion_user)
+
         private val onItemListener: OnItemListener = lister
 
         init {

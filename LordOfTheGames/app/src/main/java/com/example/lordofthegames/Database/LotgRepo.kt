@@ -147,4 +147,8 @@ class LotgRepo(application: Application) {
         return lotgDao.selectCommentFromDiscussion(discussion_id)
     }
 
+    fun getDiscussionSpecific(discussionId: Int): Discussion {
+        return lotgDao.getDiscussion(discussionId)
+    }
+
 }

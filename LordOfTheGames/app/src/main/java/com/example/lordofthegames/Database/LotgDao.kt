@@ -255,13 +255,17 @@ interface LotgDao {
            "    comment.content, \n" +
            "    comment_like, \n" +
            "    comment_dislike,  \n" +
-           "    user_ref  \n" +
+           "    comment.user_ref  \n" +
            "FROM " +
            "    comment, discussion " +
            "ON discussion_ref = discussion_id " +
            "WHERE " +
            "    discussion_id = :discussion_id")
     fun selectCommentFromDiscussion(discussion_id: Int): Cursor
+
+
+    @Query("SELECT * FROM discussion WHERE discussion_id = :discussionId")
+    fun getDiscussion(discussionId: Int): Discussion
 
 
 }
