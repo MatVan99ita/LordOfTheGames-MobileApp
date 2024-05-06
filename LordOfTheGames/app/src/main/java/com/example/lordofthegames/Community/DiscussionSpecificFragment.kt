@@ -11,8 +11,9 @@ import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.recyclerView.CommentListAdapater
 import com.example.lordofthegames.recyclerView.DiscussionSpecificAdapter
+import com.example.lordofthegames.recyclerView.OnItemListener
 
-class DiscussionSpecificFragment : Fragment(){
+class DiscussionSpecificFragment : Fragment(), OnItemListener{
 
     private lateinit var binding: FragmentDiscussionContentSpecificBinding
     private lateinit var viewm: DiscussionViewModel
@@ -31,10 +32,10 @@ class DiscussionSpecificFragment : Fragment(){
             val discussion_id = bundle.getInt("discussion_id")
             disccussion = Pair(
                     viewm.getDiscussionSpecific(discussion_id),
-                    viewm.getDiscussionComments(discussion_id)
+                    viewm.getDiscussionComments(discussion_id),
                 )
 
-            adapter = DiscussionSpecificAdapter(requireActivity(), this, disccussion.second)
+            adapter = CommentListAdapater(requireActivity(), this, disccussion.second)
         }
 
         return binding.root
@@ -42,14 +43,15 @@ class DiscussionSpecificFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.discussionSpecificTitle.text = disccussion.first.title
         binding.discussionSpecificContent.text = disccussion.first.content
         binding.discussionSpecificUser.text = disccussion.first.user_ref
 
+        binding.recyclerViewComments.adapter = adapter
 
+    }
 
-
+    override fun onItemClick(view: View, position: Int) {
     }
 
 }

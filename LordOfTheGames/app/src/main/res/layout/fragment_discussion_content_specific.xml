@@ -8,10 +8,11 @@
     >
 
     <TextView
+        android:paddingTop="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
         android:id="@+id/discussion_specific_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/god_of_war"
         android:text="@string/game_title"
         android:textSize="30sp"
@@ -21,10 +22,13 @@
 
     <TextView
         android:id="@+id/discussion_specific_content"
-        android:layout_width="344dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
         android:text="@string/long_text"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/discussion_specific_title" />
 
@@ -95,19 +99,14 @@
         android:textColor="#595050"
         android:text="by GinoPippoFreebbooter"
         app:layout_constraintEnd_toStartOf="@id/up_img"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view_comments"
         app:layout_constraintTop_toBottomOf="@id/discussion_specific_content2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="horizontal"
-
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/discussion_specific_user"
+        app:layout_constraintTop_toBottomOf="@+id/discussion_specific_user"
         tools:listitem="@layout/comment_item" />
 
 
