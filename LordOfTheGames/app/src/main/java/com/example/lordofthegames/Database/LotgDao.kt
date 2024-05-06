@@ -268,5 +268,14 @@ interface LotgDao {
     fun getDiscussion(discussionId: Int): Discussion
 
 
+    @Query(" SELECT count(*)                                                   as gameNumTot,\n" +
+           "(SELECT count(*) FROM game where game_status = \"playing\")        as playing,\n" +
+           "(SELECT count(*) FROM game where game_status = \"Wanted to play\") as wanted,\n" +
+           "(SELECT count(*) FROM game where game_status = \"Abandoned\")      as abandoned,\n" +
+           "(SELECT count(*) FROM game where game_status = \"Played\")         as played\n" +
+           "FROM game \n" +
+           "WHERE game_status IS NOT \"NP\"")
+    fun getUserStatisticsCounts(): Cursor
+
 }
 

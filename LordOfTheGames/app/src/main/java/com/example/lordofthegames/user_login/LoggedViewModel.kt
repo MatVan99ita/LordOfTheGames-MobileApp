@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.lordofthegames.Database.AbstractViewModel
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.recyclerView.UserGameGraphItem
 
 class LoggedViewModel(application: Application): AbstractViewModel(application) {
 
@@ -22,5 +23,17 @@ class LoggedViewModel(application: Application): AbstractViewModel(application) 
 
     fun getAllGames(): LiveData<List<Game?>?>{
         return repository.getAllGames()
+    }
+
+    fun getUserStatisticsCounts(): UserGameGraphItem{
+        val c = repository.getUserStatisticsCounts()
+        c.moveToNext()
+        return UserGameGraphItem(
+            gameNumTot =    c.getInt(c.getColumnIndexOrThrow("gameNumTot")),
+            playingTot =    c.getInt(c.getColumnIndexOrThrow("playing")),
+            planToPlayTot = c.getInt(c.getColumnIndexOrThrow("wanted")),
+            abandonedTot =  c.getInt(c.getColumnIndexOrThrow("abandoned")),
+            completedTot =  c.getInt(c.getColumnIndexOrThrow("played")),
+        )
     }
 }

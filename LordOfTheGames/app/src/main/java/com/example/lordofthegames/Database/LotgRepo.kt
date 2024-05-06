@@ -151,4 +151,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getDiscussion(discussionId)
     }
 
+    /** gameNumTot, playing, wanted, abandoned, played*/
+    fun getUserStatisticsCounts(): Cursor{
+        return lotgDao.getUserStatisticsCounts()
+    }
+
 }
