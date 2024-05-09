@@ -1,5 +1,6 @@
 package com.example.lordofthegames.user_login
 
+import android.R
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -8,10 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.ViewModel.GameDetViewModel2
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
+import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 
@@ -19,6 +27,8 @@ class LoggedInFragment: Fragment() , SeekBar.OnSeekBarChangeListener,
     OnChartValueSelectedListener {
 
     private lateinit var bind: FragmentLoggedinBinding
+    private lateinit var viewm: LoggedViewModel
+    private lateinit var statistics: UserGameGraphItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +36,8 @@ class LoggedInFragment: Fragment() , SeekBar.OnSeekBarChangeListener,
         savedInstanceState: Bundle?
     ): View? {
         bind = FragmentLoggedinBinding.inflate(layoutInflater, container, false);
+        viewm = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
+        statistics = viewm.getUserStatisticsCounts()
         return bind.root
     }
 
@@ -37,24 +49,24 @@ class LoggedInFragment: Fragment() , SeekBar.OnSeekBarChangeListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
+        val chart = bind.piechart
         bind.btnExit.setOnClickListener { eschilo() }
 
-        bind.piechart.setUsePercentValues(true);
-        bind.piechart.description.isEnabled = false;
-        bind.piechart.setExtraOffsets(5.0F, 10.0F, 5.0F, 5.0F);
-        bind.piechart.dragDecelerationFrictionCoef = 0.95f;
+        chart.setUsePercentValues(true);
+        chart.description.isEnabled = false;
+        chart.setExtraOffsets(5.0F, 10.0F, 5.0F, 5.0F);
+        chart.dragDecelerationFrictionCoef = 0.95f;
         //bind.piechart.setCenterTextTypeface(tfLight);
-        bind.piechart.isDrawHoleEnabled = true;
-        bind.piechart.setHoleColor(Color.WHITE);
-        bind.piechart.setTransparentCircleColor(Color.WHITE);
-        bind.piechart.setTransparentCircleAlpha(110);
-        bind.piechart.holeRadius = 58f;
-        bind.piechart.transparentCircleRadius = 61f;
-        bind.piechart.setDrawCenterText(true);
-        bind.piechart.rotationAngle = 0.0F;
-        bind.piechart.isRotationEnabled = true;
-        bind.piechart.isHighlightPerTapEnabled = true;
+        chart.isDrawHoleEnabled = true;
+        chart.setHoleColor(Color.WHITE);
+        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleAlpha(110);
+        chart.holeRadius = 58f;
+        chart.transparentCircleRadius = 61f;
+        chart.setDrawCenterText(true);
+        chart.rotationAngle = 0.0F;
+        chart.isRotationEnabled = true;
+        chart.isHighlightPerTapEnabled = true;
         //bind.piechart.setOnChartValueSelectedListener(this);
 
 
@@ -70,8 +82,35 @@ class LoggedInFragment: Fragment() , SeekBar.OnSeekBarChangeListener,
         // entry label styling
 
         // entry label styling
-        bind.piechart.setEntryLabelColor(Color.WHITE)
-        bind.piechart.setEntryLabelTextSize(12f)
+        chart.setEntryLabelColor(Color.WHITE)
+        chart.setEntryLabelTextSize(12f)
+
+        val values = ArrayList<BarEntry>()
+        values.add(
+            BarEntry(0f, statistics.gameNumTot as Float)
+        )
+        values.add(
+            BarEntry(0f, statistics.playingTot as Float)
+        )
+        values.add(
+            BarEntry(0f, statistics.planToPlayTot as Float)
+        )
+        values.add(
+            BarEntry(0f, statistics.abandonedTot as Float)
+        )
+        values.add(
+            BarEntry(0f, statistics.completedTot as Float)
+        )
+
+        val set1: BarDataSet = chart.data.getDataSetByIndex(0) as BarDataSet
+        set1.values = values;
+
+        val dataSets = ArrayList<IBarDataSet>()
+        dataSets.add(set1)
+        val data = BarData(dataSets)
+        data.setValueTextSize(10f)
+        data.barWidth = 0.9f
+        chart.setData(data)
 
 
     }
