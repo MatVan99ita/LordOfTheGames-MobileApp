@@ -1,6 +1,10 @@
 package com.example.lordofthegames
 
+import android.Manifest.permission.POST_NOTIFICATIONS
 import android.app.Activity
+import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.ContentValues
@@ -10,6 +14,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -31,14 +36,27 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.example.lordofthegames.Community.CommunitySpecificFragment
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Settings.SettingsFragment
+import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.home.HomeFragment
+import com.example.lordofthegames.home.NotificationViewModel
+import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedInFragment
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.ColorTemplate.rgb
 import com.google.android.material.navigation.NavigationView
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -48,17 +66,6 @@ import java.security.SecureRandom
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import android.Manifest.permission.*
-import android.app.Application
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.graphics.Color
-import androidx.annotation.RequiresApi
-import com.example.lordofthegames.Community.CommunitySpecificFragment
-import com.example.lordofthegames.db_entities.Notification
-import com.example.lordofthegames.home.NotificationViewModel
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 
 class Utilities {
     companion object{
@@ -416,6 +423,64 @@ class Utilities {
                 )
 
             return "${d.dayOfMonth}/${d.monthOfYear}/${d.year} - ${d.hourOfDay+1}:${d.minuteOfHour}:${d.secondOfMinute}"
+        }
+
+
+        fun setupPieChart(pieChart: PieChart, graphData: UserGameGraphItem, darkTheme: Boolean) {
+
+            //pupulating list of PieEntires
+            val pieEntires: MutableList<PieEntry> = ArrayList()
+
+            /*pieEntires.add(
+                PieEntry( statistics.gameNumTot.toFloat(), "Tot")
+            )*/
+            pieEntires.add(
+                PieEntry( graphData.playingTot.toFloat(), "Playing")
+            )
+            pieEntires.add(
+                PieEntry( graphData.planToPlayTot.toFloat(), "Planned")
+            )
+            pieEntires.add(
+                PieEntry( graphData.abandonedTot.toFloat(), "Abandoned")
+            )
+            pieEntires.add(
+                PieEntry(graphData.completedTot.toFloat(), "Completed")
+            )
+
+            val dataSet = PieDataSet(pieEntires, "")
+
+            //dataSet.setColors(*MATERIAL_COLORS)
+
+            dataSet.setColors(
+                rgb("#00AC88"),
+                rgb("#007005"),
+                rgb("#FF6200EE"),
+                rgb("#970000")
+            )
+
+            val data = PieData(dataSet)
+            //Get the chart
+            pieChart.data = data
+            //pieChart.isDrawHoleEnabled = false;
+            pieChart.invalidate()
+            pieChart.centerText = "Giochi totali: \n ${graphData.gameNumTot} \n "
+            pieChart.setDrawEntryLabels(false)
+            pieChart.contentDescription = ""
+
+            pieChart.holeRadius = 35F;
+            pieChart.maxHighlightDistance = 74f;
+
+            //legend attributes
+            val legend: Legend = pieChart.legend
+            legend.form = Legend.LegendForm.CIRCLE
+            legend.textSize = 12f
+            legend.formSize = 20f
+            legend.formToTextSpace = 2f
+
+            if(darkTheme)
+                legend.textColor = Color.WHITE
+            else
+                legend.textColor = Color.BLACK
         }
 
     }
