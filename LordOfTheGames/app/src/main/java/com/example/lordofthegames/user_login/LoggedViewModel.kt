@@ -38,4 +38,7 @@ class LoggedViewModel(application: Application): AbstractViewModel(application) 
             completedTot =  c.getInt(c.getColumnIndexOrThrow("played")),
         )
     }
+
+
+
 }

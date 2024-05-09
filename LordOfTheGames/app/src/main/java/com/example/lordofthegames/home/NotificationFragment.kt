@@ -52,6 +52,5 @@ class NotificationFragment: Fragment(), OnItemListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-        TODO("Not yet implemented")
     }
 }

@@ -101,7 +101,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
                     val j = tabLayout.tabCount
                     // textView.text = "$i/$j"
                     // textView.append(tab.text)
-                    when(i){//TODO: EH ELALE metti la lista dei giuochi
+                    when(i){//TODO: PERCENTUALI DI COMPLETAMENTO DEI GIOCHI BASATO SUL NUMERO DI ACHIEVEMENT
                         1 -> {
                             textView.text = "$i/$j"
                             textView.append(tab.text)
@@ -139,7 +139,6 @@ class MyGameListFragment: Fragment(), OnItemListener{
     /**
      * TODO:
      *      5 funzioni che vanno richiamate nella sezione when
-     *
      *      EXTRA: fare in modo che alla creazione della view la prima tab venga selezionata automaticamente
      */
 
