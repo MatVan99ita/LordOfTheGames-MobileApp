@@ -130,4 +130,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return s
     }
 
+    fun getGameListValidity(game_title: String): Boolean{
+        return repository.getGameListValidity(game_title) == "NP"
+    }
+
+    fun isGameFavorite(game_title: String): Boolean{
+        TODO("AGGIUNGERE COLONNA AL DB CON IL CONTROLLO")
+    }
+
 }

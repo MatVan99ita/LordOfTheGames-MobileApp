@@ -2,6 +2,7 @@ package com.example.lordofthegames.recyclerView
 
 import android.R.attr.data
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
 
@@ -47,6 +49,10 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
             1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
+        if(!viuvve.getGameListValidity(currentCardItem.gameTitle)){
+            holder.addBtn.visibility = View.GONE
+            holder.modifyBtn.visibility = View.GONE
+        }
 
         holder.gameImg.setImageDrawable(drawable)
 
@@ -76,10 +82,16 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
 
         holder.modifyBtn.setOnClickListener {
             this.viuvve.modifyGameStatus("playing", currentCardItem.gameId)
+            Utilities.showaToast(activity as Context, "Have fun playing ${currentCardItem.gameTitle}")
+            holder.addBtn.visibility = View.GONE
+            holder.modifyBtn.visibility = View.GONE
         }
 
         holder.addBtn.setOnClickListener {
             this.viuvve.modifyGameStatus("Wanted to play", currentCardItem.gameId)
+            Utilities.showaToast(activity as Context, "${currentCardItem.gameTitle} added to wishlist")
+            holder.addBtn.visibility = View.GONE
+            holder.modifyBtn.visibility = View.GONE
         }
 
         //val catItems: MutableList<CategoryCardItem> = listOf(

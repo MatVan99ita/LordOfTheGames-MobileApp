@@ -59,7 +59,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
     private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
 
-    private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE
+    private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,7 +75,7 @@ class HomeFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //homeViewModel = ViewModelProvider((activity as ViewModelStoreOwner?)!!)[HomeViewModel::class.java]
+        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         setHasOptionsMenu(true)
     }
 
@@ -112,11 +112,6 @@ class HomeFragment: Fragment(), OnItemListener {
             //}
 
             //val r = homeViewModel.getAllGame().value
-            //Log.w("CIAONE", r?.size.toString())
-
-
-
-            //Log.w("PORCADDIO", gameListdb.size.toString())
 
             //val db: LOTGDatabase = Room.databaseBuilder(
             //    requireContext(),

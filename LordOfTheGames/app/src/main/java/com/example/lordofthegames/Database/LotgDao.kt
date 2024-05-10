@@ -277,5 +277,8 @@ interface LotgDao {
            "WHERE game_status IS NOT \"NP\"")
     fun getUserStatisticsCounts(): Cursor
 
+    @Query("SELECT game_status FROM game WHERE game_title = :gameTitle")
+    fun getGameListValidity(gameTitle: String): Cursor
+
 }
 

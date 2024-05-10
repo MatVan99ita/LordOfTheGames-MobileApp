@@ -156,4 +156,10 @@ class LotgRepo(application: Application) {
         return lotgDao.getUserStatisticsCounts()
     }
 
+    fun getGameListValidity(gameTitle: String): String {
+        val c = lotgDao.getGameListValidity(gameTitle)
+        c.moveToNext()
+        return c.getString(c.getColumnIndexOrThrow("game_status"))
+    }
+
 }
