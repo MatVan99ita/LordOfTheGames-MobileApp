@@ -24,4 +24,7 @@ class MyGameListViewModel(application: Application): AndroidViewModel(applicatio
     fun getFilt(): List<Game>{
         return repository.getFilt()
     }
+    fun getOrderedFilt(): List<Game>{
+        return repository.getOrderedFilt()
+    }
 }

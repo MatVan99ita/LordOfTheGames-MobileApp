@@ -29,14 +29,24 @@ import kotlin.streams.toList
 class MyGameListFragment: Fragment(), OnItemListener{
 
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
+
     private lateinit var gameList: List<Game>
+    private lateinit var playingList: List<Game>
+    private lateinit var wantedList: List<Game>
+    private lateinit var playedList: List<Game>
+    private lateinit var abandonedList: List<Game>
+
     private lateinit var pageViewModel: MyGameListViewModel
     private lateinit var viewPager2: ViewPager2
     private lateinit var tabLayout: TabLayout
     private lateinit var textView: TextView
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MyGameAdapter
-    private lateinit var adapter2: MyGameAdapter
+
+    private lateinit var adapterAll: MyGameAdapter
+    private lateinit var adapterWanted: MyGameAdapter
+    private lateinit var adapterPlaying: MyGameAdapter
+    private lateinit var adapterPlayed: MyGameAdapter
+    private lateinit var adapterAbandoned: MyGameAdapter
 
     private val TAB_TITLES = arrayOf(
         R.string.all,
@@ -49,18 +59,42 @@ class MyGameListFragment: Fragment(), OnItemListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java]
-        gameList = pageViewModel.getFilt()
 
-        adapter = MyGameAdapter(
+        gameList = pageViewModel.getOrderedFilt()
+        playingList = gameList.stream().filter {it.game_status == "Playing"}.toList()
+        wantedList = gameList.stream().filter {it.game_status == "Wanted to play"}.toList()
+        playedList = gameList.stream().filter {it.game_status == "Played"}.toList()
+        abandonedList = gameList.stream().filter {it.game_status == "Abandoned"}.toList()
+
+
+        adapterAll = MyGameAdapter(
             this,
             ViewModelProvider(requireActivity())[HomeViewModel::class.java],
             gameList,
             requireActivity()
         )
-        adapter2 = MyGameAdapter(
+        adapterPlaying = MyGameAdapter(
             this,
             ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            gameList.stream().filter { it.game_status == "playing" }.toList(),
+            playingList,
+            requireActivity()
+        )
+        adapterPlayed = MyGameAdapter(
+            this,
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+            playedList,
+            requireActivity()
+        )
+        adapterWanted = MyGameAdapter(
+            this,
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+            wantedList,
+            requireActivity()
+        )
+        adapterAbandoned = MyGameAdapter(
+            this,
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+            abandonedList,
             requireActivity()
         )
     }
@@ -102,27 +136,30 @@ class MyGameListFragment: Fragment(), OnItemListener{
                     // textView.text = "$i/$j"
                     // textView.append(tab.text)
                     when(i){//TODO: PERCENTUALI DI COMPLETAMENTO DEI GIOCHI BASATO SUL NUMERO DI ACHIEVEMENT
-                        1 -> {
+                        1 -> { // ALL
                             textView.text = "$i/$j"
                             textView.append(tab.text)
-                            recyclerView.adapter = adapter
+                            recyclerView.adapter = adapterAll
                         }
-                        2 -> {
+                        2 -> { // PLAYING
                             textView.text = "$i/$j"
                             textView.append(tab.text)
-                            recyclerView.adapter = adapter2
+                            recyclerView.adapter = adapterPlayed
                         }
-                        3 -> {
+                        3 -> { // WANTED TO PLAY
                             textView.text = "$i/$j"
                             textView.append(tab.text)
+                            recyclerView.adapter = adapterWanted
                         }
-                        4 -> {
+                        4 -> { // PLAYED
                             textView.text = "$i/$j"
                             textView.append(tab.text)
+                            recyclerView.adapter = adapterPlayed
                         }
-                        5 -> {
+                        5 -> { // ABANDONED
                             textView.text = "$i/$j"
                             textView.append(tab.text)
+                            recyclerView.adapter = adapterAbandoned
                         }
                     }
                 }

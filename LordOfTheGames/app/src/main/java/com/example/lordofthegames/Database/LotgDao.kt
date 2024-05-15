@@ -210,6 +210,17 @@ interface LotgDao {
     @Query("SELECT * FROM game WHERE game_status != \"NP\" ")
     fun getAllFilteredGame(): List<Game>
 
+    @Query( "SELECT * FROM game " +
+            "WHERE game_status IS NOT \"NP\"\n" +
+            "ORDER BY CASE\n" +
+            "    WHEN game_status = 'Playing' then 1\n" +
+            "    WHEN game_status = 'Played' then 2\n" +
+            "    WHEN game_status = 'Wanted to play' then 3\n" +
+            "    WHEN game_status = 'Abandoned' then 4\n" +
+            "END ASC, game_title")
+    fun getAllOrderedFilteredGames(): List<Game>
+
+
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
     fun getNotes(game_ref: Int): Cursor
 
@@ -282,15 +293,7 @@ interface LotgDao {
 
 
 
-    /** QUERY BELLA
-    SELECT * FROM game WHERE game_status IS NOT "NP"
-    ORDER BY CASE
-    WHEN game_status = 'Playing' then 1
-    WHEN game_status = 'Played' then 2
-    WHEN game_status = 'Wanted to play' then 3
-    WHEN game_status = 'Abandoned' then 4
-    END ASC, game_title
-    */
+
 
 }
 

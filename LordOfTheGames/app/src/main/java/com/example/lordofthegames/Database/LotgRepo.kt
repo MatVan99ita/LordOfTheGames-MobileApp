@@ -91,6 +91,10 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllFilteredGame()
     }
 
+    fun getOrderedFilt(): List<Game> {
+        return lotgDao.getAllOrderedFilteredGames()
+    }
+
     fun updateGameStatus(game_title: String, game_status: String): Int {
         return lotgDao.updateGameStatus(game_title, game_status)
     }
