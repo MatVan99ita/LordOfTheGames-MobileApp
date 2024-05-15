@@ -14,7 +14,7 @@
     <string name="my_game" translatable="false">My game</string>
     <string name="completed">Completed</string>
     <string name="all">All</string>
-    <string name="plan_to_play">Plan to play</string>
+    <string name="plan_to_play">Wanted to play</string>
     <string name="dropped">Dropped</string>
     <string name="playing">Playing</string>
     <string name="abandoned">Abandoned</string>

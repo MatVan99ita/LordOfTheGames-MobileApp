@@ -81,7 +81,7 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         holder.achieText.text = "${a.x}/${a.y}"
 
         holder.modifyBtn.setOnClickListener {
-            this.viuvve.modifyGameStatus("playing", currentCardItem.gameId)
+            this.viuvve.modifyGameStatus("Playing", currentCardItem.gameId)
             Utilities.showaToast(activity as Context, "Have fun playing ${currentCardItem.gameTitle}")
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE

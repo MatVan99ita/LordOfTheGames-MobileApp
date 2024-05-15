@@ -125,6 +125,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.text = context?.resources?.getString(TAB_TITLES[position])
         }.attach()
+
         textView = view.findViewById(R.id.mygame_textview)
         //textView.text = "1/5\nTUTTE COSE"
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
@@ -173,12 +174,6 @@ class MyGameListFragment: Fragment(), OnItemListener{
         return view
     }
 
-    /**
-     * TODO:
-     *      5 funzioni che vanno richiamate nella sezione when
-     *      EXTRA: fare in modo che alla creazione della view la prima tab venga selezionata automaticamente
-     */
-
 
     companion object {
         /**
@@ -202,7 +197,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
     }
 
     override fun onItemClick(view: View, position: Int) {
-        TODO("Not yet implemented")
+
     }
 
 }

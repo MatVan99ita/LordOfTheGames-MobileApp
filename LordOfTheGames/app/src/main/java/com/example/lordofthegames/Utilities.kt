@@ -77,10 +77,8 @@ class Utilities {
             1. Camera
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
         4. Home con lista item
-            1. Preferiti (tasto e schermata)
             2. Filtri <- ESASE COME FAAF
-        5. Settings
-            1. dark / light
+            *
      * Funzionalità opzionali
         • Progettazione / Design (max 2)
             – mockup (potete usare diversi software, come balsamiq, figma, AdobeXD, ecc.. e in formato cartaceo eventualmente)
