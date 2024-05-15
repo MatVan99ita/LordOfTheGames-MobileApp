@@ -280,5 +280,17 @@ interface LotgDao {
     @Query("SELECT game_status FROM game WHERE game_title = :gameTitle")
     fun getGameListValidity(gameTitle: String): Cursor
 
+
+
+    /** QUERY BELLA
+    SELECT * FROM game WHERE game_status IS NOT "NP"
+    ORDER BY CASE
+    WHEN game_status = 'Playing' then 1
+    WHEN game_status = 'Played' then 2
+    WHEN game_status = 'Wanted to play' then 3
+    WHEN game_status = 'Abandoned' then 4
+    END ASC, game_title
+    */
+
 }
 
