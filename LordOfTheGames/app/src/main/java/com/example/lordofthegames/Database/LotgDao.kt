@@ -207,18 +207,7 @@ interface LotgDao {
     @Query("UPDATE game SET game_status = :new_status WHERE game_id = :id")
     fun modifyGameStatus(new_status: String, id: Int)
 
-    @Query("SELECT * FROM game WHERE game_status != \"NP\" ")
-    fun getAllFilteredGame(): List<Game>
 
-    @Query( "SELECT * FROM game " +
-            "WHERE game_status IS NOT \"NP\"\n" +
-            "ORDER BY CASE\n" +
-            "    WHEN game_status = 'Playing' then 1\n" +
-            "    WHEN game_status = 'Played' then 2\n" +
-            "    WHEN game_status = 'Wanted to play' then 3\n" +
-            "    WHEN game_status = 'Abandoned' then 4\n" +
-            "END ASC, game_title")
-    fun getAllOrderedFilteredGames(): List<Game>
 
 
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
@@ -302,6 +291,16 @@ interface LotgDao {
     )
     fun getAddedGameListForUser(game_title: String, user_ref: String): Cursor
 
+    @Query( "SELECT g.game_title, ug.game_status FROM game g, UsersGame ug \n" +
+            "WHERE user_ref = :user_ref \n" +
+            "AND   g.game_id = game_ref \n" +
+            "ORDER BY CASE \n" +
+            "WHEN ug.game_status = 'Playing' then 1 \n" +
+            "WHEN ug.game_status = 'Played' then 2 \n" +
+            "WHEN ug.game_status = 'Wanted to play' then 3 \n" +
+            "WHEN ug.game_status = 'Abandoned' then 4 \n" +
+            "END ASC, g.game_title")
+    fun getAllOrderedFilteredGames(user_ref: String): List<Game>
 
 }
 
