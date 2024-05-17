@@ -313,5 +313,7 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUsersGame(usersGame: UsersGame): Long
 
+
+
 }
 

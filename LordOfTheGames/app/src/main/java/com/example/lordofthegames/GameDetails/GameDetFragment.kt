@@ -77,6 +77,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var maxNum: TextView
     private lateinit var editText: EditText
     private lateinit var spinner_GS: Spinner
+    private lateinit var gameStatus: String
 
     private val statuss = listOf(
         "Not played",

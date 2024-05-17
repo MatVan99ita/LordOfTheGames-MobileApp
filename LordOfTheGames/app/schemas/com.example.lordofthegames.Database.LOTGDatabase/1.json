@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "38e2cb2337e96d96c5f4d20498dfcfca",
+    "identityHash": "9f09188edce1dd983a7a98dd9704cfa5",
     "entities": [
       {
         "tableName": "achievement",
@@ -646,12 +646,87 @@
           }
         ],
         "foreignKeys": []
+      },
+      {
+        "tableName": "UsersGame",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, `game_status` TEXT NOT NULL, PRIMARY KEY(`game_ref`, `user_ref`), FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`mail`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "game_ref",
+            "columnName": "game_ref",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user_ref",
+            "columnName": "user_ref",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "game_status",
+            "columnName": "game_status",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "game_ref",
+            "user_ref"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_UsersGame_game_ref",
+            "unique": false,
+            "columnNames": [
+              "game_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_UsersGame_game_ref` ON `${TABLE_NAME}` (`game_ref`)"
+          },
+          {
+            "name": "index_UsersGame_user_ref",
+            "unique": false,
+            "columnNames": [
+              "user_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_UsersGame_user_ref` ON `${TABLE_NAME}` (`user_ref`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "game",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "game_ref"
+            ],
+            "referencedColumns": [
+              "game_id"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_ref"
+            ],
+            "referencedColumns": [
+              "mail"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38e2cb2337e96d96c5f4d20498dfcfca')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f09188edce1dd983a7a98dd9704cfa5')"
     ]
   }
 }

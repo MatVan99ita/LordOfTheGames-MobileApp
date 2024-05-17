@@ -94,8 +94,8 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllOrderedFilteredGames(user_ref)
     }
 
-    fun updateGameStatus(game_title: String, game_status: String): Int {
-        return lotgDao.updateGameStatus(game_title, game_status)
+    fun updateGameStatus(game_status: String, game_id: Int, user_ref: String): Int {
+        return lotgDao.updateGameStatus(game_status, game_id, user_ref)
     }
 
     fun updateAchievement(game_title: String, id: Int, actual: Int): Int {

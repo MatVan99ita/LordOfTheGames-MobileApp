@@ -15,7 +15,7 @@ import androidx.room.Index
             parentColumns = ["game_id"]
         ),
         ForeignKey(
-            entity = Platform::class,
+            entity = User::class,
             childColumns = ["user_ref"],
             parentColumns = ["mail"]
         )],

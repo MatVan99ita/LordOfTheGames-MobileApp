@@ -73,8 +73,8 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return l
     }
 
-    fun updateGameStatus(game_title: String, game_status: String): Int {
-        return repository.updateGameStatus(game_title, game_status)
+    fun updateGameStatus(game_status: String, game_id: Int, user_ref: String): Int {
+        return repository.updateGameStatus(game_status, game_id, user_ref)
     }
 
     fun updateAchievement(game_title: String, id: Int, actual: Int): Int {
