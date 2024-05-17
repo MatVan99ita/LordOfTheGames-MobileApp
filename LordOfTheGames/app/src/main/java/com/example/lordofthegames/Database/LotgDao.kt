@@ -293,6 +293,14 @@ interface LotgDao {
 
 
 
+    @Query("SELECT game_id FROM game \n" +
+    "       WHERE game_title = :game_title \n" +
+    "       AND game_id IN (\n" +
+            "SELECT ug.game_ref \n" +
+            "FROM UsersGame ug \n" +
+            "WHERE ug.user_ref = :user_ref)"
+    )
+    fun getAddedGameListForUser(game_title: String, user_ref: String): Cursor
 
 
 }
