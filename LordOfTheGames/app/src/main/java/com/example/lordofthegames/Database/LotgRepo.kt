@@ -10,6 +10,8 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.db_entities.UsersGame
+import com.example.lordofthegames.recyclerView.MyGameListItem
 
 class LotgRepo(application: Application) {
 
@@ -87,12 +89,9 @@ class LotgRepo(application: Application) {
         lotgDao.modifyGameStatus(stat, id)
     }
 
-    fun getFilt(): List<Game> {
-        return lotgDao.getAllFilteredGame()
-    }
 
-    fun getOrderedFilt(): List<Game> {
-        return lotgDao.getAllOrderedFilteredGames()
+    fun getOrderedFilt(user_ref: String): Cursor {
+        return lotgDao.getAllOrderedFilteredGames(user_ref)
     }
 
     fun updateGameStatus(game_title: String, game_status: String): Int {
@@ -160,10 +159,20 @@ class LotgRepo(application: Application) {
         return lotgDao.getUserStatisticsCounts()
     }
 
-    fun getGameListValidity(gameTitle: String): String {
-        val c = lotgDao.getGameListValidity(gameTitle)
+    fun getGameListValidity(gameTitle: String, user_ref: String): Int {
+        val c = lotgDao.getGameListValidity(gameTitle, user_ref)
         c.moveToNext()
-        return c.getString(c.getColumnIndexOrThrow("game_status"))
+        return c.getInt(c.getColumnIndexOrThrow("game_id"))
     }
+
+    fun getFilt(user_ref: String): Cursor {
+        return lotgDao.getAllOrderedFilteredGames(user_ref)
+    }
+
+    fun  insertUsersGame(usersGame: UsersGame): Long{
+        return lotgDao.insertUsersGame(usersGame)
+    }
+
+
 
 }

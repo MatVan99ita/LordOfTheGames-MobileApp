@@ -12,6 +12,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.UsersGame
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.PlatformCardItem
@@ -130,12 +131,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return s
     }
 
-    fun getGameListValidity(game_title: String): Boolean{
-        return repository.getGameListValidity(game_title) == "NP"
+    fun getGameListValidity(game_title: String, user_ref: String): Boolean {
+        return repository.getGameListValidity(game_title, user_ref) >= 0
     }
 
-    fun isGameFavorite(game_title: String): Boolean{
-        TODO("AGGIUNGERE COLONNA AL DB CON IL CONTROLLO")
+    fun isGameAdded(usersGame: UsersGame): Boolean{
+        return repository.insertUsersGame(usersGame) > 0
     }
 
 }

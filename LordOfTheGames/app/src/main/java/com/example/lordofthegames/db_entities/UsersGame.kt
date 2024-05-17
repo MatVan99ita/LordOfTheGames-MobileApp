@@ -24,5 +24,8 @@ import androidx.room.Index
 data class UsersGame(
     var game_ref: Int,
     var user_ref: String,
+    /**
+     * Status -> Playing, Played, Abandoned, Wanted to play
+     */
     var game_status: String,
 )

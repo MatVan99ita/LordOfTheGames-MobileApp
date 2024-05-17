@@ -27,13 +27,4 @@ data class Game(
     var game_title: String,
     var game_description: String,
     var game_cover: String="img",
-
-    /**
-     * Status -> Not played, Playing, Played, Abandoned, Wanted to play
-     */
-    var game_status: String = "NP",
-
-
-    //var achievements: List<Achievement>?,
-    //var categories: List<Categories>?,
     )

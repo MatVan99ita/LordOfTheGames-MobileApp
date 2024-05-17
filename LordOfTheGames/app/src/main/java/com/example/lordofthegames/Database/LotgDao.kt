@@ -19,6 +19,7 @@ import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.db_entities.UsersGame
 
 @Dao
 interface LotgDao {
@@ -269,16 +270,23 @@ interface LotgDao {
 
 
     @Query(" SELECT count(*)                                                   as gameNumTot,\n" +
-           "(SELECT count(*) FROM game where game_status = \"playing\")        as playing,\n" +
-           "(SELECT count(*) FROM game where game_status = \"Wanted to play\") as wanted,\n" +
-           "(SELECT count(*) FROM game where game_status = \"Abandoned\")      as abandoned,\n" +
-           "(SELECT count(*) FROM game where game_status = \"Played\")         as played\n" +
-           "FROM game \n" +
-           "WHERE game_status IS NOT \"NP\"")
-    fun getUserStatisticsCounts(): Cursor
+           "(SELECT count(*) FROM UsersGame where game_status = \"playing\")        as playing,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Wanted to play\") as wanted,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Abandoned\")      as abandoned,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Played\")         as played\n" +
+           "FROM UsersGame \n" +
+           "WHERE game_ref=:game_ref AND user_ref = :user_ref")
+    fun getUserStatisticsCounts(game_ref: Int, user_ref: String): Cursor
 
-    @Query("SELECT game_status FROM game WHERE game_title = :gameTitle")
-    fun getGameListValidity(gameTitle: String): Cursor
+    @Query("SELECT game_id \n" +
+            "FROM game " +
+            "WHERE game_title = :gameTitle \n" +
+            "AND game_id IN (" +
+            "   SELECT game_ref " +
+            "   FROM UsersGame " +
+            "   WHERE user_ref = :user_ref)"
+    )
+    fun getGameListValidity(gameTitle: String, user_ref: String): Cursor
 
 
 
@@ -291,7 +299,7 @@ interface LotgDao {
     )
     fun getAddedGameListForUser(game_title: String, user_ref: String): Cursor
 
-    @Query( "SELECT g.game_title, ug.game_status FROM game g, UsersGame ug \n" +
+    @Query( "SELECT g.game_id, g.game_title, ug.game_status FROM game g, UsersGame ug \n" +
             "WHERE user_ref = :user_ref \n" +
             "AND   g.game_id = game_ref \n" +
             "ORDER BY CASE \n" +
@@ -300,7 +308,10 @@ interface LotgDao {
             "WHEN ug.game_status = 'Wanted to play' then 3 \n" +
             "WHEN ug.game_status = 'Abandoned' then 4 \n" +
             "END ASC, g.game_title")
-    fun getAllOrderedFilteredGames(user_ref: String): List<Game>
+    abstract fun getAllOrderedFilteredGames(user_ref: String): Cursor
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertUsersGame(usersGame: UsersGame): Long
 
 }
 

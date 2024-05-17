@@ -16,7 +16,7 @@ import com.example.lordofthegames.home.HomeViewModel
 class MyGameAdapter(
     var listener: OnItemListener,
     var viewModel: HomeViewModel,
-    var mygamelist: List<Game>,
+    var mygamelist: List<MyGameListItem>,
     var activity: Activity
 ) : RecyclerView.Adapter<MyGameAdapter.MyGameHolder>() {
 
@@ -32,7 +32,7 @@ class MyGameAdapter(
         mygamelist.forEach {
             Log.i("MANNACC", "${it.game_title} - ${it.game_status}")
         }
-        val g: Game = mygamelist[position]
+        val g: MyGameListItem = mygamelist[position]
 
         holder.id.text = "${g.game_id}"
         holder.nome.text = g.game_title
@@ -63,4 +63,6 @@ class MyGameAdapter(
         }
 
     }
+
+
 }
