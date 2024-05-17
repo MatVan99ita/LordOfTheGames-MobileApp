@@ -205,8 +205,8 @@ interface LotgDao {
     @Query("SELECT game_cover, game_title, game_id FROM game")
     fun getSIMP(): Cursor
 
-    @Query("UPDATE game SET game_status = :new_status WHERE game_id = :id")
-    fun modifyGameStatus(new_status: String, id: Int)
+    @Query("UPDATE UsersGame SET game_status = :new_status WHERE game_ref = :id AND user_ref = :mail")
+    fun modifyGameStatus(new_status: String, id: Int, mail: String)
 
 
 
@@ -275,8 +275,8 @@ interface LotgDao {
            "(SELECT count(*) FROM UsersGame where game_status = \"Abandoned\")      as abandoned,\n" +
            "(SELECT count(*) FROM UsersGame where game_status = \"Played\")         as played\n" +
            "FROM UsersGame \n" +
-           "WHERE game_ref=:game_ref AND user_ref = :user_ref")
-    fun getUserStatisticsCounts(game_ref: Int, user_ref: String): Cursor
+           "WHERE user_ref = :user_ref")
+    fun getUserStatisticsCounts(user_ref: String): Cursor
 
     @Query("SELECT game_id \n" +
             "FROM game " +

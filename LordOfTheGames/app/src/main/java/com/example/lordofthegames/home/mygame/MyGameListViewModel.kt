@@ -21,10 +21,7 @@ class MyGameListViewModel(application: Application): AndroidViewModel(applicatio
         _index.value = index
     }
 
-    fun getFilt(): List<Game>{
-        return repository.getFilt()
-    }
-    fun getOrderedFilt(): List<Game>{
+    fun getOrderedFilt(): List<MyGameListFragment>{
         return repository.getOrderedFilt()
     }
 }

@@ -85,8 +85,8 @@ class LotgRepo(application: Application) {
         return lotgDao.getSIMP()
     }
 
-    fun modifyGameStatus(stat: String, id: Int){
-        lotgDao.modifyGameStatus(stat, id)
+    fun modifyGameStatus(stat: String, id: Int, mail: String){
+        lotgDao.modifyGameStatus(stat, id, mail)
     }
 
 
@@ -155,8 +155,8 @@ class LotgRepo(application: Application) {
     }
 
     /** gameNumTot, playing, wanted, abandoned, played*/
-    fun getUserStatisticsCounts(): Cursor{
-        return lotgDao.getUserStatisticsCounts()
+    fun getUserStatisticsCounts(user_ref: String): Cursor{
+        return lotgDao.getUserStatisticsCounts(user_ref)
     }
 
     fun getGameListValidity(gameTitle: String, user_ref: String): Int {

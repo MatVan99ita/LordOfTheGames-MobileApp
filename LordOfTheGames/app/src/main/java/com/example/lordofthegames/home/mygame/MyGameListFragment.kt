@@ -19,6 +19,7 @@ import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
 import com.example.lordofthegames.recyclerView.MyGameAdapter
+import com.example.lordofthegames.recyclerView.MyGameListItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -30,11 +31,11 @@ class MyGameListFragment: Fragment(), OnItemListener{
 
     private var sectionsPagerAdapter: SectionsPagerAdapter? = null
 
-    private lateinit var gameList: List<Game>
-    private lateinit var playingList: List<Game>
-    private lateinit var wantedList: List<Game>
-    private lateinit var playedList: List<Game>
-    private lateinit var abandonedList: List<Game>
+    private lateinit var gameList: List<MyGameListItem>
+    private lateinit var playingList: List<MyGameListItem>
+    private lateinit var wantedList: List<MyGameListItem>
+    private lateinit var playedList: List<MyGameListItem>
+    private lateinit var abandonedList: List<MyGameListItem>
 
     private lateinit var pageViewModel: MyGameListViewModel
     private lateinit var viewPager2: ViewPager2
@@ -60,7 +61,9 @@ class MyGameListFragment: Fragment(), OnItemListener{
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java]
 
-        gameList = pageViewModel.getOrderedFilt()
+        //PRENDERE DAL CAZZP LA MAIL DELL'UTENTE LOGGATP
+
+        gameList = pageViewModel.getOrderedFilt(user_ref)
         playingList = gameList.stream().filter {it.game_status == "Playing"}.toList()
         wantedList = gameList.stream().filter {it.game_status == "Wanted to play"}.toList()
         playedList = gameList.stream().filter {it.game_status == "Played"}.toList()
