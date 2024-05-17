@@ -236,12 +236,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.bottom_my_game_list -> {
+                    val bundle = Bundle()
+                    bundle.putString("mail", banana.getString("email", "null"))
                     if(this.actualFragment !is MyGameListFragment) {
                         Utilities.insertFragment(
                             this,
                             MyGameListFragment(),
                             MyGameListFragment::class.java.simpleName,
-                            null
+                            bundle
                         )
                         this.actualFragment = MyGameListFragment()
                         true

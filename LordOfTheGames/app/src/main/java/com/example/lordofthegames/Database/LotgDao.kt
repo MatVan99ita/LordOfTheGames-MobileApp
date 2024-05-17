@@ -68,8 +68,8 @@ interface LotgDao {
     /**
      * UPDATE
      */
-    @Query("UPDATE game SET game_status = :game_status WHERE game_title = :game_title")
-    fun updateGameStatus(game_title: String, game_status: String): Int
+    @Query("UPDATE UsersGame SET game_status = :game_status WHERE game_ref = :game_id AND user_ref = :user_ref")
+    fun updateGameStatus(game_status: String, game_id: Int, user_ref: String): Int
 
 
     @Query("UPDATE achievement \n" +
@@ -299,7 +299,7 @@ interface LotgDao {
     )
     fun getAddedGameListForUser(game_title: String, user_ref: String): Cursor
 
-    @Query( "SELECT g.game_id, g.game_title, ug.game_status FROM game g, UsersGame ug \n" +
+    @Query( "SELECT g.game_id, g.game_title, g.game_cover, ug.game_status FROM game g, UsersGame ug \n" +
             "WHERE user_ref = :user_ref \n" +
             "AND   g.game_id = game_ref \n" +
             "ORDER BY CASE \n" +

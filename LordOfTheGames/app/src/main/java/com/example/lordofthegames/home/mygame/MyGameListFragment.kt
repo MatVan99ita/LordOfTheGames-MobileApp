@@ -2,6 +2,7 @@ package com.example.lordofthegames.home.mygame
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -62,44 +63,46 @@ class MyGameListFragment: Fragment(), OnItemListener{
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java]
 
         //PRENDERE DAL CAZZP LA MAIL DELL'UTENTE LOGGATP
+        val banana = savedInstanceState!!.getString("mail")
+        if(banana != "null") {
+            gameList = banana?.let { pageViewModel.getOrderedFilt(it) }!!
+            playingList = gameList.stream().filter { it.game_status == "Playing" }.toList()
+            wantedList = gameList.stream().filter { it.game_status == "Wanted to play" }.toList()
+            playedList = gameList.stream().filter { it.game_status == "Played" }.toList()
+            abandonedList = gameList.stream().filter { it.game_status == "Abandoned" }.toList()
 
-        gameList = pageViewModel.getOrderedFilt(user_ref)
-        playingList = gameList.stream().filter {it.game_status == "Playing"}.toList()
-        wantedList = gameList.stream().filter {it.game_status == "Wanted to play"}.toList()
-        playedList = gameList.stream().filter {it.game_status == "Played"}.toList()
-        abandonedList = gameList.stream().filter {it.game_status == "Abandoned"}.toList()
 
-
-        adapterAll = MyGameAdapter(
-            this,
-            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            gameList,
-            requireActivity()
-        )
-        adapterPlaying = MyGameAdapter(
-            this,
-            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            playingList,
-            requireActivity()
-        )
-        adapterPlayed = MyGameAdapter(
-            this,
-            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            playedList,
-            requireActivity()
-        )
-        adapterWanted = MyGameAdapter(
-            this,
-            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            wantedList,
-            requireActivity()
-        )
-        adapterAbandoned = MyGameAdapter(
-            this,
-            ViewModelProvider(requireActivity())[HomeViewModel::class.java],
-            abandonedList,
-            requireActivity()
-        )
+            adapterAll = MyGameAdapter(
+                this,
+                ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+                gameList,
+                requireActivity()
+            )
+            adapterPlaying = MyGameAdapter(
+                this,
+                ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+                playingList,
+                requireActivity()
+            )
+            adapterPlayed = MyGameAdapter(
+                this,
+                ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+                playedList,
+                requireActivity()
+            )
+            adapterWanted = MyGameAdapter(
+                this,
+                ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+                wantedList,
+                requireActivity()
+            )
+            adapterAbandoned = MyGameAdapter(
+                this,
+                ViewModelProvider(requireActivity())[HomeViewModel::class.java],
+                abandonedList,
+                requireActivity()
+            )
+        }
     }
 
     @SuppressLint("MissingInflatedId")

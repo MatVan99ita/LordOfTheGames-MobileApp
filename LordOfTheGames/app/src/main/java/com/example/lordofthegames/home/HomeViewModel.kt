@@ -22,8 +22,8 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     private val mText: MutableLiveData<String> = MutableLiveData<String>()
     private val repository: LotgRepo = LotgRepo(application)
 
-    fun modifyGameStatus(stat: String, id: Int){
-        repository.modifyGameStatus(stat, id)
+    fun modifyGameStatus(stat: String, id: Int, mail: String){
+        repository.modifyGameStatus(stat, id, mail)
     }
 
     fun getCurrentUser(user_name: String, passw: String): LiveData<List<User?>?> {

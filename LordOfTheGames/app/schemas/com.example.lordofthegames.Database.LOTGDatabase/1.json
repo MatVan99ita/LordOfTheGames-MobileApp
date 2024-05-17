@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "301b692dec6ce4d0213f248c7aa0bc75",
+    "identityHash": "38e2cb2337e96d96c5f4d20498dfcfca",
     "entities": [
       {
         "tableName": "achievement",
@@ -276,7 +276,7 @@
       },
       {
         "tableName": "game",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `game_title` TEXT NOT NULL, `game_description` TEXT NOT NULL, `game_cover` TEXT NOT NULL, `game_status` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `game_title` TEXT NOT NULL, `game_description` TEXT NOT NULL, `game_cover` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "game_id",
@@ -299,12 +299,6 @@
           {
             "fieldPath": "game_cover",
             "columnName": "game_cover",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "game_status",
-            "columnName": "game_status",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -657,7 +651,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '301b692dec6ce4d0213f248c7aa0bc75')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '38e2cb2337e96d96c5f4d20498dfcfca')"
     ]
   }
 }
