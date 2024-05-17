@@ -27,8 +27,8 @@ class LoggedViewModel(application: Application): AbstractViewModel(application) 
 
 
     /** gameNumTot, playing, wanted, abandoned, played*/
-    fun getUserStatisticsCounts(): UserGameGraphItem{
-        val c = repository.getUserStatisticsCounts()
+    fun getUserStatisticsCounts(user_ref: String): UserGameGraphItem{
+        val c = repository.getUserStatisticsCounts(user_ref)
         c.moveToNext()
         return UserGameGraphItem(
             gameNumTot =    c.getInt(c.getColumnIndexOrThrow("gameNumTot")),

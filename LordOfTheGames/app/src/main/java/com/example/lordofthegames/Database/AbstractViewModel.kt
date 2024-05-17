@@ -14,4 +14,8 @@ abstract class AbstractViewModel(application: Application): AndroidViewModel(app
     fun getText(): LiveData<String?> {
         return mText
     }
+
+    fun getGameStatus(gameId: Int, mail: String): String{
+        return repository.getGameStatus(gameId, mail)
+    }
 }

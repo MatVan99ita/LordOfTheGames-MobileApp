@@ -19,7 +19,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
 
 
-class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var cardItemList: List<GameCardItem>?, var activity: Activity): RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var cardItemList: List<GameCardItem>?, var activity: Activity, var mail: String): RecyclerView.Adapter<CardViewHolder>() {
 
     private var filteredData: MutableList<GameCardItem> =
         cardItemList as MutableList<GameCardItem> //mutableListOf()
@@ -49,7 +49,7 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
             1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
-        if(!viuvve.getGameListValidity(currentCardItem.gameTitle)){
+        if(!viuvve.getGameListValidity(currentCardItem.gameTitle, mail)){
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE
         }
@@ -81,14 +81,14 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         holder.achieText.text = "${a.x}/${a.y}"
 
         holder.modifyBtn.setOnClickListener {
-            this.viuvve.modifyGameStatus("Playing", currentCardItem.gameId)
+            this.viuvve.modifyGameStatus("Playing", currentCardItem.gameId, mail)
             Utilities.showaToast(activity as Context, "Have fun playing ${currentCardItem.gameTitle}")
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE
         }
 
         holder.addBtn.setOnClickListener {
-            this.viuvve.modifyGameStatus("Wanted to play", currentCardItem.gameId)
+            this.viuvve.modifyGameStatus("Wanted to play", currentCardItem.gameId, mail)
             Utilities.showaToast(activity as Context, "${currentCardItem.gameTitle} added to wishlist")
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE

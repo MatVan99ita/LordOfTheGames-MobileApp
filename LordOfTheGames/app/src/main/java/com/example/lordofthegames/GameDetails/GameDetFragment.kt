@@ -77,7 +77,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var maxNum: TextView
     private lateinit var editText: EditText
     private lateinit var spinner_GS: Spinner
-    private lateinit var gameStatus: String
+    private var gameStatus: String = "Not played"
 
     private val statuss = listOf(
         "Not played",
@@ -101,7 +101,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
-
 
         achieve = gameDetViewModel.getGameAchievement(game_title)
 
@@ -168,6 +167,10 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             val game = gameDetViewModel.getGameDetails(game_title)
 
+            if (savedInstanceState != null) {
+                gameStatus = gameDetViewModel.getGameStatus(game.game_id, savedInstanceState.getString("mail", "null"))
+            }
+
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerAchievement = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -196,7 +199,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
 
             spinner_GS.setSelection(
-                if (game.game_status != "NP") statuss.indexOf(game.game_status) else 0
+                if (gameStatus != "NP") statuss.indexOf(gameStatus) else 0
             )
 
             spinner_GS.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -207,8 +210,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     id: Long
                 ) {
                     val item = parent.getItemAtPosition(pos).toString()
-                    if(item != game.game_status){
-                        val i = gameDetViewModel.updateGameStatus(game.game_title, item)
+                    if(item != gameStatus){
+                        gameStatus = item
+                        val i = gameDetViewModel.updateGameStatus(gameStatus, game.game_id, arguments?.getString("mail").toString())
                         if(i > 0){
                             //toast positivo
                             Utilities.showaToast(requireContext(), "Gioco aggiornato")

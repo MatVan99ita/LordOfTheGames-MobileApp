@@ -313,7 +313,8 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUsersGame(usersGame: UsersGame): Long
 
-
+    @Query("SELECT game_status FROM UsersGame WHERE game_ref = :game_id AND user_ref = :user_ref")
+    fun getGameStatus(game_id: Int, user_ref: String): String
 
 }
 
