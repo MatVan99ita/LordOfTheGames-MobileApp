@@ -261,6 +261,10 @@ class Utilities {
             sharedPrefLog(activity, nick, mail)
         }
 
+        fun checkLogin(): Boolean{
+            TODO("METTERE ROBA")
+        }
+
 
         fun generateSalt(): String{
             val random = SecureRandom()

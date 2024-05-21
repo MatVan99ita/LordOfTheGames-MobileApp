@@ -172,6 +172,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottom)
         actualFragment = HomeFragment()
 
+        val bundle: Bundle
+        if()
         if (savedInstanceState == null) {
             Utilities.insertFragment(
                 this,
@@ -237,7 +239,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.bottom_my_game_list -> {
                     val bundle = Bundle()
-                    bundle.putString("mail", banana.getString("email", "null"))
+                    bundle.putString("mail", banana.getString("email", "null")) //TODO: qua va sistemato il controllo sul login che va ricontrollato anche nel fragment
                     if(this.actualFragment !is MyGameListFragment) {
                         Utilities.insertFragment(
                             this,

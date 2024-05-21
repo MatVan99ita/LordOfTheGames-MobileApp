@@ -37,7 +37,7 @@ class LoggedInFragment: Fragment(){
     ): View? {
         bind = FragmentLoggedinBinding.inflate(layoutInflater, container, false);
         viewm = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
-        statistics = viewm.getUserStatisticsCounts()
+        statistics = viewm.getUserStatisticsCounts(TODO("METTERE LA MAIL DAL BUNDLE"))
         return bind.root
     }
 
