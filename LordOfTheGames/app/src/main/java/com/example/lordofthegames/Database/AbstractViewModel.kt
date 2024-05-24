@@ -1,6 +1,7 @@
 package com.example.lordofthegames.Database
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,6 +17,8 @@ abstract class AbstractViewModel(application: Application): AndroidViewModel(app
     }
 
     fun getGameStatus(gameId: Int, mail: String): String{
-        return repository.getGameStatus(gameId, mail)
+        val s = repository.getGameStatus(gameId, mail)
+        Log.i("AAAAAAAAAAAAAAAAAAAAAA", "${s.length}")
+        return s
     }
 }

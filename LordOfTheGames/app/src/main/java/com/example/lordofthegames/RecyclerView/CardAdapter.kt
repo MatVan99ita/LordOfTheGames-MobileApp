@@ -49,7 +49,7 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
             1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
-        if(!viuvve.getGameListValidity(currentCardItem.gameTitle, mail)){
+        if(viuvve.getGameListValidity(currentCardItem.gameTitle, mail)){
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE
         }
@@ -81,17 +81,31 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         holder.achieText.text = "${a.x}/${a.y}"
 
         holder.modifyBtn.setOnClickListener {
-            this.viuvve.modifyGameStatus("Playing", currentCardItem.gameId, mail)
-            Utilities.showaToast(activity as Context, "Have fun playing ${currentCardItem.gameTitle}")
-            holder.addBtn.visibility = View.GONE
-            holder.modifyBtn.visibility = View.GONE
+            val i = this.viuvve.newGAmeAdded("Playing", currentCardItem.gameId, mail)
+            if(i>0) {
+                Utilities.showaToast(
+                    activity as Context,
+                    "Have fun playing ${currentCardItem.gameTitle}"
+                )
+                holder.addBtn.visibility = View.GONE
+                holder.modifyBtn.visibility = View.GONE
+            } else {
+                Utilities.showaToast(activity as Context, "Errore nell'inserimento del gioco in lista")
+            }
         }
 
         holder.addBtn.setOnClickListener {
-            this.viuvve.modifyGameStatus("Wanted to play", currentCardItem.gameId, mail)
-            Utilities.showaToast(activity as Context, "${currentCardItem.gameTitle} added to wishlist")
-            holder.addBtn.visibility = View.GONE
-            holder.modifyBtn.visibility = View.GONE
+            val i = this.viuvve.newGAmeAdded("Wanted to play", currentCardItem.gameId, mail)
+            if(i>0){
+                Utilities.showaToast(
+                    activity as Context,
+                    "${currentCardItem.gameTitle} added to wishlist"
+                )
+                holder.addBtn.visibility = View.GONE
+                holder.modifyBtn.visibility = View.GONE
+            } else {
+                Utilities.showaToast(activity as Context, "Errore nell'inserimento del gioco in lista")
+            }
         }
 
         //val catItems: MutableList<CategoryCardItem> = listOf(

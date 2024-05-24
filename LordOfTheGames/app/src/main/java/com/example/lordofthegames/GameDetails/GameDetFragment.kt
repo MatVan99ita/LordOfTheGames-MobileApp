@@ -96,7 +96,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
         savedInstanceState: Bundle?
     ): View {
 
-        Log.i("LOFRAGMENTDEIDETAILS", "MARIUOLO")
         val view = inflater.inflate(R.layout.fragment_game_details, container, false)
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
@@ -164,7 +163,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
 
-
             val game = gameDetViewModel.getGameDetails(game_title)
 
             if (savedInstanceState != null) {
@@ -187,19 +185,12 @@ class GameDetFragment: Fragment(), OnItemListener  {
             recyclerViewPlatform.adapter = platformCardAdapter
             recyclerViewAchievement.adapter = achievementCardAdapter
 
-
-            /*
-            short_descr             =   R.id.description_short
-            long_descr              =   R.id.game_description
-            game_img                =   R.id.selectedImage
-            */
-
             short_descr.text = game.game_description
             long_descr.text = game.game_description
 
 
             spinner_GS.setSelection(
-                if (gameStatus != "NP") statuss.indexOf(gameStatus) else 0
+                if (gameStatus != "Not played") statuss.indexOf(gameStatus) else 0
             )
 
             spinner_GS.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -212,13 +203,20 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     val item = parent.getItemAtPosition(pos).toString()
                     if(item != gameStatus){
                         gameStatus = item
-                        val i = gameDetViewModel.updateGameStatus(gameStatus, game.game_id, arguments?.getString("mail").toString())
-                        if(i > 0){
-                            //toast positivo
-                            Utilities.showaToast(requireContext(), "Gioco aggiornato")
-                        } else {
-                            //toast negativo
-                            Utilities.showaToast(requireContext(), "Errore nell'aggiornamento")
+                        if(gameStatus != "Not played") {
+                            val i = gameDetViewModel.updateGameStatus(
+                                gameStatus,
+                                game.game_id,
+                                arguments?.getString("email").toString()
+                            )
+                            Log.i("ASDFGHJKDFGHJKDFGHJKL", "$i")
+                            if (i > 0) {
+                                //toast positivo
+                                Utilities.showaToast(requireContext(), "Gioco aggiornato")
+                            } else {
+                                //toast negativo
+                                Utilities.showaToast(requireContext(), "Errore nell'aggiornamento")
+                            }
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 package com.example.lordofthegames.GameDetails
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -42,6 +43,9 @@ class GameDetActivity: AppCompatActivity() {
         game_ref = intent.getIntExtra("game_id", -1)
         bundle.putString("game_cover", imagePath) // put image data in Intent
         bundle.putString("game_title", title) // put image data in Intent
+        bundle.putString("game_cover", imagePath) // put image data in Intent
+        bundle.putString("game_cover", imagePath) // put image data in Intent
+        bundle.putString("email", this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("email", "sesso"))
         drawerLayout = findViewById(R.id.game_det_drawer)
 
         if (savedInstanceState == null) {

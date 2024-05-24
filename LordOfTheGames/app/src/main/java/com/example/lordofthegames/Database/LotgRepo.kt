@@ -175,5 +175,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getGameStatus(gameId, mail)
     }
 
+    fun newGameAdded(stat: String, id: Int, mail: String): Long {
+        return lotgDao.newGameAdded(UsersGame(id, mail, stat))
+    }
+
 
 }

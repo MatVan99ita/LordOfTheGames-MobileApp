@@ -26,6 +26,10 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         repository.modifyGameStatus(stat, id, mail)
     }
 
+    fun newGameAdded(stat: String, id: Int, mail: String): Long{
+        return repository.newGameAdded(stat, id, mail)
+    }
+
     fun getCurrentUser(user_name: String, passw: String): LiveData<List<User?>?> {
         return repository.getCurrentUser(user_name, passw)
     }
@@ -142,6 +146,10 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     fun isGameAdded(usersGame: UsersGame): Boolean{
         return repository.insertUsersGame(usersGame) > 0
+    }
+
+    fun newGAmeAdded(s: String, gameId: Int, mail: String): Long {
+        return repository.newGameAdded(s, gameId, mail)
     }
 
 }
