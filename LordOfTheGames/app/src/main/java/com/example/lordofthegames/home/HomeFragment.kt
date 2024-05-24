@@ -55,6 +55,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var bundle: Bundle
 
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
     private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
@@ -70,6 +71,7 @@ class HomeFragment: Fragment(), OnItemListener {
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
         filterFrameLayout = view.findViewById(R.id.filter_home)
+        bundle = savedInstanceState!!
         return view
     }
 
@@ -181,7 +183,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //}
 
         gameItems.addAll(homeViewModel.getSIMP())
-        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act)
+        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act, bundle.getString("email", "sesso"))
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
@@ -324,7 +326,16 @@ class HomeFragment: Fragment(), OnItemListener {
         super.onResume()
 
         val listener: OnItemListener = this
-        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), requireActivity())
+        adapter = CardAdapter(
+            listener,
+            homeViewModel,
+            homeViewModel.getSIMP(),
+            requireActivity(),
+            bundle.getString(
+                "email",
+                "sesso"
+            )
+        )
         recyclerView.adapter = adapter
     }
 

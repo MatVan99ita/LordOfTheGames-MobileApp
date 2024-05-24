@@ -30,6 +30,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var viewm: LoggedViewModel
     private lateinit var statistics: UserGameGraphItem
     private lateinit var circularProgress: CircularProgressIndicator
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +38,7 @@ class LoggedInFragment: Fragment(){
     ): View? {
         bind = FragmentLoggedinBinding.inflate(layoutInflater, container, false);
         viewm = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
-        statistics = viewm.getUserStatisticsCounts()
+        statistics = viewm.getUserStatisticsCounts(savedInstanceState!!.getString("email", "sesso"))
         return bind.root
     }
 
