@@ -244,9 +244,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
             } else if(imagePath.contains("yee")){
                 drawable = ContextCompat.getDrawable(requireActivity(), requireActivity().resources.getIdentifier("ic_yeee_foreground", "mipmap", requireContext().packageName))
             }
-
             selectedImage.setImageDrawable(drawable)
-
         }
 
         btnFLAnnulla.setOnClickListener { frameLayout.visibility = View.GONE }
