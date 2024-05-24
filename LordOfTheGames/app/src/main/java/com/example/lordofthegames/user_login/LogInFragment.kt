@@ -80,7 +80,7 @@ class LogInFragment: Fragment() {
                         this.startActivity(intent)
 
                     } else {
-                        print("BANANANANANANAN") // TODO: Creare un toast per indicare il wrong login
+                        Utilities.showaToast(requireContext(), "Wrong mail or password")
                     }
                 }
             }

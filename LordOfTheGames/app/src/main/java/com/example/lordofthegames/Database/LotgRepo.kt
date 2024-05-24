@@ -159,10 +159,8 @@ class LotgRepo(application: Application) {
         return lotgDao.getUserStatisticsCounts(user_ref)
     }
 
-    fun getGameListValidity(gameTitle: String, user_ref: String): Int {
-        val c = lotgDao.getGameListValidity(gameTitle, user_ref)
-        c.moveToNext()
-        return c.getInt(c.getColumnIndexOrThrow("game_id"))
+    fun getGameListValidity(gameTitle: String, user_ref: String): Cursor {
+        return lotgDao.getGameListValidity(gameTitle, user_ref)
     }
 
     fun getFilt(user_ref: String): Cursor {

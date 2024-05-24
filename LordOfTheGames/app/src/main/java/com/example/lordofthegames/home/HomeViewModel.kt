@@ -132,7 +132,12 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun getGameListValidity(game_title: String, user_ref: String): Boolean {
-        return repository.getGameListValidity(game_title, user_ref) >= 0
+        val c = repository.getGameListValidity(game_title, user_ref)
+        var i: Int = -1
+        while (c.moveToNext()){
+            i = c.getInt(c.getColumnIndexOrThrow("game_id"))
+        }
+        return i >= 0
     }
 
     fun isGameAdded(usersGame: UsersGame): Boolean{

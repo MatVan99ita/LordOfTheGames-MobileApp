@@ -2,6 +2,7 @@ package com.example.lordofthegames.user_login
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,15 +31,16 @@ class LoggedInFragment: Fragment(){
     private lateinit var viewm: LoggedViewModel
     private lateinit var statistics: UserGameGraphItem
     private lateinit var circularProgress: CircularProgressIndicator
+    private var bundle: Bundle? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         bind = FragmentLoggedinBinding.inflate(layoutInflater, container, false);
         viewm = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
-        statistics = viewm.getUserStatisticsCounts(savedInstanceState!!.getString("email", "sesso"))
+
         return bind.root
     }
 
@@ -50,6 +52,8 @@ class LoggedInFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
+        statistics = viewm.getUserStatisticsCounts(requireArguments().getString("email", "sesso"))
         bind.btnExit.setOnClickListener { eschilo() }
         val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val p: PieChart = bind.chart

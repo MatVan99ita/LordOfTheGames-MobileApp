@@ -55,7 +55,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var bundle: Bundle
+    private var bundle: Bundle? = null
 
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
     private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
@@ -71,7 +71,7 @@ class HomeFragment: Fragment(), OnItemListener {
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
         ///userViewModel.addItem(User("", "", ""))
         filterFrameLayout = view.findViewById(R.id.filter_home)
-        bundle = savedInstanceState!!
+        bundle = arguments
         return view
     }
 
@@ -183,51 +183,13 @@ class HomeFragment: Fragment(), OnItemListener {
         //}
 
         gameItems.addAll(homeViewModel.getSIMP())
-        adapter = CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act, bundle.getString("email", "sesso"))
+        adapter =
+            bundle?.let { CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act, it.getString("email", "sesso")) }
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
         recyclerView.adapter = adapter
         val itemCount: Int = gameItems.size
-
-        /*if(itemCount > 0){
-            for (i in 0 until itemCount) {
-                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? CategoryCardViewHolder
-                viewHolder?.let {
-                    val catList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
-                    val platList: MutableList<TextView> = listOf<TextView>() as MutableList<TextView>
-
-                    val listCat = it.itemView.findViewById<LinearLayout>(R.id.category_linear_home)
-                    listCat.removeAllViews()
-                    val listPlat = it.itemView.findViewById<LinearLayout>(R.id.platform_linear_home)
-                    listPlat.removeAllViews()
-                    // Ora puoi aggiungere TextView dinamicamente al LinearLayout
-
-                    catItems.forEach { x ->
-                        val t = TextView(requireContext())
-                        t.text = x.category_name
-                        viewHolder.catTitle.text = x.category_name
-                        catList.add(t)
-                    }
-
-                    platItems.forEach { x ->
-                        val t = TextView(requireContext())
-                        t.text = x.platFormName
-                        platList.add(t)
-                    }
-
-                    catList.forEach { el ->
-                        listCat.addView(el)
-                    }
-
-                    platList.forEach { el ->
-                        listPlat.addView(el)
-                    }
-
-                }
-            }
-        }*/
-
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -331,7 +293,7 @@ class HomeFragment: Fragment(), OnItemListener {
             homeViewModel,
             homeViewModel.getSIMP(),
             requireActivity(),
-            bundle.getString(
+            bundle!!.getString(
                 "email",
                 "sesso"
             )

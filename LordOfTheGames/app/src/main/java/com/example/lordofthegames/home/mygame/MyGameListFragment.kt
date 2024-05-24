@@ -63,7 +63,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
         pageViewModel = ViewModelProvider(this)[MyGameListViewModel::class.java]
 
         //PRENDERE DAL CAZZP LA MAIL DELL'UTENTE LOGGATP
-        val banana = savedInstanceState!!.getString("mail")
+        val banana = requireArguments().getString("email")
         if(banana != "null") {
             gameList = banana?.let { pageViewModel.getOrderedFilt(it) }!!
             playingList = gameList.stream().filter { it.game_status == "Playing" }.toList()

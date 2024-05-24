@@ -270,10 +270,10 @@ interface LotgDao {
 
 
     @Query(" SELECT count(*)                                                   as gameNumTot,\n" +
-           "(SELECT count(*) FROM UsersGame where game_status = \"playing\")        as playing,\n" +
-           "(SELECT count(*) FROM UsersGame where game_status = \"Wanted to play\") as wanted,\n" +
-           "(SELECT count(*) FROM UsersGame where game_status = \"Abandoned\")      as abandoned,\n" +
-           "(SELECT count(*) FROM UsersGame where game_status = \"Played\")         as played\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"playing\" and user_ref = :user_ref)        as playing,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Wanted to play\" and user_ref = :user_ref) as wanted,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Abandoned\" and user_ref = :user_ref)      as abandoned,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Played\" and user_ref = :user_ref)         as played\n" +
            "FROM UsersGame \n" +
            "WHERE user_ref = :user_ref")
     fun getUserStatisticsCounts(user_ref: String): Cursor

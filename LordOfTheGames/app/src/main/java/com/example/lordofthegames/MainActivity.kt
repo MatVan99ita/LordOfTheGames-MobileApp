@@ -146,7 +146,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        homeViewModel = HomeViewModel(application)
         /**
          * TODO: Se lo sharedpref non è stato settato si parte dal login
          *       val intent = Intent(this, LoggedActivity::class.java)
@@ -163,18 +162,23 @@ class MainActivity : AppCompatActivity() {
                 )
             )
         } else {
+            homeViewModel = HomeViewModel(application)
+
             setContentView(R.layout.activity_main)
             toolbar = findViewById(R.id.toolbar)
             drawerLayout = findViewById(R.id.main_activity_drawer)
             navigationView = findViewById(R.id.nav_view)
             bottomNavigationView = findViewById(R.id.bottom)
             actualFragment = HomeFragment()
+            val bundle: Bundle = Bundle()
+            bundle.putString("email", banana.getString("email", "sesso"))
 
             if (savedInstanceState == null) {
                 Utilities.insertFragment(
                     this,
                     HomeFragment(),
-                    HomeFragment::class.java.simpleName, null,
+                    HomeFragment::class.java.simpleName,
+                    bundle,
                 )
             }
 
@@ -209,7 +213,8 @@ class MainActivity : AppCompatActivity() {
                             Utilities.insertFragment(
                                 this,
                                 HomeFragment(),
-                                HomeFragment::class.java.simpleName, null
+                                HomeFragment::class.java.simpleName,
+                                bundle
                             )
                             actualFragment = HomeFragment()
                             true
@@ -224,7 +229,7 @@ class MainActivity : AppCompatActivity() {
                                 this,
                                 NotificationFragment(),
                                 NotificationFragment::class.java.simpleName,
-                                null
+                                bundle
                             )
                             this.actualFragment = NotificationFragment()
                             true
@@ -234,8 +239,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     R.id.bottom_my_game_list -> {
-                        val bundle = Bundle()
-                        bundle.putString("mail", banana.getString("email", "null"))
                         if(this.actualFragment !is MyGameListFragment) {
                             Utilities.insertFragment(
                                 this,
@@ -256,7 +259,7 @@ class MainActivity : AppCompatActivity() {
                                 this,
                                 CommunityFragment(),
                                 CommunityFragment::class.java.simpleName,
-                                null
+                                bundle
                             )
                             this.actualFragment = CommunityFragment()
                             true
@@ -306,7 +309,7 @@ class MainActivity : AppCompatActivity() {
         } else if(item.itemId == R.id.nav_usr){
             val intent = Intent(this, LoggedActivity::class.java)
             drawerLayout.closeDrawer(GravityCompat.START)
-            intent.putExtra("user_det", true)
+            intent.putExtra("user_ref", true)
             this.startActivity(intent)
             true
         } else {

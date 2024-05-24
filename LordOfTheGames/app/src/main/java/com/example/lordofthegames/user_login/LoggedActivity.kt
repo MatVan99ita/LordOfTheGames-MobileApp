@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -56,13 +57,21 @@ class LoggedActivity: AppCompatActivity() {
         //userViewModel.addItem(User("", "", ""))
         val sp = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
+        val bundle: Bundle = Bundle()
+
+        Log.i("PORCACCIODDIO", "${sp.all}")
+        Log.i("PORCACCIODDIO", "${sp.getString("email", "sesso")}")
+
+        bundle.putString("email", sp.getString("email", "sesso"))
+        Log.i("PORCACCIODDIO", bundle.getString("email", "sesso"))
         setContentView(R.layout.activity_login)
 
         if (savedInstanceState == null) {
             Utilities.insertFragment(
                 this,
                 LogInFragment(),
-                LogInFragment::class.java.simpleName, null,
+                LogInFragment::class.java.simpleName,
+                bundle,
             )
         }
 
@@ -77,7 +86,8 @@ class LoggedActivity: AppCompatActivity() {
                 Utilities.insertFragment(
                     this,
                     LoggedInFragment(),
-                    LoggedInFragment::class.java.simpleName, null,
+                    LoggedInFragment::class.java.simpleName,
+                    bundle,
                 )
 
                 Utilities.setUpToolBar(
@@ -98,7 +108,8 @@ class LoggedActivity: AppCompatActivity() {
                 Utilities.insertFragment(
                     this,
                     LogInFragment(),
-                    LogInFragment::class.java.simpleName, null,
+                    LogInFragment::class.java.simpleName,
+                    bundle,
                 )
             }
         }
