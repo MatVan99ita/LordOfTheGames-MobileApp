@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5208f9622ce54fa03bddb4aa0b65e245",
+    "identityHash": "e6ab9b49f0254d90c905f0a72bc9737e",
     "entities": [
       {
         "tableName": "achievement",
@@ -440,7 +440,7 @@
       },
       {
         "tableName": "notes",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `last_modified` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`note_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `last_modified` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`mail`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "note_id",
@@ -471,6 +471,12 @@
             "columnName": "game_ref",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "user_ref",
+            "columnName": "user_ref",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -500,6 +506,17 @@
             ],
             "referencedColumns": [
               "game_id"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_ref"
+            ],
+            "referencedColumns": [
+              "mail"
             ]
           }
         ]
@@ -795,7 +812,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5208f9622ce54fa03bddb4aa0b65e245')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e6ab9b49f0254d90c905f0a72bc9737e')"
     ]
   }
 }

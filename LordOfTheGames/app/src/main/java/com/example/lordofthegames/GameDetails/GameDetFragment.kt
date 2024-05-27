@@ -1,5 +1,6 @@
 package com.example.lordofthegames.GameDetails
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
@@ -28,6 +29,7 @@ import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.recyclerView.AchievementCardAdapter
 import com.example.lordofthegames.recyclerView.AchievementCardItem
+import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
@@ -51,7 +53,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     //####################################################################
 
-    private var bundle: Bundle? = null
+    private var bundle: Bundle = Bundle()
     private lateinit var gameDetViewModel: GameDetViewModel2
     private lateinit var categoryList: List<Categories?>
     private lateinit var platformList: List<Platform?>
@@ -89,8 +91,18 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private var achieve: List<AchievementCardItem?> = mutableListOf()
     private lateinit var user_ref: String
-
     private lateinit var game_title: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        user_ref =
+            requireActivity()
+                .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                .getString("email", "sesso")
+            .toString()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -101,8 +113,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
-        bundle = arguments
-        user_ref = bundle!!.getString("mail", "null")
 
         achieve = gameDetViewModel.getGameAchievement(game_title, user_ref)
 
@@ -150,12 +160,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
             achieve as List<AchievementCardItem>, requireActivity())
 
         return view
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-
     }
 
 

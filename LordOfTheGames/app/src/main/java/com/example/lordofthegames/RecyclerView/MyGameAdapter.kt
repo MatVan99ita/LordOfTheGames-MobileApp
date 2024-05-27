@@ -17,7 +17,8 @@ class MyGameAdapter(
     var listener: OnItemListener,
     var viewModel: HomeViewModel,
     var mygamelist: List<MyGameListItem>,
-    var activity: Activity
+    var activity: Activity,
+    var mail: String
 ) : RecyclerView.Adapter<MyGameAdapter.MyGameHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyGameHolder {
@@ -39,7 +40,7 @@ class MyGameAdapter(
         holder.stat.text = g.game_status
 
         //holder.ach.text = "8/8"
-        val p: Pair<Int, Int> = viewModel.getAchievementCount(game_title = g.game_title)
+        val p: Pair<Int, Int> = viewModel.getAchievementCount(game_title = g.game_title, user_ref = mail)
         holder.ach.text = "${p.y}/${p.x}"
     }
 

@@ -95,8 +95,9 @@ interface LotgDao {
 
     @Query("UPDATE notes \n" +
             "SET content = :content, last_modified=:lastMod \n" +
-            "WHERE game_ref = :gameRef")
-    fun saveNotes(content: String, lastMod: String, gameRef: Int): Int
+            "WHERE game_ref = :gameRef\n" +
+            "AND user_ref = :user_ref")
+    fun saveNotes(content: String, lastMod: String, gameRef: Int, user_ref: String): Int
 
     @Query("UPDATE notification \n" +
             "SET read = 1 \n" +
@@ -231,8 +232,8 @@ interface LotgDao {
 
 
 
-    @Query("SELECT * FROM notes WHERE game_ref = :game_ref")
-    fun getNotes(game_ref: Int): Cursor
+    @Query("SELECT * FROM notes WHERE game_ref = :game_ref AND user_ref = :user_ref")
+    fun getNotes(game_ref: Int, user_ref: String): Cursor
 
     @Query("SELECT * FROM notification")
     fun getNotification(): Cursor

@@ -1,0 +1,29 @@
+ Caused by: java.lang.IllegalStateException: Pre-packaged database has an invalid schema: notes(com.example.lordofthegames.db_entities.Notes).
+
+
+
+Expected:
+TableInfo{
+name='notes',
+columns={note_id=Column{
+name='note_id', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=1, defaultValue='undefined'},
+title=Column{
+name='title', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+last_modified=Column{name='last_modified', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+content=Column{name='content', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+game_ref=Column{name='game_ref', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'}},
+foreignKeys=[ForeignKey{referenceTable='game', onDelete='NO ACTION +', onUpdate='NO ACTION', columnNames=[game_ref],
+referenceColumnNames=[game_id]}], indices=[Index{name='index_notes_game_ref', unique=false, columns=[game_ref], orders=[ASC]'}]}
+
+
+
+
+Found:
+TableInfo{name='notes', columns={note_id=Column{
+
+name='note_id', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=1, defaultValue='undefined'},
+title=Column{name='title', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+content=Column{name='content', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+last_modified=Column{name='last_modified', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+game_ref=Column{name='game_ref', type='INTEGER', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
+user_ref=Column{name='user_ref', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'}}, foreignKeys=[ForeignKey{referenceTable='game', onDelete='NO ACTION +', onUpdate='NO ACTION', columnNames=[game_ref], referenceColumnNames=[game_id]}, ForeignKey{referenceTable='user', onDelete='NO ACTION +', onUpdate='NO ACTION', columnNames=[user_ref], referenceColumnNames=[mail]}], indices=[Index{name='index_notes_game_ref', unique=false, columns=[game_ref], orders=[ASC]'}]}

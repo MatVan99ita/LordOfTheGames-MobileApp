@@ -76,31 +76,36 @@ class MyGameListFragment: Fragment(), OnItemListener{
                 this,
                 ViewModelProvider(requireActivity())[HomeViewModel::class.java],
                 gameList,
-                requireActivity()
+                requireActivity(),
+                mail = banana
             )
             adapterPlaying = MyGameAdapter(
                 this,
                 ViewModelProvider(requireActivity())[HomeViewModel::class.java],
                 playingList,
-                requireActivity()
+                requireActivity(),
+                mail = banana
             )
             adapterPlayed = MyGameAdapter(
                 this,
                 ViewModelProvider(requireActivity())[HomeViewModel::class.java],
                 playedList,
-                requireActivity()
+                requireActivity(),
+                mail = banana
             )
             adapterWanted = MyGameAdapter(
                 this,
                 ViewModelProvider(requireActivity())[HomeViewModel::class.java],
                 wantedList,
-                requireActivity()
+                requireActivity(),
+                mail = banana
             )
             adapterAbandoned = MyGameAdapter(
                 this,
                 ViewModelProvider(requireActivity())[HomeViewModel::class.java],
                 abandonedList,
-                requireActivity()
+                requireActivity(),
+                mail = banana
             )
         }
     }

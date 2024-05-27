@@ -16,20 +16,22 @@ import org.joda.time.format.DateTimeFormatter;
 class GameNoteViewModel(application: Application): ViewModel() {
     private var repository: LotgRepo = LotgRepo(application)
 
-    fun getNotes(game_title: String = "", game_ref: Int): Notes {
+    fun getNotes(game_title: String = "", game_ref: Int, user_ref: String): Notes {
         Log.i("LO REFFO", "$game_ref")
-        val c = repository.getNotes(game_ref)
+        val c = repository.getNotes(game_ref, user_ref)
 
         if(c.count > 0){
             c.moveToNext()
             Log.i("LO CONTO", c.getString(2))
 
             return Notes(
-                c.getInt(0),        //note_id"
-                c.getString(1),     //title"
-                c.getString(2),     //content"
-                c.getString(3),     //last_modified"
-                c.getInt(4),        //game_ref"
+                c.getInt(c.getColumnIndexOrThrow("note_id")),
+                c.getString(c.getColumnIndexOrThrow("title")),
+                c.getString(c.getColumnIndexOrThrow("content")),
+                c.getString(c.getColumnIndexOrThrow("last_modified")),
+                c.getInt(c.getColumnIndexOrThrow("game_ref")),
+                c.getString(c.getColumnIndexOrThrow("user_ref"))
+
             )
 
         } else {
@@ -42,14 +44,14 @@ class GameNoteViewModel(application: Application): ViewModel() {
                 )
                 .toString()
 
-            val n = Notes(0, game_title, "", startTime, game_ref)
+            val n = Notes(0, game_title, "", startTime, game_ref, user_ref)
             val i = repository.newNote(n)
             return n
         }
 
     }
 
-    fun saveNotes(content: String, last_mod:String, game_ref: Int): Int{
-        return repository.saveNotes(content, last_mod, game_ref)
+    fun saveNotes(content: String, last_mod:String, game_ref: Int, user_ref: String): Int{
+        return repository.saveNotes(content, last_mod, game_ref, user_ref)
     }
 }

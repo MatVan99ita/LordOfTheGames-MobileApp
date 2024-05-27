@@ -105,8 +105,8 @@ class LotgRepo(application: Application) {
         return lotgDao.completeAchievement(achieve_id, user_ref)
     }
 
-    fun getNotes(game_ref: Int): Cursor {
-        return lotgDao.getNotes(game_ref)
+    fun getNotes(game_ref: Int, user_ref: String): Cursor {
+        return lotgDao.getNotes(game_ref, user_ref)
     }
 
     fun newNote(notes: Notes): Long {
@@ -114,8 +114,8 @@ class LotgRepo(application: Application) {
         return lotgDao.insertNotes(notes.title, notes.content, notes.last_modified, notes.game_ref)
     }
 
-    fun saveNotes(content: String, lastMod: String, gameRef: Int): Int {
-        return lotgDao.saveNotes(content, lastMod, gameRef)
+    fun saveNotes(content: String, lastMod: String, gameRef: Int, user_ref: String): Int {
+        return lotgDao.saveNotes(content, lastMod, gameRef, user_ref)
     }
 
     fun saveNotes(content: Notification): Long {
@@ -179,7 +179,7 @@ class LotgRepo(application: Application) {
         return lotgDao.newGameAdded(UsersGame(id, mail, stat))
     }
 
-    fun getAchievementStatus(achieve: Int, user: String): UsersAchievement {
+    fun getAchievementStatus(achieve: Int, user: String): UsersAchievement? {
         return lotgDao.getUserAchievementStatus(achieve, user)
     }
 

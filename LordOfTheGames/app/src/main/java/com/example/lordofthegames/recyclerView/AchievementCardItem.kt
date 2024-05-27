@@ -7,5 +7,5 @@ class AchievementCardItem(
     var descr: String,
     var actual_count: Int,
     var total_count: Int,
-    var completed: Boolean = false,
+    var completed: Int = 0,
 )

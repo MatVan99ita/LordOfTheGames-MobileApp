@@ -2,6 +2,7 @@ package com.example.lordofthegames.GameNotes
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,7 +31,7 @@ class GameNoteActivity: AppCompatActivity() {
 
     private var game_ref: Int  =-1
     private var note_id: Int = -1
-
+    private lateinit var user_ref: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
@@ -58,8 +59,8 @@ class GameNoteActivity: AppCompatActivity() {
             this,
         )
 
-
-        val noteContent = noteViewModel.getNotes(game_title, game_ref)
+        user_ref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("email", "null")!!
+        val noteContent = noteViewModel.getNotes(game_title, game_ref, user_ref = user_ref)
         editText.hint = noteContent.title
         editText.setText(noteContent.content)
 
@@ -69,7 +70,7 @@ class GameNoteActivity: AppCompatActivity() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
-                val ib = noteViewModel.saveNotes(p0.toString(), TUDEI(), game_ref)
+                val ib = noteViewModel.saveNotes(p0.toString(), TUDEI(), game_ref, user_ref)
                 if(ib > 0)
                     Utilities.showaToast(applicationContext, "Autosave Completed")
                 else
@@ -88,7 +89,7 @@ class GameNoteActivity: AppCompatActivity() {
     @SuppressLint("Range")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.gn_top_save) {
-            val i = noteViewModel.saveNotes(editText.text.toString(), TUDEI(), game_ref)
+            val i = noteViewModel.saveNotes(editText.text.toString(), TUDEI(), game_ref, user_ref)
             if(i > 0)
                 Utilities.showaToast(applicationContext, "Save completed")
             else

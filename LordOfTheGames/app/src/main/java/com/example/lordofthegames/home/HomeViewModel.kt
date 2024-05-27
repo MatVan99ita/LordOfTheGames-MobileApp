@@ -49,8 +49,8 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
 
 
-    fun getGameAchievementCount(game_title: String): Cursor {
-        return repository.getAchievementCount(game_title)
+    fun getGameAchievementCount(game_title: String, user_ref: String): Cursor {
+        return repository.getAchievementCount(game_title, user_ref)
     }
 
     /**
@@ -108,14 +108,14 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
      * Count W  total_count
      * Count W  completed_count
      * */
-    fun getAchievementCount(game_title: String): Pair<Int, Int> {
-        val l = repository.getAchievementCount(game_title)
+    fun getAchievementCount(game_title: String, user_ref: String): Pair<Int, Int> {
+        val l = repository.getAchievementCount(game_title, user_ref)
         l.moveToFirst()
         return Pair(l.getInt(1), l.getInt(0));
     }
 
-    fun getPrintableAchivement(game_title: String): String {
-        val l = repository.getAchievementCount(game_title)
+    fun getPrintableAchivement(game_title: String, user_ref: String): String {
+        val l = repository.getAchievementCount(game_title, user_ref)
         return "${l.getInt(0)}/${l.getInt(1)}"
     }
 

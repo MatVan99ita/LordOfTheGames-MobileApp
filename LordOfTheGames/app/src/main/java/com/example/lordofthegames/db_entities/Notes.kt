@@ -13,7 +13,12 @@ import java.sql.Timestamp
         entity = Game::class,
         parentColumns = ["game_id"],
         childColumns = ["game_ref"],
+    ), ForeignKey(
+        entity = User::class,
+        parentColumns = ["mail"],
+        childColumns = ["user_ref"]
     )],
+
 )
 data class Notes(
     /**
@@ -27,5 +32,6 @@ data class Notes(
     var content: String,
     var last_modified: String,
     @ColumnInfo(index = true)
-    var game_ref: Int
+    var game_ref: Int,
+    var user_ref: String
     )

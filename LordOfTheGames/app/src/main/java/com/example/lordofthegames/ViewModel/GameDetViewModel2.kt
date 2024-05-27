@@ -49,20 +49,23 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         val a = repository.getGameAchievement(game_title)
         val l: MutableList<AchievementCardItem> = mutableListOf()
         while (a.moveToNext()) {
-            val ua: UsersAchievement = repository.getAchievementStatus(
+            val ua: UsersAchievement? = repository.getAchievementStatus(
                 a.getInt(a.getColumnIndexOrThrow("achievement_id")),
                 user_ref,
             )
+
+
             l.add(
                 AchievementCardItem(
                     achieve_id = a.getInt(a.getColumnIndexOrThrow("achievement_id")),
                     img = a.getString(a.getColumnIndexOrThrow("img")),
                     name = a.getString(a.getColumnIndexOrThrow("name")),
                     descr = a.getString(a.getColumnIndexOrThrow("description")),
-                    actual_count = ua.actual_count,
-                    total_count = a.getColumnIndexOrThrow("total_count"),
-                    completed = ua.status > 0,
+                    actual_count = ua?.actual_count ?: 0,
+                    total_count = a.getInt(a.getColumnIndexOrThrow("total_count")),
+                    completed = ua?.status ?: 0,
                 )
+
             )
         }
         return l
