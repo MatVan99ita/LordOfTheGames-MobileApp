@@ -53,8 +53,6 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
                 a.getInt(a.getColumnIndexOrThrow("achievement_id")),
                 user_ref,
             )
-
-
             l.add(
                 AchievementCardItem(
                     achieve_id = a.getInt(a.getColumnIndexOrThrow("achievement_id")),
@@ -65,7 +63,6 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
                     total_count = a.getInt(a.getColumnIndexOrThrow("total_count")),
                     completed = ua?.status ?: 0,
                 )
-
             )
         }
         return l

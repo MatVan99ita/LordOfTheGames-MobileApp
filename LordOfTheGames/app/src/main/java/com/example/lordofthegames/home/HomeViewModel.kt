@@ -111,12 +111,14 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     fun getAchievementCount(game_title: String, user_ref: String): Pair<Int, Int> {
         val l = repository.getAchievementCount(game_title, user_ref)
         l.moveToFirst()
-        return Pair(l.getInt(1), l.getInt(0));
-    }
-
-    fun getPrintableAchivement(game_title: String, user_ref: String): String {
-        val l = repository.getAchievementCount(game_title, user_ref)
-        return "${l.getInt(0)}/${l.getInt(1)}"
+        return Pair(
+            l.getInt(
+                l.getColumnIndexOrThrow("completed_count")
+            ),
+            l.getInt(
+                l.getColumnIndexOrThrow("total_count")
+            )
+        )
     }
 
     fun getSIMP(): List<GameCardItem> {

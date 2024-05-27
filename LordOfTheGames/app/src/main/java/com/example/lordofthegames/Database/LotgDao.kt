@@ -210,7 +210,7 @@ interface LotgDao {
             "SELECT COUNT(*)\n"+
             "FROM achievement a1, game g1\n"+
             "WHERE a1.game_ref = g1.game_id\n"+
-            "AND g1.game_title = 'Euro Truck Simulator 2'\n"+
+            "AND g1.game_title = :game_title\n"+
             ") As total_count,\n"+ // Il conto di tutti gli achievement di un gioco
             "(\n"+
             "SELECT COUNT(*)\n"+
