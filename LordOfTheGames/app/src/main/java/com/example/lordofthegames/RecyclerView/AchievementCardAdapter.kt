@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Achievement
 
-class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<Achievement>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
+class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: List<AchievementCardItem>, var activity: Activity): RecyclerView.Adapter<AchievementCardHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementCardHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.achievement_list_item, parent, false)
         return AchievementCardHolder(layoutView, listener)

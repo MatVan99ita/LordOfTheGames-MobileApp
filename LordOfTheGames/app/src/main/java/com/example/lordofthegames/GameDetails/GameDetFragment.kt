@@ -257,9 +257,9 @@ class GameDetFragment: Fragment(), OnItemListener  {
             achievementCardAdapter!!.updateActualCount(Integer.valueOf(positionT.text.toString()), num)
 
             recyclerViewAchievement.adapter = achievementCardAdapter
-            var i = gameDetViewModel.updateAchievement(game_title, selectedItem!!.achievement_id, selectedItem!!.actual_count)
+            var i = gameDetViewModel.updateAchievement(game_title, selectedItem!!.achievement_id, selectedItem!!.actual_count, savedInstanceState.getString("mail", "null"))
             if(selectedItem!!.actual_count >= selectedItem!!.total_count){
-                i += gameDetViewModel.completeAchievement(game_title, selectedItem!!.achievement_id, 1)
+                i += gameDetViewModel.completeAchievement(game_title, selectedItem!!.achievement_id, 1, savedInstanceState.getString("mail", "null"))
             }
 
             if (i >= 1) {

@@ -19,6 +19,7 @@ import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.db_entities.UsersAchievement
 import com.example.lordofthegames.db_entities.UsersGame
 
 @Dao
@@ -75,19 +76,22 @@ interface LotgDao {
     fun updateGameStatus(game_status: String, game_id: Int, user_ref: String): Int
 
 
-    @Query("UPDATE achievement \n" +
+    @Query("UPDATE UsersAchievement \n" +
             "SET actual_count = :actual\n" +
-            "WHERE game_ref IN (SELECT game.game_id FROM game WHERE game.game_title = :game_ref)\n" +
-            "AND achievement_id  = :id;"
+            "WHERE achieve_id = :achieve_id \n" +
+            "AND user_ref  = :user_ref;"
     )
-    fun updateAchievement(game_ref: String, id: Int, actual: Int): Int
+    fun updateAchievement(achieve_id: Int, actual: Int, user_ref: String): Int
 
-    @Query("UPDATE achievement \n" +
-            "SET status = :status\n" +
-            "WHERE game_ref IN (SELECT game.game_id FROM game WHERE game.game_title = :game_ref) \n" +
-            "AND achievement_id = :id"
-    )
-    fun completeAchievement(game_ref: String, id: Int, status: Int): Int
+    @Query("UPDATE UsersAchievement " +
+            "SET status = 1, " +
+            "    actual_count = (" +
+            "       SELECT a.total_count " +
+            "       FROM achievement a " +
+            "       WHERE a.achievement_id = :achieve_id)  " +
+            "WHERE achieve_id = :achieve_id " +
+            "AND user_ref = :user_ref")
+    fun completeAchievement(achieve_id: Int, status: Int, user_ref: String): Int
 
     @Query("UPDATE notes \n" +
             "SET content = :content, last_modified=:lastMod \n" +
@@ -137,9 +141,16 @@ interface LotgDao {
     @Transaction
     @Query("SELECT achievement.*\n" +
             "FROM achievement, game\n" +
-            "ON achievement.game_ref = game.game_id\n" +
-            "WHERE game.game_title = :game_title")
+            "WHERE achievement.game_ref = game.game_id\n" +
+            "AND game.game_title = :game_title")
     fun getGameAchievement(game_title: String): Cursor
+
+    @Transaction
+    @Query("SELECT * " +
+            "FROM UsersAchievement " +
+            "WHERE achieve_id = :achieve_id " +
+            "AND user_ref = :user_ref")
+    fun getUserAchievementStatus(achieve_id: Int, user_ref: String): UsersAchievement
 
     @Transaction
     @Query("SELECT categories.*\n" +
@@ -194,16 +205,22 @@ interface LotgDao {
     fun getAllGameSimpleDetC(game_title: String): Cursor
 
     @Transaction
-    @Query("SELECT (\n" +
-            "SELECT COUNT(*)\n" +
-            "FROM achievement JOIN game\n" +
-            "ON achievement.game_ref = game.game_id\n" +
-            "WHERE game.game_title = :game_title) As total_count,\n" +
-            "(SELECT COUNT(*)\n" +
-            "FROM achievement JOIN game\n" +
-            "ON achievement.game_ref = game.game_id\n" +
-            "WHERE game.game_title = :game_title AND achievement.status=1) as completed_count")
-    fun getAchievementCount(game_title: String): Cursor
+    @Query("SELECT ( \n"+
+            "SELECT COUNT(*)\n"+
+            "FROM achievement a1, game g1\n"+
+            "WHERE a1.game_ref = g1.game_id\n"+
+            "AND g1.game_title = 'Euro Truck Simulator 2'\n"+
+            ") As total_count,\n"+ // Il conto di tutti gli achievement di un gioco
+            "(\n"+
+            "SELECT COUNT(*)\n"+
+            "FROM UsersAchievement ua, achievement a, game g\n"+
+            "WHERE a.achievement_id = ua.achieve_id\n"+
+            "AND a.game_ref = g.game_id\n"+
+            "AND g.game_title = :game_title\n"+
+            "AND ua.status=1\n"+
+            "AND ua.user_ref = :user_ref\n"+
+            ") as completed_count")// il conto di tutti gli achievement completati da un utente
+    fun getAchievementCount(game_title: String, user_ref: String): Cursor
 
     @Query("SELECT game_cover, game_title, game_id FROM game")
     fun getSIMP(): Cursor

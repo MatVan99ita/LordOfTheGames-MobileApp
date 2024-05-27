@@ -27,9 +27,7 @@ data class Achievement(
     var name: String,
     var description: String,
     var img: String="img",
-    var actual_count: Int = 0,
     var total_count: Int = 1,
-    var status: Int = 0,
     @ColumnInfo(index = true)
     var game_ref: Int
     )

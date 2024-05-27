@@ -11,6 +11,8 @@ import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Platform
+import com.example.lordofthegames.db_entities.UsersAchievement
+import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.PlatformCardItem
 
@@ -48,12 +50,24 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return l
     }
 
-    fun getGameAchievement(game_title: String): List<Achievement> {
+    fun getGameAchievement(game_title: String, user_ref: String): List<AchievementCardItem> {
         val a = repository.getGameAchievement(game_title)
-        val l: MutableList<Achievement> = mutableListOf()
+        val l: MutableList<AchievementCardItem> = mutableListOf()
         while (a.moveToNext()) {
+            val ua: UsersAchievement = repository.getAchievementStatus(
+                a.getInt(a.getColumnIndexOrThrow("achievement_id")),
+                user_ref,
+            )
             l.add(
-                Achievement(a.getInt(0), a.getString(1), a.getString(2), a.getString(3), a.getInt(4), a.getInt(5), a.getInt(6), a.getInt(7))
+                AchievementCardItem(
+                    achieve_id = a.getInt(a.getColumnIndexOrThrow("achievement_id")),
+                    img = a.getString(a.getColumnIndexOrThrow("img")),
+                    name = a.getString(a.getColumnIndexOrThrow("name")),
+                    descr = a.getString(a.getColumnIndexOrThrow("description")),
+                    actual_count = ua.actual_count,
+                    total_count = a.getColumnIndexOrThrow("total_count"),
+                    completed = ua.status > 0,
+                )
             )
         }
         return l
@@ -77,11 +91,11 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.updateGameStatus(game_status, game_id, user_ref)
     }
 
-    fun updateAchievement(game_title: String, id: Int, actual: Int): Int {
-        return repository.updateAchievement(game_title, id, actual)
+    fun updateAchievement(game_title: String, id: Int, actual: Int, user_ref: String): Int {
+        return repository.updateAchievement(game_title, id, actual, user_ref)
     }
-    fun completeAchievement(game_title: String, id: Int, status: Int): Int {
-        return repository.completeAchievement(game_title, id, status)
+    fun completeAchievement(game_title: String, id: Int, status: Int, user_ref: String): Int {
+        return repository.completeAchievement(game_title, id, status, user_ref)
     }
 
 

@@ -10,6 +10,7 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.User
+import com.example.lordofthegames.db_entities.UsersAchievement
 import com.example.lordofthegames.db_entities.UsersGame
 import com.example.lordofthegames.recyclerView.MyGameListItem
 
@@ -98,11 +99,11 @@ class LotgRepo(application: Application) {
         return lotgDao.updateGameStatus(game_status, game_id, user_ref)
     }
 
-    fun updateAchievement(game_title: String, id: Int, actual: Int): Int {
-        return lotgDao.updateAchievement(game_title, id, actual)
+    fun updateAchievement(achieve_id: Int, actual: Int, user_ref: String): Int {
+        return lotgDao.updateAchievement(achieve_id, actual, user_ref)
     }
-    fun completeAchievement(game_title: String, id: Int, status: Int): Int {
-        return lotgDao.completeAchievement(game_title, id, status)
+    fun completeAchievement(game_title: String, id: Int, status: Int, user_ref: String): Int {
+        return lotgDao.completeAchievement(game_title, id, status, user_ref)
     }
 
     fun getNotes(game_ref: Int): Cursor {
@@ -177,6 +178,10 @@ class LotgRepo(application: Application) {
 
     fun newGameAdded(stat: String, id: Int, mail: String): Long {
         return lotgDao.newGameAdded(UsersGame(id, mail, stat))
+    }
+
+    fun getAchievementStatus(achieve: Int, user: String): UsersAchievement {
+        return lotgDao.getUserAchievementStatus(achieve, user)
     }
 
 

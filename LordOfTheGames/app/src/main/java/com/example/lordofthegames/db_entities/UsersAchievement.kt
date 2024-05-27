@@ -29,5 +29,5 @@ data class UsersAchievement(
      * Status -> Playing, Played, Abandoned, Wanted to play
      */
     var actual_count: Int = 0,
-    var status: String = "NC",
+    var status: Int = 0,
 )
