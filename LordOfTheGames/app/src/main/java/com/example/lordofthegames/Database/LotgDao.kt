@@ -91,7 +91,7 @@ interface LotgDao {
             "       WHERE a.achievement_id = :achieve_id)  " +
             "WHERE achieve_id = :achieve_id " +
             "AND user_ref = :user_ref")
-    fun completeAchievement(achieve_id: Int, status: Int, user_ref: String): Int
+    fun completeAchievement(achieve_id: Int, user_ref: String): Int
 
     @Query("UPDATE notes \n" +
             "SET content = :content, last_modified=:lastMod \n" +

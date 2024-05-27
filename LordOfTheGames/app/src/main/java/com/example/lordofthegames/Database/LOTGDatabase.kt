@@ -20,6 +20,7 @@ import java.util.concurrent.Executors
             Notification::class,
             Platform::class,
             User::class,
+            UsersAchievement::class,
             UsersGame::class,
         ], version = 1)
 abstract class LOTGDatabase: RoomDatabase() {

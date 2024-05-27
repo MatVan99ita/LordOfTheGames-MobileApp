@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9f09188edce1dd983a7a98dd9704cfa5",
+    "identityHash": "5208f9622ce54fa03bddb4aa0b65e245",
     "entities": [
       {
         "tableName": "achievement",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `img` TEXT NOT NULL, `actual_count` INTEGER NOT NULL, `total_count` INTEGER NOT NULL, `status` INTEGER NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`achievement_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `img` TEXT NOT NULL, `total_count` INTEGER NOT NULL, `game_ref` INTEGER NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "achievement_id",
@@ -33,20 +33,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "actual_count",
-            "columnName": "actual_count",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
             "fieldPath": "total_count",
             "columnName": "total_count",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "status",
-            "columnName": "status",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -648,6 +636,87 @@
         "foreignKeys": []
       },
       {
+        "tableName": "UsersAchievement",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_ref` TEXT NOT NULL, `achieve_id` INTEGER NOT NULL, `actual_count` INTEGER NOT NULL, `status` INTEGER NOT NULL, PRIMARY KEY(`user_ref`, `achieve_id`), FOREIGN KEY(`achieve_id`) REFERENCES `achievement`(`achievement_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`mail`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "user_ref",
+            "columnName": "user_ref",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "achieve_id",
+            "columnName": "achieve_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "actual_count",
+            "columnName": "actual_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "user_ref",
+            "achieve_id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_UsersAchievement_user_ref",
+            "unique": false,
+            "columnNames": [
+              "user_ref"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_UsersAchievement_user_ref` ON `${TABLE_NAME}` (`user_ref`)"
+          },
+          {
+            "name": "index_UsersAchievement_achieve_id",
+            "unique": false,
+            "columnNames": [
+              "achieve_id"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_UsersAchievement_achieve_id` ON `${TABLE_NAME}` (`achieve_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "achievement",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "achieve_id"
+            ],
+            "referencedColumns": [
+              "achievement_id"
+            ]
+          },
+          {
+            "table": "user",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "user_ref"
+            ],
+            "referencedColumns": [
+              "mail"
+            ]
+          }
+        ]
+      },
+      {
         "tableName": "UsersGame",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, `game_status` TEXT NOT NULL, PRIMARY KEY(`game_ref`, `user_ref`), FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`mail`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
@@ -726,7 +795,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9f09188edce1dd983a7a98dd9704cfa5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5208f9622ce54fa03bddb4aa0b65e245')"
     ]
   }
 }

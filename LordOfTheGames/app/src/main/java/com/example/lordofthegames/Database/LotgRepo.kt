@@ -12,7 +12,6 @@ import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.db_entities.UsersAchievement
 import com.example.lordofthegames.db_entities.UsersGame
-import com.example.lordofthegames.recyclerView.MyGameListItem
 
 class LotgRepo(application: Application) {
 
@@ -63,8 +62,8 @@ class LotgRepo(application: Application) {
         return lotgDao.getGameSimpleDet()
     }
 
-    fun getAchievementCount(game_title: String): Cursor{
-        return lotgDao.getAchievementCount(game_title)
+    fun getAchievementCount(game_title: String, user_ref: String): Cursor{
+        return lotgDao.getAchievementCount(game_title, user_ref)
     }
 
 
@@ -102,8 +101,8 @@ class LotgRepo(application: Application) {
     fun updateAchievement(achieve_id: Int, actual: Int, user_ref: String): Int {
         return lotgDao.updateAchievement(achieve_id, actual, user_ref)
     }
-    fun completeAchievement(game_title: String, id: Int, status: Int, user_ref: String): Int {
-        return lotgDao.completeAchievement(game_title, id, status, user_ref)
+    fun completeAchievement(achieve_id: Int, user_ref: String): Int {
+        return lotgDao.completeAchievement(achieve_id, user_ref)
     }
 
     fun getNotes(game_ref: Int): Cursor {

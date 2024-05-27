@@ -68,7 +68,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var btnFLAnnulla: Button
     private lateinit var btnFLSalva: Button
     private lateinit var positionT: TextView
-    private var selectedItem: Achievement? = null
+    private var selectedItem: AchievementCardItem? = null
 
     private lateinit var sgrull: ScrollView
     private lateinit var achievementImgEdit: ImageView
@@ -87,7 +87,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
         "Wanted to play",
     )
 
-    private var achieve: List<Achievement?> = mutableListOf()
+    private var achieve: List<AchievementCardItem?> = mutableListOf()
+    private lateinit var user_ref: String
 
     private lateinit var game_title: String
     override fun onCreateView(
@@ -100,15 +101,16 @@ class GameDetFragment: Fragment(), OnItemListener  {
         gameDetViewModel = ViewModelProvider(requireActivity())[GameDetViewModel2::class.java]
         //return super.onCreateView(inflater, container, savedInstanceState);
         this.game_title = requireActivity().intent.getStringExtra("game_title").toString()
+        bundle = arguments
+        user_ref = bundle!!.getString("mail", "null")
 
-        achieve = gameDetViewModel.getGameAchievement(game_title)
+        achieve = gameDetViewModel.getGameAchievement(game_title, user_ref)
 
         val plat = gameDetViewModel.getGamePlatform(game_title)
         val cate = gameDetViewModel.getGameCategory(game_title)
 
 
 
-        bundle = savedInstanceState
 
         sgrull = view.findViewById(R.id.sgrullatina)
 
@@ -145,7 +147,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         categoryCardAdapter = CategoryCardAdapter(this, cate)
         achievementCardAdapter = AchievementCardAdapter(this,
-            achieve as List<Achievement>, requireActivity())
+            achieve as List<AchievementCardItem>, requireActivity())
 
         return view
     }
@@ -257,9 +259,16 @@ class GameDetFragment: Fragment(), OnItemListener  {
             achievementCardAdapter!!.updateActualCount(Integer.valueOf(positionT.text.toString()), num)
 
             recyclerViewAchievement.adapter = achievementCardAdapter
-            var i = gameDetViewModel.updateAchievement(game_title, selectedItem!!.achievement_id, selectedItem!!.actual_count, savedInstanceState.getString("mail", "null"))
+            var i = gameDetViewModel.updateAchievement(
+                achieve_id = selectedItem!!.achieve_id,
+                actual = selectedItem!!.actual_count,
+                user_ref = user_ref
+            )
             if(selectedItem!!.actual_count >= selectedItem!!.total_count){
-                i += gameDetViewModel.completeAchievement(game_title, selectedItem!!.achievement_id, 1, savedInstanceState.getString("mail", "null"))
+                i += gameDetViewModel.completeAchievement(
+                    achieve_id = selectedItem!!.achieve_id,
+                    user_ref = user_ref
+                )
             }
 
             if (i >= 1) {
@@ -303,7 +312,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     {
                         positionT.text = "$position"
                         achievementTitleEdit.text = item.name
-                        achievementDescription.text = item.description
+                        achievementDescription.text = item.descr
                         maxNum.text = "/${item.total_count}"
                         editText.text =
                             Editable.Factory.getInstance().newEditable("${item.actual_count}")

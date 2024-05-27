@@ -1,16 +1,11 @@
 package com.example.lordofthegames.ViewModel
 
 import android.app.Application
-import android.database.Cursor
 import android.graphics.Color
 import android.util.Log
-import androidx.lifecycle.LiveData
 import com.example.lordofthegames.Database.AbstractViewModel
 import com.example.lordofthegames.R
-import com.example.lordofthegames.db_entities.Achievement
-import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Game
-import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.UsersAchievement
 import com.example.lordofthegames.recyclerView.AchievementCardItem
 import com.example.lordofthegames.recyclerView.CategoryCardItem
@@ -91,11 +86,11 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.updateGameStatus(game_status, game_id, user_ref)
     }
 
-    fun updateAchievement(game_title: String, id: Int, actual: Int, user_ref: String): Int {
-        return repository.updateAchievement(game_title, id, actual, user_ref)
+    fun updateAchievement(achieve_id: Int, actual: Int, user_ref: String): Int {
+        return repository.updateAchievement(achieve_id, actual, user_ref)
     }
-    fun completeAchievement(game_title: String, id: Int, status: Int, user_ref: String): Int {
-        return repository.completeAchievement(game_title, id, status, user_ref)
+    fun completeAchievement(achieve_id: Int, user_ref: String): Int {
+        return repository.completeAchievement(achieve_id, user_ref)
     }
 
 
