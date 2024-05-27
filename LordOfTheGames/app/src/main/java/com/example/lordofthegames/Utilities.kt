@@ -25,6 +25,8 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -35,6 +37,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Community.CommunitySpecificFragment
@@ -515,6 +518,18 @@ class Utilities {
                 legend.textColor = Color.WHITE
             else
                 legend.textColor = Color.BLACK
+        }
+
+
+        fun setDrawerWithUser(activity: FragmentActivity, nick: String, mail: String, img: String){
+            val navigationView = activity.findViewById<View>(R.id.nav_view) as NavigationView
+            val headerView = navigationView.getHeaderView(0)
+            val usr_icon: ImageView = headerView.findViewById(R.id.usr_icon)
+            val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
+            val mail_head: TextView = headerView.findViewById(R.id.mail_header)
+
+            nick_head.text = nick
+            mail_head.text = mail
         }
 
     }
