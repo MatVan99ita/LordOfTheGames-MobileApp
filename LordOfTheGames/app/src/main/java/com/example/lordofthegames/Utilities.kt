@@ -36,6 +36,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Community.CommunitySpecificFragment
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
@@ -47,6 +48,7 @@ import com.example.lordofthegames.home.NotificationViewModel
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedInFragment
+import com.example.lordofthegames.user_login.LoggedViewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
@@ -72,7 +74,8 @@ class Utilities {
     /*
     * TODO: ULTIMATE
     *  Funzionalità obbligatorie
-        1. Login e registrazione
+        1. Login e registrazione DIOMADONNA
+        1.5. Mettere l'immagine presa dalla camera nel hader di tutto e anche nel drawerLayout
         2. Profilo utente
             1. Camera
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
@@ -393,53 +396,54 @@ class Utilities {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 // Richiedi il permesso all'utente
-                ActivityCompat.requestPermissions(context as Activity,
-                    arrayOf(POST_NOTIFICATIONS), 500)
+                ActivityCompat.requestPermissions(context as Activity, arrayOf(POST_NOTIFICATIONS), 500)
                 return
-            }
+            } else {
 
-            // Costruisci la notifica
-            val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.yo_listen_foreground)
-                .setContentTitle(textTitle)
-                .setContentText(textContent)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Costruisci la notifica
+                val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.yo_listen_foreground)
+                    .setContentTitle(textTitle)
+                    .setContentText(textContent)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-            // Se l'API level è 26 o superiore, crea e registra il canale delle notifiche
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val channelName = "My Notification Channel"
-                val importance = NotificationManager.IMPORTANCE_DEFAULT
-                val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply {
-                    description = "Description of my notification channel"
-                    // Configura altre opzioni del canale, se necessario
-                    enableLights(true)
-                    lightColor = Color.RED
+                // Se l'API level è 26 o superiore, crea e registra il canale delle notifiche
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channelName = "My Notification Channel"
+                    val importance = NotificationManager.IMPORTANCE_DEFAULT
+                    val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply {
+                        description = "Description of my notification channel"
+                        // Configura altre opzioni del canale, se necessario
+                        enableLights(true)
+                        lightColor = Color.RED
+                    }
+
+                    // Registra il canale delle notifiche con il NotificationManager
+                    val notificationManager =
+                        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    notificationManager.createNotificationChannel(channel)
                 }
 
-                // Registra il canale delle notifiche con il NotificationManager
-                val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.createNotificationChannel(channel)
-            }
+                val n: NotificationViewModel = NotificationViewModel(context as Application)
 
-            val n = NotificationViewModel(context as Application)
 
-            n.saveNotification(
-                Notification(
-                    notification_id,
-                    textTitle,
-                    textContent,
-                    data_inizio,
-                    data_fine,
-                    0,
+                n.saveNotification(
+                    Notification(
+                        notification_id,
+                        textTitle,
+                        textContent,
+                        data_inizio,
+                        data_fine,
+                        0,
+                    )
                 )
-            )
 
-            // Invia la notifica utilizzando il NotificationManagerCompat
-            with(NotificationManagerCompat.from(context)) {
-                notify(666, builder.build())
+                // Invia la notifica utilizzando il NotificationManagerCompat
+                with(NotificationManagerCompat.from(context)) {
+                    notify(666, builder.build())
+                }
+
             }
-
-
 
         }
         fun TUDEI(): String {

@@ -70,6 +70,7 @@ class LoggedInFragment: Fragment(){
         editor.remove("email")
         editor.remove("logged")
         editor.apply()
+
     }
     /* TODO: aggiungere tipo una lista con gli chievement dell'utente come
              giochi completati,

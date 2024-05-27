@@ -38,6 +38,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.GameDetails.GameDetActivity
+import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.Utilities.Companion.CAMERA_PERMISSION_REQUEST_CODE
@@ -272,26 +273,12 @@ class SignInFragment2: Fragment(){
             sp.edit().putString("logged", "logged").putString("nickname", nickn).putString("email", mail).apply()
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LoggedInFragment()).addToBackStack(null).commit()
         }
-        // Log.w("TAGGHETE", "$nick $password $mail")
-        /**
-         *
-         *     TODO: aggiungere i dati al db e il log nelle shared pref
-         *              val salt = Utilities.generateSalt()
-         *              val hashedPassword = Utilities.hashPassword(passw, salt)
-         *              val check = 10// repository.insertUser(User(email, nickn, passw))
-         *              if(check > 0){
-         *                  val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-         *                  val editor = sharedPrefs.edit()
-         *                  editor.putString("logged", "")
-         *                  editor.putString("mail", email)
-         *                  editor.putString("nick", nickn)
-         *                  editor.apply()
-         *                  //parentFragmentManager.beginTransaction().replace(R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
-         *              }
-         */
-
-
-
+        startActivity(
+            Intent(
+                requireActivity(),
+                MainActivity::class.java
+            )
+        )
     }
 
 
@@ -299,9 +286,6 @@ class SignInFragment2: Fragment(){
         contentResolver: ContentResolver,
         capturedImageBitmap: Bitmap?
     ) {
-        /***
-         * TODO: Aggiungere il salvataggio dell'immagine ache nel db
-         */
 
         val values = ContentValues()
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
@@ -393,6 +377,7 @@ class SignInFragment2: Fragment(){
                     this.nick = bundle.getString("nick", "Gabibbo")
                     this.password = bundle.getString("passw", "Gabibbo")
                     this.mail = bundle.getString("mail", "Gabibbo")
+                    Log.i("MAMMETA", "$nick $password $mail")
                     signin(nick, password, mail, img)
                 }
             }

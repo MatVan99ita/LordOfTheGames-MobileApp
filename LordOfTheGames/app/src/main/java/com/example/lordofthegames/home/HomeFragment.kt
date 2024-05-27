@@ -6,6 +6,7 @@ package com.example.lordofthegames.home
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -13,18 +14,22 @@ import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.GameDetails.GameDetActivity
+import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
+import com.google.android.material.navigation.NavigationView
 
 
 class HomeFragment: Fragment(), OnItemListener {
@@ -89,6 +94,25 @@ class HomeFragment: Fragment(), OnItemListener {
             if(adapter != null){
                 displayGame()
             }
+
+            val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            val navigationView = requireActivity().findViewById<View>(R.id.nav_view) as NavigationView
+            val headerView = navigationView.getHeaderView(0)
+            val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
+            val mail_head: TextView = headerView.findViewById(R.id.mail_header)
+
+            nick_head.text = banana.getString("nickname", "BANANA").toString()
+            mail_head.text = banana.getString("email", "BANANA").toString()
+
+
+            Utilities.generaNotifiche(
+                requireContext(),
+                4,
+                "Prova",
+                "Prova prova sa sa",
+                Utilities.TUDEI(),
+                Utilities.TUDEI(),
+                MainActivity::class.java.simpleName)
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
 
@@ -213,6 +237,8 @@ class HomeFragment: Fragment(), OnItemListener {
         val searchItem = menu.findItem(R.id.search_fragment_item)
         val filterItem = menu.findItem(R.id.filter_fragment_item)
         val searchView: SearchView = searchItem.actionView as SearchView
+
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

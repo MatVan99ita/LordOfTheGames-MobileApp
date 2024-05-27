@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -32,57 +33,6 @@ import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-
-/* Struttura del db
- *
- * | Achievements |
- * |--------------|
- * | id           |
- * | nome         |
- * | descr        |
- * | count        |
- * | game         |
- *      N                 | Tag       |
- *      ^                 |-----------|
- *      1                 | id        |         | Categorie |
- * | Game   | 1--------N> | gioco     |         |-----------|
- * |--------|             | categoria | <N----1 | id        |
- * | id     | <N-----------------------------N> | nome      |
- * | nome   |                                   | tag       |
- * | img    |        | Note      |
- * | status |        |-----------|
- * | notes  | <1---1 | id        |
- *                   | title     |
- *                   | contenuto |
- *
- * Riassunto relazioni
- *
- *                           /  Game.id      -> Tag.game
- * Game < - > Categorie ----|
- *                           \  Categorie.id -> Tag.categorie
- *
- * Note.id -> Game.notes
- * Game.id -> Achievements.game
- *
- *
- *
- *
- *
- *
- *
- * #TOD
- *
- *
- *
- * QUERY PER IL COUNT DEGLI ACHIEVEMENT
- * SELECT
- *  (SELECT COUNT(id) FROM achievement WHERE completed != 0) as "Completati",
- *  (SELECT count(id) FROM achievement WHERE completed = 0) as "Non Completati",
- *   COUNT(id) as "Totali"
- * FROM achievement;
- *
- *
- */
 
 
 
@@ -145,15 +95,6 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
 
-
-        /**
-         * TODO: Se lo sharedpref non è stato settato si parte dal login
-         *       val intent = Intent(this, LoggedActivity::class.java)
-         *       //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
-         *       intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-         *       this.startActivity(intent)
-         */
-
         if(!banana.contains("email") && !banana.contains("nickname") && !banana.contains("logged")) {
             startActivity(
                 Intent(
@@ -167,6 +108,8 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_main)
             toolbar = findViewById(R.id.toolbar)
             drawerLayout = findViewById(R.id.main_activity_drawer)
+
+
             navigationView = findViewById(R.id.nav_view)
             bottomNavigationView = findViewById(R.id.bottom)
             actualFragment = HomeFragment()
@@ -277,15 +220,6 @@ class MainActivity : AppCompatActivity() {
 
             sharedPreferences.getString("Settings", "username")?.let { Log.w("POCODIO", it) }
 
-
-            Utilities.generaNotifiche(
-                application,
-                4,
-                "Prova",
-                "Prova prova sa sa",
-                Utilities.TUDEI(),
-                Utilities.TUDEI(),
-                MainActivity::class.java.simpleName)
         }
     }
 

@@ -41,7 +41,7 @@ class MyGameAdapter(
 
         //holder.ach.text = "8/8"
         val p: Pair<Int, Int> = viewModel.getAchievementCount(game_title = g.game_title, user_ref = mail)
-        holder.ach.text = "${p.y}/${p.x}"
+        holder.ach.text = "${p.x}/${p.y}"
     }
 
     class MyGameHolder(itemView: View, listener: OnItemListener): RecyclerView.ViewHolder(itemView), View.OnClickListener{

@@ -142,7 +142,7 @@ class SignInFragment: Fragment() {
                     .show()
             } else {
                 val bundle = Bundle()
-                //bundle.putStringArrayList("signin_val", arrayListOf(nick.text.toString(), reqpassword.text.toString(), mail.text.toString()))
+
                 bundle.putString("nick", nick.text.toString())
                 bundle.putString("passw", reqpassword.text.toString())
                 bundle.putString("mail", mail.text.toString())

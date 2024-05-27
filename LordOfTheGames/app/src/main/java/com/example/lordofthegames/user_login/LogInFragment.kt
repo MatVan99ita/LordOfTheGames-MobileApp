@@ -45,15 +45,7 @@ class LogInFragment: Fragment() {
         }
 
         login_btn.setOnClickListener {//TODO: ANDARE AFFANCULO NELL'ACTIVITY PRICIPALE
-
-            //requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit().putString("logged", "").apply()
-            //Utilities.login(LoggedActivity(), "", "", "");
             this.login(password.text.toString(), mail.text.toString())
-
-
-
-
-            //login(password.text.toString(), mail.text.toString());
         }
 
 
@@ -62,7 +54,7 @@ class LogInFragment: Fragment() {
 
     private fun login(passw: String, email: String) {
 
-        if(passw != "" && email != ""){
+        if(passw != "" && email != "") {
             loggedViewModel.getUsrByMailPass(email, passw).observe(viewLifecycleOwner) {users ->
                 users?.forEach{ user ->
                     if (user != null) {
@@ -85,34 +77,5 @@ class LogInFragment: Fragment() {
                 }
             }
         }
-
-        //loggedViewModel.getUsr(email, passw).observe(viewLifecycleOwner) { usrs ->
-        //    usrs?.forEach{ usr ->
-        //        if (usr != null) {
-        //            if(usr.mail == email && usr.password == passw){
-        //                val editor = sharedPrefs.edit()
-        //                editor.putString("logged", "")
-        //                editor.putString("mail", usr.mail)
-        //                editor.putString("nick", usr.nickname)
-        //                editor.apply()
-        //                parentFragmentManager.beginTransaction().replace(com.example.lordofthegames.R.id.login_fragment, LoggedInFragment()).addToBackStack(null).commit()
-        //            }
-        //        }
-        //    }
-        //}
-            //val myValue = sharedPrefs.getString("myKey", defaultValue)
-            //Si passa alla logged interface e si tiene traccia di una variabile logged da usare per le varie cose
-
-            //val exists = sharedPrefs.contains("logged") <- da usare in caso
-
-            /*Per rimuovere la cosa in modo da poter checckare meglio
-            * editor.remove("logged")
-                editor.apply()
-                * val intent = Intent(context, MainActivity::class.java)
-//intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP;
-intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-this.startActivity(intent)
-                *
-            * */
     }
 }
