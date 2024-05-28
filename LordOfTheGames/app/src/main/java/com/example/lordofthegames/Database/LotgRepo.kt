@@ -21,7 +21,7 @@ class LotgRepo(application: Application) {
 
     @WorkerThread
     fun insertUser(user: User): Long {
-        return lotgDao.insertUser(user)
+        return lotgDao.insertUser(user.mail, user.nickname, user.password, user.photo)
     }
 
     @WorkerThread
@@ -74,11 +74,6 @@ class LotgRepo(application: Application) {
 
     fun getAllGameSimpleDetC(condition: String): Cursor {
         return lotgDao.getAllGameSimpleDetC(condition)
-    }
-
-
-    fun addUserItem(userItem: User) {
-        LOTGDatabase.executor.execute { lotgDao.insertUser(userItem) }
     }
 
     fun getSimp(): Cursor {

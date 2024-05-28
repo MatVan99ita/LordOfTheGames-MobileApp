@@ -98,15 +98,22 @@ class HomeFragment: Fragment(), OnItemListener {
             val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val navigationView = requireActivity().findViewById<View>(R.id.nav_view) as NavigationView
             val headerView = navigationView.getHeaderView(0)
+
+            Utilities.setDrawerWithUser(
+                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                banana.getString("nickname", "BANANA").toString(),
+                banana.getString("email", "BANANA").toString(),
+                null
+            )
+
             val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
             val mail_head: TextView = headerView.findViewById(R.id.mail_header)
 
             nick_head.text = banana.getString("nickname", "BANANA").toString()
             mail_head.text = banana.getString("email", "BANANA").toString()
 
-
             Utilities.generaNotifiche(
-                requireContext(),
+                requireActivity(),
                 4,
                 "Prova",
                 "Prova prova sa sa",

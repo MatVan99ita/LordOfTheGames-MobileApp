@@ -390,7 +390,7 @@ class Utilities {
 
 
 
-        fun generaNotifiche(context: Context, notification_id:Int, textTitle: String, textContent: String, data_inizio: String, data_fine: String, CHANNEL_ID: String) {
+        fun generaNotifiche(context: FragmentActivity, notification_id:Int, textTitle: String, textContent: String, data_inizio: String, data_fine: String, CHANNEL_ID: String) {
 
             // Verifica se l'applicazione ha il permesso di inviare notifiche
             if (ActivityCompat.checkSelfPermission(
@@ -399,7 +399,7 @@ class Utilities {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 // Richiedi il permesso all'utente
-                ActivityCompat.requestPermissions(context as Activity, arrayOf(POST_NOTIFICATIONS), 500)
+                ActivityCompat.requestPermissions(context, arrayOf(POST_NOTIFICATIONS), 500)
                 return
             } else {
 
@@ -427,7 +427,7 @@ class Utilities {
                     notificationManager.createNotificationChannel(channel)
                 }
 
-                val n: NotificationViewModel = NotificationViewModel(context as Application)
+                val n = ViewModelProvider(context)[NotificationViewModel::class.java]
 
 
                 n.saveNotification(
@@ -521,15 +521,15 @@ class Utilities {
         }
 
 
-        fun setDrawerWithUser(activity: FragmentActivity, nick: String, mail: String, img: String){
-            val navigationView = activity.findViewById<View>(R.id.nav_view) as NavigationView
-            val headerView = navigationView.getHeaderView(0)
-            val usr_icon: ImageView = headerView.findViewById(R.id.usr_icon)
-            val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
-            val mail_head: TextView = headerView.findViewById(R.id.mail_header)
+        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: Bitmap?){
+            val head = headerView.getHeaderView(0)
+            val usr_icon: ImageView = head.findViewById(R.id.usr_icon)
+            val nick_head: TextView = head.findViewById(R.id.nickname_header)
+            val mail_head: TextView = head.findViewById(R.id.mail_header)
 
             nick_head.text = nick
             mail_head.text = mail
+            if(img != null) usr_icon.setImageBitmap(img)
         }
 
     }

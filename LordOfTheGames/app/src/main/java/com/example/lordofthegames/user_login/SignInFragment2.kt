@@ -270,15 +270,23 @@ class SignInFragment2: Fragment(){
         val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val res = loggedViewModel.insertNewUsr(User(mail, nick, passw, Utilities.convertBitmapToByteArray(img)))
         if(res > 0){
-            sp.edit().putString("logged", "logged").putString("nickname", nickn).putString("email", mail).apply()
+            Log.i("AAAALAFREGNAALPOSTODELCA", "$mail $nick $passw")
+            sp.edit()
+                .putString("logged", "logged")
+                .putString("nickname", nickn)
+                .putString("email", mail)
+                .apply()
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LoggedInFragment()).addToBackStack(null).commit()
-        }
-        startActivity(
-            Intent(
-                requireActivity(),
-                MainActivity::class.java
+            startActivity(
+                Intent(
+                    requireContext(),
+                    MainActivity::class.java
+                )
             )
-        )
+        } else {
+            Utilities.showaToast(requireContext(), "Le forse del male sono incerte")
+        }
+
     }
 
 

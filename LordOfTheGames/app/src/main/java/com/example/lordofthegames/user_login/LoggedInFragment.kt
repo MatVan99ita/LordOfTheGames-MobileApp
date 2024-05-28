@@ -1,6 +1,7 @@
 package com.example.lordofthegames.user_login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.SeekBar
 import androidx.compose.ui.graphics.Color
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
@@ -70,6 +72,12 @@ class LoggedInFragment: Fragment(){
         editor.remove("email")
         editor.remove("logged")
         editor.apply()
+        startActivity(
+            Intent(
+                requireContext(),
+                MainActivity::class.java
+            )
+        )
 
     }
     /* TODO: aggiungere tipo una lista con gli chievement dell'utente come

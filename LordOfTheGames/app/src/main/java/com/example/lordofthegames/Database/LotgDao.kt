@@ -57,8 +57,8 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPlatform(platform: Platform): Long
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertUser(user: User): Long
+    @Query("INSERT INTO user (mail, nickname, password, photo) VALUES (:mail, :nick, :psw, :photo)")
+    fun insertUser(mail: String, nick: String, psw: String, photo: ByteArray?): Long
 
 
 
