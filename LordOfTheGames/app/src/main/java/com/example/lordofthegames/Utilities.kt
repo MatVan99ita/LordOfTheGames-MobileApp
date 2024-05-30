@@ -69,6 +69,7 @@ import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.text.SimpleDateFormat
+import java.util.Base64
 import java.util.Date
 import java.util.Locale
 
@@ -377,8 +378,9 @@ class Utilities {
          * @param src source array
          * @return result bitmap
          */
-        fun convertCompressedByteArrayToBitmap(src: ByteArray): Bitmap? {
-            return BitmapFactory.decodeByteArray(src, 0, src.size)
+        fun stringToByteArrayToBitmap(base64String: String): Bitmap? {
+            val decodedByteArray: ByteArray = Base64.getDecoder().decode(base64String)
+            return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
         }
 
         fun showaToast(context: Context, testo: String){
@@ -521,7 +523,7 @@ class Utilities {
         }
 
 
-        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: Bitmap?){
+        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: String?){
             val head = headerView.getHeaderView(0)
             val usr_icon: ImageView = head.findViewById(R.id.usr_icon)
             val nick_head: TextView = head.findViewById(R.id.nickname_header)
@@ -529,7 +531,7 @@ class Utilities {
 
             nick_head.text = nick
             mail_head.text = mail
-            if(img != null) usr_icon.setImageBitmap(img)
+            if(img != null) usr_icon.setImageBitmap(this.stringToByteArrayToBitmap(img))
         }
 
     }

@@ -154,4 +154,8 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.newGameAdded(s, gameId, mail)
     }
 
+    fun getUsrImg(mail: String): String? {
+        return repository.getUsrImg(mail)
+    }
+
 }

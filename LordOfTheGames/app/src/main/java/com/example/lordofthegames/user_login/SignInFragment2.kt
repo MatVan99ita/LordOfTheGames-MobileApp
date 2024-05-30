@@ -50,6 +50,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
+import java.util.Base64
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.ExecutorService
@@ -268,7 +269,22 @@ class SignInFragment2: Fragment(){
     fun signin(nickn: String, passw: String, email: String, img: Bitmap) {
 
         val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val res = loggedViewModel.insertNewUsr(User(mail, nick, passw, Utilities.convertBitmapToByteArray(img)))
+
+        val res = loggedViewModel
+            .insertNewUsr(
+                User(
+                    mail,
+                    nick,
+                    passw,
+                    Base64
+                        .getEncoder()
+                        .encodeToString(
+                            Utilities
+                            .convertBitmapToByteArray(img)
+                        )
+                )
+            )
+        Log.i("resresresresresr", "$res")
         if(res > 0){
             Log.i("AAAALAFREGNAALPOSTODELCA", "$mail $nick $passw")
             sp.edit()
@@ -276,7 +292,7 @@ class SignInFragment2: Fragment(){
                 .putString("nickname", nickn)
                 .putString("email", mail)
                 .apply()
-            parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LoggedInFragment()).addToBackStack(null).commit()
+            //parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, LoggedInFragment()).addToBackStack(null).commit()
             startActivity(
                 Intent(
                     requireContext(),

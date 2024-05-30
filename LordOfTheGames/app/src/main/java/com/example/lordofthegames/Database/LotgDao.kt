@@ -58,7 +58,7 @@ interface LotgDao {
     fun insertPlatform(platform: Platform): Long
 
     @Query("INSERT INTO user (mail, nickname, password, photo) VALUES (:mail, :nick, :psw, :photo)")
-    fun insertUser(mail: String, nick: String, psw: String, photo: ByteArray?): Long
+    fun insertUser(mail: String, nick: String, psw: String, photo: String?): Long
 
 
 
@@ -336,6 +336,9 @@ interface LotgDao {
 
     @Query("SELECT game_status FROM UsersGame WHERE game_ref = :game_id AND user_ref = :user_ref")
     fun getGameStatus(game_id: Int, user_ref: String): String
+
+    @Query("SELECT photo FROM user WHERE mail = :mail")
+    fun getUserImg(mail: String): String?
 
 
 }

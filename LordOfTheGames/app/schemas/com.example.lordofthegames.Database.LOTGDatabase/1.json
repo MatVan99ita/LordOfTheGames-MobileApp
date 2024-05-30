@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e6ab9b49f0254d90c905f0a72bc9737e",
+    "identityHash": "f6ed1e0788c79b26b934358a578ed196",
     "entities": [
       {
         "tableName": "achievement",
@@ -606,7 +606,7 @@
       },
       {
         "tableName": "user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mail` TEXT NOT NULL, `nickname` TEXT NOT NULL, `password` TEXT NOT NULL, `photo` BLOB, PRIMARY KEY(`mail`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mail` TEXT NOT NULL, `nickname` TEXT NOT NULL, `password` TEXT NOT NULL, `photo` TEXT, PRIMARY KEY(`mail`))",
         "fields": [
           {
             "fieldPath": "mail",
@@ -629,7 +629,7 @@
           {
             "fieldPath": "photo",
             "columnName": "photo",
-            "affinity": "BLOB",
+            "affinity": "TEXT",
             "notNull": false
           }
         ],
@@ -812,7 +812,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e6ab9b49f0254d90c905f0a72bc9737e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f6ed1e0788c79b26b934358a578ed196')"
     ]
   }
 }

@@ -178,5 +178,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getUserAchievementStatus(achieve, user)
     }
 
+    fun getUsrImg(mail: String): String? {
+        return lotgDao.getUserImg(mail)
+    }
+
 
 }

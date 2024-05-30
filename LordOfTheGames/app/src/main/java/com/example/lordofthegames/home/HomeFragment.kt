@@ -103,7 +103,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),
                 banana.getString("email", "BANANA").toString(),
-                null
+                homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
             )
 
             val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
