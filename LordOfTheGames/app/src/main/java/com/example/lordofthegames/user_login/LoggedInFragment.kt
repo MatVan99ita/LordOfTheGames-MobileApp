@@ -80,23 +80,5 @@ class LoggedInFragment: Fragment(){
         )
 
     }
-    /* TODO: aggiungere tipo una lista con gli chievement dell'utente come
-             giochi completati,
-             achievement completati,
-             giochi aggiunti alle liste
-             giochi abbandonati
-             _
-             ALLA BATTLE CATS a
-             livelli
-             legno x10 ->
-             ferro x20 ->
-             rame x35 ->
-             bronzo   V IV III II I -> x40   - 70
-             argento  V IV III II I -> x75   - 99
-             oro      V IV III II I -> x100  - 700
-             diamante V IV III II I -> x1000 - 1300
-             smeraldo V IV III II I -> x1400 - 1600
-             platino  V IV III II I -> x1700 - 1800
-             immortal V IV III II I -> x2000 - e oltre
-    */
+
 }

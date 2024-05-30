@@ -78,12 +78,13 @@ class Utilities {
     /*
     * TODO: ULTIMATE
     *  Funzionalità obbligatorie
-        1. Login e registrazione DIOMADONNA
-        1.5. Mettere l'immagine presa dalla camera nel hader di tutto e anche nel drawerLayout
+        1.5. Mettere l'immagine presa dalla camera nel hader di tutto e anche nel drawerLayout <- va fatto per ogni activity e comunque il drawer deve avere interazioni dappertutto
+        *
         2. Profilo utente
             1. Camera
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
-        4. Home con lista item
+        *
+        * 4. Home con lista item
             2. Filtri <- ESASE COME FAAF
             *
      * Funzionalità opzionali
@@ -99,6 +100,7 @@ class Utilities {
         • Gallery e/o folder prendere dati da storage interno (max 3)
         • Notifiche in app e/o push (max 3) <- notifiche create da implementare
         • Tracking utente su mappa (max 4) <- boh
+        • EXTRA MIO: la chat funzionante nelle discussion
     * */
 
     companion object{
