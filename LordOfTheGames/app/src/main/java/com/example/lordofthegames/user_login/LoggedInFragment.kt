@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
@@ -18,16 +17,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
-import com.example.lordofthegames.Manifest
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
+import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.github.mikephil.charting.charts.PieChart
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.example.lordofthegames.Manifest.permission
-import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.util.Base64
+import java.util.concurrent.ExecutorService
 
 class LoggedInFragment: Fragment(){
 
@@ -36,6 +34,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var statistics: UserGameGraphItem
     private lateinit var circularProgress: CircularProgressIndicator
     private var bundle: Bundle? = null
+    private lateinit var cameraExecutor: ExecutorService
     private lateinit var user: User
 
     override fun onCreateView(
@@ -207,16 +206,34 @@ class LoggedInFragment: Fragment(){
                         Utilities
                             .convertBitmapToByteArray(it)
                     ) }
-                viewm.updateUsrImg(imgs!!, user.mail)
+                val i =viewm.updateUsrImg(imgs!!, user.mail)
+                Utilities.showaToast(requireContext(),
+                    if(i>0) "update successfull" else "errore update img"
+                )
             }
         }
     }
+
+
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, Utilities.CAMERA_REQUEST_CODE)
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, Utilities.GALLERY_REQUEST_CODE)
+
+    }
+
     private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
         // when a scale gesture is detected, use it to resize the image
+        private var mScaleFactor = 1.0f
         override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
             mScaleFactor *= scaleGestureDetector.scaleFactor
-            imageView.scaleX = mScaleFactor
-            imageView.scaleY = mScaleFactor
+            bind.loggedUsrImg.scaleX = mScaleFactor
+            bind.loggedUsrImg.scaleY = mScaleFactor
             return true
         }
     }

@@ -182,7 +182,7 @@ class LotgRepo(application: Application) {
         return lotgDao.getUserImg(mail)
     }
 
-    fun updateUsrImg(img: String, mail: String): Long {
+    fun updateUsrImg(img: String, mail: String): Int {
         return lotgDao.updateUsrImg(img, mail)
     }
 

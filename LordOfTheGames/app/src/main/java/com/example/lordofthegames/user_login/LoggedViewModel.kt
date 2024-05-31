@@ -45,7 +45,7 @@ class LoggedViewModel(application: Application): AbstractViewModel(application) 
         return uggi ?: UserGameGraphItem(0,0,0,0,0)
     }
 
-    fun updateUsrImg(img: String, mail: String): Long{
+    fun updateUsrImg(img: String, mail: String): Int{
         return repository.updateUsrImg(img, mail)
     }
 

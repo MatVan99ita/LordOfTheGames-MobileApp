@@ -343,7 +343,7 @@ interface LotgDao {
 
 
     @Query("UPDATE user SET photo = :img WHERE mail = :mail ")
-    fun updateUsrImg(img: String, mail: String): Long
+    fun updateUsrImg(img: String, mail: String): Int
 
     @Query("SELECT * FROM user WHERE mail = :mail")
     fun getUsr(mail: String): User
