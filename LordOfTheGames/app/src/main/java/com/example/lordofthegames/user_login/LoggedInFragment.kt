@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
@@ -24,7 +25,9 @@ import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.lordofthegames.Manifest.permission
+import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.Base64
 
 class LoggedInFragment: Fragment(){
 
@@ -33,6 +36,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var statistics: UserGameGraphItem
     private lateinit var circularProgress: CircularProgressIndicator
     private var bundle: Bundle? = null
+    private lateinit var user: User
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,11 +57,11 @@ class LoggedInFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
         statistics = viewm.getUserStatisticsCounts(requireArguments().getString("email", "sesso"))
         bind.btnExit.setOnClickListener { eschilo() }
         val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val p: PieChart = bind.chart
+        user = viewm.getUsr(banana.getString("email", "mail")!!)
 
         Utilities.setupPieChart(p, statistics, banana.getString("Theme", "NoTheme").equals("Night"))
 
@@ -71,8 +75,6 @@ class LoggedInFragment: Fragment(){
                 ),
                 1
             )
-
-
 
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -179,14 +181,13 @@ class LoggedInFragment: Fragment(){
         var img: Bitmap? = null
 
         if (resultCode == Activity.RESULT_OK) {
-            btnImg2.visibility = View.VISIBLE
             when (requestCode) {
                 Utilities.CAMERA_REQUEST_CODE -> {
                     // L'immagine è stata catturata con successo dalla fotocamera
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     img = imageBitmap
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
-                    imageView.setImageBitmap(imageBitmap)
+                    bind.loggedUsrImg.setImageBitmap(imageBitmap)
                 }
                 Utilities.GALLERY_REQUEST_CODE -> {
                     // L'immagine è stata selezionata dalla galleria
@@ -194,25 +195,31 @@ class LoggedInFragment: Fragment(){
                     // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
                     img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
 
-                    imageView.setImageURI(selectedImageBitmap)
+                    bind.loggedUsrImg.setImageURI(selectedImageBitmap)
                 }
             }
 
-            btnImg2.setOnClickListener {
+            bind.btnSaveChanges.setOnClickListener {
                 val bundle: Bundle? = arguments
-
-                // Now you have your ArrayList<String>
-                if (bundle != null && img != null) {
-                    this.nick = bundle.getString("nick", "Gabibbo")
-                    this.password = bundle.getString("passw", "Gabibbo")
-                    this.mail = bundle.getString("mail", "Gabibbo")
-                    Log.i("MAMMETA", "$nick $password $mail")
-                    signin(nick, password, mail, img)
-                }
+                val imgs = img?.let { Base64
+                    .getEncoder()
+                    .encodeToString(
+                        Utilities
+                            .convertBitmapToByteArray(it)
+                    ) }
+                viewm.updateUsrImg(imgs!!, user.mail)
             }
         }
     }
-
+    private inner class ScaleListener : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        // when a scale gesture is detected, use it to resize the image
+        override fun onScale(scaleGestureDetector: ScaleGestureDetector): Boolean {
+            mScaleFactor *= scaleGestureDetector.scaleFactor
+            imageView.scaleX = mScaleFactor
+            imageView.scaleY = mScaleFactor
+            return true
+        }
+    }
 
 
 }

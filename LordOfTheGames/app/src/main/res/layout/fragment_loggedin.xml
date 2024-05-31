@@ -29,13 +29,38 @@
     </com.github.mikephil.charting.charts.PieChart>
 
     <TextView
+        android:id="@+id/logged_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:fontFamily="@font/god_of_war"
+        android:text="Gabibbo"
+        app:layout_constraintBottom_toTopOf="@+id/logged_mail"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imageView" />
+
+    <TextView
+        android:id="@+id/logged_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="belandi@striscia.papere"
+        android:fontFamily="@font/god_of_war"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logged_nick" />
+
+
+    <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Ecco le tue statistiche:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/logged_mail" />
 
 
     <Button
@@ -50,6 +75,25 @@
         app:layout_constraintTop_toBottomOf="@+id/chart" />
 
     <Button
+        android:id="@+id/btn_save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="72dp"
+        android:text="Cambia\nmaschera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chart" />
+    <Button
+        android:id="@+id/btn_annulla_logges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="72dp"
+        android:text="Cambia\nmaschera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chart" />
+
+    <Button
         android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@id/chart" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/logged_usr_img"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="24dp"

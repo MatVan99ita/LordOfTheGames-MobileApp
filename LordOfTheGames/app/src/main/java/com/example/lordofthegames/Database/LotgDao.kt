@@ -8,6 +8,7 @@ import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -339,6 +340,13 @@ interface LotgDao {
 
     @Query("SELECT photo FROM user WHERE mail = :mail")
     fun getUserImg(mail: String): String?
+
+
+    @Query("UPDATE user SET photo = :img WHERE mail = :mail ")
+    fun updateUsrImg(img: String, mail: String): Long
+
+    @Query("SELECT * FROM user WHERE mail = :mail")
+    fun getUsr(mail: String): User
 
 
 }
