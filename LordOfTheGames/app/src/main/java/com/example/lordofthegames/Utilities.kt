@@ -380,7 +380,7 @@ class Utilities {
          * @param src source array
          * @return result bitmap
          */
-        fun stringToByteArrayToBitmap(base64String: String): Bitmap? {
+        fun stringToByteArrayToBitmap(base64String: String): Bitmap {
             val decodedByteArray: ByteArray = Base64.getDecoder().decode(base64String)
             return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
         }

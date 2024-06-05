@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
+import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
 import com.example.lordofthegames.db_entities.User
@@ -37,6 +39,7 @@ class LoggedInFragment: Fragment(){
     private var bundle: Bundle? = null
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var user: User
+    private lateinit var defaultImg: Drawable
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,8 +58,10 @@ class LoggedInFragment: Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
+
+        defaultImg = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_gabibbo_drawable)!!
+
         statistics = viewm.getUserStatisticsCounts(requireArguments().getString("email", "sesso"))
         bind.btnExit.setOnClickListener { eschilo() }
         val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -66,7 +71,7 @@ class LoggedInFragment: Fragment(){
 
         if(user.photo != null) bind.loggedUsrImg.setImageBitmap(Utilities.stringToByteArrayToBitmap(
             user.photo!!
-        ))
+        )) else bind.loggedUsrImg.setImageDrawable(defaultImg)
 
         bind.loggedNick.text = user.nickname
         bind.loggedMail.text = user.mail
@@ -199,6 +204,8 @@ class LoggedInFragment: Fragment(){
                     img = imageBitmap
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
                     bind.loggedUsrImg.setImageBitmap(imageBitmap)
+                    bind.btnSaveChanges.visibility = View.VISIBLE
+                    bind.btnAnnullaLogges.visibility = View.VISIBLE
                 }
                 Utilities.GALLERY_REQUEST_CODE -> {
                     // L'immagine è stata selezionata dalla galleria
@@ -207,6 +214,8 @@ class LoggedInFragment: Fragment(){
                     img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
 
                     bind.loggedUsrImg.setImageURI(selectedImageBitmap)
+                    bind.btnSaveChanges.visibility = View.VISIBLE
+                    bind.btnAnnullaLogges.visibility = View.VISIBLE
                 }
             }
 
@@ -222,7 +231,23 @@ class LoggedInFragment: Fragment(){
                 Utilities.showaToast(requireContext(),
                     if(i>0) "update successfull" else "errore update img"
                 )
+                if(i<=0) {
+                    bind.btnSaveChanges.visibility = View.VISIBLE
+                    bind.btnAnnullaLogges.visibility = View.VISIBLE
+                }
             }
+
+            bind.btnAnnullaLogges.setOnClickListener {
+
+                if(user.photo != null) bind.loggedUsrImg.setImageBitmap(Utilities.stringToByteArrayToBitmap(
+                    user.photo!!
+                )) else bind.loggedUsrImg.setImageDrawable(defaultImg)
+
+                bind.btnSaveChanges.visibility = View.GONE
+                bind.btnAnnullaLogges.visibility = View.GONE
+
+            }
+
         }
     }
 
