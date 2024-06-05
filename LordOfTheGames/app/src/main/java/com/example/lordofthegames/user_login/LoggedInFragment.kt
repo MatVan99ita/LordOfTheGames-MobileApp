@@ -26,6 +26,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.util.Base64
 import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class LoggedInFragment: Fragment(){
 
@@ -61,6 +62,17 @@ class LoggedInFragment: Fragment(){
         val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val p: PieChart = bind.chart
         user = viewm.getUsr(banana.getString("email", "mail")!!)
+
+
+        if(user.photo != null) bind.loggedUsrImg.setImageBitmap(Utilities.stringToByteArrayToBitmap(
+            user.photo!!
+        ))
+
+        bind.loggedNick.text = user.nickname
+        bind.loggedMail.text = user.mail
+
+
+        cameraExecutor = Executors.newFixedThreadPool(1)
 
         Utilities.setupPieChart(p, statistics, banana.getString("Theme", "NoTheme").equals("Night"))
 

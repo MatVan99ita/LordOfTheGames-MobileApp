@@ -8,17 +8,6 @@
     tools:context=".user_login.LoggedInFragment"
     android:layout_marginTop="?attr/actionBarSize">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/ic_gabibbo_drawable"
-        android:src="@drawable/ic_gabibbo_drawable"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
@@ -26,6 +15,12 @@
         android:layout_gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/textView3">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_gabibbo_drawable"
+            android:src="@drawable/ic_gabibbo_drawable" />
     </com.github.mikephil.charting.charts.PieChart>
 
     <TextView
@@ -37,15 +32,13 @@
         android:text="Gabibbo"
         app:layout_constraintBottom_toTopOf="@+id/logged_mail"
         android:layout_marginStart="5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imageView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/logged_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="belandi@striscia.papere"
-        android:fontFamily="@font/god_of_war"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +60,7 @@
         android:id="@+id/fottinn_logged"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="8dp"
         android:text="Cambia\nmaschera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -78,29 +71,31 @@
         android:id="@+id/btn_save_changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="72dp"
-        android:text="Cambia\nmaschera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart" />
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="Salva"
+        app:layout_constraintStart_toEndOf="@+id/logged_usr_img"
+        app:layout_constraintTop_toBottomOf="@+id/fottinn_logged" />
+
     <Button
         android:id="@+id/btn_annulla_logges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="72dp"
-        android:text="Cambia\nmaschera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart" />
+        android:layout_marginTop="8dp"
+        android:text="Nah, I'd win"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_save_changes"
+        app:layout_constraintTop_toBottomOf="@+id/fottinn_logged" />
 
     <Button
         android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
+        android:layout_marginTop="44dp"
         android:text="eschilo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chart" />
+        app:layout_constraintTop_toBottomOf="@+id/logged_usr_img" />
 
     <ImageView
         android:id="@+id/logged_usr_img"
@@ -108,7 +103,8 @@
         android:layout_height="120dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:src="@mipmap/ic_gabibbo2"
+        android:src="@drawable/yo_listen_background"
+        app:circularflow_radiusInDP="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chart" />
 
