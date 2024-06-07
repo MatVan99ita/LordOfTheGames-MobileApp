@@ -46,7 +46,7 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
         binding.discussionSpecificTitle.text = disccussion.first.title
         binding.discussionSpecificContent.text = disccussion.first.content
         binding.discussionSpecificUser.text = disccussion.first.user_ref
-
+        binding.etAddComment.background.alpha = 255
         binding.recyclerViewComments.adapter = adapter
 
     }
