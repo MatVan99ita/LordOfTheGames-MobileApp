@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Community.DiscussionCreateFragment"
+    android:layout_marginTop="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/lbl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Insert title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lbl_title"
+        android:hint="Insert title here..."
+        />
+
+
+    <TextView
+        android:id="@+id/lbl_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_Title"
+        android:text="Insert title" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/gn_Insert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:hint="Insert Note Here"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_attachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/baseline_attachment_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <!--This will be the parent Floating Action Button-->
+    <!--After the implementation the Floating Action Button at
+         the bottom right corner as we have constrained accordingly-->
+    <!--After clicking the above button the
+        following two buttons will pop up.
+         So this button is considered as parent FAB-->
+    <!--After opening the application it looks like regular
+        FAB but after user clicks it, it extends-->
+    <!--This functionality has been handled in the MainActivity.java-->
+
+    <!--Floating action button for add alarm-->
+    <!--Make sure that you are constraining this
+        button to the parent button-->
+    <!--Make sure to add backgroundTint attribute to match
+         the entire application color-->
+    <!--because after changing the base application theme the color
+         of the FAB is set Blue as default-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_image_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/baseline_add_photo_alternate_24"
+        app:layout_constraintBottom_toTopOf="@+id/fab_attachment"
+        app:layout_constraintEnd_toEndOf="@+id/fab_attachment"
+
+        />
+
+    <!--Action name text for the add alarm button-->
+    <!--Make sure that you are constraining this
+        Text to the add Alarm FAB button-->
+
+    <!--Floating action button for add person-->
+    <!--Make sure that you are constraining this button
+        to the add Alarm FAB button-->
+    <!--Make sure to add backgroundTint attribute to match
+         the entire application color-->
+    <!--because after changing the base application theme
+         the color of the FAB is set Blue as default-->
+
+    <TextView
+        android:id="@+id/add_image_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add image"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/add_image_fab"
+        app:layout_constraintEnd_toStartOf="@+id/add_image_fab"
+        app:layout_constraintTop_toTopOf="@+id/add_image_fab" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_photo_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:srcCompat="@drawable/baseline_add_photo_alternate_24"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/add_image_fab"
+        app:layout_constraintEnd_toEndOf="@+id/add_image_fab"
+        app:layout_constraintStart_toStartOf="@+id/add_image_fab"
+        />
+
+    <TextView
+        android:id="@+id/add_position_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Position"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/add_photo_fab"
+        app:layout_constraintEnd_toStartOf="@+id/add_photo_fab"
+        app:layout_constraintTop_toTopOf="@+id/add_photo_fab" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

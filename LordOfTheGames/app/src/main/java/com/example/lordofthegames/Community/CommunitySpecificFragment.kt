@@ -48,6 +48,22 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
         super.onViewCreated(view, savedInstanceState)
 
         bind.recyclerViewDiscussion.adapter = adapter
+
+        bind.fabAddDiscussion.setOnClickListener {
+            if(activity != null) {
+                val bundle = Bundle()
+                bundle.putString("game_title", requireActivity().intent.getStringExtra("game_title").toString())
+
+                Utilities.insertFragment(
+                    requireActivity() as AppCompatActivity,
+                    DiscussionSpecificFragment(),
+                    DiscussionSpecificFragment::class.java.simpleName,
+                    bundle,
+                )
+                //this.startActivity(intent)
+            }
+        }
+
     }
 
     override fun onItemClick(view: View, position: Int) {
