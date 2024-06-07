@@ -33,12 +33,12 @@
         android:text="Insert title" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/gn_Insert"
+        android:id="@+id/et_Content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="345dp"
         android:gravity="start"
         android:hint="Insert Note Here"
-        />
+        app:layout_constraintTop_toBottomOf="@id/lbl_text" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_attachment"
@@ -74,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         app:fabSize="normal"
+        app:fabCustomSize="35dp"
         app:srcCompat="@drawable/baseline_add_photo_alternate_24"
         app:layout_constraintBottom_toTopOf="@+id/fab_attachment"
         app:layout_constraintEnd_toEndOf="@+id/fab_attachment"
@@ -97,7 +98,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add image"
-        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/add_image_fab"
         app:layout_constraintEnd_toStartOf="@+id/add_image_fab"
         app:layout_constraintTop_toTopOf="@+id/add_image_fab" />
@@ -107,7 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        app:srcCompat="@drawable/baseline_add_photo_alternate_24"
+        app:fabCustomSize="35dp"
+        app:srcCompat="@drawable/baseline_add_a_photo_24"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/add_image_fab"
         app:layout_constraintEnd_toEndOf="@+id/add_image_fab"
@@ -115,11 +116,10 @@
         />
 
     <TextView
-        android:id="@+id/add_position_action_text"
+        android:id="@+id/add_photo_action_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Position"
-        android:layout_margin="8dp"
+        android:text="Add photo"
         app:layout_constraintBottom_toBottomOf="@+id/add_photo_fab"
         app:layout_constraintEnd_toStartOf="@+id/add_photo_fab"
         app:layout_constraintTop_toTopOf="@+id/add_photo_fab" />

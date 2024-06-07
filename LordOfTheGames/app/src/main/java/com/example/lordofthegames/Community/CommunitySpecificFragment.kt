@@ -56,8 +56,8 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
 
                 Utilities.insertFragment(
                     requireActivity() as AppCompatActivity,
-                    DiscussionSpecificFragment(),
-                    DiscussionSpecificFragment::class.java.simpleName,
+                    DiscussionCreateFragment(),
+                    DiscussionCreateFragment::class.java.simpleName,
                     bundle,
                 )
                 //this.startActivity(intent)
