@@ -57,10 +57,6 @@ class DiscussionCreateFragment: Fragment() {
                 // true make all the action name
                 // texts and FABs VISIBLE.
 
-                bind.addImageFab.show()
-                bind.addPhotoFab.show()
-                bind.addImageActionText.visibility = View.VISIBLE
-                bind.addPhotoActionText.visibility = View.VISIBLE
 
                 //bind.fabAttachment.rotation = 90.0F
                 ViewCompat.animate(bind.fabAttachment)
@@ -68,6 +64,37 @@ class DiscussionCreateFragment: Fragment() {
                     .withLayer()
                     .setDuration(300)
                     .setInterpolator(interpolator).start()
+
+
+
+                bind.addImageFab.show()
+                bind.addPhotoFab.show()
+                bind.addImageActionText.visibility = View.VISIBLE
+                bind.addPhotoActionText.visibility = View.VISIBLE
+
+
+                ViewCompat.animate(bind.addPhotoFab)
+                    .translationY(-300f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+                ViewCompat.animate(bind.addPhotoActionText)
+                    .translationY(-300f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+
+                ViewCompat.animate(bind.addImageFab)
+                    .translationY(-150f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+                ViewCompat.animate(bind.addImageActionText)
+                    .translationY(-150f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+
 
                 // make the boolean variable true as
                 // we have set the sub FABs
@@ -87,6 +114,31 @@ class DiscussionCreateFragment: Fragment() {
 
                 ViewCompat.animate(bind.fabAttachment)
                     .rotation(0f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+
+
+
+
+                ViewCompat.animate(bind.addPhotoFab)
+                    .translationY(0f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+                ViewCompat.animate(bind.addPhotoActionText)
+                    .translationY(0f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+
+                ViewCompat.animate(bind.addImageFab)
+                    .translationY(0f)
+                    .withLayer()
+                    .setDuration(300)
+                    .setInterpolator(interpolator).start()
+                ViewCompat.animate(bind.addImageActionText)
+                    .translationY(0f)
                     .withLayer()
                     .setDuration(300)
                     .setInterpolator(interpolator).start()
