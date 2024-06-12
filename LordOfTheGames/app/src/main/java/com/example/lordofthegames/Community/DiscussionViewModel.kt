@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
+import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.recyclerView.DiscussionItem
 
 class DiscussionViewModel(application: Application): AndroidViewModel(application) {
@@ -58,6 +59,22 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
 
     fun getDiscussionSpecific(discussion_id: Int): Discussion{
         return repo.getDiscussionSpecific(discussion_id)
+    }
+
+    fun insertComment(text: String, discussionId: Int): Int {
+        TODO("Not yet implemented")
+    }
+
+    fun sendNotificationToUser(userRef: String, s: String): Int {
+        val n: Notification = Notification(id = 0,
+            title = "Hai ricevuto una risposta",
+            content = "$s responded",
+            data_inizio = null,
+            data_fine = null,
+            usr_ref = userRef
+        )
+
+        return repo.sendNotification(n)
     }
 
 }

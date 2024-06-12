@@ -7,7 +7,12 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "notification"
+    tableName = "notification",
+    foreignKeys = [ForeignKey(
+        entity = User::class,
+        parentColumns = ["mail"],
+        childColumns = ["usr_ref"]
+    )],
 )
 data class Notification(
     @PrimaryKey(autoGenerate = true, )
@@ -16,8 +21,8 @@ data class Notification(
     val content: String?,
     val data_inizio: String?,
     val data_fine: String?,
-    @ColumnInfo(defaultValue = "0")
-    val read: Int,
+    val read: Int = 0,
+    val usr_ref: String,
 )
 
 /*

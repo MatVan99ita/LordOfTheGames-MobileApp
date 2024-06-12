@@ -348,6 +348,9 @@ interface LotgDao {
     @Query("SELECT * FROM user WHERE mail = :mail")
     fun getUsr(mail: String): User
 
+    @Insert(Notification::class)
+    fun sendNotificaton(n: Notification): Int
+
 
 }
 

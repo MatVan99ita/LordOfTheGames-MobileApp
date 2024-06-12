@@ -111,21 +111,51 @@
         tools:layout_editor_absoluteX="5dp"
         tools:listitem="@layout/comment_item" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_addComment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:padding="3dp"
-
-        android:layout_marginBottom="2dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-
-        android:background="#99000000"
-        android:hint="Insert comment"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="4dp"
+        android:background="#BF000000"
+        android:elevation="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_addComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+
+            android:gravity="bottom"
+            android:hint="Insert comment"
+            android:maxLength="280"
+            android:maxLines="5"
+            android:padding="3dp"
+            android:shadowColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_send_comment"
+            />
+
+        <ImageButton
+            android:id="@+id/btn_send_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="5dp"
+            android:background="#00000000"
+            android:foregroundGravity="center"
+            android:gravity="end"
+            android:src="@drawable/baseline_send_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_addComment"
+            tools:layout_editor_absoluteY="3dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

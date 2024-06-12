@@ -119,7 +119,9 @@ class HomeFragment: Fragment(), OnItemListener {
                 "Prova prova sa sa",
                 Utilities.TUDEI(),
                 Utilities.TUDEI(),
-                MainActivity::class.java.simpleName)
+                MainActivity::class.java.simpleName,
+                mail_head.text.toString()
+                )
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
 

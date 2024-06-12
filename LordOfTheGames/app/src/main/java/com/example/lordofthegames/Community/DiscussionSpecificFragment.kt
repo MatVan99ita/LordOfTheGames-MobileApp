@@ -1,17 +1,20 @@
 package com.example.lordofthegames.Community
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentDiscussionContentSpecificBinding
 import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.recyclerView.CommentListAdapater
 import com.example.lordofthegames.recyclerView.DiscussionSpecificAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
+import com.github.mikephil.charting.charts.PieChart
 
 class DiscussionSpecificFragment : Fragment(), OnItemListener{
 
@@ -19,6 +22,8 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
     private lateinit var viewm: DiscussionViewModel
     private lateinit var disccussion: Pair<Discussion, List<Comments>>
     private lateinit var adapter: CommentListAdapater
+    private var discussion_id: Int = 0
+    private lateinit var this_usr: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +33,12 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
         viewm = ViewModelProvider(requireActivity())[DiscussionViewModel::class.java]
         binding = FragmentDiscussionContentSpecificBinding.inflate(layoutInflater)
         val bundle: Bundle? = arguments
+
+        val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        this.this_usr = banana.getString("nickname", "Besugo")!!
+
         if(bundle != null){
-            val discussion_id = bundle.getInt("discussion_id")
+            discussion_id = bundle.getInt("discussion_id")
             disccussion = Pair(
                     viewm.getDiscussionSpecific(discussion_id),
                     viewm.getDiscussionComments(discussion_id),
@@ -49,7 +58,32 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
         binding.etAddComment.background.alpha = 255
         binding.recyclerViewComments.adapter = adapter
 
+        binding.etAddComment.setText("")
+
+
+        binding.btnSendComment.setOnClickListener {
+            if(binding.etAddComment.text?.length!! > 0){
+                if(this.insertComment(binding.etAddComment.text.toString())>0){
+                    this.updateView()
+                }
+            } else {
+                Utilities.showaToast(requireContext(), "You serious?")
+            }
+        }
+
     }
+
+    fun insertComment(text: String): Int{
+        var i = viewm.insertComment(text, disccussion.first.discussion_id)
+
+        if(i > 0) i += viewm.sendNotificationToUser(disccussion.first.user_ref, this_usr)
+        return i
+    }
+
+    fun updateView(){
+        adapter = CommentListAdapater(requireActivity(), this, viewm.getDiscussionComments(discussion_id))
+    }
+
 
     override fun onItemClick(view: View, position: Int) {
     }

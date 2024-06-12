@@ -394,7 +394,7 @@ class Utilities {
 
 
 
-        fun generaNotifiche(context: FragmentActivity, notification_id:Int, textTitle: String, textContent: String, data_inizio: String, data_fine: String, CHANNEL_ID: String) {
+        fun generaNotifiche(context: FragmentActivity, notification_id:Int, textTitle: String, textContent: String, data_inizio: String, data_fine: String, CHANNEL_ID: String, usr_ref: String) {
 
             // Verifica se l'applicazione ha il permesso di inviare notifiche
             if (ActivityCompat.checkSelfPermission(
@@ -442,6 +442,7 @@ class Utilities {
                         data_inizio,
                         data_fine,
                         0,
+                        usr_ref
                     )
                 )
 
