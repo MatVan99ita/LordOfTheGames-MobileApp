@@ -349,7 +349,7 @@ interface LotgDao {
     fun getUsr(mail: String): User
 
     @Insert(Notification::class)
-    fun sendNotificaton(n: Notification): Int
+    fun sendNotificaton(n: Notification): Long
 
 
 }

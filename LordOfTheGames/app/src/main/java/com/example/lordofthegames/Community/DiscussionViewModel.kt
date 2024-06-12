@@ -65,7 +65,7 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         TODO("Not yet implemented")
     }
 
-    fun sendNotificationToUser(userRef: String, s: String): Int {
+    fun sendNotificationToUser(userRef: String, s: String): Long {
         val n: Notification = Notification(id = 0,
             title = "Hai ricevuto una risposta",
             content = "$s responded",

@@ -25,12 +25,13 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
 
             l.add(
                 Notification(
-                    c.getInt(c.getColumnIndex("id")),
-                    c.getString(c.getColumnIndex("title")),
-                    c.getString(c.getColumnIndex("content")),
-                    c.getString(c.getColumnIndex("data_inizio")),
-                    c.getString(c.getColumnIndex("data_fine")),
-                    c.getInt(c.getColumnIndex("read")),
+                    c.getInt(c.getColumnIndexOrThrow("id")),
+                    c.getString(c.getColumnIndexOrThrow("title")),
+                    c.getString(c.getColumnIndexOrThrow("content")),
+                    c.getString(c.getColumnIndexOrThrow("data_inizio")),
+                    c.getString(c.getColumnIndexOrThrow("data_fine")),
+                    c.getInt(c.getColumnIndexOrThrow("read")),
+                    c.getString(c.getColumnIndexOrThrow("usr_ref")),
                 )
             )
         }

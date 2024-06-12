@@ -76,7 +76,7 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
     fun insertComment(text: String): Int{
         var i = viewm.insertComment(text, disccussion.first.discussion_id)
 
-        if(i > 0) i += viewm.sendNotificationToUser(disccussion.first.user_ref, this_usr)
+        if(i > 0) i += (viewm.sendNotificationToUser(disccussion.first.user_ref, this_usr)).toInt()
         return i
     }
 

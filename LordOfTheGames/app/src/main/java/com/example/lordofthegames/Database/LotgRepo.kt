@@ -190,8 +190,8 @@ class LotgRepo(application: Application) {
         return lotgDao.getUsr(mail)
     }
 
-    fun sendNotification(n: Notification): Int {
-        return lotgDao.sendNotificaton(n)
+    fun sendNotification(n: Notification): Long {
+        return lotgDao.saveNotes(n)
     }
 
 
