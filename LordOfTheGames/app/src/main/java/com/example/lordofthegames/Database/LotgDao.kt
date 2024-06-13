@@ -8,7 +8,6 @@ import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -16,7 +15,6 @@ import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.GameCategory
 import com.example.lordofthegames.db_entities.GamePlatform
-import com.example.lordofthegames.db_entities.Notes
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.User
@@ -63,8 +61,8 @@ interface LotgDao {
 
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveNotes(content: Notification): Long
+    @Query("INSERT INTO notification (title, content, usr_ref) VALUES (:title, :content, :user_ref)")
+    fun saveNotification(title: String, content: String, user_ref: String): Long
     /**
      * DELETE
      */
@@ -98,7 +96,7 @@ interface LotgDao {
             "SET content = :content, last_modified=:lastMod \n" +
             "WHERE game_ref = :gameRef\n" +
             "AND user_ref = :user_ref")
-    fun saveNotes(content: String, lastMod: String, gameRef: Int, user_ref: String): Int
+    fun saveNotification(content: String, lastMod: String, gameRef: Int, user_ref: String): Int
 
     @Query("UPDATE notification \n" +
             "SET read = 1 \n" +

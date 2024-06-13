@@ -61,20 +61,25 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         return repo.getDiscussionSpecific(discussion_id)
     }
 
-    fun insertComment(text: String, discussionId: Int): Int {
-        TODO("Not yet implemented")
+    fun insertComment(text: String, discussionId: Int, userRef: String): Long {
+        return repo.insertComment(
+            Comments(
+                discussion_ref = discussionId,
+                content = text,
+                user_ref = userRef,
+                comment_dislike = 0,
+                comment_like = 0,
+                comment_id = 0
+                )
+        )
     }
 
-    fun sendNotificationToUser(userRef: String, s: String): Long {
-        val n: Notification = Notification(id = 0,
+    fun sendNotificationToUser(userRef: String, usr: String, partial_content: String): Long {
+        return repo.sendNotification(
             title = "Hai ricevuto una risposta",
-            content = "$s responded",
-            data_inizio = null,
-            data_fine = null,
+            content = "$usr responded:\n\"$partial_content...\"",
             usr_ref = userRef
         )
-
-        return repo.sendNotification(n)
     }
 
 }

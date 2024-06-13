@@ -5,6 +5,7 @@ import android.database.Cursor
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.Notes
@@ -110,11 +111,11 @@ class LotgRepo(application: Application) {
     }
 
     fun saveNotes(content: String, lastMod: String, gameRef: Int, user_ref: String): Int {
-        return lotgDao.saveNotes(content, lastMod, gameRef, user_ref)
+        return lotgDao.saveNotification(content, lastMod, gameRef, user_ref)
     }
 
     fun saveNotes(content: Notification): Long {
-        return lotgDao.saveNotes(content)
+        return lotgDao.saveNotification(content.title!!, content.content!!, content.usr_ref)
     }
 
     fun allRead(): Int {
@@ -190,8 +191,12 @@ class LotgRepo(application: Application) {
         return lotgDao.getUsr(mail)
     }
 
-    fun sendNotification(n: Notification): Long {
-        return lotgDao.saveNotes(n)
+    fun sendNotification(title: String, content: String, usr_ref: String): Long {
+        return lotgDao.saveNotification(title, content, usr_ref)
+    }
+
+    fun insertComment(comments: Comments): Long {
+        return lotgDao.insertComment(comments)
     }
 
 

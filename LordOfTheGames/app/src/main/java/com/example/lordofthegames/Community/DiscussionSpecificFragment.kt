@@ -73,14 +73,25 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
 
     }
 
-    fun insertComment(text: String): Int{
-        var i = viewm.insertComment(text, disccussion.first.discussion_id)
+    private fun insertComment(text: String): Long {
+        var i: Long = viewm.insertComment(text, disccussion.first.discussion_id, this_usr)
 
-        if(i > 0) i += (viewm.sendNotificationToUser(disccussion.first.user_ref, this_usr)).toInt()
+        if(i > 0) i += viewm.sendNotificationToUser(
+            userRef = disccussion.first.user_ref,
+            usr = this_usr,
+            partial_content =
+            if(text.length < 20)
+                text
+            else
+            text.substring(
+                0,
+                20
+            )
+        )
         return i
     }
 
-    fun updateView(){
+    private fun updateView(){
         adapter = CommentListAdapater(requireActivity(), this, viewm.getDiscussionComments(discussion_id))
     }
 
