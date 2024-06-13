@@ -1,10 +1,12 @@
 package com.example.lordofthegames.Community
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Utilities
@@ -12,9 +14,8 @@ import com.example.lordofthegames.databinding.FragmentDiscussionContentSpecificB
 import com.example.lordofthegames.db_entities.Comments
 import com.example.lordofthegames.db_entities.Discussion
 import com.example.lordofthegames.recyclerView.CommentListAdapater
-import com.example.lordofthegames.recyclerView.DiscussionSpecificAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
-import com.github.mikephil.charting.charts.PieChart
+
 
 class DiscussionSpecificFragment : Fragment(), OnItemListener{
 
@@ -92,7 +93,14 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
     }
 
     private fun updateView(){
-        adapter = CommentListAdapater(requireActivity(), this, viewm.getDiscussionComments(discussion_id))
+        val l = viewm.getDiscussionComments(discussion_id)
+        adapter.updateView(l)
+        binding.etAddComment.text!!.clear()
+        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        binding.recyclerViewComments.scrollToPosition(l.lastIndex)
+        requireActivity().currentFocus?.let { view ->
+            (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
+        }
     }
 
 

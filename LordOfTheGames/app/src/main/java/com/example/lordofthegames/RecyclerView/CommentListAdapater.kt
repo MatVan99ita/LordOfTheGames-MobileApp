@@ -37,6 +37,14 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
     }
 
 
+    fun updateView(discussionComments: List<Comments>) {
+        list = discussionComments
+        // Aggiorna l'adapter con la lista filtrata
+        this.notifyDataSetChanged()
+    }
+
+
+
     inner class CommentListHolder(itemView: View, lister: OnItemListener) :
         RecyclerView.ViewHolder(itemView), View.OnClickListener {
 

@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     tableName = "notification",
     foreignKeys = [ForeignKey(
         entity = User::class,
-        parentColumns = ["mail"],
+        parentColumns = ["nickname"],
         childColumns = ["usr_ref"]
     )],
 )
