@@ -44,26 +44,40 @@
         android:hint="Insert Note Here"
         app:layout_constraintTop_toBottomOf="@id/lbl_text" />
 
+    <ImageButton
+        android:id="@+id/post_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+
+        android:gravity="center"
+        android:src="@mipmap/gabibbo_blade_of_striscia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/et_Content">
+
+    </ImageButton>
+
+
+
     <Button
         android:id="@+id/btn_save_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_Content"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="12dp"
         android:text="Save"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_img" />
 
 
     <Button
         android:id="@+id/btn_nope_post"
-        android:text="Nope"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/et_Content"
         android:layout_marginStart="12dp"
+        android:text="Nope"
         app:layout_constraintStart_toEndOf="@id/btn_save_post"
-        />
+        app:layout_constraintTop_toTopOf="@+id/btn_save_post" />
 
 
 

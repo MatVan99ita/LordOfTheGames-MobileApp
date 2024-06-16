@@ -1,15 +1,30 @@
 package com.example.lordofthegames.Community
 
+import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.util.Base64
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 class DiscussionCreateFragment: Fragment() {
@@ -18,6 +33,7 @@ class DiscussionCreateFragment: Fragment() {
     private lateinit var bind: FragmentAddDiscussionBinding
     private lateinit var viewm: DiscussionViewModel
     private var isAllFabsVisible = false
+    private lateinit var cameraExecutor: ExecutorService
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -150,22 +166,163 @@ class DiscussionCreateFragment: Fragment() {
             }
         }
 
-        // below is the sample action to handle add person
-        // FAB. Here it shows simple Toast msg. The Toast
-        // will be shown only when they are visible and only
-        // when user clicks on them
-        bind.addPhotoFab.setOnClickListener{
-            Utilities.showaToast(requireContext(), "PHOTO SESSO")
+
+        cameraExecutor = Executors.newFixedThreadPool(1)
+
+
+        bind.addPhotoFab.setOnClickListener {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    android.Manifest.permission.CAMERA,
+                ),
+                1
+            )
+
+            if (
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                openCamera()
+            }
+            else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        android.Manifest.permission.CAMERA
+                    ),
+                    1
+                )
+            }
         }
 
-        // below is the sample action to handle add alarm
-        // FAB. Here it shows simple Toast msg The Toast
-        // will be shown only when they are visible and only
-        // when user clicks on them
-        bind.addImageFab.setOnClickListener{
-            Utilities.showaToast(requireContext(), "IMAGE SESSO")
+
+        bind.addImageFab.setOnClickListener {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    android.Manifest.permission.READ_MEDIA_IMAGES,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                ),
+                1
+            )
+
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.READ_MEDIA_IMAGES
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                openGallery()
+            }
+            else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        android.Manifest.permission.READ_MEDIA_IMAGES,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    ),
+                    1
+                )
+            }
         }
 
+        bind.postImg.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Remove image?")
+                .setPositiveButton("Yes"){ _: DialogInterface?, _: Int ->
+                    bind.postImg.visibility = View.GONE
+                    bind.postImg.setImageDrawable(
+                        ContextCompat.getDrawable(requireActivity(), R.mipmap.ic_gabibbo_test)
+                    )
+                }
+                .setNegativeButton("No"){ _: DialogInterface?, _: Int ->
+                }
+                .show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        //val drawable: Drawable? = ContextCompat.getDrawable(requireContext(),
+        //    this.resources.getIdentifier("yo_listen_foreground", "mipmap", ""))
+        var img: Bitmap? = null
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                Utilities.CAMERA_REQUEST_CODE -> {
+                    // L'immagine è stata catturata con successo dalla fotocamera
+                    val imageBitmap = data?.extras?.get("data") as Bitmap
+                    img = imageBitmap
+                    // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
+                    bind.postImg.setImageBitmap(imageBitmap)
+                    bind.postImg.visibility = View.VISIBLE
+                }
+                Utilities.GALLERY_REQUEST_CODE -> {
+                    // L'immagine è stata selezionata dalla galleria
+                    val selectedImageBitmap = data?.data //.extras?.get("data") as Bitmap
+                    // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
+                    img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
+
+                    bind.postImg.setImageURI(selectedImageBitmap)
+                    bind.postImg.visibility = View.VISIBLE
+                }
+            }
+
+        }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("BANANA", "BANANA")
+        cameraExecutor.shutdown()
+    }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, Utilities.CAMERA_REQUEST_CODE)
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, Utilities.GALLERY_REQUEST_CODE)
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            Utilities.CAMERA_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera()
+                } else {
+                    // L'utente ha negato il permesso per la fotocamera, gestisci di conseguenza
+                    // Ad esempio, mostra un messaggio all'utente
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    )
+                        .setTitle("Permissione Denied")
+                        .setMessage("How is possible for you to face your enemy without a face")
+                }
+            }
+            Utilities.GALLERY_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery()
+                } else {
+                    // L'utente ha negato il permesso per la galleria, gestisci di conseguenza
+                    // Ad esempio, mostra un messaggio all'utente
+                    MaterialAlertDialogBuilder(
+                        requireContext()
+                    )
+                        .setTitle("Permissione Denied")
+                        .setMessage("How is possible for you to face your enemy without a face")
+                }
+            }
+        }
 
     }
 
