@@ -26,6 +26,11 @@ data class Discussion(
     var discussion_id: Int,
     var title: String,
     var content: String,
+    /**
+     * il content sarò
+     * { text: "", img: ""}
+     * IIIIIIIZY
+     * */
     @ColumnInfo(index = true)
     var game_ref: Int,
     var user_ref: String,

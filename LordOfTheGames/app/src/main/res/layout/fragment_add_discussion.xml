@@ -46,8 +46,12 @@
 
     <ImageButton
         android:id="@+id/post_img"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+
+        android:visibility="gone"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
 
         android:gravity="center"
         android:src="@mipmap/gabibbo_blade_of_striscia"

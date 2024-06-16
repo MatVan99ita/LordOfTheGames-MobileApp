@@ -69,100 +69,10 @@ class DiscussionCreateFragment: Fragment() {
         bind.fabAttachment.setOnClickListener {
             if (!isAllFabsVisible) {
 
-                // when isAllFabsVisible becomes
-                // true make all the action name
-                // texts and FABs VISIBLE.
-
-
-                //bind.fabAttachment.rotation = 90.0F
-                ViewCompat.animate(bind.fabAttachment)
-                    .rotation(90f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-
-
-                bind.addImageFab.show()
-                bind.addPhotoFab.show()
-                bind.addImageActionText.visibility = View.VISIBLE
-                bind.addPhotoActionText.visibility = View.VISIBLE
-
-
-                ViewCompat.animate(bind.addPhotoFab)
-                    .translationY(-300f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-                ViewCompat.animate(bind.addPhotoActionText)
-                    .translationY(-300f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-                ViewCompat.animate(bind.addImageFab)
-                    .translationY(-150f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-                ViewCompat.animate(bind.addImageActionText)
-                    .translationY(-150f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-
-                // make the boolean variable true as
-                // we have set the sub FABs
-                // visibility to GONE
-                isAllFabsVisible = true;
+                showAllAnimation(interpolator)
             } else {
 
-                // when isAllFabsVisible becomes
-                // true make all the action name
-                // texts and FABs GONE.
-
-                bind.addImageFab.hide()
-                bind.addPhotoFab.hide()
-                bind.addImageActionText.visibility = View.GONE
-                bind.addPhotoActionText.visibility = View.GONE
-
-
-                ViewCompat.animate(bind.fabAttachment)
-                    .rotation(0f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-
-
-
-                ViewCompat.animate(bind.addPhotoFab)
-                    .translationY(0f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-                ViewCompat.animate(bind.addPhotoActionText)
-                    .translationY(0f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-                ViewCompat.animate(bind.addImageFab)
-                    .translationY(0f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-                ViewCompat.animate(bind.addImageActionText)
-                    .translationY(0f)
-                    .withLayer()
-                    .setDuration(300)
-                    .setInterpolator(interpolator).start()
-
-                // make the boolean variable false
-                // as we have set the sub FABs
-                // visibility to GONE
-                isAllFabsVisible = false;
+                hideAllAnimation(interpolator)
             }
         }
 
@@ -257,6 +167,7 @@ class DiscussionCreateFragment: Fragment() {
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
                     bind.postImg.setImageBitmap(imageBitmap)
                     bind.postImg.visibility = View.VISIBLE
+                    hideAllAnimation(OvershootInterpolator())
                 }
                 Utilities.GALLERY_REQUEST_CODE -> {
                     // L'immagine è stata selezionata dalla galleria
@@ -266,6 +177,7 @@ class DiscussionCreateFragment: Fragment() {
 
                     bind.postImg.setImageURI(selectedImageBitmap)
                     bind.postImg.visibility = View.VISIBLE
+                    hideAllAnimation(OvershootInterpolator())
                 }
             }
 
@@ -326,6 +238,102 @@ class DiscussionCreateFragment: Fragment() {
 
     }
 
+
+    private fun hideAllAnimation(interpolator: OvershootInterpolator){
+
+        val interpolator = OvershootInterpolator()
+        bind.addImageFab.hide()
+        bind.addPhotoFab.hide()
+        bind.addImageActionText.visibility = View.GONE
+        bind.addPhotoActionText.visibility = View.GONE
+
+
+        ViewCompat.animate(bind.fabAttachment)
+            .rotation(0f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+
+
+
+        ViewCompat.animate(bind.addPhotoFab)
+            .translationY(0f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+        ViewCompat.animate(bind.addPhotoActionText)
+            .translationY(0f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+        ViewCompat.animate(bind.addImageFab)
+            .translationY(0f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+        ViewCompat.animate(bind.addImageActionText)
+            .translationY(0f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+        // make the boolean variable false
+        // as we have set the sub FABs
+        // visibility to GONE
+        isAllFabsVisible = false;
+    }
+
+    private fun showAllAnimation(interpolator: OvershootInterpolator){
+        // when isAllFabsVisible becomes
+        // true make all the action name
+        // texts and FABs VISIBLE.
+
+
+        //bind.fabAttachment.rotation = 90.0F
+        ViewCompat.animate(bind.fabAttachment)
+            .rotation(90f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+
+
+        bind.addImageFab.show()
+        bind.addPhotoFab.show()
+        bind.addImageActionText.visibility = View.VISIBLE
+        bind.addPhotoActionText.visibility = View.VISIBLE
+
+
+        ViewCompat.animate(bind.addPhotoFab)
+            .translationY(-300f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+        ViewCompat.animate(bind.addPhotoActionText)
+            .translationY(-300f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+        ViewCompat.animate(bind.addImageFab)
+            .translationY(-150f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+        ViewCompat.animate(bind.addImageActionText)
+            .translationY(-150f)
+            .withLayer()
+            .setDuration(300)
+            .setInterpolator(interpolator).start()
+
+
+        // make the boolean variable true as
+        // we have set the sub FABs
+        // visibility to GONE
+        isAllFabsVisible = true;
+    }
 
 
 }
