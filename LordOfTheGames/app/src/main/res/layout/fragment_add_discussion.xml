@@ -1,90 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context=".Community.DiscussionCreateFragment"
-    android:layout_marginTop="?attr/actionBarSize">
+    >
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/lbl_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:text="Insert title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_Title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/lbl_title"
-        android:hint="Insert title here..."
-        />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lbl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Insert title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insert title here..."
+            app:layout_constraintTop_toBottomOf="@id/lbl_title" />
 
 
-    <TextView
-        android:id="@+id/lbl_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:text="Insert content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_Title" />
+        <TextView
+            android:id="@+id/lbl_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="Insert content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_Title" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/et_Content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_Content"
+            android:layout_width="match_parent"
+            android:layout_height="345dp"
+            android:gravity="start"
+            android:hint="Insert Note Here"
+            app:layout_constraintTop_toBottomOf="@id/lbl_text" />
+
+        <ImageButton
+            android:id="@+id/post_img"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:gravity="center"
+
+            android:scaleType="centerCrop"
+            android:src="@mipmap/gabibbo_blade_of_striscia"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_Content">
+
+        </ImageButton>
+
+
+        <Button
+            android:id="@+id/btn_save_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Save"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_img" />
+
+
+        <Button
+            android:id="@+id/btn_nope_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Nope"
+            app:layout_constraintStart_toEndOf="@id/btn_save_post"
+            app:layout_constraintTop_toTopOf="@+id/btn_save_post" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="345dp"
-        android:gravity="start"
-        android:hint="Insert Note Here"
-        app:layout_constraintTop_toBottomOf="@id/lbl_text" />
-
-    <ImageButton
-        android:id="@+id/post_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-
-        android:visibility="gone"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-
-        android:gravity="center"
-        android:src="@mipmap/gabibbo_blade_of_striscia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@id/et_Content">
-
-    </ImageButton>
-
-
-
-    <Button
-        android:id="@+id/btn_save_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="Save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_img" />
-
-
-    <Button
-        android:id="@+id/btn_nope_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="Nope"
-        app:layout_constraintStart_toEndOf="@id/btn_save_post"
-        app:layout_constraintTop_toTopOf="@+id/btn_save_post" />
-
-
-
+        android:layout_height="match_parent"
+        >
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_image_fab"
@@ -145,10 +164,10 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="@dimen/fab_margin"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/baseline_attachment_24"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_attachment_24" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

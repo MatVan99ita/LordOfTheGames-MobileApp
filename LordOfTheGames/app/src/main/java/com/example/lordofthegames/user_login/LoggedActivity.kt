@@ -29,12 +29,7 @@ class LoggedActivity: AppCompatActivity() {
     private var savedInstanceState: Bundle? = null
     private lateinit var toolbar: Toolbar
 
-    /**TODO: ggiungere a login e signin il ritorno alla sezione scelta, se è solo per vedere
-     *  i dettagli si torna sui dettagli dell'utente
-     *  quando si è nel game list e si clicca sul bottone di edit del gioco
-     *  se non c'è accesso bisogna farlo fare e mettere un bundle all'activity sull'activity precedente
-     *  se si va sulla lista perosnale senza aver eseguito l'accesso si va al login diretto
-     *  e se si torna indoetro bisogna rimettere la home base
+    /**TODO:
         *
      *  DALLE SPECIFICHE: mappa utente - grafico andamento - achievement
         *

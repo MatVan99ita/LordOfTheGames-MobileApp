@@ -187,7 +187,6 @@ class DiscussionCreateFragment: Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.e("BANANA", "BANANA")
         cameraExecutor.shutdown()
     }
 
