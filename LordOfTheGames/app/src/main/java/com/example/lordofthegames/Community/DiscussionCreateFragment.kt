@@ -1,18 +1,19 @@
 package com.example.lordofthegames.Community
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -21,9 +22,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
-import com.example.lordofthegames.db_entities.Discussion
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Base64
+import java.nio.charset.StandardCharsets
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -35,6 +35,7 @@ class DiscussionCreateFragment: Fragment() {
     private lateinit var viewm: DiscussionViewModel
     private var isAllFabsVisible = false
     private lateinit var cameraExecutor: ExecutorService
+    private var game_id: Int = -1
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +50,8 @@ class DiscussionCreateFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val interpolator = OvershootInterpolator()
+        val game_title = arguments?.getString("game_title")
+        game_id = viewm.getGameId(title = game_title)
 
         // Now set all the FABs and all the action name
         // texts as GONE
@@ -340,6 +343,9 @@ class DiscussionCreateFragment: Fragment() {
 
     fun createDiscussion(){
 
+        val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val s = sp.getString("email", "mail")!!
+
         if(bind.etTitle.text?.trim()?.equals("") == true){
             Utilities.showaToast(requireContext(), "Manca un titolo")
         }
@@ -350,14 +356,13 @@ class DiscussionCreateFragment: Fragment() {
         //val d = Discussion(0, )
 
 
-//        viewm.saveNewDiscussion(
-//            title = bind.etTitle.text?.toString(),
-//            content = bind.etContent.text?.toString(),
-//            usr = ,
-//            game = ,
-//            img = if(img is null) [] else [1,2,3]
-//        )
-
+        viewm.saveNewDiscussion(
+            title = bind.etTitle.text?.toString()!!,
+            content = bind.etContent.text?.toString()!!,
+            usr = s,
+            game = game_id,
+            img = String(Utilities.convertBitmapToByteArray((bind.postImg.getDrawable() as BitmapDrawable).bitmap)!!, StandardCharsets.UTF_8)
+        )
     }
 
     fun deleteDiscussion(){

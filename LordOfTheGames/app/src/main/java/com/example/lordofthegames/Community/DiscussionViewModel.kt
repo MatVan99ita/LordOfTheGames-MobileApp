@@ -82,4 +82,20 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         )
     }
 
+    fun getGameId(title: String?): Int {
+        return repo.getGameDetail(title!!).game_id
+    }
+
+    fun saveNewDiscussion(title: String, content: String, usr: String, game: Int, img: String?): Long {
+        return repo.saveNewDiscussion(
+            Discussion(
+                title = title,
+                content = content,
+                user_ref = usr,
+                game_ref = game,
+                img = img
+            )
+        )
+    }
+
 }

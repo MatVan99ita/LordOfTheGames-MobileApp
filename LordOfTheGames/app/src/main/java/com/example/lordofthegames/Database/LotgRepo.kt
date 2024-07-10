@@ -199,5 +199,9 @@ class LotgRepo(application: Application) {
         return lotgDao.insertComment(comments)
     }
 
+    fun saveNewDiscussion(discussion: Discussion): Long {
+        return lotgDao.insertDiscussion(discussion)
+    }
+
 
 }

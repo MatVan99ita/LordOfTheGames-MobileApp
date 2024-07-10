@@ -22,8 +22,9 @@ import java.util.Date
 )
 data class Discussion(
 
+
     @PrimaryKey(autoGenerate = true)
-    var discussion_id: Int,
+    var discussion_id: Int = 0,
     var title: String,
     var content: String,
     /**
@@ -35,4 +36,7 @@ data class Discussion(
     var game_ref: Int,
     var user_ref: String,
 
-)
+    var img: String? = null
+
+){
+}
