@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
+import com.example.lordofthegames.db_entities.Discussion
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.Base64
 import java.util.concurrent.ExecutorService
@@ -151,6 +152,9 @@ class DiscussionCreateFragment: Fragment() {
                 }
                 .show()
         }
+
+        bind.btnSavePost.setOnClickListener { this.createDiscussion() }
+        bind.btnNopePost.setOnClickListener { this.deleteDiscussion() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -332,6 +336,32 @@ class DiscussionCreateFragment: Fragment() {
         // we have set the sub FABs
         // visibility to GONE
         isAllFabsVisible = true;
+    }
+
+    fun createDiscussion(){
+
+        if(bind.etTitle.text?.trim()?.equals("") == true){
+            Utilities.showaToast(requireContext(), "Manca un titolo")
+        }
+        if(bind.etContent.text?.trim()?.equals("") == true){
+            Utilities.showaToast(requireContext(), "Manca il contenuto")
+        }
+
+        //val d = Discussion(0, )
+
+
+//        viewm.saveNewDiscussion(
+//            title = bind.etTitle.text?.toString(),
+//            content = bind.etContent.text?.toString(),
+//            usr = ,
+//            game = ,
+//            img = if(img is null) [] else [1,2,3]
+//        )
+
+    }
+
+    fun deleteDiscussion(){
+        //fuck go back
     }
 
 

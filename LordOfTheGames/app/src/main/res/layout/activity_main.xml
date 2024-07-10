@@ -13,19 +13,18 @@
 
         <include layout="@layout/topbar"/>
 
-        <include layout="@layout/bottom_navigation_view" android:id="@+id/bottom"/>
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/fragment_container_view"
             app:layout_constraintBottom_toTopOf="@id/bottom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <include layout="@layout/bottom_navigation_view" android:id="@+id/bottom"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

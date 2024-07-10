@@ -35,7 +35,8 @@ class CommunityActivity: AppCompatActivity() {
         val bundle = Bundle()
         val title = intent.getStringExtra("game_title").toString()
         string = title
-        bundle.putString("game_title", title) // put image data in Intent
+        bundle.putString("game_title", title)
+
         //drawerLayout = findViewById(R.id.community_activity_drawer)
 
 
