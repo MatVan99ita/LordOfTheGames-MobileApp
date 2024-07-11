@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7d0f410e1016bdfc3341948912fc1267",
+    "identityHash": "fb736fc334b62f1dd5f7e22d752c5ce6",
     "entities": [
       {
         "tableName": "achievement",
@@ -187,7 +187,7 @@
       },
       {
         "tableName": "discussion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, `img` TEXT, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "discussion_id",
@@ -218,6 +218,12 @@
             "columnName": "user_ref",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "img",
+            "columnName": "img",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -829,7 +835,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7d0f410e1016bdfc3341948912fc1267')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb736fc334b62f1dd5f7e22d752c5ce6')"
     ]
   }
 }
