@@ -3,6 +3,7 @@ package com.example.lordofthegames.Community
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,6 +106,19 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
     }
 
     override fun onItemClick(view: View, position: Int) {
+        when(view.id){
+            R.id.up_img -> upvote(1)
+            R.id.down_img -> downvote(1)
+        }
+    }
+
+    fun upvote(comment_id: Int){
+        Log.e("IPPONEP", "+1")
+
+    }
+
+    fun downvote(comment_id: Int){
+        Log.e("IPPONEP", "-1")
     }
 
 }

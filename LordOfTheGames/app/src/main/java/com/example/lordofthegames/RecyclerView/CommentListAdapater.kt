@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
@@ -49,25 +50,14 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
 
 
     inner class CommentListHolder(itemView: View, lister: OnItemListener) :
-        RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        RecyclerView.ViewHolder(itemView){
 
         val user_nick: TextView = itemView.findViewById(R.id.user_nick)
         val comment_content: TextView = itemView.findViewById(R.id.comment_content)
         val down_count: TextView = itemView.findViewById(R.id.down_count)
         val up_count: TextView = itemView.findViewById(R.id.up_count)
-        val up_btn:
 
-        private val onItemListener: OnItemListener = lister
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(p0: View?) {
-            onItemListener.onItemClick(itemView, adapterPosition)
-            p0?.id
-                ?.let { activity.resources.getResourceEntryName(it) }
-                ?.let { Log.i("IPPONEP", it) }
-        }
+        // val up_btn: ImageButton = itemView.findViewById(R.id.up_img)
+        // val down_btn: ImageButton = itemView.findViewById(R.id.down_img)
     }
 }
