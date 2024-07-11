@@ -7,17 +7,18 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -35,6 +36,7 @@ class DiscussionCreateFragment: Fragment() {
     private lateinit var viewm: DiscussionViewModel
     private var isAllFabsVisible = false
     private lateinit var cameraExecutor: ExecutorService
+    private var c_img: String? = null
     private var game_id: Int = -1
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -171,8 +173,12 @@ class DiscussionCreateFragment: Fragment() {
                     // L'immagine è stata catturata con successo dalla fotocamera
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     img = imageBitmap
+
+                    this.c_img = String(Utilities.convertBitmapToByteArray(img)!!, StandardCharsets.UTF_8)
+
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
                     bind.postImg.setImageBitmap(imageBitmap)
+
                     bind.postImg.visibility = View.VISIBLE
                     hideAllAnimation(OvershootInterpolator())
                 }
@@ -181,7 +187,7 @@ class DiscussionCreateFragment: Fragment() {
                     val selectedImageBitmap = data?.data //.extras?.get("data") as Bitmap
                     // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
                     img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
-
+                    this.c_img = String(Utilities.convertBitmapToByteArray(img)!!, StandardCharsets.UTF_8)
                     bind.postImg.setImageURI(selectedImageBitmap)
                     bind.postImg.visibility = View.VISIBLE
                     hideAllAnimation(OvershootInterpolator())
@@ -344,7 +350,7 @@ class DiscussionCreateFragment: Fragment() {
     fun createDiscussion(){
 
         val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val s = sp.getString("email", "mail")!!
+        val s = sp.getString("nickname", "besugo")!!
 
         if(bind.etTitle.text?.trim()?.equals("") == true){
             Utilities.showaToast(requireContext(), "Manca un titolo")
@@ -353,20 +359,33 @@ class DiscussionCreateFragment: Fragment() {
             Utilities.showaToast(requireContext(), "Manca il contenuto")
         }
 
-        //val d = Discussion(0, )
-
-
-        viewm.saveNewDiscussion(
+        val disc_id = viewm.saveNewDiscussion(
             title = bind.etTitle.text?.toString()!!,
             content = bind.etContent.text?.toString()!!,
             usr = s,
             game = game_id,
-            img = String(Utilities.convertBitmapToByteArray((bind.postImg.getDrawable() as BitmapDrawable).bitmap)!!, StandardCharsets.UTF_8)
+            img = if(c_img != null) c_img else null
+        )
+
+
+
+        val bundle = Bundle()
+        bundle.putInt("discussion_id", disc_id.toInt())
+
+        Utilities.insertFragment(
+            requireActivity() as AppCompatActivity,
+            DiscussionSpecificFragment(),
+            DiscussionSpecificFragment::class.java.simpleName,
+            bundle,
         )
     }
 
-    fun deleteDiscussion(){
+    fun deleteDiscussion() {
         //fuck go back
+
+        fragmentManager?.popBackStack()
+
+
     }
 
 

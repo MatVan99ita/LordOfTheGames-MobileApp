@@ -255,7 +255,7 @@ interface LotgDao {
 
     @Query("SELECT \n" +
            "    g.game_id, \n" +
-           "    d.discussion_id, d.title, d.content, d.user_ref, \n" +
+           "    d.*, \n" +
            "    COALESCE(SUM(c.comment_like - c.comment_dislike), 0) AS TotaleLike,\n" +
            "    COUNT(c.comment_id) AS NumeroCommenti\n" +
            "FROM \n" +

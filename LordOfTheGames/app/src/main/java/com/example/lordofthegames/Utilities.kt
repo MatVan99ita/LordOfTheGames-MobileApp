@@ -41,6 +41,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Community.CommunitySpecificFragment
+import com.example.lordofthegames.Community.DiscussionCreateFragment
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
@@ -124,7 +125,8 @@ class Utilities {
                 fragment !is GameDetFragment &&
                 fragment !is SettingsFragment &&
                 fragment !is LoggedInFragment &&
-                fragment !is CommunitySpecificFragment
+                fragment !is CommunitySpecificFragment //&&
+                //fragment !is DiscussionCreateFragment
             ) {
                 transaction.addToBackStack(tag);
             }
