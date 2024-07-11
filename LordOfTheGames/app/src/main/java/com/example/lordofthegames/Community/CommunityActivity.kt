@@ -36,8 +36,8 @@ class CommunityActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityCommunityBinding.inflate(layoutInflater)
-        setContentView(bind.root/*R.layout.activity_community*/)
-        //actionBarDrawerToggle = Utilities.setUpDrawer(findViewById(R.id.game_det_drawer), )
+        setContentView(bind.root)
+        
         discussion_intent = intent
         val bundle = Bundle()
         val title = intent.getStringExtra("game_title").toString()

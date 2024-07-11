@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentDiscussionContentSpecificBinding
 import com.example.lordofthegames.db_entities.Comments
@@ -102,7 +103,6 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
             (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
-
 
     override fun onItemClick(view: View, position: Int) {
     }

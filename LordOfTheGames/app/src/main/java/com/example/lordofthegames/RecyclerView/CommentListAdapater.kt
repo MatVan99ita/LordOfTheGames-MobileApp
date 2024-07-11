@@ -1,6 +1,7 @@
 package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         holder.down_count.text = "${item.comment_dislike}"
         holder.up_count.text = "${item.comment_like}"
         holder.user_nick.text = item.user_ref
+
+
     }
 
 
@@ -52,6 +55,7 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         val comment_content: TextView = itemView.findViewById(R.id.comment_content)
         val down_count: TextView = itemView.findViewById(R.id.down_count)
         val up_count: TextView = itemView.findViewById(R.id.up_count)
+        val up_btn:
 
         private val onItemListener: OnItemListener = lister
 
@@ -61,6 +65,9 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
 
         override fun onClick(p0: View?) {
             onItemListener.onItemClick(itemView, adapterPosition)
+            p0?.id
+                ?.let { activity.resources.getResourceEntryName(it) }
+                ?.let { Log.i("IPPONEP", it) }
         }
     }
 }
