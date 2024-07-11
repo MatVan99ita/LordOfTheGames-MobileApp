@@ -267,7 +267,9 @@ interface LotgDao {
            "WHERE\n" +
            "    g.game_title = :game_title \n" +
            "GROUP BY \n" +
-           "    g.game_title, d.title;")
+           "    g.game_title, d.title\n" +
+           "ORDER BY \n" +
+           "    d.discussion_id DESC;")
     fun selectAllDiscussion(game_title: String): Cursor
 
 
