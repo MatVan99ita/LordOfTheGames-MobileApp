@@ -25,6 +25,12 @@ class CommunityActivity: AppCompatActivity() {
     private var game_ref: Int = -1
     private lateinit var bind: ActivityCommunityBinding
 
+    /* TODO: ~ invertire i counter per like e commenti delle discussioni
+             ~ aggiungere l'update di like e dislike sui commenti
+             ~ ordinare i commenti sempre per l'ultimo inserito per primo
+             ~ sistemare le immagini se ci sono nelle discussioni
+     * */
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
