@@ -31,8 +31,8 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         val item: Comments = list[position]
 
         holder.comment_content.text = item.content
-        holder.down_count.text = "${item.comment_like}"
-        holder.up_count.text = "${item.comment_dislike}"
+        holder.down_count.text = "${item.comment_dislike}"
+        holder.up_count.text = "${item.comment_like}"
         holder.user_nick.text = item.user_ref
     }
 

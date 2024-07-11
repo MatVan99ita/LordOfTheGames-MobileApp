@@ -20,8 +20,8 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         val l = arrayListOf<DiscussionItem>()
         while (c.moveToNext()){
             l.add(
-                DiscussionItem(
-                    Discussion(
+                DiscussionItem (
+                    Discussion (
                         discussion_id = c.getInt(c.getColumnIndexOrThrow("discussion_id")),
                         title = c.getString(c.getColumnIndexOrThrow("title")),
                         content = c.getString(c.getColumnIndexOrThrow("content")),
@@ -29,8 +29,8 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
                         user_ref = c.getString(c.getColumnIndexOrThrow("user_ref")),
                         img = c.getString(c.getColumnIndexOrThrow("img")),
                     ),
-                    c.getInt(c.getColumnIndexOrThrow("TotaleLike")),
-                    c.getInt(c.getColumnIndexOrThrow("NumeroCommenti")),
+                    totaleLike = c.getInt(c.getColumnIndexOrThrow("TotaleLike")),
+                    totComment = c.getInt(c.getColumnIndexOrThrow("NumeroCommenti")),
                 )
             )
         }

@@ -25,10 +25,11 @@ class CommunityActivity: AppCompatActivity() {
     private var game_ref: Int = -1
     private lateinit var bind: ActivityCommunityBinding
 
-    /* TODO: ~ invertire i counter per like e commenti delle discussioni
-             ~ aggiungere l'update di like e dislike sui commenti
-             ~ ordinare i commenti sempre per l'ultimo inserito per primo
+    /* TODO: ~ aggiungere l'update di like e dislike sui commenti
              ~ sistemare le immagini se ci sono nelle discussioni
+             ~ aggiungere un sistema di gestione dei troppi like
+                val tot_like: Long = totale_like
+                se 1000 -> 1.0k fino a 999.0k -> 1.0Mln/M
      * */
 
 

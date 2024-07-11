@@ -36,6 +36,7 @@ class CommunitySpecificFragment: Fragment(), OnItemListener {
         bind = FragmentCommunitySpecificBinding.inflate(layoutInflater, container, false);
         list = viewm.selectAllDiscussion(requireActivity().intent.getStringExtra("game_title").toString())
 
+
         list.forEach { el -> Log.i("OnCreateViewDSF", el.toString()) }
 
         adapter = DiscussionSpecificAdapter(requireActivity(), this, list,)

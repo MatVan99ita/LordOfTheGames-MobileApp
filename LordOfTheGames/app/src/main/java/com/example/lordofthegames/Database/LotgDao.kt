@@ -283,7 +283,9 @@ interface LotgDao {
            "    comment, discussion " +
            "ON discussion_ref = discussion_id " +
            "WHERE " +
-           "    discussion_id = :discussion_id")
+           "    discussion_id = :discussion_id \n" +
+           "ORDER BY \n" +
+           "   comment_id DESC;")
     fun selectCommentFromDiscussion(discussion_id: Int): Cursor
 
 

@@ -44,8 +44,8 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
 
         var discussion_title: TextView= itemView.findViewById(R.id.discussion_title)
         var discussion_content: TextView = itemView.findViewById(R.id.discussion_content)
-        var discussion_likes: TextView = itemView.findViewById(R.id.comment_count)
-        var discussion_comments: TextView = itemView.findViewById(R.id.like_count)
+        var discussion_likes: TextView = itemView.findViewById(R.id.like_count)
+        var discussion_comments: TextView = itemView.findViewById(R.id.comment_count)
         var discussion_user: TextView = itemView.findViewById(R.id.discussion_user)
 
         private val onItemListener: OnItemListener = lister
