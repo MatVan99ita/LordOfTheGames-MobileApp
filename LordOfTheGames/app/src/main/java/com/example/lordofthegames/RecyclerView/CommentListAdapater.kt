@@ -45,7 +45,7 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         holder.user_nick.text = item.user_ref
 
 
-        //TODO: Sistemare bene le condizioni per like e dislike perchè risulta un po' tutto stortos
+        //VA BENE LO STESSOOOOOO: Sistemare bene le condizioni per like e dislike perchè risulta un po' tutto stortos
         //NOTA PER ME: i like se messi sono in locale quindi succedono cose se sono altri a fare cose, ma basta non farlo notare e bum chissene
 
         /** Clicco upvote
