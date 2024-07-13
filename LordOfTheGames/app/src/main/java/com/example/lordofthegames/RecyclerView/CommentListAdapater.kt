@@ -44,24 +44,38 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         holder.up_count.text = "${item.comment_like}"
         holder.user_nick.text = item.user_ref
 
-        holder.up_btn.setOnClickListener {
-            if(like_inserted > 0){
 
-                if(viewm.deUpComment(item.comment_id) < 0){
+        //TODO: Sistemare bene le condizioni per like e dislike
+
+        /** Clicco upvote
+         * se non c'è nulla -> like
+         * se dislike è stato premuto -> like e deDislike
+         * se like è premuto -> deLike
+          */
+        holder.up_btn.setOnClickListener {
+
+            if(like_inserted == 0){
+                if(viewm.upComment(item.comment_id) < 0) {
                     Utilities.showaToast(activity, "Error")
                 } else {
-                    like_inserted--
-                    item.comment_like = item.comment_like!! - 1
+                    like_inserted++
+                    item.comment_like = item.comment_like!! + 1
                     holder.up_count.text = "${item.comment_like}"
-
-                    holder.up_btn.clearColorFilter()
+                    holder.up_btn.setColorFilter(
+                        ContextCompat.getColor(
+                            activity,
+                            R.color.purple_500
+                        ), PorterDuff.Mode.SRC_IN
+                    )
                 }
-            } else {
 
-                if (viewm.upComment(item.comment_id) < 0) {
+            } else if(like_inserted == 0 && dislike_inserted > 0){
+
+                if ( viewm.upComment(item.comment_id) < 0 &&
+                    viewm.deDownComment(item.comment_id) < 0) {
                     Utilities.showaToast(
                         activity,
-                        "Cannot Like comment"
+                        "Cannot Change opinion"
                     )
                 }
                 else {
@@ -74,17 +88,84 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
                             R.color.purple_500
                         ), PorterDuff.Mode.SRC_IN
                     )
+
+                    dislike_inserted --
+                    item.comment_dislike = item.comment_dislike!! - 1
+                    holder.down_count.text = "${item.comment_dislike}"
+                    holder.down_btn.clearColorFilter()
+                }
+
+            } else if (like_inserted > 0){
+
+                if(viewm.deUpComment(item.comment_id) < 0) {
+                    Utilities.showaToast(activity, "Error")
+                } else {
+                    like_inserted--
+                    item.comment_like = item.comment_like!! - 1
+                    holder.up_count.text = "${item.comment_like}"
+                    holder.up_btn.clearColorFilter()
                 }
             }
-
         }
 
+        /** Clicco downvote
+         * se non c'è nulla -> dislike
+         * se like è stato premuto -> delike e dislike
+         * se dislike è premuto -> deDislike
+         */
         holder.down_btn.setOnClickListener {
-            if(viewm.dowmComment(item.comment_id) < 0) Utilities.showaToast(activity, "Cannot Dislike comment")
-            else {
-                dislike_inserted++
-                item.comment_dislike = item.comment_dislike!! + 1
-                holder.down_count.text = "${item.comment_dislike}"
+
+            if(dislike_inserted == 0){
+                if(viewm.dowmComment(item.comment_id) < 0) {
+                    Utilities.showaToast(activity, "Error")
+                } else {
+                    dislike_inserted++
+                    item.comment_dislike = item.comment_dislike!! + 1
+                    holder.down_count.text = "${item.comment_dislike}"
+                    holder.up_btn.setColorFilter(
+                        ContextCompat.getColor(
+                            activity,
+                            R.color.red_light_primary
+                        ), PorterDuff.Mode.SRC_IN
+                    )
+                }
+
+            } else if(like_inserted == 0 && dislike_inserted > 0){
+
+                if ( viewm.upComment(item.comment_id) < 0 &&
+                    viewm.deDownComment(item.comment_id) < 0) {
+                    Utilities.showaToast(
+                        activity,
+                        "Cannot Change opinion"
+                    )
+                }
+                else {
+                    like_inserted++
+                    item.comment_like = item.comment_like!! + 1
+                    holder.up_count.text = "${item.comment_like}"
+                    holder.up_btn.setColorFilter(
+                        ContextCompat.getColor(
+                            activity,
+                            R.color.red_light_primary
+                        ), PorterDuff.Mode.SRC_IN
+                    )
+
+                    dislike_inserted --
+                    item.comment_dislike = item.comment_dislike!! - 1
+                    holder.down_count.text = "${item.comment_dislike}"
+                    holder.down_btn.clearColorFilter()
+                }
+
+            } else if (like_inserted > 0){
+
+                if(viewm.deUpComment(item.comment_id) < 0) {
+                    Utilities.showaToast(activity, "Error")
+                } else {
+                    like_inserted--
+                    item.comment_like = item.comment_like!! - 1
+                    holder.up_count.text = "${item.comment_like}"
+                    holder.up_btn.clearColorFilter()
+                }
             }
         }
 
