@@ -45,7 +45,8 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
         holder.user_nick.text = item.user_ref
 
 
-        //TODO: Sistemare bene le condizioni per like e dislike
+        //TODO: Sistemare bene le condizioni per like e dislike perchè risulta un po' tutto stortos
+        //NOTA PER ME: i like se messi sono in locale quindi succedono cose se sono altri a fare cose, ma basta non farlo notare e bum chissene
 
         /** Clicco upvote
          * se non c'è nulla -> like
@@ -54,7 +55,7 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
           */
         holder.up_btn.setOnClickListener {
 
-            if(like_inserted == 0){
+            if(like_inserted == 0 && dislike_inserted == 0){
                 if(viewm.upComment(item.comment_id) < 0) {
                     Utilities.showaToast(activity, "Error")
                 } else {
@@ -95,7 +96,7 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
                     holder.down_btn.clearColorFilter()
                 }
 
-            } else if (like_inserted > 0){
+            } else if (like_inserted > 0 && dislike_inserted == 0){
 
                 if(viewm.deUpComment(item.comment_id) < 0) {
                     Utilities.showaToast(activity, "Error")
@@ -115,14 +116,14 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
          */
         holder.down_btn.setOnClickListener {
 
-            if(dislike_inserted == 0){
+            if(dislike_inserted == 0 && like_inserted == 0){
                 if(viewm.dowmComment(item.comment_id) < 0) {
                     Utilities.showaToast(activity, "Error")
                 } else {
                     dislike_inserted++
                     item.comment_dislike = item.comment_dislike!! + 1
                     holder.down_count.text = "${item.comment_dislike}"
-                    holder.up_btn.setColorFilter(
+                    holder.down_btn.setColorFilter(
                         ContextCompat.getColor(
                             activity,
                             R.color.red_light_primary
@@ -156,15 +157,15 @@ class CommentListAdapater(var activity: Activity, var listener: OnItemListener, 
                     holder.down_btn.clearColorFilter()
                 }
 
-            } else if (like_inserted > 0){
+            } else if (dislike_inserted > 0){
 
                 if(viewm.deUpComment(item.comment_id) < 0) {
                     Utilities.showaToast(activity, "Error")
                 } else {
-                    like_inserted--
-                    item.comment_like = item.comment_like!! - 1
-                    holder.up_count.text = "${item.comment_like}"
-                    holder.up_btn.clearColorFilter()
+                    dislike_inserted--
+                    item.comment_dislike = item.comment_dislike!! - 1
+                    holder.down_count.text = "${item.comment_dislike}"
+                    holder.down_btn.clearColorFilter()
                 }
             }
         }
