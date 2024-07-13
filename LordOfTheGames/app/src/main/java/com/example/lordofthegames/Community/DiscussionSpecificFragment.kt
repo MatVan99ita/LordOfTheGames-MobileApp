@@ -47,7 +47,7 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
                     viewm.getDiscussionComments(discussion_id),
                 )
 
-            adapter = CommentListAdapater(requireActivity(), this, disccussion.second)
+            adapter = CommentListAdapater(requireActivity(), this, disccussion.second, viewm)
         }
 
         return binding.root
@@ -106,19 +106,7 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
     }
 
     override fun onItemClick(view: View, position: Int) {
-        when(view.id){
-            R.id.up_img -> upvote(1)
-            R.id.down_img -> downvote(1)
-        }
-    }
 
-    fun upvote(comment_id: Int){
-        Log.e("IPPONEP", "+1")
-
-    }
-
-    fun downvote(comment_id: Int){
-        Log.e("IPPONEP", "-1")
     }
 
 }

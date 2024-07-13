@@ -203,5 +203,21 @@ class LotgRepo(application: Application) {
         return lotgDao.insertDiscussion(discussion)
     }
 
+    fun upComment(commentId: Int): Int {
+        return lotgDao.upComment(commentId)
+    }
+
+    fun downComment(commentId: Int): Int {
+        return lotgDao.downComment(commentId)
+    }
+
+    fun deUpComment(commentId: Int): Int {
+        return lotgDao.deUpComment(commentId)
+    }
+
+    fun deDownComment(commentId: Int): Int{
+        return lotgDao.deDownComment(commentId)
+    }
+
 
 }

@@ -99,4 +99,20 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         )
     }
 
+    fun upComment(commentId: Int): Int {
+        return repo.upComment(commentId)
+    }
+
+    fun dowmComment(commentId: Int): Int {
+        return repo.downComment(commentId)
+    }
+
+    fun deUpComment(commentId: Int): Int {
+        return repo.deUpComment(commentId)
+    }
+
+    fun deDownComment(commentId: Int): Int{
+        return repo.deDownComment(commentId)
+    }
+
 }

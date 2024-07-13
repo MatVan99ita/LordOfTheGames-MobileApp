@@ -8,6 +8,7 @@ import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -353,6 +354,24 @@ interface LotgDao {
     @Insert(Notification::class)
     fun sendNotificaton(n: Notification): Long
 
+    @Query("UPDATE comment\n" +
+            "SET comment_like = comment_like + 1\n" +
+            "WHERE comment_id = :commentId;")
+    fun upComment(commentId: Int): Int
+
+    @Query("UPDATE comment\n" +
+            "SET comment_dislike = comment_dislike + 1\n" +
+            "WHERE comment_id = :commentId;")
+    fun downComment(commentId: Int): Int
+
+    @Query("UPDATE comment\n" +
+            "SET comment_dislike = comment_like - 1\n" +
+            "WHERE comment_id = :commentId;")
+    fun deUpComment(commentId: Int): Int
+    @Query("UPDATE comment\n" +
+            "SET comment_dislike = comment_dislike - 1\n" +
+            "WHERE comment_id = :commentId;")
+    fun deDownComment(commentId: Int): Int
 
 }
 

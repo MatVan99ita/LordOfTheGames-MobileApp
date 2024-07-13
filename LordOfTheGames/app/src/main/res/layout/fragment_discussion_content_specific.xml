@@ -104,12 +104,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_comments"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constrainedHeight="true"
-        app:layout_constraintTop_toBottomOf="@+id/discussion_specific_user"
-        tools:layout_editor_absoluteX="5dp"
         app:layout_constraintBottom_toTopOf="@id/layoutInsertComment"
+        app:layout_constraintTop_toBottomOf="@+id/discussion_specific_user"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/comment_item" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
