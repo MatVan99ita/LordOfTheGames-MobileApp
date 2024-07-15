@@ -275,7 +275,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 )
             }
 
-            if (i >= 1) {
+            if (i >= 0) {
                 Utilities.showaToast(requireContext(), "Achievement aggiornato")
             } else {
                 Utilities.showaToast(requireContext(), "Errore update")
@@ -293,21 +293,12 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     override fun onItemClick(view: View, position: Int) {
 
-        Log.w("Belandi", "Belandi ${view.resources.getResourceEntryName(view.id)}")
-
         when(view.id){
 
             //Achievement
             R.id.single_card2, R.id.achievement_item_button_edit -> {
                 if(!frameLayout.isVisible){
                     frameLayout.visibility = View.VISIBLE
-
-                    /*
-                    frame_button_plus_one   =   R.id.btn_plus
-                    */
-
-
-
 
                     val item = achieve[position]
                     selectedItem = item
@@ -330,15 +321,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
                         }
                     }
                 }
-            //
             }
-            //Category
-            R.id.category_item -> Log.w("Belandi", "b")
-
-            //Platform
-            R.id.platform_item -> Log.w("Belandi", "c")
-
-
         }
     }
 

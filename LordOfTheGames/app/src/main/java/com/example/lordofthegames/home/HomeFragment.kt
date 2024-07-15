@@ -74,7 +74,7 @@ class HomeFragment: Fragment(), OnItemListener {
     ): View {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-        ///userViewModel.addItem(User("", "", ""))
+
         filterFrameLayout = view.findViewById(R.id.filter_home)
         bundle = arguments
         return view

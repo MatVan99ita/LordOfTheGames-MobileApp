@@ -130,9 +130,20 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
 
         while (l.moveToNext()){
-            s.add(GameCardItem(l.getString(0).toString(), l.getString(1).toString(), l.getInt(2)))
+            s.add(
+                GameCardItem(
+                    imageResource = l.getString(
+                        l.getColumnIndexOrThrow("game_cover")
+                    ).toString(),
+                    gameTitle = l.getString(
+                        l.getColumnIndexOrThrow("game_title")
+                    ).toString(),
+                    gameId = l.getInt(
+                        l.getColumnIndexOrThrow("game_id")
+                    )
+                )
+            )
         }
-        s.forEach{el -> Log.w("POCODIO4", el.toString())}
 
         return s
     }

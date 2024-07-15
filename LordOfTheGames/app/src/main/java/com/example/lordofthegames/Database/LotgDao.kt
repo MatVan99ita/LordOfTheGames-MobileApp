@@ -79,8 +79,7 @@ interface LotgDao {
     @Query("UPDATE UsersAchievement \n" +
             "SET actual_count = :actual\n" +
             "WHERE achieve_id = :achieve_id \n" +
-            "AND user_ref  = :user_ref;"
-    )
+            "AND user_ref  = :user_ref;")
     fun updateAchievement(achieve_id: Int, actual: Int, user_ref: String): Int
 
     @Query("UPDATE UsersAchievement " +
