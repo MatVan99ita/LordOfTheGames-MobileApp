@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 
 class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemListener, var list: List<DiscussionItem>):
     RecyclerView.Adapter<DiscussionSpecificAdapter.DiscussionSpecificHolder>() {
@@ -36,6 +38,14 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
         holder.discussion_comments.text = "${item.totComment}"
         holder.discussion_likes.text = "${item.totaleLike}"
         holder.discussion_user.text = "by ${item.discussion.user_ref}"
+        if(item.discussion.img != null){
+            holder.discussion_img.setImageBitmap(
+                Utilities.stringToBitmap(
+                    item.discussion.img
+                )
+            )
+            holder.discussion_img.visibility = View.VISIBLE
+        }
 
     }
 
@@ -47,6 +57,7 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
         var discussion_likes: TextView = itemView.findViewById(R.id.like_count)
         var discussion_comments: TextView = itemView.findViewById(R.id.comment_count)
         var discussion_user: TextView = itemView.findViewById(R.id.discussion_user)
+        val discussion_img: ImageView = itemView.findViewById(R.id.specific_post_img)
 
         private val onItemListener: OnItemListener = lister
 

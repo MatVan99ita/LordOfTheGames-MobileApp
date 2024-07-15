@@ -25,10 +25,6 @@ class CommunityActivity: AppCompatActivity() {
     private var game_ref: Int = -1
     private lateinit var bind: ActivityCommunityBinding
 
-    /* TODO: ~ sistemare le immagini se ci sono nelle discussioni
-     * */
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = ActivityCommunityBinding.inflate(layoutInflater)

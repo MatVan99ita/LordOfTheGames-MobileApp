@@ -37,13 +37,23 @@
 
         <TextView
             android:id="@+id/discussion_content"
-            android:layout_width="344dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="16dp"
             android:lines="2"
             android:text="@string/long_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discussion_title" />
+
+        <ImageView
+            android:id="@+id/specific_post_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:visibility="gone"
+            android:src="@mipmap/heart2_foreground"
+            app:layout_constraintBottom_toTopOf="@+id/like_count"
+            app:layout_constraintStart_toEndOf="@+id/discussion_content"
+            app:layout_constraintTop_toBottomOf="@+id/discussion_user" />
 
         <ImageView
             android:id="@+id/heart_img"
