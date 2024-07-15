@@ -96,5 +96,9 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.completeAchievement(achieve_id, user_ref)
     }
 
+    fun uaExist(user_ref: String, achieve_id: Int): Boolean{
+        return repository.uaExist(user_ref, achieve_id)
+    }
+
 
 }

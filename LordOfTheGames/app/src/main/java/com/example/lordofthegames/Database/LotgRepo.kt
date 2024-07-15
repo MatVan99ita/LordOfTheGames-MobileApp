@@ -223,5 +223,9 @@ class LotgRepo(application: Application) {
         return lotgDao.createAURecord(achieveId, userRef, actual, status)
     }
 
+    fun uaExist(userRef: String, achieveId: Int): Boolean {
+        return lotgDao.uaExist(userRef, achieveId)
+    }
+
 
 }

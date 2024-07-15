@@ -256,7 +256,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         btnFLAnnulla.setOnClickListener { frameLayout.visibility = View.GONE }
         btnFLSalva.setOnClickListener {
             val num: Int = if ("${editText.text}".toInt() > selectedItem!!.total_count) selectedItem!!.total_count else "${editText.text}".toInt()
-
+            val prev = selectedItem!!.actual_count
             if(selectedItem != null){
                 selectedItem!!.actual_count = num
             }
@@ -264,22 +264,35 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             recyclerViewAchievement.adapter = achievementCardAdapter
 
-            if(selectedItem!!.actual_count == 0){
-                //TODO: capire come gestire sta cosa dell'achievement che non c'è
-            }
-            var i = gameDetViewModel.updateAchievement(
-                achieve_id = selectedItem!!.achieve_id,
-                actual = selectedItem!!.actual_count,
-                user_ref = user_ref
-            )
-            if(selectedItem!!.actual_count >= selectedItem!!.total_count){
-                i += gameDetViewModel.completeAchievement(
+            var i = -1
+            var j: Long = -1L
+            if(!gameDetViewModel.uaExist(user_ref, selectedItem!!.achieve_id) ) {
+
+                 Log.e("CAZZOHOSCRITTO", "achieve_id = ${selectedItem!!.achieve_id}, \n"+
+                                                    "user_ref = $user_ref, \n"+
+                                                    "actual = ${selectedItem!!.actual_count}"
+                 )
+                j = gameDetViewModel.createUserAchievementRecord(
                     achieve_id = selectedItem!!.achieve_id,
+                    user_ref = user_ref,
+                    actual = selectedItem!!.actual_count,
+                    status = if(selectedItem!!.actual_count == selectedItem!!.total_count) 1 else 0
+                )
+            } else {
+                i = gameDetViewModel.updateAchievement(
+                    achieve_id = selectedItem!!.achieve_id,
+                    actual = selectedItem!!.actual_count,
                     user_ref = user_ref
                 )
+                if(selectedItem!!.actual_count >= selectedItem!!.total_count){
+                    i += gameDetViewModel.completeAchievement(
+                        achieve_id = selectedItem!!.achieve_id,
+                        user_ref = user_ref
+                    )
+                }
             }
 
-            if (i >= 0) {
+            if (i >= 0 || j >= 0.0F) {
                 Utilities.showaToast(requireContext(), "Achievement aggiornato")
             } else {
                 Utilities.showaToast(requireContext(), "Errore update")
