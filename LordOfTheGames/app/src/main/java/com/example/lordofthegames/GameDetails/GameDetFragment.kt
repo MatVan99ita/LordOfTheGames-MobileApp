@@ -279,18 +279,23 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     status = if(selectedItem!!.actual_count == selectedItem!!.total_count) 1 else 0
                 )
             } else {
-                i = gameDetViewModel.updateAchievement(
-                    achieve_id = selectedItem!!.achieve_id,
-                    actual = selectedItem!!.actual_count,
-                    user_ref = user_ref
-                )
                 if(selectedItem!!.actual_count >= selectedItem!!.total_count){
-                    i += gameDetViewModel.completeAchievement(
+                    i = gameDetViewModel.completeAchievement(
                         achieve_id = selectedItem!!.achieve_id,
                         user_ref = user_ref
                     )
+                } else {
+                    i = gameDetViewModel.updateAchievement(
+                        achieve_id = selectedItem!!.achieve_id,
+                        actual = selectedItem!!.actual_count,
+                        user_ref = user_ref
+                    )
                 }
+
             }
+
+
+
 
             if (i >= 0 || j >= 0.0F) {
                 Utilities.showaToast(requireContext(), "Achievement aggiornato")
