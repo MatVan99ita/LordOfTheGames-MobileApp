@@ -74,6 +74,15 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
             }
         }
 
+        if(disccussion.first.img != null) {
+            binding.discussionSpecificImg.visibility = View.VISIBLE
+
+            binding.discussionSpecificImg.setImageBitmap(
+                Utilities.stringToBitmap(
+                    disccussion.first.img!!
+                )
+            )
+        }
     }
 
     private fun insertComment(text: String): Long {

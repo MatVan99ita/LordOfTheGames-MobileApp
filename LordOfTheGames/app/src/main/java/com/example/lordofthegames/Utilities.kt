@@ -1,8 +1,6 @@
 package com.example.lordofthegames
 
 import android.Manifest.permission.POST_NOTIFICATIONS
-import android.app.Activity
-import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.UiModeManager
@@ -25,7 +23,6 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -41,7 +38,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Community.CommunitySpecificFragment
-import com.example.lordofthegames.Community.DiscussionCreateFragment
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.GameDetails.GameDetFragment
 import com.example.lordofthegames.Settings.SettingsActivity
@@ -52,13 +48,11 @@ import com.example.lordofthegames.home.NotificationViewModel
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedInFragment
-import com.example.lordofthegames.user_login.LoggedViewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.ColorTemplate.rgb
 import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
@@ -386,6 +380,29 @@ class Utilities {
             val decodedByteArray: ByteArray = Base64.getDecoder().decode(base64String)
             return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.size)
         }
+
+
+        /**PORCODIO**/
+        fun bitmapToString(bitmap: Bitmap, quality: Int = 50): String? {
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
+            val byteArray = byteArrayOutputStream.toByteArray()
+            return Base64.getEncoder().encodeToString(byteArray)
+        }
+
+        fun stringToBitmap(encodedString: String?): Bitmap? {
+            try {
+                val decodedString = Base64.getDecoder().decode(encodedString)
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
+                return null
+            }
+        }
+
+        /**PORCODIO**/
+
+
 
         fun showaToast(context: Context, testo: String){
             val duration = Toast.LENGTH_SHORT

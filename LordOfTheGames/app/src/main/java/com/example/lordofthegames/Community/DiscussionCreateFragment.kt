@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.charset.StandardCharsets
+import java.util.Arrays
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -174,7 +176,7 @@ class DiscussionCreateFragment: Fragment() {
                     val imageBitmap = data?.extras?.get("data") as Bitmap
                     img = imageBitmap
 
-                    this.c_img = String(Utilities.convertBitmapToByteArray(img)!!, StandardCharsets.UTF_8)
+                    this.c_img = Utilities.bitmapToString(img)
 
                     // Fai qualcosa con l'immagine (es. mostrala in un'ImageView)
                     bind.postImg.setImageBitmap(imageBitmap)
@@ -183,11 +185,13 @@ class DiscussionCreateFragment: Fragment() {
                     hideAllAnimation(OvershootInterpolator())
                 }
                 Utilities.GALLERY_REQUEST_CODE -> {
-                    // L'immagine è stata selezionata dalla galleria
-                    val selectedImageBitmap = data?.data //.extras?.get("data") as Bitmap
-                    // Fai qualcosa con l'URI dell'immagine (es. caricala in un'ImageView)
+
+                    val selectedImageBitmap = data?.data
+
                     img = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageBitmap)
-                    this.c_img = String(Utilities.convertBitmapToByteArray(img)!!, StandardCharsets.UTF_8)
+
+
+                    this.c_img =  Utilities.bitmapToString(img)
                     bind.postImg.setImageURI(selectedImageBitmap)
                     bind.postImg.visibility = View.VISIBLE
                     hideAllAnimation(OvershootInterpolator())
