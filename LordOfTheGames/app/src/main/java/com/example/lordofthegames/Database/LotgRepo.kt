@@ -219,5 +219,9 @@ class LotgRepo(application: Application) {
         return lotgDao.deDownComment(commentId)
     }
 
+    fun createAURecord(achieveId: Int, userRef: String, actual: Int, status: Int): Long {
+        return lotgDao.createAURecord(achieveId, userRef, actual, status)
+    }
+
 
 }

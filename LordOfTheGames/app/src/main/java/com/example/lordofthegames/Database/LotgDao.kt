@@ -372,5 +372,9 @@ interface LotgDao {
             "WHERE comment_id = :commentId;")
     fun deDownComment(commentId: Int): Int
 
+    //INSERT INTO notification (title, content, usr_ref) VALUES (:title, :content, :user_ref)")
+    @Query("INSERT INTO UsersAchievement (user_ref, achieve_id, actual_count, status) VALUES (:achieveId, :userRef, :actual, :status)")
+    fun createAURecord(achieveId: Int, userRef: String, actual: Int, status: Int): Long
+
 }
 

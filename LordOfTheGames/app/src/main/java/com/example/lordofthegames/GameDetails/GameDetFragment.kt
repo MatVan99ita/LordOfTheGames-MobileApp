@@ -263,6 +263,10 @@ class GameDetFragment: Fragment(), OnItemListener  {
             achievementCardAdapter!!.updateActualCount(Integer.valueOf(positionT.text.toString()), num)
 
             recyclerViewAchievement.adapter = achievementCardAdapter
+
+            if(selectedItem!!.actual_count == 0){
+                //TODO: capire come gestire sta cosa dell'achievement che non c'è
+            }
             var i = gameDetViewModel.updateAchievement(
                 achieve_id = selectedItem!!.achieve_id,
                 actual = selectedItem!!.actual_count,

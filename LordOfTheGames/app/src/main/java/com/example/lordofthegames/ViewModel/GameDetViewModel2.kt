@@ -82,6 +82,10 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return l
     }
 
+
+    fun createUserAchievementRecord(achieve_id: Int, user_ref: String, actual: Int, status: Int): Long{
+        return repository.createAURecord(achieve_id, user_ref, actual, status)
+    }
     fun updateGameStatus(game_status: String, game_id: Int, user_ref: String): Int {
         return repository.updateGameStatus(game_status, game_id, user_ref)
     }

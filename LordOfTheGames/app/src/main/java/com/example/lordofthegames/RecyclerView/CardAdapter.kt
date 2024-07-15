@@ -78,7 +78,7 @@ class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var c
         val catItems = this.viuvve.getGameCategory(currentCardItem.gameTitle)
         val platItems = this.viuvve.getGamePlatform(currentCardItem.gameTitle)
         val a = this.viuvve.getAchievementCount(currentCardItem.gameTitle, mail)
-
+        Log.e(currentCardItem.gameTitle, a.toString())
         holder.achieText.text = "${a.x}/${a.y}"
 
         holder.modifyBtn.setOnClickListener {
