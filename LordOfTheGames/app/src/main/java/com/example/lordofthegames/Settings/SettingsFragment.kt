@@ -95,7 +95,7 @@ class SettingsFragment: Fragment() {
             val editor = sharedPreferences.edit()
             /***
              * TODO:
-             *      migliorare il tema chiaro
+             *      rifare la scelta del tema o scegliere giusto 2 temi
              */
             switchThemeButton.setOnCheckedChangeListener { buttonView, isChecked ->
                 // Post the check to the main thread to ensure that the switch's state is updated
