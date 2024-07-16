@@ -18,10 +18,13 @@ class AchievementCardAdapter(var listener: OnItemListener, var cardItemList: Lis
     override fun onBindViewHolder(holder: AchievementCardHolder, position: Int) {
 
         val currentCardItem = this.cardItemList[position]
-        //val imagePath: String = currentCardItem.img
+
         holder.title.text = currentCardItem.name
         holder.completation.text = "${currentCardItem.actual_count}/${currentCardItem.total_count}"
 
+        if(currentCardItem.completed == 1){
+            holder.checkImg.visibility = View.VISIBLE
+        }
         val drawable = ContextCompat.getDrawable(activity, activity.resources.getIdentifier("yo_listen_foreground", "mipmap", activity.packageName))
 
         holder.achievementImg.setImageDrawable(drawable)

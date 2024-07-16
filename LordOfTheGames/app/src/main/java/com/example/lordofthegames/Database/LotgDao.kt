@@ -380,5 +380,12 @@ interface LotgDao {
     @Query("SELECT EXISTS(SELECT 1 FROM UsersAchievement WHERE user_ref = :userRef AND achieve_id = :achieveId)")
     fun uaExist(userRef: String, achieveId: Int): Boolean
 
+    @Query("SELECT EXISTS(SELECT 1 FROM UsersGame WHERE user_ref = :userRef AND game_ref = :gameId)")
+    fun ugExist(userRef: String, gameId: Int): Boolean
+
+
+    @Query("INSERT INTO UsersGame (user_ref, game_ref, game_status) VALUES (:user_ref, :game_id, :game_status)")
+    fun ugCreate(user_ref: String, game_id: Int, game_status: String): Long
+
 }
 

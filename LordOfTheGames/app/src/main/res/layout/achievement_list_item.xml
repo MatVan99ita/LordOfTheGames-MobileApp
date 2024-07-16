@@ -23,12 +23,24 @@
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:contentDescription="img"
             android:src="@mipmap/yo_listen_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/achievement_item_completed"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:contentDescription="img"
+            android:src="@drawable/baseline_check_circle_24"
+            app:layout_constraintBottom_toBottomOf="@+id/achievement_item_img"
+            app:layout_constraintEnd_toEndOf="@+id/achievement_item_img"
+             />
 
         <TextView
             android:id="@+id/achievement_title"

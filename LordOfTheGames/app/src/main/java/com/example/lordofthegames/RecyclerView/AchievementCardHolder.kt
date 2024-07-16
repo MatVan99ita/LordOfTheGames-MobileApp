@@ -13,12 +13,14 @@ class AchievementCardHolder(itemView: View, lister: OnItemListener) : RecyclerVi
     val achievementImg: ImageView
     val title: TextView
     val completation: TextView
+    val checkImg: ImageView
     private val onItemListener: OnItemListener
 
     init {
         this.achievementImg = itemView.findViewById(R.id.achievement_item_img)
         this.title = itemView.findViewById(R.id.achievement_title)
         this.completation = itemView.findViewById(R.id.achievement_completetion)
+        this.checkImg = itemView.findViewById(R.id.achievement_item_completed)
         this.onItemListener = lister
         itemView.setOnClickListener(this)
     }

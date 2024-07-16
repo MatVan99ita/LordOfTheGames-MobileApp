@@ -100,5 +100,13 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.uaExist(user_ref, achieve_id)
     }
 
+    fun ugExist(userRef: String, gameId: Int): Boolean {
+        return repository.ugExist(userRef, gameId)
+    }
+
+    fun ugCreate(user_ref: String, game_id: Int, game_status: String): Long{
+        return repository.ugCreate(user_ref, game_id, game_status)
+    }
+
 
 }

@@ -155,7 +155,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
                         2 -> { // PLAYING
                             textView.text = "$i/$j"
                             textView.append(tab.text)
-                            recyclerView.adapter = adapterPlayed
+                            recyclerView.adapter = adapterPlaying
                         }
                         3 -> { // WANTED TO PLAY
                             textView.text = "$i/$j"

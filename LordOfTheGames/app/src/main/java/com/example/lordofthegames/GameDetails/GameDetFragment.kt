@@ -207,23 +207,40 @@ class GameDetFragment: Fragment(), OnItemListener  {
                     id: Long
                 ) {
                     val item = parent.getItemAtPosition(pos).toString()
+
                     if(item != gameStatus){
                         gameStatus = item
-                        if(gameStatus != "Not played") {
-                            val i = gameDetViewModel.updateGameStatus(
-                                gameStatus,
-                                game.game_id,
-                                arguments?.getString("email").toString()
+                        if(!gameDetViewModel.ugExist(user_ref, game.game_id)){
+                            val j = gameDetViewModel.ugCreate(
+                                user_ref = user_ref,
+                                game_id = game.game_id,
+                                game_status = gameStatus
                             )
-                            Log.i("ASDFGHJKDFGHJKDFGHJKL", "$i")
-                            if (i > 0) {
+                            if (j > 0L) {
                                 //toast positivo
-                                Utilities.showaToast(requireContext(), "Gioco aggiornato")
+                                Utilities.showaToast(requireContext(), "Gioco aggiunto alla lista $gameStatus")
                             } else {
                                 //toast negativo
-                                Utilities.showaToast(requireContext(), "Errore nell'aggiornamento")
+                                Utilities.showaToast(requireContext(), "Errore nell'aggiunta")
+                            }
+                        } else {
+                            if(gameStatus != "Not played") {
+                                val i = gameDetViewModel.updateGameStatus(
+                                    gameStatus,
+                                    game.game_id,
+                                    arguments?.getString("email").toString()
+                                )
+
+                                if (i > 0) {
+                                    //toast positivo
+                                    Utilities.showaToast(requireContext(), "Gioco aggiornato")
+                                } else {
+                                    //toast negativo
+                                    Utilities.showaToast(requireContext(), "Errore nell'aggiornamento")
+                                }
                             }
                         }
+
                     }
                 }
 

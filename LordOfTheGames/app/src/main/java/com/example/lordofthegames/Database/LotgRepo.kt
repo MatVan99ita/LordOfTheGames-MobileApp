@@ -227,5 +227,13 @@ class LotgRepo(application: Application) {
         return lotgDao.uaExist(userRef, achieveId)
     }
 
+    fun ugExist(userRef: String, gameId: Int): Boolean {
+        return lotgDao.ugExist(userRef, gameId)
+    }
+
+    fun ugCreate(user_ref: String, game_id: Int, game_status: String): Long{
+        return lotgDao.ugCreate(user_ref, game_id, game_status)
+    }
+
 
 }
