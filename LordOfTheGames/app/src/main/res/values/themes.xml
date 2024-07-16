@@ -64,6 +64,37 @@
         <item name="colorOnSecondary">@color/black</item>
     </style>
 
+    <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colori primari -->
+        <item name="colorPrimary">#00E676</item>
+        <item name="colorPrimaryDark">#00C853</item>
+        <item name="colorAccent">#00B0FF</item>
 
+        <!-- Colori di sfondo -->
+        <item name="android:colorBackground">#FFFFFF</item>
+        <item name="android:textColor">#212121</item>
+    </style>
+
+    <style name="Theme.GamingApp.RetroArcade" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colori primari -->
+        <item name="colorPrimary">#FFEB3B</item>
+        <item name="colorPrimaryDark">#FBC02D</item>
+        <item name="colorAccent">#FF5722</item>
+
+        <!-- Colori di sfondo -->
+        <item name="android:colorBackground">#FAFAFA</item>
+        <item name="android:textColor">#212121</item>
+    </style>
+
+    <style name="Theme.GamingApp.SciFi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Colori primari -->
+        <item name="colorPrimary">#03A9F4</item>
+        <item name="colorPrimaryDark">#0288D1</item>
+        <item name="colorAccent">#FF4081</item>
+
+        <!-- Colori di sfondo -->
+        <item name="android:colorBackground">#E0F7FA</item>
+        <item name="android:textColor">#212121</item>
+    </style>
 
 </resources>
