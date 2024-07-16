@@ -65,7 +65,7 @@
     </style>
 
     <!-- ################# TEMI NUOVI ##################### -->
-    <!--TODO: sistemare il tema con label personalizzate per i png e per i font -->
+    <!--TODO: sistemare il tema con label personalizzate per i png e per i font magari aggiungere qualche gradient con i colori del tema -->
 
     <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar"><item name="colorPrimary">#00E676</item>
         <item name="colorPrimaryVariant">#00C853</item>
