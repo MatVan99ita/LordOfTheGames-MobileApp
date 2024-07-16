@@ -76,7 +76,17 @@ class LoggedInFragment: Fragment(){
         bind.loggedNick.text = user.nickname
         bind.loggedMail.text = user.mail
 
-
+        if(user.photo != null) {
+            bind.loggedUsrImg.setImageBitmap(
+                Utilities.stringToBitmap(
+                    user.photo
+                )
+            )
+        } else {
+            bind.loggedUsrImg.setImageResource(
+                R.mipmap.gabibbo_blade_of_striscia
+            )
+        }
         cameraExecutor = Executors.newFixedThreadPool(1)
 
         Utilities.setupPieChart(p, statistics, banana.getString("Theme", "NoTheme").equals("Night"))
@@ -234,6 +244,9 @@ class LoggedInFragment: Fragment(){
                 if(i<=0) {
                     bind.btnSaveChanges.visibility = View.VISIBLE
                     bind.btnAnnullaLogges.visibility = View.VISIBLE
+                } else {
+                    bind.btnSaveChanges.visibility = View.GONE
+                    bind.btnAnnullaLogges.visibility = View.GONE
                 }
             }
 
