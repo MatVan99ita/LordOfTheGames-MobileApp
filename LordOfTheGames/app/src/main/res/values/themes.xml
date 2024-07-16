@@ -64,37 +64,56 @@
         <item name="colorOnSecondary">@color/black</item>
     </style>
 
-    <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Colori primari -->
-        <item name="colorPrimary">#00E676</item>
-        <item name="colorPrimaryDark">#00C853</item>
-        <item name="colorAccent">#00B0FF</item>
+    <!-- ################# TEMI NUOVI ##################### -->
 
-        <!-- Colori di sfondo -->
+    <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar"><item name="colorPrimary">#00E676</item>
+        <item name="colorPrimaryVariant">#00C853</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#00B0FF</item>
+        <item name="colorSecondaryVariant">#0091EA</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:statusBarColor">#00C853</item>
         <item name="android:colorBackground">#FFFFFF</item>
         <item name="android:textColor">#212121</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="Theme.GamingApp.RetroArcade" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Colori primari -->
+    <style name="Theme.LordOfTheGames.RetroArcade" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#FFEB3B</item>
-        <item name="colorPrimaryDark">#FBC02D</item>
-        <item name="colorAccent">#FF5722</item>
+        <item name="colorPrimaryVariant">#FBC02D</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="colorSecondary">#FF5722</item>
+        <item name="colorSecondaryVariant">#E64A19</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:statusBarColor">#FBC02D</item>
 
-        <!-- Colori di sfondo -->
-        <item name="android:colorBackground">#FAFAFA</item>
         <item name="android:textColor">#212121</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="Theme.GamingApp.SciFi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Colori primari -->
+    <style name="Theme.LordOfTheGames.SciFi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#03A9F4</item>
-        <item name="colorPrimaryDark">#0288D1</item>
-        <item name="colorAccent">#FF4081</item>
+        <item name="colorPrimaryVariant">#0288D1</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#FF4081</item>
+        <item name="colorSecondaryVariant">#F50057</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:statusBarColor">#0288D1</item>
 
-        <!-- Colori di sfondo -->
-        <item name="android:colorBackground">#E0F7FA</item>
         <item name="android:textColor">#212121</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
 </resources>
