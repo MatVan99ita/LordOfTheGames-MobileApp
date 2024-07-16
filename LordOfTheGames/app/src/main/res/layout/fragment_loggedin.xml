@@ -106,7 +106,7 @@
         android:layout_height="120dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/yo_listen_background"
+        android:src="@mipmap/gabibbo_blade_of_striscia"
         app:circularflow_radiusInDP="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chart" />

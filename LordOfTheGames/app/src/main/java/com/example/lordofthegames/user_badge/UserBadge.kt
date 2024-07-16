@@ -1,13 +1,27 @@
 package com.example.lordofthegames.user_badge
 
 class UserBadge {
-    /* TODO: aggiungere tipo una lista con gli chievement dell'utente come
-         giochi completati,
-         achievement completati,
-         giochi aggiunti alle singole liste
-         giochi abbandonati
+    /* TODO: capito come gestire la gameification
+         • imageview con tipo la medaglia del rank rispetto alla classifica(?) e di fianco mega textcview con la posizione => fare query con  COALESCE
+         • contatori vari:
+            ~ achievement completati
+            {
+                {
+                    ~ media achievement completati
+                    ~ percentuale di completamento media dei giochi
+                    # N.B. Queste 2 sono uguali
+                }
+                # N.B.: Questi avranno gli achievement dell'utemte
+            }
+            ~ Tot discussioni fatte
+            ~ Tot commenti scritti
+            {
+                ~ Tot like ricevuti
+                ~ Tot dislike ricevuti
+                #N.B: Specifico delle discussioni
+            }
          _
-         ALLA BATTLE CATS a livelli
+         ALLA BATTLE CATS a livelli <- pensare a come ridurli tanto non ne servono così tanti per la presentazione
          *
          legno x10 ->
          ferro x20 ->
@@ -19,6 +33,8 @@ class UserBadge {
          smeraldo V IV III II I -> x1400 - 1600
          platino  V IV III II I -> x1700 - 1800
          immortal V IV III II I -> x2000 - e oltre
+         _
+         Mettere anche una mini view in cui si spiegano i vari obiettivi e si fanno vedere le varie medaglie
 */ //POTREI FARLA COME UNA DB ENTITIES E L'ENUM SERVE A TRADURRE IL LIVELLO CHE FA +1 AD OGNI COSA CHE ACCADE
     private var game_level: Int = 0
     private var achievement_level: Int = 0
