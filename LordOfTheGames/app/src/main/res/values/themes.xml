@@ -78,8 +78,12 @@
         <item name="android:colorBackground">#FFFFFF</item>
         <item name="android:textColor">#212121</item>
 
-        <item name="themeItemsBGColor">#8AC9EFE7</item> <!-- Colore di sfondo per gli elementi della RecyclerView -->
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AC9EFE7</item>
         <item name="themeBorderColor">#00B0FF</item>
+
+        <item name="fontBGColor"  >#000000</item>
+        <item name="fontItemColor">#001478</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -98,7 +102,10 @@
         <item name="android:textColor">#212121</item>
 
 
-        <!--item name="primaryPale">#F8CF53</item-->
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AC9EFE7</item>
+        <item name="themeBorderColor">#00B0FF</item>
+        <item name="fontItemColor">#001478</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -114,8 +121,12 @@
         <item name="colorSecondaryVariant">#F50057</item>
         <item name="colorOnSecondary">#FFFFFF</item>
         <item name="android:statusBarColor">#0288D1</item>
-
         <item name="android:textColor">#212121</item>
+
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AC9EFE7</item>
+        <item name="themeBorderColor">#00B0FF</item>
+        <item name="fontItemColor">#001478</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
