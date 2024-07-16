@@ -75,6 +75,7 @@
         <item name="android:statusBarColor">#00C853</item>
         <item name="android:colorBackground">#FFFFFF</item>
         <item name="android:textColor">#212121</item>
+    
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -90,8 +91,10 @@
         <item name="colorSecondaryVariant">#E64A19</item>
         <item name="colorOnSecondary">#FFFFFF</item>
         <item name="android:statusBarColor">#FBC02D</item>
-
         <item name="android:textColor">#212121</item>
+
+
+        <!--item name="primaryPale">#F8CF53</item-->
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
