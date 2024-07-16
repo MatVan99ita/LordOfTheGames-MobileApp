@@ -4,6 +4,8 @@
 
     <declare-styleable name="CustomTheme">
         <attr name="themeItemsBGColor" format="reference|color" />
-        <attr name="themeBorderColor" format="reference|color" />
+        <attr name="themeBorderColor"  format="reference|color" />
+        <attr name="fontBGColor"       format="reference|color" />
+        <attr name="fontItemColor"     format="reference|color" />
     </declare-styleable>
 </resources>
