@@ -269,23 +269,23 @@ class GameDetFragment: Fragment(), OnItemListener  {
             if(!gameDetViewModel.uaExist(user_ref, selectedItem!!.achieve_id) ) {
 
                  Log.e("CAZZOHOSCRITTO", "achieve_id = ${selectedItem!!.achieve_id}, \n"+
-                                                    "user_ref = $user_ref, \n"+
-                                                    "actual = ${selectedItem!!.actual_count}"
+                                                   "user_ref = $user_ref, \n"+
+                                                   "actual = ${selectedItem!!.actual_count}"
                  )
-                j = gameDetViewModel.createUserAchievementRecord(
+                j = gameDetViewModel.createUserAchievementRecord (
                     achieve_id = selectedItem!!.achieve_id,
                     user_ref = user_ref,
                     actual = selectedItem!!.actual_count,
                     status = if(selectedItem!!.actual_count == selectedItem!!.total_count) 1 else 0
                 )
             } else {
-                if(selectedItem!!.actual_count >= selectedItem!!.total_count){
-                    i = gameDetViewModel.completeAchievement(
+                if(selectedItem!!.actual_count >= selectedItem!!.total_count) {
+                    i = gameDetViewModel.completeAchievement (
                         achieve_id = selectedItem!!.achieve_id,
                         user_ref = user_ref
                     )
                 } else {
-                    i = gameDetViewModel.updateAchievement(
+                    i = gameDetViewModel.updateAchievement (
                         achieve_id = selectedItem!!.achieve_id,
                         actual = selectedItem!!.actual_count,
                         user_ref = user_ref
@@ -297,7 +297,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
 
 
-            if (i >= 0 || j >= 0.0F) {
+            if (i >= 0 || j >= 0L) {
                 Utilities.showaToast(requireContext(), "Achievement aggiornato")
             } else {
                 Utilities.showaToast(requireContext(), "Errore update")
