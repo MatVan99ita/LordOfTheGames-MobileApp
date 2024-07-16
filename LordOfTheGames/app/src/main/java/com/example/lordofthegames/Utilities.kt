@@ -97,6 +97,15 @@ class Utilities {
         • Tracking utente su mappa (max 4) <- boh
     * */
 
+    /*
+    * TODO: 2
+    *   Sistemare il drawerlayout ovunque con le cose che gli mancano e sistemare i colori delle varie parti del progetto
+    *   drawer fuori dalla home
+    *   topbar nei setting
+    *   sfondo notifiche
+    *   mylist item con qualche ghirigoro
+    * */
+
     companion object{
         const val CAMERA_PERMISSION_REQUEST_CODE = 101
         const val GALLERY_PERMISSION_REQUEST_CODE = 102

@@ -65,6 +65,7 @@
     </style>
 
     <!-- ################# TEMI NUOVI ##################### -->
+    <!--TODO: sistemare il tema con label personalizzate per i png e per i font -->
 
     <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar"><item name="colorPrimary">#00E676</item>
         <item name="colorPrimaryVariant">#00C853</item>
@@ -75,7 +76,9 @@
         <item name="android:statusBarColor">#00C853</item>
         <item name="android:colorBackground">#FFFFFF</item>
         <item name="android:textColor">#212121</item>
-    
+
+        <item name="themeItemsBGColor">#8AC9EFE7</item> <!-- Colore di sfondo per gli elementi della RecyclerView -->
+        <item name="themeBorderColor">#00B0FF</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>

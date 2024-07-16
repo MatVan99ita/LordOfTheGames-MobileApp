@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Other values-->
-    <attr name="themeItemsBGColor" format="reference" />
-    <attr name="themeBorderColor"  format="reference" />
+
+    <declare-styleable name="CustomTheme">
+        <attr name="themeItemsBGColor" format="reference|color" />
+        <attr name="themeBorderColor" format="reference|color" />
+    </declare-styleable>
 </resources>
