@@ -112,7 +112,9 @@ class HomeFragment: Fragment(), OnItemListener {
             nick_head.text = banana.getString("nickname", "BANANA").toString()
             mail_head.text = banana.getString("email", "BANANA").toString()
 
-            Utilities.generaNotifiche(
+
+            //TODO: creare una funzione che generi la notifica con il numero di notifiche non lette senza salvare effettivamente quest'ultima
+            /*Utilities.generaNotifiche(
                 requireActivity(),
                 4,
                 "Prova",
@@ -121,7 +123,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 Utilities.TUDEI(),
                 MainActivity::class.java.simpleName,
                 nick_head.text.toString()
-                )
+                )*/
             //this.homeViewModel.getCurrentUser("")?.observe(viewLifecycleOwner){ user -> print(user.toString()) }
             //val repository = UserRepo(UserDAO, activity.application)
 

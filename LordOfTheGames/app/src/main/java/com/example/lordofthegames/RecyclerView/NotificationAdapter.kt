@@ -4,7 +4,9 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Notification
@@ -34,13 +36,19 @@ class NotificationAdapter(
 
         holder.title.text = item.title
         holder.content.text
+        if(item.read == 0){
+            holder.point.visibility = View.VISIBLE
+            holder.body.setBackgroundResource(R.drawable.rainbow)
+        }
     }
 
     inner class NotificationHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
         val title: TextView = itemView.findViewById(R.id.notification_title)
         val content: TextView = itemView.findViewById(R.id.notification_content)
-        val mbtn: MaterialButton = itemView.findViewById(R.id.edit_btn)
+        val point: ImageView = itemView.findViewById(R.id.check_notification_point)
+        val cestino: MaterialButton = itemView.findViewById(R.id.edit_btn)
+        val body: ConstraintLayout = itemView.findViewById(R.id.notification_body)
         private var onItemListener: OnItemListener = listener
 
 
