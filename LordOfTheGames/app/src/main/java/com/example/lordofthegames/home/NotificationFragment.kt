@@ -47,7 +47,7 @@ class NotificationFragment: Fragment(), OnItemListener {
         user_nick = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("nickname", "MinaScondo")!!
         list = viewm.getNotification(user_nick)
         Log.w("LALLISTA", list.toString())
-        notificationAdapter = NotificationAdapter(this, list, requireActivity())
+        notificationAdapter = NotificationAdapter(this, list, requireActivity(), viewm, user_nick)
         //recycler = view.findViewById(R.id.recycler_view_notification)
 
         return bind.root

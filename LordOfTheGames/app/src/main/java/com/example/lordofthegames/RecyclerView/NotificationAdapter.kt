@@ -52,7 +52,7 @@ class NotificationAdapter(
         }
 
         holder.cestino.setOnClickListener {
-            val i = viewm.deleteNotification(item.id, usr_ref)
+            val i: Int = viewm.deleteNotification(item.id, usr_ref)
             if(i >= 0){
                 notification_list = notification_list.drop(position)
                 this.notifyDataSetChanged()

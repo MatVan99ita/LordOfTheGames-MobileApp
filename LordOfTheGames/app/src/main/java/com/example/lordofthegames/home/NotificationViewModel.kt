@@ -61,7 +61,7 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
         return repository.readAllNotification(userRef)
     }
 
-    fun deleteNotification(id: Int, usrRef: String): Any {
+    fun deleteNotification(id: Int, usrRef: String): Int {
         return repository.deleteNotification(id, usrRef)
     }
 }

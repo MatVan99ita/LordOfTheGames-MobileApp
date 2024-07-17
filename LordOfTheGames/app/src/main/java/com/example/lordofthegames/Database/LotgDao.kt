@@ -3,6 +3,7 @@ package com.example.lordofthegames.Database
 import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
@@ -389,5 +390,8 @@ interface LotgDao {
 
     @Query("UPDATE notification SET read = 1 WHERE usr_ref = :userRef ")
     fun readAllNotification(userRef: String): Int
+
+    @Query("DELETE FROM notification WHERE id=:id AND usr_ref = :usrRef")
+    fun deleteNotification(id: Int, usrRef: String): Int
 }
 

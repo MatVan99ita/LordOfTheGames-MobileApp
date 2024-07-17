@@ -235,8 +235,8 @@ class LotgRepo(application: Application) {
         return lotgDao.readAllNotification(userRef)
     }
 
-    fun deleteNotification(id: Int, usrRef: String): Any {
-        return lotgDao.deleteNotification()
+    fun deleteNotification(id: Int, usrRef: String): Int {
+        return lotgDao.deleteNotification(id, usrRef)
     }
 
 
