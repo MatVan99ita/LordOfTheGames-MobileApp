@@ -118,16 +118,12 @@ class LotgRepo(application: Application) {
         return lotgDao.saveNotification(content.title!!, content.content!!, content.usr_ref)
     }
 
-    fun allRead(): Int {
-        return lotgDao.allRead()
+    fun notificationRead(user_ref: String, id: Int): Int {
+        return lotgDao.notificationRead(user_ref, id)
     }
 
-    fun notificationRead(id: Int): Int {
-        return lotgDao.notificationRead(id)
-    }
-
-    fun getNotification(): Cursor {
-        return lotgDao.getNotification()
+    fun getNotification(user_ref: String): Cursor {
+        return lotgDao.getNotification(user_ref)
     }
 
 
@@ -233,6 +229,14 @@ class LotgRepo(application: Application) {
 
     fun ugCreate(user_ref: String, game_id: Int, game_status: String): Long{
         return lotgDao.ugCreate(user_ref, game_id, game_status)
+    }
+
+    fun readAllNotification(userRef: String): Int {
+        return lotgDao.readAllNotification(userRef)
+    }
+
+    fun deleteNotification(id: Int, usrRef: String): Any {
+        return lotgDao.deleteNotification()
     }
 
 

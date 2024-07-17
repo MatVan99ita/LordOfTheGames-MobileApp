@@ -16,22 +16,35 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
         return repository.saveNotes(notes)
     }
 
-    @SuppressLint("Range")
-    fun getNotification(): List<Notification>{
-        val c = repository.getNotification()
+    fun getNotification(userRef: String): List<Notification>{
+        val c = repository.getNotification(userRef)
         val l: MutableList<Notification> = arrayListOf()
 
         while(c.moveToNext()){
 
             l.add(
                 Notification(
-                    c.getInt(c.getColumnIndexOrThrow("id")),
-                    c.getString(c.getColumnIndexOrThrow("title")),
-                    c.getString(c.getColumnIndexOrThrow("content")),
-                    c.getString(c.getColumnIndexOrThrow("data_inizio")),
-                    c.getString(c.getColumnIndexOrThrow("data_fine")),
-                    c.getInt(c.getColumnIndexOrThrow("read")),
-                    c.getString(c.getColumnIndexOrThrow("usr_ref")),
+                    c.getInt(
+                        c.getColumnIndexOrThrow("id")
+                    ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("title")
+                    ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("content")
+                    ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("data_inizio")
+                    ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("data_fine")
+                    ),
+                    c.getInt(
+                        c.getColumnIndexOrThrow("read")
+                    ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("usr_ref")
+                    ),
                 )
             )
         }
@@ -39,12 +52,16 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
         return l
     }
 
-    fun allRead(): Int{
-        return repository.allRead()
+
+    fun notificationRead(user_ref: String, id: Int): Int{
+        return repository.notificationRead(user_ref, id)
     }
 
+    fun readAllNotification(userRef: String): Int {
+        return repository.readAllNotification(userRef)
+    }
 
-    fun notificationRead(id: Int): Int{
-        return repository.notificationRead(id)
+    fun deleteNotification(id: Int, usrRef: String): Any {
+        return repository.deleteNotification(id, usrRef)
     }
 }

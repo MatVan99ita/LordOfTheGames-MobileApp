@@ -63,7 +63,6 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
 
         binding.etAddComment.setText("")
 
-
         binding.btnSendComment.setOnClickListener {
             if(binding.etAddComment.text?.length!! > 0){
                 if(this.insertComment(binding.etAddComment.text.toString())>0){

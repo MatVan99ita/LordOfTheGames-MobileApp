@@ -1,6 +1,8 @@
 package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +11,17 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.db_entities.Notification
+import com.example.lordofthegames.home.NotificationViewModel
 import com.google.android.material.button.MaterialButton
 
 class NotificationAdapter(
     var listener: OnItemListener,
     var notification_list: List<Notification>,
-    var activity: Activity
+    var activity: Activity,
+    val viewm: NotificationViewModel,
+    val usr_ref: String
 ): RecyclerView.Adapter<NotificationAdapter.NotificationHolder>() {
 
     //TODO: creare la funzione per rendere lette le notifiche
@@ -34,14 +40,34 @@ class NotificationAdapter(
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
         val item = notification_list[position]
-
+        Log.e("LALLISTA", "${ notification_list.size }")
         holder.title.text = item.title
         holder.content.text
         if(item.read == 0){
             holder.point.visibility = View.VISIBLE
             holder.body.setBackgroundResource(R.drawable.rainbow)
+        } else {
+            holder.point.visibility = View.GONE
+            holder.body.setBackgroundResource(R.drawable.raonbow2)
+        }
+
+        holder.cestino.setOnClickListener {
+            val i = viewm.deleteNotification(item.id, usr_ref)
+            if(i >= 0){
+                notification_list = notification_list.drop(position)
+                this.notifyDataSetChanged()
+                Utilities.showaToast(activity as Context, "Notifica eliminata")
+            } else {
+                Utilities.showaToast(activity as Context, "Impossibile eliminare.\nSpegni e riaccendi")
+            }
         }
     }
+
+    fun updateView(new_set: List<Notification>) {
+        this.notification_list = new_set
+        this.notifyDataSetChanged()
+    }
+
 
     inner class NotificationHolder(itemView: View, listener: OnItemListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 

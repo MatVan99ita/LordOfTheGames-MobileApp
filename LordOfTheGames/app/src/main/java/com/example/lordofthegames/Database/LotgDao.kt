@@ -105,8 +105,8 @@ interface LotgDao {
 
     @Query("UPDATE notification \n" +
             "SET read = 1 \n" +
-            "WHERE id = :id")
-    fun notificationRead(id: Int): Int
+            "WHERE id = :id AND usr_ref = :user_ref")
+    fun notificationRead(user_ref: String, id: Int): Int
 
 
     /**
@@ -234,8 +234,8 @@ interface LotgDao {
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref AND user_ref = :user_ref")
     fun getNotes(game_ref: Int, user_ref: String): Cursor
 
-    @Query("SELECT * FROM notification")
-    fun getNotification(): Cursor
+    @Query("SELECT * FROM notification WHERE usr_ref = :user_ref")
+    fun getNotification(user_ref: String): Cursor
 
 
     @Query("SELECT\n"+
@@ -387,5 +387,7 @@ interface LotgDao {
     @Query("INSERT INTO UsersGame (user_ref, game_ref, game_status) VALUES (:user_ref, :game_id, :game_status)")
     fun ugCreate(user_ref: String, game_id: Int, game_status: String): Long
 
+    @Query("UPDATE notification SET read = 1 WHERE usr_ref = :userRef ")
+    fun readAllNotification(userRef: String): Int
 }
 
