@@ -40,7 +40,6 @@ class NotificationAdapter(
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
         val item = notification_list[position]
-        Log.e("LALLISTA", "${ notification_list.size }")
         holder.title.text = item.title
         holder.content.text
         if(item.read == 0){

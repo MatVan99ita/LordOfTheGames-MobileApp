@@ -27,7 +27,7 @@ class NotificationFragment: Fragment(), OnItemListener {
     private lateinit var recycler: RecyclerView
 
     //TODO: mettere tipo un pallino con o senza numero dentro sopra la campanella per sehnalare il numero di notifiche presenti
-    //      fare in modo che il fab usi la funzione di update delle notifiche
+    //      creare il framelayout per visualizzare la singola notifica con tutto quello che ha scritto e il bottone del calendario se esiste una data
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
