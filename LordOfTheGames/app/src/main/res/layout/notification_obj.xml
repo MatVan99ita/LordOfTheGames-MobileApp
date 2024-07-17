@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/rainbow"
+        android:background="@drawable/raonbow2"
         android:orientation="horizontal">
 
         <ImageView
@@ -27,6 +27,17 @@
             app:layout_constraintVertical_bias="1.0" />
 
 
+        <ImageView
+            android:id="@+id/check_notification_point"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:contentDescription="img"
+
+            android:src="@drawable/baseline_circle_24"
+            app:layout_constraintBottom_toBottomOf="@+id/notification_title"
+            app:layout_constraintStart_toEndOf="@+id/notification_title"
+            app:layout_constraintTop_toTopOf="@+id/notification_title" />
+
         <TextView
             android:id="@+id/notification_title"
             android:layout_width="170dp"
@@ -41,6 +52,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/notification_img"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
         <TextView
