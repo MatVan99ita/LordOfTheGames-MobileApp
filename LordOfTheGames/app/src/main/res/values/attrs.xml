@@ -3,9 +3,16 @@
 
 
     <declare-styleable name="CustomTheme">
-        <attr name="themeItemsBGColor" format="reference|color" />
-        <attr name="themeBorderColor"  format="reference|color" />
-        <attr name="fontBGColor"       format="reference|color" />
-        <attr name="fontItemColor"     format="reference|color" />
+        <attr name="themeItemsBGColor"          format="reference|color" />
+        <attr name="themeBorderColor"           format="reference|color" />
+
+        <attr name="fontBGColor"                format="reference|color" />
+        <attr name="fontItemColor"              format="reference|color" />
+
+        <attr name="colorPrimaryPale"           format="reference|color" />
+        <attr name="colorPrimaryVariantPale"    format="reference|color" />
+
+        <attr name="colorSecondaryPale"         format="reference|color" />
+        <attr name="colorSecondaryVariantPale"  format="reference|color" />
     </declare-styleable>
 </resources>

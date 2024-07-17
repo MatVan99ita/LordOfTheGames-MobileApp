@@ -13,16 +13,10 @@
         android:background="@drawable/rainbow"
         android:orientation="horizontal">
 
-        <!--on below line we are creating
-                 a simple image view-->
-
-        <!--on below line we are creating
-                a simple text view-->
-
         <ImageView
             android:id="@+id/notification_img"
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+            android:layout_width="129dp"
+            android:layout_height="87dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:contentDescription="img"
@@ -32,7 +26,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <!-- TODO: ############## LORO 2 DEVONO DIVENTARE 2 ULTERIORI RECYCLER CON DENTRO SOLO DEI TEXTVIEW ###################-->
 
         <TextView
             android:id="@+id/notification_title"
@@ -69,15 +62,15 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_btn"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
             android:layout_gravity="bottom"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/baseline_calendar_today_24"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/baseline_delete_forever_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notification_title"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.727" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>x

@@ -128,6 +128,11 @@
         <item name="themeBorderColor">#00B0FF</item>
         <item name="fontItemColor">#001478</item>
 
+        <item name="colorPrimaryPale">#93DBFB</item>
+        <item name="colorPrimaryVariantPale">#53A0CA</item>
+        <item name="colorSecondaryPale">#ED90B0</item>
+        <item name="colorSecondaryVariantPale">#D65482</item>
+
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>

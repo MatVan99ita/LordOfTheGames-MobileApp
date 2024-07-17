@@ -8,6 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bordino"
         android:layout_marginTop="10dp"
         >
 
@@ -23,13 +24,13 @@
 
         <TextView
             android:id="@+id/mg_name"
-            android:layout_width="0dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
-
+            android:maxLines="1"
             android:layout_marginEnd="5dp"
-            android:text="ego balego"
+            android:text="EGO BALEGO RISING: REVEN"
             app:layout_constraintEnd_toStartOf="@id/mg_stat"
             app:layout_constraintStart_toEndOf="@id/mg_img"
             app:layout_constraintTop_toTopOf="@+id/mg_img" />
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="5dp"
-            android:text="AAAA"
+            android:text="Wanted to AAAAA"
             app:layout_constraintEnd_toStartOf="@id/mg_ach"
             app:layout_constraintStart_toEndOf="@id/mg_name"
             app:layout_constraintTop_toTopOf="parent" />

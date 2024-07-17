@@ -9,23 +9,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/community_body"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
-
-        >
+        android:background="@drawable/bordino">
 
 
         <ImageView
             android:id="@+id/community_img"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#9F2323"
-            android:backgroundTint="#777777"
+
+            android:background="@drawable/theme_gradient"
             android:elevation="15dp"
             android:src="@mipmap/gabibbo_blade_of_striscia_foreground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/textview1"

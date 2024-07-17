@@ -55,7 +55,7 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
         holder.communityImg.setImageDrawable(drawable)
 
 
-        holder.layout.setBackgroundColor( when((0..11).random()) {
+        /*holder.layout.setBackgroundColor( when((0..11).random()) {
             0   -> R.color.rosso
             1   -> R.color.arancione
             2   -> R.color.giallo
@@ -69,7 +69,7 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
             10  -> R.color.viola2
             11  -> R.color.viola3
             else -> 0
-        })
+        })*/
 
 
 
