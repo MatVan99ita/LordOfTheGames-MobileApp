@@ -23,7 +23,6 @@
         android:layout_height="400dp"
         android:layout_weight=".70"
         android:layout_gravity="center"
-        android:visibility="gone"
         android:background="@drawable/rainbow">
 
         <androidx.constraintlayout.widget.ConstraintLayout

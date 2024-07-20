@@ -7,10 +7,9 @@
     android:orientation="vertical"
     android:id="@+id/login_fragment"
     tools:context=".user_login.LogInFragment"
-    android:background="@drawable/rainbow_background">
+    android:background="@drawable/raonbow2">
 
     <TextView
-
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

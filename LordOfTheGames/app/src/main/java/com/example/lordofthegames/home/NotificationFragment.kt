@@ -31,7 +31,6 @@ class NotificationFragment: Fragment(), OnItemListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
     }
 
@@ -40,7 +39,6 @@ class NotificationFragment: Fragment(), OnItemListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         //val view = inflater.inflate(R.layout.fragment_notification, container, false)
         viewm = ViewModelProvider(requireActivity())[NotificationViewModel::class.java]
         bind = FragmentNotificationBinding.inflate(layoutInflater, container, false);
