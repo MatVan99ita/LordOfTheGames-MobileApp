@@ -19,7 +19,13 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
 
 
-class CardAdapter(var listener: OnItemListener, viewModell: HomeViewModel, var cardItemList: List<GameCardItem>?, var activity: Activity, var mail: String): RecyclerView.Adapter<CardViewHolder>() {
+class CardAdapter(
+    var listener: OnItemListener,
+    viewModell: HomeViewModel,
+    var cardItemList: List<GameCardItem>?,
+    var activity: Activity,
+    var mail: String
+): RecyclerView.Adapter<CardViewHolder>() {
 
     private var filteredData: MutableList<GameCardItem> =
         cardItemList as MutableList<GameCardItem> //mutableListOf()

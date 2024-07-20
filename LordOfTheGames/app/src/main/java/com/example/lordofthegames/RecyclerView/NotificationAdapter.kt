@@ -20,8 +20,6 @@ class NotificationAdapter(
     var listener: OnItemListener,
     var notification_list: List<Notification>,
     var activity: Activity,
-    val viewm: NotificationViewModel,
-    val usr_ref: String
 ): RecyclerView.Adapter<NotificationAdapter.NotificationHolder>() {
 
     //TODO: creare la funzione per rendere lette le notifiche
@@ -49,17 +47,6 @@ class NotificationAdapter(
             holder.point.visibility = View.GONE
             holder.body.setBackgroundResource(R.drawable.raonbow2)
         }
-
-        holder.cestino.setOnClickListener {
-            val i: Int = viewm.deleteNotification(item.id, usr_ref)
-            if(i >= 0){
-                notification_list = notification_list.drop(position)
-                this.notifyDataSetChanged()
-                Utilities.showaToast(activity as Context, "Notifica eliminata")
-            } else {
-                Utilities.showaToast(activity as Context, "Impossibile eliminare.\nSpegni e riaccendi")
-            }
-        }
     }
 
     fun updateView(new_set: List<Notification>) {
@@ -73,10 +60,12 @@ class NotificationAdapter(
         val title: TextView = itemView.findViewById(R.id.notification_title)
         val content: TextView = itemView.findViewById(R.id.notification_content)
         val point: ImageView = itemView.findViewById(R.id.check_notification_point)
-        val cestino: MaterialButton = itemView.findViewById(R.id.edit_btn)
         val body: ConstraintLayout = itemView.findViewById(R.id.notification_body)
         private var onItemListener: OnItemListener = listener
 
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         override fun onClick(p0: View?) {
             onItemListener.onItemClick(itemView, adapterPosition)

@@ -45,8 +45,7 @@ class NotificationFragment: Fragment(), OnItemListener {
         user_nick = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("nickname", "MinaScondo")!!
         list = viewm.getNotification(user_nick)
         Log.w("LALLISTA", list.toString())
-        notificationAdapter = NotificationAdapter(this, list, requireActivity(), viewm, user_nick)
-        //recycler = view.findViewById(R.id.recycler_view_notification)
+        notificationAdapter = NotificationAdapter(this, list, requireActivity())
 
         return bind.root
     }
@@ -77,7 +76,19 @@ class NotificationFragment: Fragment(), OnItemListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
+        Log.e("ALLORA?", "${list[position]}")
         readSingleNotification(user_nick, list[position].id)
+        val item = list[position]
+        bind.notificationTitleSpecific.text = item.title
+        bind.notificationContentSpecific.text = item.content
+
+        bind.notificationDateSpecific.text =
+            if(item.data_inizio != null && item.data_fine == null)
+                item.data_inizio
+            else if(item.data_inizio != null && item.data_fine != null)
+                "${item.data_inizio} ~ ${item.data_fine}"
+            else ""
+
         this.updateView()
     }
 
