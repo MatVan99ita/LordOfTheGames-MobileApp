@@ -28,6 +28,7 @@ class NotificationFragment: Fragment(), OnItemListener {
 
     //TODO: mettere tipo un pallino con o senza numero dentro sopra la campanella per sehnalare il numero di notifiche presenti
     //      creare il framelayout per visualizzare la singola notifica con tutto quello che ha scritto e il bottone del calendario se esiste una data
+    //      sistemare l'update della view
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,14 @@ class NotificationFragment: Fragment(), OnItemListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind.recyclerViewNotification.adapter = notificationAdapter
+
+        bind.trashBtn.setOnClickListener {
+            bind.notificationSpecificFrameLayout.visibility = View.GONE
+        }
+
+        bind.addToCalendarBtn.setOnClickListener {
+            bind.notificationSpecificFrameLayout.visibility = View.GONE
+        }
 
         bind.notificationFab.setOnClickListener {
             var i = 0
@@ -82,6 +91,7 @@ class NotificationFragment: Fragment(), OnItemListener {
         bind.notificationTitleSpecific.text = item.title
         bind.notificationContentSpecific.text = item.content
 
+        bind.notificationSpecificFrameLayout.visibility = View.VISIBLE
         bind.notificationDateSpecific.text =
             if(item.data_inizio != null && item.data_fine == null)
                 item.data_inizio

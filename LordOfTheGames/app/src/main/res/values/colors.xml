@@ -50,6 +50,9 @@
     <color name="viola2">#ff00ff </color>
     <color name="viola3">#ff0080 </color>
 
+    <color name="button_pressed_color">#40FFCDD2</color> <!-- Colore quando il bottone è premuto -->
+    <color name="button_focused_color">#27FFE0E0</color> <!-- Colore quando il bottone è focalizzato -->
+
 
     <!-- ########## RISORSE PER I NUOVI TEMI ############ -->
 
