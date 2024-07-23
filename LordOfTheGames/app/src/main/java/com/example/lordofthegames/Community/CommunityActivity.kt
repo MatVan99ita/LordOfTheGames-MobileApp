@@ -48,7 +48,7 @@ class CommunityActivity: AppCompatActivity() {
 
         Utilities.setUpToolBar(
             this,
-            findViewById(R.id.toolbar),
+            findViewById(R.id.topbar),
             title,
             bind.communityActivityDrawer,
             null,

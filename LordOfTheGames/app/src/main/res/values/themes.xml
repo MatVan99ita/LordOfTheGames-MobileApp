@@ -65,7 +65,6 @@
     </style>
 
     <!-- ################# TEMI NUOVI ##################### -->
-    <!--TODO: sistemare il tema con label personalizzate per i png e per i font magari aggiungere qualche gradient con i colori del tema -->
 
     <style name="Theme.LordOfTheGames.NeonLight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#00E676</item>
@@ -91,7 +90,7 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
-    <style name="Theme.LordOfTheGames.RetroArcade" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.LordOfTheGames.RetroArcade" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#FFEB3B</item>
         <item name="colorPrimaryVariant">#FBC02D</item>
         <item name="colorOnPrimary">#000000</item>
@@ -106,6 +105,7 @@
         <item name="themeItemsBGColor">#8AC9EFE7</item>
         <item name="themeBorderColor">#00B0FF</item>
         <item name="fontItemColor">#001478</item>
+        <item name="fontBGColor"  >#000000</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>

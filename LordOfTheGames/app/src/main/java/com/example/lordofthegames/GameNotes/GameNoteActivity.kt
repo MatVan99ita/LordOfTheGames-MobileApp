@@ -47,11 +47,12 @@ class GameNoteActivity: AppCompatActivity() {
         editText  = findViewById(R.id.gn_Insert)
         Utilities.setUpToolBar(
             this,
-            findViewById(R.id.toolbar),
+            findViewById(R.id.topbar),
             game_title,
             drawerLayout,
             R.menu.game_notes_menu
         )
+        setSupportActionBar(findViewById(R.id.topbar))
 
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,

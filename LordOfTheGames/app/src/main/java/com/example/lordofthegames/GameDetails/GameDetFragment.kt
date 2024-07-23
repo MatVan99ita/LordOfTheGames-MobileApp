@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.ScrollView
+import android.widget.SearchView
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -100,6 +101,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 .getString("email", "sesso")
             .toString()
+        setHasOptionsMenu(true)
     }
 
 
@@ -326,6 +328,15 @@ class GameDetFragment: Fragment(), OnItemListener  {
     }
 
 
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.game_det_top_bar, menu)
+
+        val noteItem = menu.findItem(R.id.gd_app_bar_note)
+
+    }
 
 
 

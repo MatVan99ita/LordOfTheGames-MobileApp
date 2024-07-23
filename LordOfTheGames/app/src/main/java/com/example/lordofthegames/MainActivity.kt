@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
             homeViewModel = HomeViewModel(application)
 
             setContentView(R.layout.activity_main)
-            toolbar = findViewById(R.id.toolbar)
+            toolbar = findViewById(R.id.topbar)
             drawerLayout = findViewById(R.id.main_activity_drawer)
 
 
@@ -127,11 +127,13 @@ class MainActivity : AppCompatActivity() {
 
             Utilities.setUpToolBar(
                 this,
-                findViewById(R.id.toolbar),
+                findViewById(R.id.topbar),
                 getString(R.string.app_name),
                 drawerLayout,
                 null
             )
+
+            setSupportActionBar(toolbar)
 
             actionBarDrawerToggle = Utilities.setUpDrawer(
                 drawerLayout,
@@ -255,14 +257,6 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        //if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-        //    val bundle = data!!.extras
-        //    if (bundle != null) {
-        //        val imageBitmap = bundle["data"] as Bitmap?
-        //        //addViewModel!!.setImageBitmap(imageBitmap!!)
-        //    }
-        //}
-
     }
 
     @Deprecated("Deprecated in Java")
@@ -289,20 +283,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
-            //if (id == R.id.nav_setting) {
-            //    val intent = Intent(this, SettingsActivity::class.java)
-            //    drawerLayout.closeDrawer(GravityCompat.START)
-            //    this.startActivity(intent)
-            //} else if (id == R.id.nav_usr){
-            //    val intent = Intent(this, LoggedActivity::class.java)
-            //    drawerLayout.closeDrawer(GravityCompat.START)
-            //    this.startActivity(intent)
-            //}
-            //This is for maintaining the behavior of the Navigation view
-            //onNavDestinationSelected(menuItem, navController)
-            //This is for closing the drawer after acting on it
-            //drawer.closeDrawer(GravityCompat.START)
             true
         }
         Log.e("CreateOPTMenu", menu.toString())

@@ -44,11 +44,12 @@ class SettingsActivity: AppCompatActivity() {
 
         Utilities.setUpToolBar(
             this,
-            findViewById(R.id.toolbar),
+            findViewById(R.id.topbar),
             getString(R.string.settings),
             drawerLayout,
             null,
         )
+        setSupportActionBar(findViewById(R.id.topbar))
 
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,

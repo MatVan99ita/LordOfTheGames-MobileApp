@@ -10,14 +10,6 @@
         android:contentDescription="@string/notes"
         />
 
-    <item
-        android:id="@+id/gd_app_bar_add"
-        android:icon="@drawable/ic_videogame_30"
-        android:title="@string/settings"
-        app:showAsAction="ifRoom"
-        android:contentDescription="@string/settings"
-        />
-
 
 
 </menu>

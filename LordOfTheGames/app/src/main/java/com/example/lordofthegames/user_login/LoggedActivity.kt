@@ -75,7 +75,7 @@ class LoggedActivity: AppCompatActivity() {
             if (sp.contains("logged") && sp.contains("email") && sp.contains("nickname")) {
 
 
-                toolbar = findViewById(R.id.toolbar)
+                toolbar = findViewById(R.id.topbar)
                 drawerLayout = findViewById(R.id.logged_activity_drawer)
 
                 Utilities.insertFragment(
@@ -87,11 +87,12 @@ class LoggedActivity: AppCompatActivity() {
 
                 Utilities.setUpToolBar(
                     this,
-                    findViewById(R.id.toolbar),
+                    findViewById(R.id.topbar),
                     "Equipment",
                     drawerLayout,
                     null,
                 )
+                setSupportActionBar(findViewById(R.id.topbar))
 
                 actionBarDrawerToggle = Utilities.setUpDrawer(
                     drawerLayout,

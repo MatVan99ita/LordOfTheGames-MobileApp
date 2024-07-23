@@ -58,11 +58,12 @@ class GameDetActivity: AppCompatActivity() {
 
         Utilities.setUpToolBar(
             this,
-            findViewById(R.id.toolbar),
+            findViewById(R.id.topbar),
             title,
             drawerLayout,
             R.menu.game_det_top_bar,
         )
+        setSupportActionBar(findViewById(R.id.topbar))
 
         navigationView = findViewById(R.id.nav_view)
         actionBarDrawerToggle = Utilities.setUpDrawer(
@@ -84,15 +85,6 @@ class GameDetActivity: AppCompatActivity() {
             this.startActivity(intent)
             true
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            true
-        } else if (item.itemId == R.id.gd_app_bar_add) {
-            /*Utilities.insertFragment(
-                this,
-                SettingsFragment(),
-                SettingsFragment::class.java.simpleName, null,
-            )*/
-            val intent = Intent(this, SettingsActivity::class.java)
-            this.startActivity(intent)
             true
         } else if (item.itemId == R.id.gd_app_bar_note) {
             Log.i("LO REFER", "$game_ref")
