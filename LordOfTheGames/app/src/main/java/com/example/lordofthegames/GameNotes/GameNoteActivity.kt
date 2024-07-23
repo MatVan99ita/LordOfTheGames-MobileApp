@@ -99,13 +99,8 @@ class GameNoteActivity: AppCompatActivity() {
         } else if (actionBarDrawerToggle.onOptionsItemSelected(item)){
                 true
         } else if (item.itemId == R.id.gn_top_today) {
-            /*AGGIUNTA DELLA DATA CON DATE PICKER PER SEGNARE LE COSE, si ma no*/
-            //val dpd = DatePickerDialog(
-            //    this
-            //)
-            //dpd.show()
-
-            editText.append(TUDEI())
+            //Aggiunge la data cib l'ora per poter segnare come se fosse un titolo
+            editText.append("\n~ ${TUDEI()}:\n")
 
             true
         } else {
