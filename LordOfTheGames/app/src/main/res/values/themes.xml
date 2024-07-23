@@ -91,21 +91,33 @@
     </style>
 
     <style name="Theme.LordOfTheGames.RetroArcade" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#FFEB3B</item>
-        <item name="colorPrimaryVariant">#FBC02D</item>
-        <item name="colorOnPrimary">#000000</item>
-        <item name="colorSecondary">#FF5722</item>
-        <item name="colorSecondaryVariant">#E64A19</item>
+        <item name="colorPrimary">          #FFEB3B</item>
+        <item name="colorPrimaryVariant">   #FBC02D</item>
+        <item name="colorOnPrimary">        #000000</item>
+        <item name="colorSecondary">        #FF5722</item>
+        <item name="colorSecondaryVariant"> #E64A19</item>
         <item name="colorOnSecondary">#FFFFFF</item>
         <item name="android:statusBarColor">#FBC02D</item>
         <item name="android:textColor">#212121</item>
 
 
         <!--Elementi personali-->
-        <item name="themeItemsBGColor">#8AC9EFE7</item>
-        <item name="themeBorderColor">#00B0FF</item>
-        <item name="fontItemColor">#001478</item>
         <item name="fontBGColor"  >#000000</item>
+
+
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AEFDBC9</item>
+        <item name="themeBorderColor">#9C27B0</item>
+        <item name="fontItemColor">#050609</item>
+
+        <item name="pageColor">#ECCBAA</item>
+
+
+        <item name="colorPrimaryPale">#F6E65C</item>
+        <item name="colorPrimaryVariantPale">#B38A23</item>
+        <item name="colorSecondaryPale">#C66C50</item>
+        <item name="colorSecondaryVariantPale">#953B20</item>
+
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
