@@ -8,13 +8,12 @@ android:layout_width="match_parent"
 android:layout_height="match_parent">
 
 
-    <include
-        android:id="@+id/gn_include"
-        layout="@layout/topbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <include layout="@layout/topbar"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -28,9 +27,16 @@ android:layout_height="match_parent">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start"
+                android:background="?attr/pageColor"
                 android:hint="Insert Note Here"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
 <include layout="@layout/side_navigation_menu" />
 
