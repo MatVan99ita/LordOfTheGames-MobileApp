@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/filter_fragment_item"
-        android:icon="@drawable/baseline_filter_list_24_white"
+        android:icon="@drawable/baseline_filter_list_24"
         android:title="@string/search"
         app:showAsAction="ifRoom"
         />

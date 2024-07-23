@@ -180,9 +180,7 @@ class HomeFragment: Fragment(), OnItemListener {
         })
 
         filterItem.setOnMenuItemClickListener {
-
             filterFrameLayout.visibility = if(filterFrameLayout.isVisible) View.GONE else View.VISIBLE
-
             true
         }
 
