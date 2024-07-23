@@ -52,8 +52,8 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertGamePlatform(gamePlatform: GamePlatform): Long
 
-    @Query("INSERT INTO notes (title, content, last_modified, game_ref) VALUES (:title, :content, :last_mod, :game_ref)")
-    fun insertNotes(title: String, content: String, last_mod: String, game_ref: Int): Long
+    @Query("INSERT INTO notes (title, content, last_modified, game_ref, user_ref) VALUES (:title, :content, :last_mod, :game_ref, :user_ref)")
+    fun insertNotes(title: String, content: String, last_mod: String, game_ref: Int, user_ref: String): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPlatform(platform: Platform): Long

@@ -17,7 +17,7 @@ class GameNoteViewModel(application: Application): ViewModel() {
     private var repository: LotgRepo = LotgRepo(application)
 
     fun getNotes(game_title: String = "", game_ref: Int, user_ref: String): Notes {
-        Log.i("LO REFFO", "$game_ref")
+        Log.i("LO REFFO", "$game_ref - $user_ref")
         val c = repository.getNotes(game_ref, user_ref)
 
         if(c.count > 0){

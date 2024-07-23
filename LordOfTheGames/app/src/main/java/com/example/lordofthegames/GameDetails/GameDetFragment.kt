@@ -1,6 +1,7 @@
 package com.example.lordofthegames.GameDetails
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
@@ -334,7 +335,6 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
         inflater.inflate(R.menu.game_det_top_bar, menu)
 
-        val noteItem = menu.findItem(R.id.gd_app_bar_note)
 
     }
 

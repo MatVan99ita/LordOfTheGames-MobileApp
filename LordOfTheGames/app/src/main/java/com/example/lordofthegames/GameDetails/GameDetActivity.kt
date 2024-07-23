@@ -92,9 +92,9 @@ class GameDetActivity: AppCompatActivity() {
                 val intent = Intent(this, GameNoteActivity::class.java)
                 intent.putExtra("game_title", string)
                 intent.putExtra("game_id", game_ref)
+
                 this.startActivity(intent)
             }
-
             true
         } else {
             super.onOptionsItemSelected(item)

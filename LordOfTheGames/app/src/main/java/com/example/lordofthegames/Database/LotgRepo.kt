@@ -107,7 +107,7 @@ class LotgRepo(application: Application) {
 
     fun newNote(notes: Notes): Long {
         Log.i("LO NOTO", notes.toString())
-        return lotgDao.insertNotes(notes.title, notes.content, notes.last_modified, notes.game_ref)
+        return lotgDao.insertNotes(notes.title, notes.content, notes.last_modified, notes.game_ref, notes.user_ref)
     }
 
     fun saveNotes(content: String, lastMod: String, gameRef: Int, user_ref: String): Int {
