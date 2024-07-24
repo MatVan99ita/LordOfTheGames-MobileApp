@@ -14,12 +14,12 @@
 
     <item
         android:id="@+id/bottom_nav_search"
-        android:icon="@drawable/baseline_notifications_24_white"
+        android:icon="@drawable/baseline_notifications_24"
         android:title="@string/notification" />
 
     <item
         android:id="@+id/bottom_my_game_list"
-        android:icon="@drawable/ic_baseline_view_list_24"
+        android:icon="@drawable/baseline_view_list_24"
         android:title="@string/my_game" />
 
 
