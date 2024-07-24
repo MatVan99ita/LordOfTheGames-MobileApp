@@ -226,7 +226,7 @@ class HomeFragment: Fragment(), OnItemListener {
         //            }
 //
         //            list.forEach { e -> newGameList.add(GameCardItem(e.game_cover, e.game_title)) }
-        //            //adapter = CardAdapter(listener, newGameList, catItems, platItems, act)
+        //            //adapter = CardAdadpter(listener, newGameList, catItems, platItems, act)
         //        }
         //}
         //Log.w("GiuochiMale", newGameList.toString())

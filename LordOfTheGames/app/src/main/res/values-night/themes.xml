@@ -1,24 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. Theme.MaterialComponents.DayNight.DarkActionBar Theme.AppCompat.DayNight.NoActionBar-->
     <style name="Theme.LordOfTheGames" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red_dark_primary</item>
-        <item name="colorPrimaryVariant">@color/red_light_variant</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/viola_primo</item>
-        <item name="colorSecondaryVariant">@color/red_light_variant</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#680F98</item>
+        <item name="colorPrimaryVariant">#41008C</item>
+        <item name="colorOnPrimary">#05A4A8</item>
+
+        <item name="colorSecondary">#000D81</item>
+        <item name="colorSecondaryVariant">#171C51</item>
+        <item name="colorOnSecondary">#05715C</item>
+        <item name="android:statusBarColor">#272727</item>
+        <item name="android:colorBackground">#121212</item>
+        <item name="android:textColor">#FFFFFF</item>
+
+        <!--Elementi personali-->
+        <item name="fontBGColor"  >#000000</item>
+
+
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AEFDBC9</item>
+        <item name="themeBorderColor">#DA00FF</item>
+        <item name="fontItemColor">#050609</item>
+
+        <item name="pageColor">#110A2E</item>
+
+
+        <item name="colorPrimaryPale">#4F3370</item>
+        <item name="colorPrimaryVariantPale">#30316E</item>
+        <item name="colorSecondaryPale">#904DA8</item>
+        <item name="colorSecondaryVariantPale">#553359</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
-
-<!--
+        <item name="floatingActionButtonStyle">@style/floatingActionButtonStyle</item>
 -->
     </style>
 
@@ -46,21 +61,40 @@
 
     <!-- ################# TEMI NUOVI ##################### -->
 
-    <style name="Theme.LordOfTheGames.DarkNight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#BB86FC</item>
-        <item name="colorPrimaryVariant">#3700B3</item>
-        <item name="colorOnPrimary">#000000</item>
-        <item name="colorSecondary">#03DAC6</item>
-        <item name="colorSecondaryVariant">#018786</item>
+    <style name="Theme.LordOfTheGames.DarkNight" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#441E71</item>
+        <item name="colorPrimaryVariant">#28037A</item>
+        <item name="colorOnPrimary">#05A4A8</item>
+
+        <item name="colorSecondary">#630485</item>
+        <item name="colorSecondaryVariant">#7A0987</item>
         <item name="colorOnSecondary">#000000</item>
         <item name="android:statusBarColor">#3700B3</item>
         <item name="android:colorBackground">#121212</item>
         <item name="android:textColor">#FFFFFF</item>
 
+        <!--Elementi personali-->
+        <item name="fontBGColor"  >#000000</item>
+
+
+        <!--Elementi personali-->
+        <item name="themeItemsBGColor">#8AEFDBC9</item>
+        <item name="themeBorderColor">#DA00FF</item>
+        <item name="fontItemColor">#050609</item>
+
+        <item name="pageColor">#110A2E</item>
+
+
+        <item name="colorPrimaryPale">#4F3370</item>
+        <item name="colorPrimaryVariantPale">#30316E</item>
+        <item name="colorSecondaryPale">#904DA8</item>
+        <item name="colorSecondaryVariantPale">#553359</item>
+
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+        <item name="floatingActionButtonStyle">@style/floatingActionButtonStyle</item>
     </style>
 
     <style name="Theme.LordOfTheGames.MidnightBlues" parent="Theme.MaterialComponents.DayNight.NoActionBar">
