@@ -24,10 +24,10 @@
         <item name="pageColor">#110A2E</item>
 
 
-        <item name="colorPrimaryPale">#4F3370</item>
-        <item name="colorPrimaryVariantPale">#30316E</item>
-        <item name="colorSecondaryPale">#904DA8</item>
-        <item name="colorSecondaryVariantPale">#553359</item>
+        <item name="colorPrimaryPale">#8145A1</item>
+        <item name="colorPrimaryVariantPale">#684B8A</item>
+        <item name="colorSecondaryPale">#444A81</item>
+        <item name="colorSecondaryVariantPale">#487475</item>
 
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>

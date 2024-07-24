@@ -45,7 +45,8 @@ class NotificationFragment: Fragment(), OnItemListener {
         bind = FragmentNotificationBinding.inflate(layoutInflater, container, false);
         user_nick = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("nickname", "MinaScondo")!!
         list = viewm.getNotification(user_nick)
-        Log.w("LALLISTA", list.toString())
+
+
         notificationAdapter = NotificationAdapter(this, list, requireActivity())
 
         return bind.root
@@ -56,6 +57,7 @@ class NotificationFragment: Fragment(), OnItemListener {
         super.onViewCreated(view, savedInstanceState)
         bind.recyclerViewNotification.adapter = notificationAdapter
 
+        //TODO: dare vita ai bottoni trash e calendar e vedere se si può fare qualcosa per il colore
         bind.trashBtn.setOnClickListener {
             bind.notificationSpecificFrameLayout.visibility = View.GONE
         }
