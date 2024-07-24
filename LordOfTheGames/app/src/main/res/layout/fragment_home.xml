@@ -23,7 +23,8 @@
         android:layout_height="400dp"
         android:layout_weight=".70"
         android:layout_gravity="center"
-        android:background="@drawable/rainbow">
+        android:background="@drawable/theme_gradient_centered"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
