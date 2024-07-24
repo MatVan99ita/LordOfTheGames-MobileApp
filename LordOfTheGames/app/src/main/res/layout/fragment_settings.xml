@@ -51,7 +51,80 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include layout="@layout/grid_item2" android:id="@+id/game_item"/>
-    <include layout="@layout/notification_obj" android:id="@+id/notification_notread"/>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notification_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rainbow"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/notification_img"
+                android:layout_width="129dp"
+                android:layout_height="87dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:contentDescription="img"
+                android:src="@mipmap/yo_listen_foreground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <ImageView
+                android:id="@+id/check_notification_point"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:contentDescription="img"
+                android:src="@drawable/baseline_circle_24"
+                app:layout_constraintBottom_toBottomOf="@+id/notification_title"
+                app:layout_constraintStart_toEndOf="@+id/notification_title"
+                app:layout_constraintTop_toTopOf="@+id/notification_title" />
+
+            <TextView
+                android:id="@+id/notification_title"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:lines="1"
+                android:padding="4dp"
+                android:text="@string/app_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/notification_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/notification_content"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:lines="1"
+                android:padding="4dp"
+                android:text="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/notification_img"
+                app:layout_constraintTop_toBottomOf="@id/notification_title"
+                app:layout_constraintVertical_bias="0.088" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
    <androidx.cardview.widget.CardView android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -63,8 +136,6 @@
         android:layout_gravity="center"
         android:background="@drawable/raonbow2"
         android:orientation="horizontal">
-
-
         <ImageView
             android:id="@+id/notification_img_S"
             android:layout_width="129dp"
@@ -77,18 +148,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
-
-        <ImageView
-            android:id="@+id/check_notification_point_S"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:contentDescription="img"
-            android:src="@drawable/baseline_circle_24"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/notification_title_S"
-            app:layout_constraintStart_toEndOf="@+id/notification_title_S"
-            app:layout_constraintTop_toTopOf="@+id/notification_title_S" />
 
         <TextView
             android:id="@+id/notification_title_S"
