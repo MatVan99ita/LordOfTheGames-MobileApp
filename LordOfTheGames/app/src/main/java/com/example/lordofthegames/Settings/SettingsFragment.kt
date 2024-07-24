@@ -22,6 +22,7 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
 import com.google.android.material.materialswitch.MaterialSwitch
@@ -61,7 +62,6 @@ class SettingsFragment: Fragment() {
 
         if(activity != null){
 
-
             val switchThemeButton: SwitchCompat = view.findViewById(R.id.material_switch_theme)
             val textInputLayout: TextInputLayout = view.findViewById(R.id.username_textinput)
             val editText: EditText? = textInputLayout.editText
@@ -93,10 +93,6 @@ class SettingsFragment: Fragment() {
             if(sharedPreferences.getString("Theme", "NoTheme").equals("Night")) { switchThemeButton.isChecked = true }
 
             val editor = sharedPreferences.edit()
-            /***
-             * TODO:
-             *      rifare la scelta del tema o scegliere giusto 2 temi
-             */
             switchThemeButton.setOnCheckedChangeListener { buttonView, isChecked ->
                 // Post the check to the main thread to ensure that the switch's state is updated
                 val handler = Handler(Looper.getMainLooper())
