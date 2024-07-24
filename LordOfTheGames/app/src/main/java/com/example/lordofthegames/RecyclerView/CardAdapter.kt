@@ -29,10 +29,7 @@ class CardAdapter(
 
     private var filteredData: MutableList<GameCardItem> =
         cardItemList as MutableList<GameCardItem> //mutableListOf()
-    private lateinit var viuvve: HomeViewModel;
-    init {
-        viuvve = viewModell
-    }
+    private var viuvve: HomeViewModel = viewModell
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val layoutView: View = LayoutInflater.from(parent.context).inflate(R.layout.grid_item2, parent, false)
@@ -94,8 +91,8 @@ class CardAdapter(
                     activity as Context,
                     "Have fun playing ${currentCardItem.gameTitle}"
                 )
-                holder.addBtn.visibility = View.GONE
-                holder.modifyBtn.visibility = View.GONE
+                holder.addBtn.visibility = View.INVISIBLE
+                holder.modifyBtn.visibility = View.INVISIBLE
             } else {
                 Utilities.showaToast(activity as Context, "Errore nell'inserimento del gioco in lista")
             }
@@ -114,27 +111,6 @@ class CardAdapter(
                 Utilities.showaToast(activity as Context, "Errore nell'inserimento del gioco in lista")
             }
         }
-
-        //val catItems: MutableList<CategoryCardItem> = listOf(
-        //    CategoryCardItem("GDR"),
-        //    CategoryCardItem("Terza persona"),
-        //    CategoryCardItem("JRPG"),
-        //    CategoryCardItem("JRPG"),
-        //    CategoryCardItem("JRPG"),
-        //    CategoryCardItem("JRPG"),
-        //    CategoryCardItem("JRPG")
-        //) as MutableList<CategoryCardItem>
-        //val platItems: MutableList<PlatformCardItem> = listOf(
-        //    PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
-        //    PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
-        //    PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
-        //    PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
-        //    PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
-        //    PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
-        //) as MutableList<PlatformCardItem>
-
-
-
 
         var conta = 0
 
