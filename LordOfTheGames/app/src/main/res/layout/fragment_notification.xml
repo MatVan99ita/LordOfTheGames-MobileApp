@@ -50,6 +50,15 @@
                 app:layout_constraintEnd_toStartOf="@id/trash_btn" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/close_btn"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="33dp"
+                android:layout_height="34dp"
+                android:background="@drawable/close_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/trash_btn"
                 android:layout_width="80dp"
                 android:layout_height="82dp"
@@ -65,8 +74,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="TextView"
+                app:layout_constraintEnd_toStartOf="@+id/close_btn"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/close_btn" />
 
             <TextView
                 android:id="@+id/notification_content_specific"

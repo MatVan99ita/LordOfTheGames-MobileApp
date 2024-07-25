@@ -15,7 +15,9 @@
         <attr name="colorSecondaryPale"         format="reference|color" />
         <attr name="colorSecondaryVariantPale"  format="reference|color" />
         <attr name="pageColor"                  format="reference|color" />
-        
+        <attr name="closeBG"                    format="reference|color" />
+        <attr name="onCloseBG"                  format="reference|color" />
+
     </declare-styleable>
     
 

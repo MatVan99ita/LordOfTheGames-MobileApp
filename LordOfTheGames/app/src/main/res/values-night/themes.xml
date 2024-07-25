@@ -16,6 +16,8 @@
         <item name="fontBGColor"  >#000000</item>
 
 
+        <item name="closeBG">#B50000</item>
+        <item name="onCloseBG">#F1F1F1</item>
         <!--Elementi personali-->
         <item name="themeItemsBGColor">#8AEFDBC9</item>
         <item name="themeBorderColor">#DA00FF</item>

@@ -1,14 +1,24 @@
 package com.example.lordofthegames.home
 
+import android.Manifest
 import android.R.attr
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -17,10 +27,10 @@ import com.example.lordofthegames.databinding.FragmentNotificationBinding
 import com.example.lordofthegames.db_entities.Notification
 import com.example.lordofthegames.recyclerView.NotificationAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import java.time.ZonedDateTime
 import java.util.TimeZone
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -39,9 +49,8 @@ class NotificationFragment: Fragment(), OnItemListener {
     private val actual_date_format: String = "dd/mm/yyyy - HH:mm"
     private val dateTime_formatter: DateTimeFormatter = DateTimeFormat.forPattern(actual_date_format)
 
-    //TODO: mettere tipo un pallino con o senza numero dentro sopra la campanella per sehnalare il numero di notifiche presenti
-    //      creare il framelayout per visualizzare la singola notifica con tutto quello che ha scritto e il bottone del calendario se esiste una data
-    //      sistemare l'update della view
+    //TODO: mettere tipo un pallino con o senza numero dentro sopra la campanella per
+    //      sehnalare il numero di notifiche presenti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +81,8 @@ class NotificationFragment: Fragment(), OnItemListener {
         bind.recyclerViewNotification.adapter = notificationAdapter
 
 
+
+
         bind.trashBtn.setOnClickListener {
             var i = 0
             i = viewm.deleteNotification(selected_notification.id, user_nick)
@@ -86,15 +97,31 @@ class NotificationFragment: Fragment(), OnItemListener {
         }
 
         bind.addToCalendarBtn.setOnClickListener {
-            //TODO: creare il coso dei permesi per poter scrivere e leggere il calendario
-            
-            addToCalendar(
-                DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
-                if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis,
-                selected_notification.title!!,
-                selected_notification.content!!
-            )
-            bind.notificationSpecificFrameLayout.visibility = View.GONE
+
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_CALENDAR
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                addToCalendar(
+                    DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
+                    if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis,
+                    selected_notification.title!!,
+                    selected_notification.content!!
+                )
+                bind.notificationSpecificFrameLayout.visibility = View.GONE
+            }
+            else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        Manifest.permission.WRITE_CALENDAR,
+                    ),
+                    1
+                )
+            }
+
+
         }
 
         bind.notificationFab.setOnClickListener {
@@ -171,41 +198,43 @@ class NotificationFragment: Fragment(), OnItemListener {
         }
     }
 
-    /*override fun onRequestPermissionsResult(
+    override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         when (requestCode) {
-            Utilities.CAMERA_PERMISSION_REQUEST_CODE -> {
+            Utilities.WRITE_CALENDAR_CODE -> {
+                // Se la richiesta è annullata, i risultati degli array sono vuoti
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    addToCalendar()
+                    // I permessi sono stati concessi, puoi chiamare la funzione per creare un evento
+                    addToCalendar(
+                        DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
+                        if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis,
+                        selected_notification.title!!,
+                        selected_notification.content!!
+                    )
+                    bind.notificationSpecificFrameLayout.visibility = View.GONE
                 } else {
-                    // L'utente ha negato il permesso per la fotocamera, gestisci di conseguenza
-                    // Ad esempio, mostra un messaggio all'utente
                     MaterialAlertDialogBuilder(
                         requireContext()
                     )
                         .setTitle("Permissione Denied")
-                        .setMessage("How is possible for you to face your enemy without a face")
-                }
-            }
-            Utilities.GALLERY_PERMISSION_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    add()
-                } else {
-                    // L'utente ha negato il permesso per la galleria, gestisci di conseguenza
-                    // Ad esempio, mostra un messaggio all'utente
-                    MaterialAlertDialogBuilder(
-                        requireContext()
-                    )
-                        .setTitle("Permissione Denied")
-                        .setMessage("How is possible for you to face your enemy without a face")
+                        .setMessage("No calendario no party")
                 }
             }
         }
+    }
 
-    }*/
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                Utilities.WRITE_CALENDAR_CODE -> {
+                    Utilities.showaToast(requireContext(), "Evento aggiunto, va a controllare")
+                }
+            }
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

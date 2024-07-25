@@ -28,7 +28,8 @@
         <item name="colorSecondaryPale">#C66C50</item>
         <item name="colorSecondaryVariantPale">#953B20</item>
 
-
+        <item name="closeBG">#850000</item>
+        <item name="onCloseBG">#F1F1F1</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
         <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
