@@ -67,6 +67,7 @@ import java.text.SimpleDateFormat
 import java.util.Base64
 import java.util.Date
 import java.util.Locale
+import android.provider.CalendarContract.Calendars
 
 class Utilities {
 
@@ -113,7 +114,7 @@ class Utilities {
         const val GALLERY_REQUEST_CODE = 104
         const val CAMERA_AND_GALLERY_REQUEST_CODE = 123
         const val REQUEST_WRITE_STORAGE = 106
-        const val READ_CALENDAR_CODE  = 106
+        const val READ_CALENDAR_CODE  = 100
         const val WRITE_CALENDAR_CODE = 100
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
@@ -564,6 +565,46 @@ class Utilities {
             nick_head.text = nick
             mail_head.text = mail
             if(img != null) usr_icon.setImageBitmap(this.stringToByteArrayToBitmap(img))
+        }
+
+        fun getCalendarId(context: Context) : Long? {
+            val projection = arrayOf(Calendars._ID, Calendars.CALENDAR_DISPLAY_NAME)
+
+            var calCursor = context.contentResolver.query(
+                Calendars.CONTENT_URI,
+                projection,
+                Calendars.VISIBLE + " = 1 AND " + Calendars.IS_PRIMARY + "=1",
+                null,
+                Calendars._ID + " ASC"
+            )
+
+            if (calCursor != null && calCursor.count <= 0) {
+                calCursor = context.contentResolver.query(
+                    Calendars.CONTENT_URI,
+                    projection,
+                    Calendars.VISIBLE + " = 1",
+                    null,
+                    Calendars._ID + " ASC"
+                )
+            }
+
+            if (calCursor != null) {
+                if (calCursor.moveToFirst()) {
+                    val calName: String
+                    val calID: String
+                    val nameCol = calCursor.getColumnIndex(projection[1])
+                    val idCol = calCursor.getColumnIndex(projection[0])
+
+                    calName = calCursor.getString(nameCol)
+                    calID = calCursor.getString(idCol)
+
+                    Log.d("CALENDERAZZIO", "Calendar name = $calName Calendar ID = $calID")
+
+                    calCursor.close()
+                    return calID.toLong()
+                }
+            }
+            return null
         }
 
     }

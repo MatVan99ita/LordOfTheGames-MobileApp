@@ -51,10 +51,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/close_btn"
-                android:layout_width="33dp"
-                android:layout_height="34dp"
-                app:backgroundTint="@null"
+                android:layout_width="53dp"
+                android:layout_height="51dp"
                 android:background="@drawable/close_btn"
+                app:backgroundTint="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,10 +89,11 @@
 
             <TextView
                 android:id="@+id/notification_date_specific"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="36dp"
+                android:layout_marginEnd="15dp"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/add_to_calendar_btn"
                 app:layout_constraintStart_toStartOf="parent" />
