@@ -57,7 +57,8 @@ class NotificationFragment: Fragment(), OnItemListener {
         super.onViewCreated(view, savedInstanceState)
         bind.recyclerViewNotification.adapter = notificationAdapter
 
-        //TODO: dare vita ai bottoni trash e calendar e vedere se si può fare qualcosa per il colore
+        //TODO: dare vita ai bottoni trash e calendar
+        //      fare in modo che l'occhio aggiorni in tempo reale la lista
         bind.trashBtn.setOnClickListener {
             bind.notificationSpecificFrameLayout.visibility = View.GONE
         }
@@ -68,9 +69,8 @@ class NotificationFragment: Fragment(), OnItemListener {
 
         bind.notificationFab.setOnClickListener {
             var i = 0
-            list.forEach {
-                viewm.readAllNotification(user_nick)
-            }
+            i = viewm.readAllNotification(user_nick)
+
             if(i > 0){
                 this.updateView()
                 Utilities.showaToast (
