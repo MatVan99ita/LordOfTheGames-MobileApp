@@ -39,6 +39,11 @@
 -->
     </style>
 
+    <style name="LoMaterioBaton" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">#B50000</item>
+        <item name="colorOnPrimary">#F1F1F1</item>
+    </style>
+
     <style name="Fontato" parent="Theme.LordOfTheGames">
         <item name="android:fontFamily">@font/god_of_war</item>
     </style>

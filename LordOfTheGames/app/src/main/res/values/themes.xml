@@ -28,7 +28,7 @@
         <item name="colorSecondaryPale">#C66C50</item>
         <item name="colorSecondaryVariantPale">#953B20</item>
 
-        <item name="closeBG">#850000</item>
+        <item name="closeBG">#E40101</item>
         <item name="onCloseBG">#F1F1F1</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
@@ -36,6 +36,16 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
         <item name="floatingActionButtonStyle">@style/floatingActionButtonStyle</item>
     </style>
+
+
+
+
+    <style name="LoMaterioBaton" parent="Widget.MaterialComponents.Button">
+        <item name="colorPrimary">#850000</item>
+        <item name="colorOnPrimary">#F1F1F1</item>
+    </style>
+
+
 
     <style name="Widget.BottomNavigationView"
         parent="Widget.Design.BottomNavigationView">

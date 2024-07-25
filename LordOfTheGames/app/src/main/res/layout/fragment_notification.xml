@@ -51,9 +51,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/close_btn"
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="33dp"
                 android:layout_height="34dp"
+                app:backgroundTint="@null"
                 android:background="@drawable/close_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
