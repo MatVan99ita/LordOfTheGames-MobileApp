@@ -12,7 +12,9 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.RadioGroup
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -260,7 +262,19 @@ class HomeFragment: Fragment(), OnItemListener {
     }
 
     private fun filterGames(filters: List<String>) {
-        TODO("Implementare il fitro")
+        TODO("")
+        /* TODO: ~ Implementare il fitro
+                 ~ Mettere dei textview sotto i bottoni plat_btn e cat_btn in modo da poter
+                   selezionare solo una categoria e una sola piattaforma (di più sarebbe il caos per ora)
+                   oppure fare il filtro con le lambda
+        */
+        val su_giu: Button
+        val radioHead: RadioGroup
+        val plat_btn: Button
+        val cat_btn: Button
+        val radioStar: RadioGroup
+        val btn_canc: Button
+        val btn_save: Button
     }
 
 
