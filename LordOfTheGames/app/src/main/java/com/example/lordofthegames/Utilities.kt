@@ -607,5 +607,53 @@ class Utilities {
             return null
         }
 
+        fun generaNotificaNonSalvabile(
+            context: FragmentActivity,
+            title: String,
+            content: String,
+            CHANNEL_ID: String
+        ) {
+
+            // Verifica se l'applicazione ha il permesso di inviare notifiche
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Richiedi il permesso all'utente
+                ActivityCompat.requestPermissions(context, arrayOf(POST_NOTIFICATIONS), 500)
+                return
+            } else {
+
+                // Costruisci la notifica
+                val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.yo_listen_foreground)
+                    .setContentTitle(title)
+                    .setContentText(content)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                // Se l'API level è 26 o superiore, crea e registra il canale delle notifiche
+                val channelName = "My Notification Channel"
+                val importance = NotificationManager.IMPORTANCE_DEFAULT
+                val channel = NotificationChannel(CHANNEL_ID, channelName, importance).apply {
+                    description = "Description of my notification channel"
+                    // Configura altre opzioni del canale, se necessario
+                    enableLights(true)
+                    lightColor = Color.RED
+                }
+
+                // Registra il canale delle notifiche con il NotificationManager
+                val notificationManager =
+                    context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channel)
+
+                // Invia la notifica utilizzando il NotificationManagerCompat
+                with(NotificationManagerCompat.from(context)) {
+                    notify(666, builder.build())
+                }
+
+            }
+        }
+
     }
 }

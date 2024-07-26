@@ -239,5 +239,9 @@ class LotgRepo(application: Application) {
         return lotgDao.deleteNotification(id, usrRef)
     }
 
+    fun getNonReadNotificationCount(userRef: String): Int {
+        return lotgDao.getNonReadNotificationCount(userRef)
+    }
+
 
 }

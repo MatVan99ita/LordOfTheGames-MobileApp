@@ -111,19 +111,17 @@ class HomeFragment: Fragment(), OnItemListener {
 
             nick_head.text = banana.getString("nickname", "BANANA").toString()
             mail_head.text = banana.getString("email", "BANANA").toString()
+            val notification_count = homeViewModel.getNonReadNotificationCount(nick_head.text.toString())
 
-
-            //TODO: creare una funzione che generi la notifica con il numero di notifiche non lette senza salvare effettivamente quest'ultima
-            /*Utilities.generaNotifiche(
+            if(notification_count > 0)
+            Utilities.generaNotificaNonSalvabile(
                 requireActivity(),
-                4,
-                "Prova",
-                "Prova prova sa sa",
-                Utilities.TUDEI(),
-                Utilities.TUDEI(),
+                "${
+                    if (notification_count > 99) "99+" else notification_count 
+                } notifiche non lette",
+                "",
                 MainActivity::class.java.simpleName,
-                nick_head.text.toString()
-                )*/
+            )
         } else {
             Log.e("HomeFragment", "Activity is null")
         }

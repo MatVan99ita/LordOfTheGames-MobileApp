@@ -169,4 +169,8 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return repository.getUsrImg(mail)
     }
 
+    fun getNonReadNotificationCount(user_ref: String): Int {
+        return repository.getNonReadNotificationCount(user_ref)
+    }
+
 }

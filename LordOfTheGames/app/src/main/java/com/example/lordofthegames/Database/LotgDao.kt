@@ -393,5 +393,8 @@ interface LotgDao {
 
     @Query("DELETE FROM notification WHERE id=:id AND usr_ref = :usrRef")
     fun deleteNotification(id: Int, usrRef: String): Int
+
+    @Query("SELECT DISTINCT COUNT(*) FROM NOTIFICATION WHERE read = 0 AND usr_ref = :userRef")
+    fun getNonReadNotificationCount(userRef: String): Int
 }
 
