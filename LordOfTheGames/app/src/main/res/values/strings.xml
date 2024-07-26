@@ -18,7 +18,6 @@
     <string name="dropped">Dropped</string>
     <string name="playing">Playing</string>
     <string name="abandoned">Abandoned</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="notes">Notes</string>
     <string name="log_in">Log-in</string>

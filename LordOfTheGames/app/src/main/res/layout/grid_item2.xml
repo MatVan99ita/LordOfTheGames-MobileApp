@@ -39,7 +39,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <!-- TODO: ############## LORO 2 DEVONO DIVENTARE 2 ULTERIORI RECYCLER CON DENTRO SOLO DEI TEXTVIEW ###################-->
 
         <TextView
             android:id="@+id/game_title2"

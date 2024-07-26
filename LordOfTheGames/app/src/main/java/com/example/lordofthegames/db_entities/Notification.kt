@@ -25,23 +25,3 @@ data class Notification(
     val usr_ref: String,
 )
 
-/*
-
- Expected:
-TableInfo{name='notification', columns={
-
-
-E user_ref=Column{name='user_ref', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='undefined'},
-F user_ref=Column{name='user_ref', type='TEXT', affinity='2', notNull=false, primaryKeyPosition=0, defaultValue='undefined'}},
-
-
-
-
-
-
-TableInfo{name='notification', columns={
-
-
-
-
-*/

@@ -100,10 +100,9 @@ class Utilities {
 
     /*
     * TODO: 2
-    *   Sistemare il drawerlayout ovunque con le cose che gli mancano e sistemare i colori delle varie parti del progetto
+    *   Sistemare il drawerlayout ovunque con le cose che gli mancano
     *   drawer fuori dalla home
     *   topbar nei setting
-    *   sfondo notifiche
     *   mylist item con qualche ghirigoro
     * */
 
@@ -266,7 +265,6 @@ class Utilities {
             return gradientDrawable
         }
 
-        //TODO: funzioni di sign e log
         fun signin(activity: AppCompatActivity, mail: String, nick: String, password: String){
             //aggiungere entry al db e loggare aggiungendo allo sharedpreference nick, mail e logged
             sharedPrefLog(activity, nick, mail)

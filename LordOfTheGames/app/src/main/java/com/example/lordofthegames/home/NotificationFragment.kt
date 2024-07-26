@@ -45,9 +45,6 @@ class NotificationFragment: Fragment(), OnItemListener {
     private val actual_date_format: String = "dd/mm/yyyy - HH:mm"
     private val dateTime_formatter: DateTimeFormatter = DateTimeFormat.forPattern(actual_date_format)
 
-    //TODO: mettere tipo un pallino con o senza numero dentro sopra la campanella per
-    //      sehnalare il numero di notifiche presenti
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

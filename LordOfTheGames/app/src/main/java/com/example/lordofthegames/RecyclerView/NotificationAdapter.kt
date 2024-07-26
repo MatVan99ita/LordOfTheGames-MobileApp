@@ -22,8 +22,6 @@ class NotificationAdapter(
     var activity: Activity,
 ): RecyclerView.Adapter<NotificationAdapter.NotificationHolder>() {
 
-    //TODO: creare la funzione per rendere lette le notifiche
-    //      il cestino deve rimuovere la notifica dal db e anche dalla vista
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
         return NotificationHolder(

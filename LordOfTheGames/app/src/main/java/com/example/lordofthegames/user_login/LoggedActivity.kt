@@ -33,8 +33,8 @@ class LoggedActivity: AppCompatActivity() {
         *
      *  DALLE SPECIFICHE: mappa utente - grafico andamento - achievement
         *
-     *  -> gi achievement dell'utente possono essere tipo: giochi completati, achievement completati, commenti scritti, discussioni create, like ricevuti(?), dislike ricevuti(?)
-     *  -> il grafico se ne possono fare 1/2 con andamento su tutti i giochi e achievement dei giochi completati
+     *  -> achievement -> tudus userbadge
+     *  -> il grafico con i giochi c'è
      *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
      **/
 

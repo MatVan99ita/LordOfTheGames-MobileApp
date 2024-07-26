@@ -31,3 +31,6 @@ data class Achievement(
     @ColumnInfo(index = true)
     var game_ref: Int
     )
+
+
+//TODO: aggiungere i link con l'immagine
