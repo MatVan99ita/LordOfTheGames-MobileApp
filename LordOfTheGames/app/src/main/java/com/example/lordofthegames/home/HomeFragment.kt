@@ -29,6 +29,7 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 
 
@@ -99,6 +100,13 @@ class HomeFragment: Fragment(), OnItemListener {
             val navigationView = requireActivity().findViewById<View>(R.id.nav_view) as NavigationView
             val headerView = navigationView.getHeaderView(0)
 
+            val close_btn: MaterialButton = requireActivity().findViewById(R.id.close_btn_filter)
+            val frameLayout: FrameLayout = requireActivity().findViewById(R.id.second_filter)
+            close_btn.setOnClickListener{
+                frameLayout.visibility =
+                    if(frameLayout.isVisible) View.GONE else View.VISIBLE
+            }
+
             Utilities.setDrawerWithUser(
                 requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),
@@ -114,14 +122,14 @@ class HomeFragment: Fragment(), OnItemListener {
             val notification_count = homeViewModel.getNonReadNotificationCount(nick_head.text.toString())
 
             if(notification_count > 0)
-            Utilities.generaNotificaNonSalvabile(
-                requireActivity(),
-                "${
-                    if (notification_count > 99) "99+" else notification_count 
-                } notifiche non lette",
-                "",
-                MainActivity::class.java.simpleName,
-            )
+                Utilities.generaNotificaNonSalvabile(
+                    requireActivity(),
+                    title = "${
+                        if (notification_count > 99) "99+" else notification_count 
+                    } notifiche non lette",
+                    content = "",
+                    CHANNEL_ID = MainActivity::class.java.simpleName,
+                )
         } else {
             Log.e("HomeFragment", "Activity is null")
         }
@@ -178,7 +186,7 @@ class HomeFragment: Fragment(), OnItemListener {
         })
 
         filterItem.setOnMenuItemClickListener {
-            filterFrameLayout.visibility = if(filterFrameLayout.isVisible) View.GONE else View.VISIBLE
+            if(filterFrameLayout.isVisible) View.GONE else View.VISIBLE
             true
         }
 
@@ -249,6 +257,10 @@ class HomeFragment: Fragment(), OnItemListener {
             )
         )
         recyclerView.adapter = adapter
+    }
+
+    private fun filterGames(filters: List<String>) {
+        TODO("Implementare il fitro")
     }
 
 

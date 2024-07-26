@@ -19,11 +19,13 @@
 
     <FrameLayout
         android:id="@+id/filter_home"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_weight=".70"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
         android:layout_gravity="center"
-        android:background="@drawable/theme_gradient_centered"
+        android:background="@drawable/gradient_rounded_bg"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -114,6 +116,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_annulla1" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/close_btn_filter"
+                android:layout_width="53dp"
+                android:layout_height="51dp"
+                android:background="@drawable/close_btn"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/btn_annulla1" />
 
 
             <Button
@@ -130,23 +140,25 @@
 
         <FrameLayout
             android:visibility="visible"
-            android:id="@+id/achievement_edit2"
+            android:id="@+id/second_filter"
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_weight=".70"
             android:layout_gravity="center"
             android:background="@drawable/rainbow">
 
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
 
                 <RadioGroup
                     android:id="@+id/radio_group2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/black"
-                    android:divider="@drawable/card_item_background_gradient"
                     android:textColor="@color/white"
                     android:orientation="horizontal"
                     app:layout_constraintTop_toTopOf="parent"
@@ -171,10 +183,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="vertical"
-                    tools:listitem="@layout/category_element"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/radio_group2"
-                    />
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:listitem="@layout/category_element" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
