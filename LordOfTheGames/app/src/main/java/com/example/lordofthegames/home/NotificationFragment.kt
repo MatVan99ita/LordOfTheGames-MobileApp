@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -186,7 +185,10 @@ class NotificationFragment: Fragment(), OnItemListener {
         values.put(CalendarContract.Events.DTSTART, dataInizio)
         if(dataFine != null) values.put(CalendarContract.Events.DTEND, dataFine) else values.put(CalendarContract.Events.DURATION, "+P1H")
         values.put(CalendarContract.Events.TITLE, title)
-        values.put(CalendarContract.Events.CALENDAR_ID, Utilities.getCalendarId(requireContext()))
+        values.put(
+            CalendarContract.Events.CALENDAR_ID,
+            Utilities.getCalendarId(requireContext()) ?: 1
+        )
         values.put(CalendarContract.Events.DESCRIPTION, attr.description)
         values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
         val uri = requireContext().contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)
