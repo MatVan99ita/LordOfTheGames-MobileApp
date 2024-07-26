@@ -25,6 +25,7 @@
         />
 
     <FrameLayout
+        android:visibility="gone"
         android:id="@+id/notification_specific_frame_layout"
         android:layout_width="300dp"
         android:layout_height="300dp"
