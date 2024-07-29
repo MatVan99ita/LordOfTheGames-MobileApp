@@ -396,5 +396,12 @@ interface LotgDao {
 
     @Query("SELECT DISTINCT COUNT(*) FROM NOTIFICATION WHERE read = 0 AND usr_ref = :userRef")
     fun getNonReadNotificationCount(userRef: String): Int
+
+    @Query("SELECT DISTINCT * FROM platform")
+    fun getPlatforms(): Cursor
+    @Query("SELECT DISTINCT * FROM categories")
+    fun getCategories(): Cursor
+
+
 }
 

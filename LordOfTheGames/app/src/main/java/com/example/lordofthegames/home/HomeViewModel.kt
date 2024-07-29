@@ -12,6 +12,8 @@ import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.Pair
 import com.example.lordofthegames.R
+import com.example.lordofthegames.db_entities.Categories
+import com.example.lordofthegames.db_entities.Platform
 import com.example.lordofthegames.db_entities.UsersGame
 import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
@@ -171,6 +173,46 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
 
     fun getNonReadNotificationCount(user_ref: String): Int {
         return repository.getNonReadNotificationCount(user_ref)
+    }
+
+    fun getPlatforms(): List<Platform>{
+        val c = repository.getPlatforms()
+        var l: MutableList<Platform> = mutableListOf()
+        while (c.moveToNext()){
+            l.add(
+                Platform(
+                    platform_id = c.getInt(
+                        c.getColumnIndexOrThrow("platform_id")
+                    ),
+                    nome = c.getString(
+                        c.getColumnIndexOrThrow("nome")
+                    ),
+                    icona = c.getString(
+                        c.getColumnIndexOrThrow("icona")
+                    )
+                )
+            )
+        }
+
+        return l
+    }
+    fun getCategories(): List<Categories>{
+        val c = repository.getCategories()
+        var l: MutableList<Categories> = mutableListOf()
+        while (c.moveToNext()){
+            l.add(
+                Categories(
+                    category_id = c.getInt(
+                        c.getColumnIndexOrThrow("category_id")
+                    ),
+                    category_name = c.getString(
+                        c.getColumnIndexOrThrow("category_name")
+                    ),
+                )
+            )
+        }
+
+        return l
     }
 
 }

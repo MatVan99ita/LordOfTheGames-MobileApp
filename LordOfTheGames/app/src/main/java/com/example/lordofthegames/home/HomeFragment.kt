@@ -8,12 +8,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.SearchView
 import android.widget.TextView
@@ -31,7 +32,6 @@ import com.example.lordofthegames.recyclerView.CategoryCardItem
 import com.example.lordofthegames.recyclerView.GameCardItem
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardItem
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 
 
@@ -95,11 +95,23 @@ class HomeFragment: Fragment(), OnItemListener {
             val navigationView = requireActivity().findViewById<View>(R.id.nav_view) as NavigationView
             val headerView = navigationView.getHeaderView(0)
 
-            val close_btn: MaterialButton = requireActivity().findViewById(R.id.close_btn_filter)
-            val frameLayout: FrameLayout = requireActivity().findViewById(R.id.second_filter)
-            close_btn.setOnClickListener{
-                frameLayout.visibility =
-                    if(frameLayout.isVisible) View.GONE else View.VISIBLE
+            radioHead = requireActivity().findViewById(R.id.radiohead)
+            radioStar = requireActivity().findViewById(R.id.radiostar)
+
+            homeViewModel.getCategories().forEach {el ->
+                val rdbtn = RadioButton(requireContext())
+                rdbtn.id = el.category_id
+                rdbtn.text = el.category_name
+                radioHead.addView(rdbtn)
+            }
+
+            homeViewModel.getPlatforms().forEach {el ->
+                val ll = LinearLayout(requireContext())
+                ll.orientation = LinearLayout.VERTICAL
+                val rdbtn = RadioButton(requireContext())
+                rdbtn.id = el.platform_id
+                rdbtn.text = el.nome
+                radioStar.addView(rdbtn)
             }
 
             Utilities.setDrawerWithUser(
@@ -108,13 +120,10 @@ class HomeFragment: Fragment(), OnItemListener {
                 banana.getString("email", "BANANA").toString(),
                 homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
             )
-            su_giu =    requireActivity().findViewById(R.id.btn_order)
-            radioHead = requireActivity().findViewById(R.id.Rgroup)
-            plat_btn =  requireActivity().findViewById(R.id.btn_annulla2222)
-            cat_btn =   requireActivity().findViewById(R.id.btn_annulla222222)
-            radioStar = requireActivity().findViewById(R.id.radio_group2)
-            btn_canc =  requireActivity().findViewById(R.id.btn_annulla1)
-            btn_save =  requireActivity().findViewById(R.id.btn_salva1)
+            su_giu    = requireActivity().findViewById(R.id.btn_order)
+            btn_canc  = requireActivity().findViewById(R.id.btn_annulla1)
+            btn_save  = requireActivity().findViewById(R.id.btn_salva1)
+
 
             btn_canc.setOnClickListener{
                 //TODO: cancellare tutte le selezioni dei filtri
@@ -334,11 +343,6 @@ class HomeFragment: Fragment(), OnItemListener {
                                 )>
                         filter con select gameItem that in lista plat/cat contains "elemento"
         */
-        su_giu
-        radioHead
-        plat_btn
-        cat_btn
-        radioStar
 
         val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
         // Filtra la lista in base al query di categorie/piattaforme

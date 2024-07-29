@@ -243,5 +243,12 @@ class LotgRepo(application: Application) {
         return lotgDao.getNonReadNotificationCount(userRef)
     }
 
+    fun getPlatforms(): Cursor {
+        return lotgDao.getPlatforms()
+    }
+    fun getCategories(): Cursor {
+        return lotgDao.getCategories()
+    }
+
 
 }
