@@ -48,7 +48,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var platformdb:   MutableList<PlatformCardItem> = mutableListOf()
     private var gheimerzz:    MutableList<GameItem>         = mutableListOf()
     private var gheimerzzReversed: Boolean = false
-    val filteredList: MutableList<GameItem> = ArrayList()
+    private var filterGheimerzz: MutableList<GameItem> = mutableListOf()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
 
@@ -129,12 +129,22 @@ class HomeFragment: Fragment(), OnItemListener {
             su_giu.setOnClickListener {
                 val list: List<GameItem>
 
-                if(!gheimerzzReversed) {
-                    list = gheimerzz.reversed()
-                    gheimerzzReversed = true
+                if(filterGheimerzz.isEmpty()) {
+                    if (!gheimerzzReversed) {
+                        list = gheimerzz.reversed()
+                        gheimerzzReversed = true
+                    } else {
+                        list = gheimerzz
+                        gheimerzzReversed = false
+                    }
                 } else {
-                    list = gheimerzz
-                    gheimerzzReversed = false
+                    if (!gheimerzzReversed) {
+                        list = filterGheimerzz.reversed()
+                        gheimerzzReversed = true
+                    } else {
+                        list = filterGheimerzz
+                        gheimerzzReversed = false
+                    }
                 }
 
                 adapter =
@@ -225,7 +235,8 @@ class HomeFragment: Fragment(), OnItemListener {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                return false
+                filterData(query)
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
@@ -243,12 +254,15 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
     private fun filterData(query: String) {
+
+        val filteredList: MutableList<GameItem> = ArrayList()
         // Filtra la lista in base alla query di ricerca
         for (gameItem in gheimerzz) {
             if (gameItem.game.gameTitle.contains(query, ignoreCase = true)) {
                 filteredList.add(gameItem)
             }
         }
+        filterGheimerzz = filteredList
 
         // Aggiorna l'adapter con la lista filtrata
         adapter?.setFilter(filteredList)
