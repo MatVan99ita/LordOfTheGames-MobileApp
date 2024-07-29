@@ -47,6 +47,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
     private var platformdb:   MutableList<PlatformCardItem> = mutableListOf()
     private var gheimerzz:    MutableList<GameItem>         = mutableListOf()
+    private var gheimerzzReversed: Boolean = false
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
 
@@ -57,6 +58,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private lateinit var radioStar: RadioGroup
     private lateinit var btn_canc: Button
     private lateinit var btn_save: Button
+    val listener: OnItemListener = this
 
 
 
@@ -119,8 +121,34 @@ class HomeFragment: Fragment(), OnItemListener {
             }
 
             btn_save.setOnClickListener {
-                filterGames(listOf()) //TODO: aggiungere le cose selezionate
+                filterGames(listOf(), listOf()) //TODO: aggiungere le cose selezionate
                 filterFrameLayout.visibility = View.GONE
+            }
+
+            su_giu.setOnClickListener {
+                val list: List<GameItem>
+
+                if(!gheimerzzReversed) {
+                    list = gheimerzz.reversed()
+                    gheimerzzReversed = true
+                } else {
+                    list = gheimerzz
+                    gheimerzzReversed = false
+                }
+
+                adapter =
+                    bundle?.let {
+                        CardAdapter(
+                            listener,
+                            homeViewModel,
+                            list,
+                            requireActivity(),
+                            it.getString("email", "sesso"
+                            )
+                        )
+                    }
+
+                recyclerView.adapter = adapter
             }
 
 
@@ -148,7 +176,6 @@ class HomeFragment: Fragment(), OnItemListener {
     private fun setRecyclerView(act: Activity) {
 
         recyclerView = act.findViewById(R.id.recycler_view)
-        val listener: OnItemListener = this
 
         gameItems.addAll(homeViewModel.getSIMP())
 
@@ -280,8 +307,7 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView.adapter = adapter
     }
 
-    private fun filterGames(filters: List<String>) {
-        TODO("")
+    private fun filterGames(categoryFilters: List<String>, platformFilter: List<String>): MutableList<GameItem> {
         /* TODO: ~ Implementare il fitro
                  ~ Mettere dei textview sotto i bottoni plat_btn e cat_btn in modo da poter
                    selezionare solo una categoria e una sola piattaforma (di più sarebbe il caos per ora)
@@ -294,17 +320,17 @@ class HomeFragment: Fragment(), OnItemListener {
                                 )>
                         filter con select gameItem that in lista plat/cat contains "elemento"
         */
-
-
-        su_giu = requireActivity().findViewById(R.id.btn_order)
+        su_giu
+        radioHead
+        plat_btn
+        cat_btn
+        radioStar
 
         val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
         // Filtra la lista in base al query di categorie/piattaforme
         for (gameItem in gheimerzz) {
-            if (gameItem.game.gameTitle.contains(query, ignoreCase = true)) {
-                filteredList.add(gameItem)
-            }
         }
+        return filteredList
     }
 
 
