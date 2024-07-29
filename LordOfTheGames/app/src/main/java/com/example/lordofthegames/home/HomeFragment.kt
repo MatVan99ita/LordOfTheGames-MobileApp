@@ -4,6 +4,10 @@ package com.example.lordofthegames.home
 //import com.example.lordofthegames.Database.LOTGRepository
 //import com.example.lordofthegames.db_entities.Game
 
+import android.R.attr.bottom
+import android.R.attr.left
+import android.R.attr.right
+import android.R.attr.top
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -16,6 +20,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.RelativeLayout
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -97,7 +102,11 @@ class HomeFragment: Fragment(), OnItemListener {
 
             radioHead = requireActivity().findViewById(R.id.radiohead)
             radioStar = requireActivity().findViewById(R.id.radiostar)
-
+            val params: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(0, 0, 0, 5)
             homeViewModel.getCategories().forEach {el ->
                 val rdbtn = RadioButton(requireContext())
                 rdbtn.id = el.category_id

@@ -44,29 +44,44 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <RadioGroup
-                android:id="@+id/radiohead"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:orientation="vertical"
-                android:background="?attr/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/btn_order"
+            <ScrollView
+                android:id="@+id/s_radiohead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/btn_annulla1"
+                app:layout_constraintEnd_toStartOf="@+id/s_radiostar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/radiostar"/>
+                app:layout_constraintTop_toBottomOf="@+id/btn_order">
 
-            <RadioGroup
-                android:id="@+id/radiostar"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="?attr/colorOnSecondary"
-                android:orientation="vertical"
+                <RadioGroup
+                    android:id="@+id/radiohead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
+                    android:orientation="vertical" />
+
+            </ScrollView>
+
+            <ScrollView
+                android:id="@+id/s_radiostar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/btn_annulla1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_order" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_order">
+
+                <RadioGroup
+                    android:id="@+id/radiostar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorOnSecondary"
+                    android:orientation="vertical" />
+            </ScrollView>
+
 
             <Button
                 android:id="@+id/btn_salva1"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cerca"
                 app:layout_constraintBottom_toBottomOf="parent"
