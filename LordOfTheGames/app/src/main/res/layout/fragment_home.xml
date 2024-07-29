@@ -194,12 +194,4 @@
 
     </FrameLayout>
 
-
-
-        <!--
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-        android:clipChildren="true"
-        -->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

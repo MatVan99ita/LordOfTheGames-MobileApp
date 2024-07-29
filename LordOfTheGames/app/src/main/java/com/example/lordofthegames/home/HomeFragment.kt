@@ -48,6 +48,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var platformdb:   MutableList<PlatformCardItem> = mutableListOf()
     private var gheimerzz:    MutableList<GameItem>         = mutableListOf()
     private var gheimerzzReversed: Boolean = false
+    val filteredList: MutableList<GameItem> = ArrayList()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
 
@@ -242,7 +243,6 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
     private fun filterData(query: String) {
-        val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
         // Filtra la lista in base alla query di ricerca
         for (gameItem in gheimerzz) {
             if (gameItem.game.gameTitle.contains(query, ignoreCase = true)) {
