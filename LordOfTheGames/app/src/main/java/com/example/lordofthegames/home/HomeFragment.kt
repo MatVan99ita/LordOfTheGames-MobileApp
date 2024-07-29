@@ -37,38 +37,28 @@ import com.google.android.material.navigation.NavigationView
 
 class HomeFragment: Fragment(), OnItemListener {
 
-    private var gameItems: MutableList<GameCardItem> = mutableListOf()
-
-    private val gameItemsss: MutableList<GameCardItem> = listOf(
-        GameCardItem("ic__search_white_24", "Spado spado uccidi uccidi", 1),
-        GameCardItem("ic_menu_24dp", "Sparo sparo uccidi uccidi", 2),
-        GameCardItem("yee", "MARVEL Spider-Man", 15),
-    ) as MutableList<GameCardItem>
-
-    private val catItems: MutableList<CategoryCardItem> = listOf(
-        CategoryCardItem("GDR"),
-        CategoryCardItem("Terza persona"),
-        CategoryCardItem("JRPG"),
-    ) as MutableList<CategoryCardItem>
-
-    private val platItems: MutableList<PlatformCardItem> = listOf(
-        PlatformCardItem("PS4", Color.rgb(19, 44, 116)),
-        PlatformCardItem("STEAM", Color.rgb(41, 41, 41)),
-        PlatformCardItem("EPIC", Color.rgb(58, 58, 56)),
-        PlatformCardItem("XBOX ONE", Color.rgb(24, 128, 24)),
-        PlatformCardItem("Game Pass", Color.rgb(24, 128, 24)),
-        PlatformCardItem("Nintendo", Color.rgb(231, 8, 25))
-    ) as MutableList<PlatformCardItem>
 
     private var adapter: CardAdapter? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var homeViewModel: HomeViewModel
     private var bundle: Bundle? = null
 
+    private var gameItems:    MutableList<GameCardItem>     = mutableListOf()
     private var categoriesdb: MutableList<CategoryCardItem> = mutableListOf()
-    private var platformdb: MutableList<PlatformCardItem> = mutableListOf()
+    private var platformdb:   MutableList<PlatformCardItem> = mutableListOf()
+    private var gheimerzz:    MutableList<GameItem>         = mutableListOf()
 
     private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
+
+    private lateinit var su_giu: Button
+    private lateinit var radioHead: RadioGroup
+    private lateinit var plat_btn: Button
+    private lateinit var cat_btn: Button
+    private lateinit var radioStar: RadioGroup
+    private lateinit var btn_canc: Button
+    private lateinit var btn_save: Button
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -115,6 +105,24 @@ class HomeFragment: Fragment(), OnItemListener {
                 banana.getString("email", "BANANA").toString(),
                 homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
             )
+            su_giu =    requireActivity().findViewById(R.id.btn_order)
+            radioHead = requireActivity().findViewById(R.id.Rgroup)
+            plat_btn =  requireActivity().findViewById(R.id.btn_annulla2222)
+            cat_btn =   requireActivity().findViewById(R.id.btn_annulla222222)
+            radioStar = requireActivity().findViewById(R.id.radio_group2)
+            btn_canc =  requireActivity().findViewById(R.id.btn_annulla1)
+            btn_save =  requireActivity().findViewById(R.id.btn_salva1)
+
+            btn_canc.setOnClickListener{
+                //TODO: cancellare tutte le selezioni dei filtri
+                // non lo so -> filterFrameLayout.visibility = View.GONE
+            }
+
+            btn_save.setOnClickListener {
+                filterGames(listOf()) //TODO: aggiungere le cose selezionate
+                filterFrameLayout.visibility = View.GONE
+            }
+
 
             val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
             val mail_head: TextView = headerView.findViewById(R.id.mail_header)
@@ -143,8 +151,19 @@ class HomeFragment: Fragment(), OnItemListener {
         val listener: OnItemListener = this
 
         gameItems.addAll(homeViewModel.getSIMP())
+
+        gameItems.forEach {el ->
+            gheimerzz.add(
+                GameItem(
+                    game = el,
+                    platform = homeViewModel.getGamePlatform(el.gameTitle),
+                    category = homeViewModel.getGameCategory(el.gameTitle),
+                )
+            )
+        }
+
         adapter =
-            bundle?.let { CardAdapter(listener, homeViewModel, homeViewModel.getSIMP(), act, it.getString("email", "sesso")) }
+            bundle?.let { CardAdapter(listener, homeViewModel, gheimerzz, act, it.getString("email", "sesso")) }
         val gridLayout = LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = gridLayout
@@ -196,11 +215,11 @@ class HomeFragment: Fragment(), OnItemListener {
 
 
     private fun filterData(query: String) {
-        val filteredList: MutableList<GameCardItem> = ArrayList<GameCardItem>()
+        val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
         // Filtra la lista in base alla query di ricerca
-        for (game in gameItems) {
-            if (game.gameTitle.contains(query, ignoreCase = true)) {
-                filteredList.add(game)
+        for (gameItem in gheimerzz) {
+            if (gameItem.game.gameTitle.contains(query, ignoreCase = true)) {
+                filteredList.add(gameItem)
             }
         }
 
@@ -251,7 +270,7 @@ class HomeFragment: Fragment(), OnItemListener {
         adapter = CardAdapter(
             listener,
             homeViewModel,
-            homeViewModel.getSIMP(),
+            gheimerzz,
             requireActivity(),
             bundle!!.getString(
                 "email",
@@ -267,14 +286,25 @@ class HomeFragment: Fragment(), OnItemListener {
                  ~ Mettere dei textview sotto i bottoni plat_btn e cat_btn in modo da poter
                    selezionare solo una categoria e una sola piattaforma (di più sarebbe il caos per ora)
                    oppure fare il filtro con le lambda
+                 N.B.: creato List<
+                                GameItem(
+                                    GameCardItem,
+                                    List<PlatformCardItem>,
+                                    List<CategoryCardItem>
+                                )>
+                        filter con select gameItem that in lista plat/cat contains "elemento"
         */
-        val su_giu: Button
-        val radioHead: RadioGroup
-        val plat_btn: Button
-        val cat_btn: Button
-        val radioStar: RadioGroup
-        val btn_canc: Button
-        val btn_save: Button
+
+
+        su_giu = requireActivity().findViewById(R.id.btn_order)
+
+        val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
+        // Filtra la lista in base al query di categorie/piattaforme
+        for (gameItem in gheimerzz) {
+            if (gameItem.game.gameTitle.contains(query, ignoreCase = true)) {
+                filteredList.add(gameItem)
+            }
+        }
     }
 
 

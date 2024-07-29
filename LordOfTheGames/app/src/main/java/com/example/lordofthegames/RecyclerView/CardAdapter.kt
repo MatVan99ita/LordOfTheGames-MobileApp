@@ -16,19 +16,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.db_entities.Game
+import com.example.lordofthegames.home.GameItem
 import com.example.lordofthegames.home.HomeViewModel
 
 
 class CardAdapter(
     var listener: OnItemListener,
     viewModell: HomeViewModel,
-    var cardItemList: List<GameCardItem>?,
+    var cardItemList: List<GameItem>?,
     var activity: Activity,
     var mail: String
 ): RecyclerView.Adapter<CardViewHolder>() {
 
-    private var filteredData: MutableList<GameCardItem> =
-        cardItemList as MutableList<GameCardItem> //mutableListOf()
+    private var filteredData: MutableList<GameItem> = cardItemList as MutableList<GameItem> //mutableListOf()
     private var viuvve: HomeViewModel = viewModell
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -40,8 +40,8 @@ class CardAdapter(
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val currentCardItem: GameCardItem = this.filteredData[position]
-        val imagePath: String = currentCardItem.imageResource
+        val currentCardItem: GameItem = this.filteredData[position]
+        val imagePath: String = currentCardItem.game.imageResource
         //val catItems: MutableList<CategoryCardItem> = mutableListOf()
         //val platItems: MutableList<PlatformCardItem> = mutableListOf()
 
@@ -52,14 +52,14 @@ class CardAdapter(
             1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
-        if(viuvve.getGameListValidity(currentCardItem.gameTitle, mail)){
+        if(viuvve.getGameListValidity(currentCardItem.game.gameTitle, mail)){
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE
         }
 
         holder.gameImg.setImageDrawable(drawable)
 
-        holder.gameTitle.text = currentCardItem.gameTitle
+        holder.gameTitle.text = currentCardItem.game.gameTitle
 
 
         val catList: MutableList<TextView> = mutableListOf()
@@ -78,18 +78,16 @@ class CardAdapter(
         )
         lp.setMargins(0, 0, 5, 0)
 
-        val catItems = this.viuvve.getGameCategory(currentCardItem.gameTitle)
-        val platItems = this.viuvve.getGamePlatform(currentCardItem.gameTitle)
-        val a = this.viuvve.getAchievementCount(currentCardItem.gameTitle, mail)
-        Log.e(currentCardItem.gameTitle, a.toString())
+        val a = this.viuvve.getAchievementCount(currentCardItem.game.gameTitle, mail)
+        Log.e(currentCardItem.game.gameTitle, a.toString())
         holder.achieText.text = "${a.x}/${a.y}"
 
         holder.modifyBtn.setOnClickListener {
-            val i = this.viuvve.newGAmeAdded("Playing", currentCardItem.gameId, mail)
+            val i = this.viuvve.newGAmeAdded("Playing", currentCardItem.game.gameId, mail)
             if(i>0) {
                 Utilities.showaToast(
                     activity as Context,
-                    "Have fun playing ${currentCardItem.gameTitle}"
+                    "Have fun playing ${currentCardItem.game.gameTitle}"
                 )
                 holder.addBtn.visibility = View.INVISIBLE
                 holder.modifyBtn.visibility = View.INVISIBLE
@@ -99,11 +97,11 @@ class CardAdapter(
         }
 
         holder.addBtn.setOnClickListener {
-            val i = this.viuvve.newGAmeAdded("Wanted to play", currentCardItem.gameId, mail)
+            val i = this.viuvve.newGAmeAdded("Wanted to play", currentCardItem.game.gameId, mail)
             if(i>0){
                 Utilities.showaToast(
                     activity as Context,
-                    "${currentCardItem.gameTitle} added to wishlist"
+                    "${currentCardItem.game.gameTitle} added to wishlist"
                 )
                 holder.addBtn.visibility = View.GONE
                 holder.modifyBtn.visibility = View.GONE
@@ -114,7 +112,8 @@ class CardAdapter(
 
         var conta = 0
 
-        catItems.forEach { x ->
+
+        currentCardItem.category.forEach { x ->
             if(conta < 3){
                 val t = TextView(holder.itemView.context)
                 t.text = x.category_name
@@ -126,7 +125,7 @@ class CardAdapter(
             }
         }
         conta = 0
-        platItems.forEach { x ->
+        currentCardItem.platform.forEach { x ->
             if(conta < 3){
                 val t = TextView(holder.itemView.context)
                 t.text = x.platFormName
@@ -153,7 +152,7 @@ class CardAdapter(
     }
 
 
-    fun setFilter(newData: Collection<GameCardItem>) {
+    fun setFilter(newData: Collection<GameItem>) {
         filteredData = ArrayList(newData)
 
         this.notifyDataSetChanged() // Notifica la RecyclerView che i dati sono cambiati
