@@ -47,7 +47,7 @@
             <ScrollView
                 android:id="@+id/s_radiohead"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="290dp"
                 app:layout_constraintBottom_toTopOf="@+id/btn_annulla1"
                 app:layout_constraintEnd_toStartOf="@+id/s_radiostar"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
 
                 <RadioGroup
                     android:id="@+id/radiohead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="?attr/colorPrimary"
                     android:orientation="vertical" />
 
@@ -73,8 +73,8 @@
 
                 <RadioGroup
                     android:id="@+id/radiostar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="?attr/colorOnSecondary"
                     android:orientation="vertical" />
             </ScrollView>

@@ -64,6 +64,8 @@ class HomeFragment: Fragment(), OnItemListener {
     private lateinit var radioStar: RadioGroup
     private lateinit var btn_canc: Button
     private lateinit var btn_save: Button
+    private var selectedRadioStarButtonId: Int = -1
+    private var selectedRadioHeadButtonId: Int = -1
     val listener: OnItemListener = this
 
 
@@ -109,16 +111,14 @@ class HomeFragment: Fragment(), OnItemListener {
             params.setMargins(0, 0, 0, 5)
             homeViewModel.getCategories().forEach {el ->
                 val rdbtn = RadioButton(requireContext())
-                rdbtn.id = el.category_id
+                rdbtn.id = View.generateViewId()
                 rdbtn.text = el.category_name
                 radioHead.addView(rdbtn)
             }
 
             homeViewModel.getPlatforms().forEach {el ->
-                val ll = LinearLayout(requireContext())
-                ll.orientation = LinearLayout.VERTICAL
                 val rdbtn = RadioButton(requireContext())
-                rdbtn.id = el.platform_id
+                rdbtn.id = View.generateViewId()
                 rdbtn.text = el.nome
                 radioStar.addView(rdbtn)
             }
@@ -133,16 +133,6 @@ class HomeFragment: Fragment(), OnItemListener {
             btn_canc  = requireActivity().findViewById(R.id.btn_annulla1)
             btn_save  = requireActivity().findViewById(R.id.btn_salva1)
 
-
-            btn_canc.setOnClickListener{
-                //TODO: cancellare tutte le selezioni dei filtri
-                // non lo so -> filterFrameLayout.visibility = View.GONE
-            }
-
-            btn_save.setOnClickListener {
-                filterGames(listOf(), listOf()) //TODO: aggiungere le cose selezionate
-                filterFrameLayout.visibility = View.GONE
-            }
 
             su_giu.setOnClickListener {
                 val list: List<GameItem>
@@ -178,7 +168,65 @@ class HomeFragment: Fragment(), OnItemListener {
                     }
 
                 recyclerView.adapter = adapter
+
+
             }
+
+            radioStar.setOnCheckedChangeListener { _, checkedId ->
+                selectedRadioStarButtonId = checkedId
+            }
+
+            radioHead.setOnCheckedChangeListener { _, checkedId ->
+                selectedRadioHeadButtonId = checkedId
+            }
+
+            btn_canc.setOnClickListener{
+               if(selectedRadioHeadButtonId != -1) {
+                    radioHead.clearCheck()
+                    selectedRadioHeadButtonId = -1
+                }
+                if(selectedRadioStarButtonId != -1) {
+                    radioStar.clearCheck()
+                    selectedRadioStarButtonId = -1
+                }
+                adapter =
+                    bundle?.let {
+                        CardAdapter(
+                            listener,
+                            homeViewModel,
+                            gheimerzz,
+                            requireActivity(),
+                            it.getString("email", "sesso"
+                            )
+                        )
+                    }
+
+                recyclerView.adapter = adapter
+            }
+
+            btn_save.setOnClickListener {
+
+                //filtra in base al -1 sui 2 cosi
+                adapter =
+                    bundle?.let {
+                        CardAdapter(
+                            listener,
+                            homeViewModel,
+                            filterGames(
+                                if(selectedRadioHeadButtonId != -1)
+                                    view.findViewById<RadioButton>(selectedRadioHeadButtonId).text.toString()
+                                else null,
+                                if(selectedRadioStarButtonId != -1)
+                                    view.findViewById<RadioButton>(selectedRadioStarButtonId).text.toString()
+                                else null,
+                            ),
+                            requireActivity(),
+                            it.getString("email", "sesso")
+                        )
+                    }
+                recyclerView.adapter = adapter
+            }
+
 
 
             val nick_head: TextView = headerView.findViewById(R.id.nickname_header)
@@ -339,25 +387,20 @@ class HomeFragment: Fragment(), OnItemListener {
         recyclerView.adapter = adapter
     }
 
-    private fun filterGames(categoryFilters: List<String>, platformFilter: List<String>): MutableList<GameItem> {
-        /* TODO: ~ Implementare il fitro
-                 ~ Mettere dei textview sotto i bottoni plat_btn e cat_btn in modo da poter
-                   selezionare solo una categoria e una sola piattaforma (di più sarebbe il caos per ora)
-                   oppure fare il filtro con le lambda
-                 N.B.: creato List<
-                                GameItem(
-                                    GameCardItem,
-                                    List<PlatformCardItem>,
-                                    List<CategoryCardItem>
-                                )>
-                        filter con select gameItem that in lista plat/cat contains "elemento"
-        */
+    private fun filterGames(category: String? = null, platform: String? = null): MutableList<GameItem> {
+        filterGheimerzz = gheimerzz.filter { gameItem ->
+            val matchesCategory = category?.let { name ->
+                gameItem.category.any { it.category_name.contains(name, ignoreCase = true) }
+            } ?: true
 
-        val filteredList: MutableList<GameItem> = ArrayList<GameItem>()
-        // Filtra la lista in base al query di categorie/piattaforme
-        for (gameItem in gheimerzz) {
-        }
-        return filteredList
+            val matchesPlatform = platform?.let { name ->
+                gameItem.platform.any { it.platFormName.contains(name, ignoreCase = true) }
+            } ?: true
+
+            matchesCategory && matchesPlatform
+        }.toMutableList()
+        return filterGheimerzz
+
     }
 
 
