@@ -34,7 +34,8 @@ class UserBadge {
          platino  V IV III II I -> x1700 - 1800
          immortal V IV III II I -> x2000 - e oltre
          _
-         Mettere anche una mini view in cui si spiegano i vari obiettivi e si fanno vedere le varie medaglie
+         Mettere anche una mini view in cui si spiegano i vari obiettivi e si fanno vedere le varie medagli
+         N.B.: IMMAGINI CREATE ORA TOCCA INSERIRLE
 */ //POTREI FARLA COME UNA DB ENTITIES E L'ENUM SERVE A TRADURRE IL LIVELLO CHE FA +1 AD OGNI COSA CHE ACCADE
     private var game_level: Int = 0
     private var achievement_level: Int = 0

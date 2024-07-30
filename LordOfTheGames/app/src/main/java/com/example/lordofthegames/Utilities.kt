@@ -79,11 +79,8 @@ class Utilities {
         2. Profilo utente
             1. Camera
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
-            3. Lista delle discussioni create(?) o grafico prestazioni community(?)
+            3. grafico prestazioni community
         *
-        * 4. Home con lista item
-            2. Filtri <- ESASE COME FAAF
-            *
      * Funzionalità opzionali
         • Progettazione / Design (max 2)
             – mockup (potete usare diversi software, come balsamiq, figma, AdobeXD, ecc.. e in formato cartaceo eventualmente)
@@ -94,7 +91,6 @@ class Utilities {
         • Intent per chiamata/calendario o simili (max 2) <- CALENDARIO IN LAVORAZIONE
             – uno di questi: https://developer.android.com/guide/components/intents-common - preferibilmente non visto a lezione
         • Richiesta http a OSM o API esterne (es. usando volley) (max 2)
-        • Notifiche in app e/o push (max 3) <- notifiche create da implementare
         • Tracking utente su mappa (max 4) <- boh
     * */
 

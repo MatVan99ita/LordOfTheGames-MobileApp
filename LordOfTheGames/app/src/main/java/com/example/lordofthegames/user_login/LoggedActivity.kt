@@ -31,10 +31,9 @@ class LoggedActivity: AppCompatActivity() {
 
     /**TODO:
         *
-     *  DALLE SPECIFICHE: mappa utente - grafico andamento - achievement
+     *  DALLE SPECIFICHE: mappa utente - achievement
         *
      *  -> achievement -> tudus userbadge
-     *  -> il grafico con i giochi c'è
      *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
      **/
 
@@ -126,16 +125,6 @@ class LoggedActivity: AppCompatActivity() {
         //menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
-/*
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerVisible(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle.onOptionsItemSelected(item)){
