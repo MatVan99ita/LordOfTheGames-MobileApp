@@ -161,6 +161,17 @@
             app:layout_constraintEnd_toEndOf="@+id/selectedImage"
             />
 
+        <ImageView
+            android:id="@+id/game_detail_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner"
+            app:layout_constraintEnd_toStartOf="@+id/description_short"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/gabibbo_blade_of_striscia_round" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -42,7 +42,6 @@ class CardAdapter(
         val picasso = Picasso.Builder(activity as Context)
             .loggingEnabled(true) // Abilita il logging per il debug
             .build()
-        Log.i(currentCardItem.game.gameTitle, currentCardItem.game.imageResource)
         picasso
             .load(currentCardItem.game.imageResource)
             .resize(150, 100)

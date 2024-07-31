@@ -35,6 +35,7 @@ import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
+import com.squareup.picasso.Picasso
 
 
 class GameDetFragment: Fragment(), OnItemListener  {
@@ -76,6 +77,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
     private lateinit var sgrull: ScrollView
     private lateinit var achievementImgEdit: ImageView
+    private lateinit var gd_game_cover: ImageView
     private lateinit var achievementTitleEdit: TextView
     private lateinit var achievementDescription: TextView
     private lateinit var maxNum: TextView
@@ -137,6 +139,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
         short_descr = view.findViewById(R.id.description_short)
         long_descr = view.findViewById(R.id.game_description)
         game_img = view.findViewById(R.id.selectedImage)
+        gd_game_cover = view.findViewById(R.id.game_detail_cover)
 
         frame_button_plus_one = view.findViewById(R.id.btn_plus)
 
@@ -245,6 +248,13 @@ class GameDetFragment: Fragment(), OnItemListener  {
                         }
 
                     }
+
+                    val picasso = Picasso.Builder(activity as Context)
+                        .loggingEnabled(true) // Abilita il logging per il debug
+                        .build()
+                    picasso
+                        .load(game.game_cover)
+                        .into(gd_game_cover)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
