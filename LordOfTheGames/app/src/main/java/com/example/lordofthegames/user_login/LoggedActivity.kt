@@ -112,13 +112,9 @@ class LoggedActivity: AppCompatActivity() {
                     )
                 }
             }
+        } else {
+            Utilities.showaToast(this, "FALLITOH")
         }
-
-
-
-        //val btn: Button = findViewById(R.id.btn_verde).setOnClickListener(this);
-        //val btn1: Button = findViewById(R.id.btn_azzurro).setOnClickListener(this);*/
-
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
