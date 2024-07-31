@@ -5,7 +5,9 @@
         android:required="false" />
 
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
@@ -27,6 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LordOfTheGames"
         android:enableOnBackInvokedCallback="true"
+        android:usesCleartextTraffic="true"
         tools:targetApi="tiramisu">
         <provider
             android:authorities="com.example.android.fileprovider"

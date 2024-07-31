@@ -1,23 +1,19 @@
 package com.example.lordofthegames.recyclerView
 
-import android.R.attr.data
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.GameItem
 import com.example.lordofthegames.home.HomeViewModel
+import com.squareup.picasso.Picasso
 
 
 class CardAdapter(
@@ -41,10 +37,19 @@ class CardAdapter(
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val currentCardItem: GameItem = this.filteredData[position]
-        val imagePath: String = currentCardItem.game.imageResource
-        //val catItems: MutableList<CategoryCardItem> = mutableListOf()
-        //val platItems: MutableList<PlatformCardItem> = mutableListOf()
 
+
+        val picasso = Picasso.Builder(activity as Context)
+            .loggingEnabled(true) // Abilita il logging per il debug
+            .build()
+        Log.i(currentCardItem.game.gameTitle, currentCardItem.game.imageResource)
+        picasso
+            .load(currentCardItem.game.imageResource)
+            .resize(150, 100)
+            .centerCrop()
+            .into(holder.gameImg)
+
+        /*
         var drawable: Drawable? = null
 
         when((0..2).random()) {
@@ -52,12 +57,14 @@ class CardAdapter(
             1 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> drawable = ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
         }
+        holder.gameImg.setImageDrawable(drawable)
+        */
+
         if(viuvve.getGameListValidity(currentCardItem.game.gameTitle, mail)){
             holder.addBtn.visibility = View.GONE
             holder.modifyBtn.visibility = View.GONE
         }
 
-        holder.gameImg.setImageDrawable(drawable)
 
         holder.gameTitle.text = currentCardItem.game.gameTitle
 

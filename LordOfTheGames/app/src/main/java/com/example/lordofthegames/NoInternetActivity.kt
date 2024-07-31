@@ -11,7 +11,7 @@ import com.example.lordofthegames.databinding.ActivityNoInternetBinding
 class NoInternetActivity: AppCompatActivity() {
 
     private lateinit var bind: ActivityNoInternetBinding
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState);
         setContentView(ActivityNoInternetBinding.inflate(layoutInflater).getRoot());

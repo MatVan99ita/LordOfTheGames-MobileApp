@@ -47,8 +47,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var connectivityManager: ConnectivityManager
     private lateinit var homeViewModel: HomeViewModel
 
-    //TODO: richiedere cose sulla rete e controllare che il dispositivo sia collegatp
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
