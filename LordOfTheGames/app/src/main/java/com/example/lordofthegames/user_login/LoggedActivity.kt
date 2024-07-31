@@ -42,29 +42,66 @@ class LoggedActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        this.savedInstanceState = savedInstanceState
+        super.onCreate(savedInstanceState)
 
-        if(Utilities.isNetworkConnected2(this)) {
-            this.savedInstanceState = savedInstanceState
-            super.onCreate(savedInstanceState)
+        val db: LOTGDatabase =
+            databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
+        //val userViewModel by viewModels<UserViewModel> {
+        //    UserViewModelFactory(repository = (application as UserApplication).repository)
+        //}
+        //userViewModel.addItem(User("", "", ""))
+        val sp = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-            val db: LOTGDatabase =
-                databaseBuilder(applicationContext, LOTGDatabase::class.java, "lotgdb").build()
-            //val userViewModel by viewModels<UserViewModel> {
-            //    UserViewModelFactory(repository = (application as UserApplication).repository)
-            //}
-            //userViewModel.addItem(User("", "", ""))
-            val sp = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val bundle: Bundle = Bundle()
 
-            val bundle: Bundle = Bundle()
+        Log.i("PORCACCIODDIO", "${sp.all}")
+        Log.i("PORCACCIODDIO", "${sp.getString("email", "sesso")}")
 
-            Log.i("PORCACCIODDIO", "${sp.all}")
-            Log.i("PORCACCIODDIO", "${sp.getString("email", "sesso")}")
+        bundle.putString("email", sp.getString("email", "sesso"))
+        Log.i("PORCACCIODDIO", bundle.getString("email", "sesso"))
+        setContentView(R.layout.activity_login)
 
-            bundle.putString("email", sp.getString("email", "sesso"))
-            Log.i("PORCACCIODDIO", bundle.getString("email", "sesso"))
-            setContentView(R.layout.activity_login)
+        if (savedInstanceState == null) {
+            Utilities.insertFragment(
+                this,
+                LogInFragment(),
+                LogInFragment::class.java.simpleName,
+                bundle,
+            )
+        }
 
-            if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
+            //val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            if (sp.contains("logged") && sp.contains("email") && sp.contains("nickname")) {
+
+
+                toolbar = findViewById(R.id.topbar)
+                drawerLayout = findViewById(R.id.logged_activity_drawer)
+
+                Utilities.insertFragment(
+                    this,
+                    LoggedInFragment(),
+                    LoggedInFragment::class.java.simpleName,
+                    bundle,
+                )
+
+                Utilities.setUpToolBar(
+                    this,
+                    findViewById(R.id.topbar),
+                    "Equipment",
+                    drawerLayout,
+                    null,
+                )
+                setSupportActionBar(findViewById(R.id.topbar))
+
+                actionBarDrawerToggle = Utilities.setUpDrawer(
+                    drawerLayout,
+                    navigationView = findViewById(R.id.nav_view),
+                    this,
+                )
+
+            } else {
                 Utilities.insertFragment(
                     this,
                     LogInFragment(),
@@ -72,48 +109,6 @@ class LoggedActivity: AppCompatActivity() {
                     bundle,
                 )
             }
-
-            if (savedInstanceState == null) {
-                //val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-                if (sp.contains("logged") && sp.contains("email") && sp.contains("nickname")) {
-
-
-                    toolbar = findViewById(R.id.topbar)
-                    drawerLayout = findViewById(R.id.logged_activity_drawer)
-
-                    Utilities.insertFragment(
-                        this,
-                        LoggedInFragment(),
-                        LoggedInFragment::class.java.simpleName,
-                        bundle,
-                    )
-
-                    Utilities.setUpToolBar(
-                        this,
-                        findViewById(R.id.topbar),
-                        "Equipment",
-                        drawerLayout,
-                        null,
-                    )
-                    setSupportActionBar(findViewById(R.id.topbar))
-
-                    actionBarDrawerToggle = Utilities.setUpDrawer(
-                        drawerLayout,
-                        navigationView = findViewById(R.id.nav_view),
-                        this,
-                    )
-
-                } else {
-                    Utilities.insertFragment(
-                        this,
-                        LogInFragment(),
-                        LogInFragment::class.java.simpleName,
-                        bundle,
-                    )
-                }
-            }
-        } else {
-            Utilities.showaToast(this, "FALLITOH")
         }
     }
 

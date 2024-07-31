@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -53,24 +52,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        Log.e("NOME", banana.getString("nickname", "BANANA").toString())
+        Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
+
+        if (banana.contains("Theme")) {
+            if (banana.getString("Theme", "NoTheme").equals("Night")) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        } else {
+            banana.edit().putString("Theme", "Night").apply()
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
         if(Utilities.isNetworkConnected2(this)) {
 
             Utilities.createDatabase(this)
 
-            val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-            Log.e("NOME", banana.getString("nickname", "BANANA").toString())
-            Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
-
-            if (banana.contains("Theme")) {
-                if (banana.getString("Theme", "NoTheme").equals("Night")) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-            } else {
-                banana.edit().putString("Theme", "Night").apply()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
 
             if (!banana.contains("email") && !banana.contains("nickname") && !banana.contains("logged")) {
                 startActivity(
@@ -212,7 +212,12 @@ class MainActivity : AppCompatActivity() {
 
             }
         } else {
-            Utilities.showaToast(this, "FALLITOH")
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    NoInternetActivity::class.java
+                )
+            )
         }
     }
 
