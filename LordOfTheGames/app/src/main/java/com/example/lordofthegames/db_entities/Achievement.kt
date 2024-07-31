@@ -33,4 +33,4 @@ data class Achievement(
     )
 
 
-//TODO: aggiungere i link con l'immagine
+//TODO: PICAZZO
