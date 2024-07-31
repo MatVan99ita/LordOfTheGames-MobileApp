@@ -58,6 +58,9 @@
         <activity android:name=".user_login.LoggedActivity" />
         <activity android:name=".GameNotes.GameNoteActivity" />
         <activity android:name=".Community.CommunityActivity" />
+
+
+
     </application>
 
 
