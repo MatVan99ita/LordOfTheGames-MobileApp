@@ -275,7 +275,8 @@ class Utilities {
         }
 
         fun checkLogin(): Boolean{
-            TODO("METTERE ROBA")
+            //("METTERE ROBA")
+            return false
         }
 
 

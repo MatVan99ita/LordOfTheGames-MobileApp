@@ -146,7 +146,7 @@ class MyGameListFragment: Fragment(), OnItemListener{
                     val j = tabLayout.tabCount
                     // textView.text = "$i/$j"
                     // textView.append(tab.text)
-                    when(i){//TODO: PERCENTUALI DI COMPLETAMENTO DEI GIOCHI BASATO SUL NUMERO DI ACHIEVEMENT
+                    when(i){
                         1 -> { // ALL
                             textView.text = "$i/$j"
                             textView.append(tab.text)
