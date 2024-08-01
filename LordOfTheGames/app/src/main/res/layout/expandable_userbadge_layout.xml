@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/expandableLayout"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:columnCount="3"
+android:orientation="horizontal">
+<!---->
+
+<ImageView
+    android:id="@+id/legno"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m1_legno_foreground"
+    android:layout_margin="10dp"/>
+
+<ImageView
+    android:id="@+id/ferro"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m2_ferro_foreground"
+    android:layout_margin="10dp" />
+
+<ImageView
+    android:id="@+id/rame"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m3_rame_foreground"
+    android:layout_margin="10dp" />
+
+<ImageView
+    android:id="@+id/bronzo"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m4_bronzo_foreground"
+    android:layout_margin="10dp"/>
+<ImageView
+    android:id="@+id/argento"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m5_silver_foreground"
+    android:layout_margin="10dp"/>
+
+<ImageView
+    android:id="@+id/oro"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m6_oro_foreground"
+    android:layout_margin="10dp"/>
+
+<ImageView
+    android:id="@+id/diamante"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m7_diamante_foreground"
+    android:layout_margin="10dp" />
+
+<ImageView
+    android:id="@+id/smeraldo"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m8_smeraldo_foreground"
+    android:layout_margin="10dp"/>
+<ImageView
+    android:id="@+id/platino"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m9_platino_foreground"
+    android:layout_margin="10dp"/>
+
+<ImageView
+    android:id="@+id/immortal_1"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m10_immortal_1_foreground"
+    android:layout_margin="10dp"/>
+
+<ImageView
+    android:id="@+id/immortal_2"
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:src="@mipmap/m10_immortal_2_foreground"
+    android:layout_margin="10dp"/>
+</GridLayout>

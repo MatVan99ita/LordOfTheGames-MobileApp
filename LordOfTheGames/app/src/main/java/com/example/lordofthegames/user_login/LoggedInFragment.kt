@@ -1,5 +1,7 @@
 package com.example.lordofthegames.user_login
 
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
@@ -13,8 +15,10 @@ import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
@@ -29,6 +33,8 @@ import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.util.Base64
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.properties.Delegates
+
 
 class LoggedInFragment: Fragment(){
 
@@ -40,6 +46,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var user: User
     private lateinit var defaultImg: Drawable
+    private var isExpanded = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +68,8 @@ class LoggedInFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         defaultImg = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_gabibbo_drawable)!!
-
+        isExpanded = bind.expandableLayout.isVisible
+        bind.menuButton.text = if(isExpanded) "Badge \u25B2" else "Badge \u25BC"
         statistics = viewm.getUserStatisticsCounts(requireArguments().getString("email", "sesso"))
         bind.btnExit.setOnClickListener { eschilo() }
         val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
@@ -77,8 +85,8 @@ class LoggedInFragment: Fragment(){
         bind.loggedMail.text = user.mail
 
         if(user.photo != null) {
-            bind.loggedUsrImg.setImageBitmap(
-                Utilities.stringToBitmap(
+            bind.loggedUsrImg.setImageBitmap (
+                Utilities.stringToBitmap (
                     user.photo
                 )
             )
@@ -141,6 +149,18 @@ class LoggedInFragment: Fragment(){
                 )
             }
         }
+
+        bind.menuButton.setOnClickListener(View.OnClickListener {
+            if (isExpanded) {
+                collapse(bind.expandableLayout)
+                bind.menuButton.text = "Badge \u25BC"
+            } else {
+                expand(bind.expandableLayout)
+                bind.menuButton.text = "Badge \u25B2"
+            }
+            isExpanded = !isExpanded
+        })
+
     }
 
     fun eschilo(){
@@ -286,6 +306,62 @@ class LoggedInFragment: Fragment(){
             bind.loggedUsrImg.scaleY = mScaleFactor
             return true
         }
+    }
+
+    private fun expand(v: View) {
+        v.visibility = View.VISIBLE
+        val widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        v.measure(widthSpec, heightSpec)
+
+        val mAnimator = slideAnimator(0, v.measuredHeight, v)
+        mAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animator: Animator) {
+                bind.loggedinFragment.post {
+                    bind.loggedinFragment.smoothScrollTo(0, bind.loggedinFragment.bottom)
+                }
+            }
+
+            override fun onAnimationStart(animator: Animator) {}
+
+            override fun onAnimationCancel(animator: Animator) {}
+
+            override fun onAnimationRepeat(animator: Animator) {}
+        })
+        mAnimator.start()
+    }
+
+    private fun collapse(v: View) {
+        val finalHeight = v.height
+
+        val mAnimator = slideAnimator(finalHeight, 0, v)
+
+        mAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animator: Animator) {
+                v.visibility = View.GONE
+            }
+
+            override fun onAnimationStart(animator: Animator) {}
+
+            override fun onAnimationCancel(animator: Animator) {}
+
+            override fun onAnimationRepeat(animator: Animator) {}
+        })
+        mAnimator.start()
+    }
+
+    private fun slideAnimator(start: Int, end: Int, v: View): ValueAnimator {
+        val animator = ValueAnimator.ofInt(start, end)
+        animator.interpolator = AccelerateDecelerateInterpolator()
+        animator.setDuration(300)
+
+        animator.addUpdateListener { valueAnimator ->
+            val value = valueAnimator.animatedValue as Int
+            val layoutParams = v.layoutParams
+            layoutParams.height = value
+            v.layoutParams = layoutParams
+        }
+        return animator
     }
 
 

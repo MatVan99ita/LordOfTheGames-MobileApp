@@ -117,109 +117,194 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chart" />
 
-        <ImageView
-            android:id="@+id/ferro"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m2_ferro_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/legno"
-            app:layout_constraintTop_toTopOf="@+id/legno" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
 
-        <ImageView
-            android:id="@+id/rame"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m3_rame_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ferro"
-            app:layout_constraintTop_toTopOf="@+id/legno" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/btn_exit">
 
-        <ImageView
-            android:id="@+id/legno"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:src="@mipmap/m1_legno_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_exit" />
+            <TextView
+                android:id="@+id/menuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Badge \u25BC"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="top"/>
 
-        <ImageView
-            android:id="@+id/smeraldo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m8_smeraldo_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/diamante"
-            app:layout_constraintTop_toBottomOf="@+id/argento" />
+            <GridLayout
+                android:id="@+id/expandableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:visibility="gone"
+                >
 
-        <ImageView
-            android:id="@+id/immortal_2"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m10_immortal_2_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/immortal_1"
-            app:layout_constraintTop_toBottomOf="@+id/smeraldo" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/gamelist_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:id="@+id/gamelist_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="@string/giochi_in_lista" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/immortal_1"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="30dp"
-            android:src="@mipmap/m10_immortal_1_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diamante" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/completed_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:id="@+id/completed_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="@string/giochi_completati" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/oro"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m6_oro_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/argento"
-            app:layout_constraintTop_toBottomOf="@+id/rame" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/achievement_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:id="@+id/achievement_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="Achievement completati: " />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/diamante"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="30dp"
-            android:src="@mipmap/m7_diamante_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bronzo" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/discussion_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:id="@+id/discussion_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="Discussioni create:" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/argento"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m5_silver_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/bronzo"
-            app:layout_constraintTop_toBottomOf="@+id/ferro" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/commenti_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:id="@+id/commenti_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="Commenti scritti:" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/platino"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@mipmap/m9_platino_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toEndOf="@+id/smeraldo"
-            app:layout_constraintTop_toBottomOf="@+id/oro" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bordino3"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp">
+                    <ImageView
+                        android:id="@+id/like_ua_img"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/m1_legno_foreground"
+                        android:background="@drawable/rainbow_centered"
+                        android:layout_marginBottom="5dp"/>
+                    <TextView
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:id="@+id/like_ua_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rainbow"
+                        android:text="Like ricevuti:" />
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/bronzo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="30dp"
-            android:src="@mipmap/m4_bronzo_foreground"
-            app:circularflow_radiusInDP="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/legno" />
+            </GridLayout>
 
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

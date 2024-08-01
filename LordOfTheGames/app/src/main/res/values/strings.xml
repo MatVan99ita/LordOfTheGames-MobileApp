@@ -32,4 +32,6 @@
     <string name="torna_a_combattere">Torna a combattere!</string>
     <string name="mostra_il_tuo_valore">Mostra il tuo valore</string>
     <string name="notification">Notification</string>
+    <string name="giochi_in_lista">Giochi in lista:</string>
+    <string name="giochi_completati">Giochi completati:</string>
 </resources>
