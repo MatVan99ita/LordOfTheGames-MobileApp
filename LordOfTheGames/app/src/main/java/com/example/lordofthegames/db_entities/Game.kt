@@ -28,6 +28,3 @@ data class Game(
     var game_description: String,
     var game_cover: String="img",
     )
-
-//TODO: aggiungere il link la copertina
-//      per il carosello e tutte le info aggiuntive mettere un TBD per evitare rotture di coglioni

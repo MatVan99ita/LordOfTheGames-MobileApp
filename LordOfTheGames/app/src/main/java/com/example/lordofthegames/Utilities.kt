@@ -102,7 +102,7 @@ class Utilities {
     *   Sistemare il drawerlayout ovunque con le cose che gli mancano
     *   drawer fuori dalla home
     *   topbar nei setting
-    *   mylist item con qualche ghirigoro
+    *
     * */
 
     companion object{

@@ -44,7 +44,7 @@ class LogInFragment: Fragment() {
             parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, SignInFragment()).commit()
         }
 
-        login_btn.setOnClickListener {//TODO: ANDARE AFFANCULO NELL'ACTIVITY PRICIPALE
+        login_btn.setOnClickListener {
             this.login(password.text.toString(), mail.text.toString())
         }
 

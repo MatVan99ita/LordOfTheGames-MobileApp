@@ -33,7 +33,7 @@ class LoggedActivity: AppCompatActivity() {
         *
      *  DALLE SPECIFICHE: mappa utente - achievement
         *
-     *  -> achievement -> tudus userbadge
+     *  -> achievement -> vreare le query per poter fare cose
      *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
      **/
 

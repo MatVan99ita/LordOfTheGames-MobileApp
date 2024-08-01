@@ -31,6 +31,3 @@ data class Achievement(
     @ColumnInfo(index = true)
     var game_ref: Int
     )
-
-
-//TODO: PICAZZO

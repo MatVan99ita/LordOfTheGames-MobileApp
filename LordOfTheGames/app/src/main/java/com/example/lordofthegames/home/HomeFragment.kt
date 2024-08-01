@@ -55,7 +55,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var gheimerzzReversed: Boolean = false
     private var filterGheimerzz: MutableList<GameItem> = mutableListOf()
 
-    private lateinit var filterFrameLayout: FrameLayout //TODO: AVERE IL DB PER POTER FILTRARE <- OBBLIGATORIA
+    private lateinit var filterFrameLayout: FrameLayout
 
     private lateinit var su_giu: Button
     private lateinit var radioHead: RadioGroup
