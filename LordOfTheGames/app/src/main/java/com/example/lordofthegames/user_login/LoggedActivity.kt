@@ -31,9 +31,7 @@ class LoggedActivity: AppCompatActivity() {
 
     /**TODO:
         *
-     *  DALLE SPECIFICHE: mappa utente - achievement
-        *
-     *  -> achievement -> vreare le query per poter fare cose
+     *  DALLE SPECIFICHE: mappa utente
      *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
      **/
 

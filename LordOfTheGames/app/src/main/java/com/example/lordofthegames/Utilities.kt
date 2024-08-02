@@ -80,20 +80,15 @@ class Utilities {
         1.5. Mettere l'immagine presa dalla camera nel hader di tutto e anche nel drawerLayout <- va fatto per ogni activity e comunque il drawer deve avere interazioni dappertutto
         *
         2. Profilo utente
-            1. Camera
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
-            3. grafico prestazioni community
         *
      * Funzionalità opzionali
         • Progettazione / Design (max 2)
             – mockup (potete usare diversi software, come balsamiq, figma, AdobeXD, ecc.. e in formato cartaceo eventualmente)
         • Mappa (max 2)
             – se non previsto dalle funzionalità dell'app si può visualizzare la posizione dell'utente nel profilo, potete utilizzare sia OpenStreetMap che Google Map
-        • Gamification (max 3) <- IN LAVORAZIONE
-            – usare badge (es. prima volta che si accede all'app) o classifica
         • Intent per chiamata/calendario o simili (max 2) <- CALENDARIO IN LAVORAZIONE
             – uno di questi: https://developer.android.com/guide/components/intents-common - preferibilmente non visto a lezione
-        • Richiesta http a OSM o API esterne (es. usando volley) (max 2)
         • Tracking utente su mappa (max 4) <- boh
     * */
 

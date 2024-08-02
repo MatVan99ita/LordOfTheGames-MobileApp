@@ -29,7 +29,7 @@ class CommunityActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = ActivityCommunityBinding.inflate(layoutInflater)
         setContentView(bind.root)
-        
+        drawerLayout = bind.communityActivityDrawer
         discussion_intent = intent
         val bundle = Bundle()
         val title = intent.getStringExtra("game_title").toString()
