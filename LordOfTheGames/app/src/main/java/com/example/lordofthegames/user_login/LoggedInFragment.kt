@@ -24,9 +24,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.ViewModel.UserBadgeViewModel
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
+import com.example.lordofthegames.user_badge.UserBadge
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -40,6 +42,7 @@ class LoggedInFragment: Fragment(){
 
     private lateinit var bind: FragmentLoggedinBinding
     private lateinit var viewm: LoggedViewModel
+    private lateinit var viewBadge: UserBadgeViewModel
     private lateinit var statistics: UserGameGraphItem
     private lateinit var circularProgress: CircularProgressIndicator
     private var bundle: Bundle? = null
@@ -55,13 +58,9 @@ class LoggedInFragment: Fragment(){
     ): View {
         bind = FragmentLoggedinBinding.inflate(layoutInflater, container, false);
         viewm = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
+        viewBadge = ViewModelProvider(requireActivity())[UserBadgeViewModel::class.java]
 
         return bind.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -161,6 +160,74 @@ class LoggedInFragment: Fragment(){
             isExpanded = !isExpanded
         })
 
+
+        this.setBadge()
+
+    }
+
+    private fun setBadge() {
+        val game_level = statistics.gameNumTot
+        val played_level = statistics.completedTot
+        val playing_level = statistics.playingTot
+        val achievement_level = viewBadge.getCompletedAchievementCount(user_ref = user.mail)
+        val disccussion_num_level = viewBadge.getDiscussionCount(user_ref = user.nickname)
+        val disccussion_like_level = viewBadge.getLikeCount(user_ref = user.nickname)
+        val comments_num_level = viewBadge.getCommentCount(user_ref = user.nickname)
+
+        bind.gamelistUaTxt.text = "Giochi in lista: $game_level"
+        bind.playingUaTxt.text = "Che stai giocando: $playing_level"
+        bind.completedUaTxt.text = "Giochi completati: $played_level"
+        bind.achievementUaTxt.text = "Achievement completati: $achievement_level"
+        bind.discussionUaTxt.text = "Discussioni create $disccussion_num_level"
+        bind.commentiUaTxt.text = "Commenti scritti: $comments_num_level"
+        bind.likeUaTxt.text = "Like ricevuti: $disccussion_like_level"
+
+        bind.gamelistUaImg.setImageResource(
+            returnBadgeId(game_level)
+        )
+        bind.playingUaImg.setImageResource(
+            returnBadgeId(playing_level)
+        )
+        bind.completedUaImg.setImageResource(
+            returnBadgeId(played_level)
+        )
+        bind.achievementUaImg.setImageResource(
+            returnBadgeId(achievement_level)
+        )
+        bind.discussionUaImg.setImageResource(
+            returnBadgeId(disccussion_num_level)
+        )
+        bind.commentiUaImg.setImageResource(
+            returnBadgeId(comments_num_level)
+        )
+        bind.likeUaImg.setImageResource(
+            returnBadgeId(disccussion_like_level)
+        )
+
+    }
+
+    private fun returnBadgeId(count: Int): Int{
+        return if (count == 0 ) R.mipmap.m1_legno_foreground
+        else if(count == 1) R.mipmap.m2_ferro_foreground
+        else if(count == 2) R.mipmap.m3_rame_foreground
+        else if(count == 3) R.mipmap.m4_bronzo_foreground
+        else if(count == 4) R.mipmap.m5_silver_foreground
+        else if(count == 5) R.mipmap.m6_oro_foreground
+        else if(count == 6) R.mipmap.m7_diamante_foreground
+        else if(count == 7) R.mipmap.m8_smeraldo_foreground
+        else if(count == 8) R.mipmap.m9_platino_foreground
+        else if(count == 9) R.mipmap.m10_immortal_1_foreground
+        else R.mipmap.m10_immortal_2_foreground
+
+        /*if(count in 11..20)
+if(count in 21..35)
+if(count in 36..50)
+if(count in 51..75)
+if(count in 76..100)
+if(count in 101..200)
+if(count in 201..300)
+if(count in 301..600)
+if(count in 601..900)*/
     }
 
     fun eschilo(){

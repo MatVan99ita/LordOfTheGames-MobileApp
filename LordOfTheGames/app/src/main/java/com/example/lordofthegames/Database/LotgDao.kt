@@ -402,6 +402,21 @@ interface LotgDao {
     @Query("SELECT DISTINCT * FROM categories")
     fun getCategories(): Cursor
 
+    @Query("SELECT count(*) FROM UsersGame where user_ref = :user_ref")
+    fun getGameCount(user_ref: String): Int
+    @Query("SELECT count(*) FROM UsersGame where game_status = \"playing\" and user_ref = :user_ref")
+    fun getPlayingCount(user_ref: String): Int
+    @Query("SELECT count(*) FROM UsersGame where game_status = \"Played\" and user_ref = :user_ref")
+    fun getCompletedGameCount(user_ref: String): Int
+    @Query("SELECT count(*) FROM UsersAchievement WHERE user_ref = :user_ref")
+    fun getAchievementCount(user_ref: String): Int
+    @Query("SELECT count(*) FROM discussion WHERE user_ref = :user_ref")
+    fun getDiscussionCount(user_ref: String): Int
+    @Query("SELECT count(*) FROM comment WHERE user_ref = :user_ref")
+    fun getCommentCount(user_ref: String): Int
+    @Query("SELECT SUM(comment_like) FROM comment WHERE user_ref = :user_ref")
+    fun getLikeCount(user_ref: String): Int
+
 
 }
 

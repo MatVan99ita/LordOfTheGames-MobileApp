@@ -250,5 +250,25 @@ class LotgRepo(application: Application) {
         return lotgDao.getCategories()
     }
 
+    fun getCompletedGameCount(userRef: String): Int {
+        return lotgDao.getCompletedGameCount(userRef)
+    }
+
+    fun getCompletedAchievementCount(userRef: String): Int {
+        return lotgDao.getAchievementCount(userRef)
+    }
+
+    fun getDiscussionCount(user_ref: String): Int{
+        return lotgDao.getAchievementCount(user_ref)
+    }
+
+    fun getCommentCount(user_ref: String): Int{
+        return lotgDao.getCommentCount(user_ref)
+    }
+
+    fun getLikeCount(user_ref: String): Int{
+        return lotgDao.getLikeCount(user_ref)
+    }
+
 
 }

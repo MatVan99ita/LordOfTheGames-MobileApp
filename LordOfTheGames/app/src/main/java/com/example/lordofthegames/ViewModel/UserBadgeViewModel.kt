@@ -13,7 +13,7 @@ import com.example.lordofthegames.user_badge.UserBadge
 class UserBadgeViewModel(application: Application): AbstractViewModel(application) {
 
     fun getCompletedGameCount(user_ref: String): Int {
-        return 0
+        return repository.getCompletedGameCount(user_ref)
     }
 
     fun getListCount(user_ref: String): Int {
@@ -21,19 +21,19 @@ class UserBadgeViewModel(application: Application): AbstractViewModel(applicatio
     }
 
     fun getCompletedAchievementCount(user_ref: String): Int {
-        return 0
+        return repository.getCompletedAchievementCount(user_ref)
     }
 
     fun getDiscussionCount(user_ref: String): Int {
-        return 0
+        return repository.getDiscussionCount(user_ref)
     }
 
     fun getCommentCount(user_ref: String): Int {
-        return 0
+        return repository.getCommentCount(user_ref)
     }
 
     fun getLikeCount(user_ref: String): Int{
-        return 0
+        return repository.getLikeCount(user_ref)
     }
 
     fun getAll(user_ref: String): UserBadge {

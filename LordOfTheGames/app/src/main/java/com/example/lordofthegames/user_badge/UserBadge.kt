@@ -24,6 +24,7 @@ package com.example.lordofthegames.user_badge
 */
 data class UserBadge (
     var game_level: Int = 0,
+    var playing_level: Int = 0,
     var achievement_level: Int = 0,
     var played_level: Int = 0,
     var disccussion_num_level: Int = 0,
