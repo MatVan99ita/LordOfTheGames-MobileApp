@@ -11,11 +11,13 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.GridLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -28,14 +30,13 @@ import com.example.lordofthegames.ViewModel.UserBadgeViewModel
 import com.example.lordofthegames.databinding.FragmentLoggedinBinding
 import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
-import com.example.lordofthegames.user_badge.UserBadge
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.util.Base64
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import kotlin.properties.Delegates
+import kotlin.math.max
 
 
 class LoggedInFragment: Fragment(){
@@ -149,7 +150,7 @@ class LoggedInFragment: Fragment(){
             }
         }
 
-        bind.menuButton.setOnClickListener(View.OnClickListener {
+        bind.menuButton.setOnClickListener{
             if (isExpanded) {
                 collapse(bind.expandableLayout)
                 bind.menuButton.text = "Badge \u25BC"
@@ -158,7 +159,7 @@ class LoggedInFragment: Fragment(){
                 bind.menuButton.text = "Badge \u25B2"
             }
             isExpanded = !isExpanded
-        })
+        }
 
 
         this.setBadge()
@@ -219,15 +220,17 @@ class LoggedInFragment: Fragment(){
         else if(count == 9) R.mipmap.m10_immortal_1_foreground
         else R.mipmap.m10_immortal_2_foreground
 
-        /*if(count in 11..20)
-if(count in 21..35)
-if(count in 36..50)
-if(count in 51..75)
-if(count in 76..100)
-if(count in 101..200)
-if(count in 201..300)
-if(count in 301..600)
-if(count in 601..900)*/
+        /*
+            if(count in 11..20)
+            if(count in 21..35)
+            if(count in 36..50)
+            if(count in 51..75)
+            if(count in 76..100)
+            if(count in 101..200)
+            if(count in 201..300)
+            if(count in 301..600)
+            if(count in 601..900)
+        */
     }
 
     fun eschilo(){
@@ -377,30 +380,68 @@ if(count in 601..900)*/
 
     private fun expand(v: View) {
         v.visibility = View.VISIBLE
-        val widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-        val heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-        v.measure(widthSpec, heightSpec)
 
-        val mAnimator = slideAnimator(0, v.measuredHeight, v)
-        mAnimator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationEnd(animator: Animator) {
-                bind.loggedinFragment.post {
-                    bind.loggedinFragment.smoothScrollTo(0, bind.loggedinFragment.bottom)
+        // Postpone the calculation to ensure that layout and size calculations are done
+        v.post {
+            Log.e("AAAALTEZZA", "${v.height}")
+            //val targetHeight = calculateGridLayoutHeight((v as GridLayout))
+            val mAnimator = slideAnimator(0, 1811, v)
+            mAnimator.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationEnd(animator: Animator) {
+                    bind.loggedinFragment.post {
+                        bind.loggedinFragment.smoothScrollTo(0, v.bottom)
+                    }
+                }
+
+                override fun onAnimationStart(animator: Animator) {}
+
+                override fun onAnimationCancel(animator: Animator) {}
+
+                override fun onAnimationRepeat(animator: Animator) {}
+            })
+            mAnimator.start()
+        }
+    }
+    /*bind.loggedinFragment.post {
+        bind.loggedinFragment.smoothScrollTo(0, v.bottom)
+        }
+    }*/
+
+    private fun calculateGridLayoutHeight(gridLayout: GridLayout): Int {
+        var totalHeight = 0
+        val rowCount = (gridLayout.childCount + gridLayout.columnCount - 1) / gridLayout.columnCount
+
+        for (i in 0 until rowCount) {
+            var rowHeight = 0
+            for (j in 0 until gridLayout.columnCount) {
+                val index = i * gridLayout.columnCount + j
+                if (index < gridLayout.childCount) {
+                    val child = gridLayout.getChildAt(index)
+                    child.measure(
+                        View.MeasureSpec.makeMeasureSpec(
+                            gridLayout.width / gridLayout.columnCount,
+                            View.MeasureSpec.EXACTLY
+                        ),
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    )
+                    rowHeight =
+                        max(rowHeight.toDouble(), child.measuredHeight.toDouble()).toInt()
                 }
             }
+            totalHeight += rowHeight
+        }
 
-            override fun onAnimationStart(animator: Animator) {}
+        // Add padding and margins
+        totalHeight += (rowCount - 1) * gridLayout.paddingTop
+        totalHeight += gridLayout.paddingTop + gridLayout.paddingBottom
 
-            override fun onAnimationCancel(animator: Animator) {}
-
-            override fun onAnimationRepeat(animator: Animator) {}
-        })
-        mAnimator.start()
+        Log.e("AAAALTEZZA", "$totalHeight")
+        return totalHeight
     }
 
     private fun collapse(v: View) {
         val finalHeight = v.height
-
+        Log.e("AAAAAAAAAAAAALTEZZA", "$finalHeight")
         val mAnimator = slideAnimator(finalHeight, 0, v)
 
         mAnimator.addListener(object : Animator.AnimatorListener {

@@ -122,8 +122,9 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="24dp"
+            android:background="@drawable/theme_gradient_pale"
             android:orientation="vertical"
             android:padding="16dp"
             app:layout_constraintBottom_toTopOf="@id/btn_exit"
@@ -256,7 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rainbow"
-                        android:text="Achievement completati: " />
+                        android:text="Achievement completati: 15" />
                 </LinearLayout>
 
                 <LinearLayout

@@ -295,7 +295,7 @@ interface LotgDao {
 
 
     @Query(" SELECT count(*)                                                   as gameNumTot,\n" +
-           "(SELECT count(*) FROM UsersGame where game_status = \"playing\" and user_ref = :user_ref)        as playing,\n" +
+           "(SELECT count(*) FROM UsersGame where game_status = \"Playing\" and user_ref = :user_ref)        as playing,\n" +
            "(SELECT count(*) FROM UsersGame where game_status = \"Wanted to play\" and user_ref = :user_ref) as wanted,\n" +
            "(SELECT count(*) FROM UsersGame where game_status = \"Abandoned\" and user_ref = :user_ref)      as abandoned,\n" +
            "(SELECT count(*) FROM UsersGame where game_status = \"Played\" and user_ref = :user_ref)         as played\n" +
@@ -404,7 +404,7 @@ interface LotgDao {
 
     @Query("SELECT count(*) FROM UsersGame where user_ref = :user_ref")
     fun getGameCount(user_ref: String): Int
-    @Query("SELECT count(*) FROM UsersGame where game_status = \"playing\" and user_ref = :user_ref")
+    @Query("SELECT count(*) FROM UsersGame where game_status = \"Playing\" and user_ref = :user_ref")
     fun getPlayingCount(user_ref: String): Int
     @Query("SELECT count(*) FROM UsersGame where game_status = \"Played\" and user_ref = :user_ref")
     fun getCompletedGameCount(user_ref: String): Int
