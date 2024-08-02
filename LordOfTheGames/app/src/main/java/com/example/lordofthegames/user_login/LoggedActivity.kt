@@ -29,11 +29,7 @@ class LoggedActivity: AppCompatActivity() {
     private var savedInstanceState: Bundle? = null
     private lateinit var toolbar: Toolbar
 
-    /**TODO:
-        *
-     *  DALLE SPECIFICHE: mappa utente
-     *  -> la mappa dell'utente adesso non lo soos se la voglio mettere
-     **/
+    //TODO:DALLE SPECIFICHE: mappa utente -> la mappa dell'utente adesso non lo soos se la voglio mettere
 
 
 
@@ -52,12 +48,7 @@ class LoggedActivity: AppCompatActivity() {
         val sp = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         val bundle: Bundle = Bundle()
-
-        Log.i("PORCACCIODDIO", "${sp.all}")
-        Log.i("PORCACCIODDIO", "${sp.getString("email", "sesso")}")
-
         bundle.putString("email", sp.getString("email", "sesso"))
-        Log.i("PORCACCIODDIO", bundle.getString("email", "sesso"))
         setContentView(R.layout.activity_login)
 
         if (savedInstanceState == null) {

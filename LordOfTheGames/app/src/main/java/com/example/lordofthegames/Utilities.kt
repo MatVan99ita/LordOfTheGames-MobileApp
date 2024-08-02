@@ -136,6 +136,7 @@ class Utilities {
             drawerLayout: DrawerLayout,
             navigationView: NavigationView,
             activity: AppCompatActivity,
+            img: Drawable? = null
         ): ActionBarDrawerToggle {
 
             val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
@@ -147,12 +148,17 @@ class Utilities {
 
             val header_mail: TextView? = drawerLayout.findViewById(R.id.mail_header)
             val header_nick: TextView? = drawerLayout.findViewById(R.id.nickname_header)
+            val header_img: ImageView? = drawerLayout.findViewById(R.id.usr_icon)
             if (header_mail != null) {
-                header_mail.text = sp.getString("email", "BELANDIH")
+                header_mail.text = sp.getString("email", "BELANDIH@paperissima.sprint")
             }
             if (header_nick != null) {
                 header_nick.text = sp.getString("nickname", "BESUGHI")
             }
+            if(header_img != null && img != null) {
+                header_img.setImageDrawable(img)
+            }
+
 
             if(activity.javaClass == SettingsActivity::class.java){
                 navigationView.menu.findItem(R.id.nav_setting).isVisible = false
@@ -189,6 +195,7 @@ class Utilities {
             title: String?,
             drawerLayout: DrawerLayout?,
             menu: Int?,
+            img: Drawable? = null
         ) {
 
             if (menu != null) {
@@ -199,9 +206,10 @@ class Utilities {
 
             if(drawerLayout != null) {
 
+                val sp: SharedPreferences = activity.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 toolbar.setNavigationOnClickListener {
 
-                    val actionBarDrawerToggle = ActionBarDrawerToggle(
+                    val actionBarDrawerToggle = ActionBarDrawerToggle( //porcoddio
                         activity,
                         drawerLayout,
                         R.string.belandih,
@@ -211,7 +219,6 @@ class Utilities {
                     toolbar.setNavigationIcon(R.drawable.ic_t_pose)
                     drawerLayout.addDrawerListener(actionBarDrawerToggle)
                     actionBarDrawerToggle.syncState()
-                    //drawerLayout.closeDrawers()
                 }
             }
             activity.setSupportActionBar(toolbar)

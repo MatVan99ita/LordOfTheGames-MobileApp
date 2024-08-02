@@ -51,8 +51,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        Log.e("NOME", banana.getString("nickname", "BANANA").toString())
-        Log.e("COGGHIONE", banana.getString("email", "BANANA").toString())
 
         if (banana.contains("Theme")) {
             if (banana.getString("Theme", "NoTheme").equals("Night")) {
@@ -124,8 +122,7 @@ class MainActivity : AppCompatActivity() {
                 val cianni = Utilities.drawableToBitmap(drawable!!)
                 val newdrawable: Drawable =
                     BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!!, 100, 100, true))
-                //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-                //supportActionBar!!.setHomeAsUpIndicator(newdrawable)
+
                 supportActionBar?.setDisplayHomeAsUpEnabled(true);
                 supportActionBar?.setHomeAsUpIndicator(newdrawable)
                 bottomNavigationView.itemIconTintList = null
