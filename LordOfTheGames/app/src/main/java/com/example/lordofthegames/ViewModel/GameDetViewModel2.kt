@@ -108,5 +108,9 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.ugCreate(user_ref, game_id, game_status)
     }
 
+    fun getUsrImg(mail: String): String? {
+        return repository.getUsrImg(mail)
+    }
+
 
 }

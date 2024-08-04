@@ -1,8 +1,8 @@
 package com.example.lordofthegames.GameNotes
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,12 +12,14 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
-import org.joda.time.DateTimeFieldType.dayOfMonth
 import org.joda.time.format.DateTimeFormat
 
 
@@ -60,6 +62,12 @@ class GameNoteActivity: AppCompatActivity() {
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
+        )
+        Utilities.setDrawerWithUser(//todo: usarla ovunque
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
         )
 
         user_ref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("email", "null")!!
@@ -110,12 +118,43 @@ class GameNoteActivity: AppCompatActivity() {
         } else if (item.itemId == R.id.gn_top_today) {
             //Aggiunge la data cib l'ora per poter segnare come se fosse un titolo
             editText.append("\n~ ${TUDEI()}:\n")
-
+            true
+        } else if(item.itemId == R.id.nav_setting) {
+            val intent = Intent(this, SettingsActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            this.startActivity(intent)
+            true
+        } else if(item.itemId == R.id.nav_usr) {
+            val intent = Intent(this, LoggedActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            intent.putExtra("user_ref", true)
+            this.startActivity(intent)
             true
         } else {
             super.onOptionsItemSelected(item)
         }
     }
+
+    /*
+    * override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (actionBarDrawerToggle.onOptionsItemSelected(item)){
+            true
+        } else if(item.itemId == R.id.nav_setting){
+            val intent = Intent(this, SettingsActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            this.startActivity(intent)
+            true
+        } else if(item.itemId == R.id.nav_usr){
+            val intent = Intent(this, LoggedActivity::class.java)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            intent.putExtra("user_ref", true)
+            this.startActivity(intent)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
+    * */
 
 
     fun TUDEI(): String {

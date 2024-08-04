@@ -36,6 +36,7 @@ import com.example.lordofthegames.recyclerView.CardAdapter
 import com.example.lordofthegames.recyclerView.CategoryCardAdapter
 import com.example.lordofthegames.recyclerView.OnItemListener
 import com.example.lordofthegames.recyclerView.PlatformCardAdapter
+import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
 
 
@@ -250,6 +251,13 @@ class GameDetFragment: Fragment(), OnItemListener  {
                         }
 
                     }
+
+                    Utilities.setDrawerWithUser(//todo: usarla ovunque
+                        requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                        banana.getString("nickname", "BANANA").toString(),
+                        banana.getString("email", "BANANA").toString(),
+                        gameDetViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
+                    )
 
                     val picasso = Picasso.Builder(activity as Context)
                         .loggingEnabled(true) // Abilita il logging per il debug

@@ -6,16 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
-import com.example.lordofthegames.Settings.SettingsFragment
 import com.example.lordofthegames.Utilities
-import com.example.lordofthegames.GameDetails.NotesFragment
 import com.example.lordofthegames.GameNotes.GameNoteActivity
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.navigation.NavigationView

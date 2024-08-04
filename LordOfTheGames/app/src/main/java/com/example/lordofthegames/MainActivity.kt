@@ -103,7 +103,15 @@ class MainActivity : AppCompatActivity() {
                     findViewById(R.id.topbar),
                     getString(R.string.app_name),
                     drawerLayout,
-                    null
+                    null,
+                    BitmapDrawable(
+                        resources,
+                        banana.getString("email", "null")?.let {
+                            homeViewModel.getUsrImg(it)
+                        }?.let {
+                            Utilities.stringToByteArrayToBitmap(it)
+                        }
+                    )
                 )
 
                 setSupportActionBar(toolbar)

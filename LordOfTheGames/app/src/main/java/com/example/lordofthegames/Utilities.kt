@@ -195,14 +195,20 @@ class Utilities {
             title: String?,
             drawerLayout: DrawerLayout?,
             menu: Int?,
-            img: Drawable? = null
+            img: BitmapDrawable? = null
         ) {
-
+            val imggg = img
             if (menu != null) {
                 toolbar.inflateMenu(menu)
             }
 
             toolbar.title = title
+            if (img != null) {
+                toolbar.setNavigationIcon(img)
+            } else {
+                toolbar.setNavigationIcon(R.mipmap.gabibbo_blade_of_striscia)
+            }
+
 
             if(drawerLayout != null) {
 
