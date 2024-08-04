@@ -219,7 +219,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
                     if(item != gameStatus){
                         gameStatus = item
-                        if(!gameDetViewModel.ugExist(user_ref, game.game_id)){
+                        if(!gameDetViewModel.ugExist(user_ref, game.game_id) && gameStatus != "Not played"){
                             val j = gameDetViewModel.ugCreate(
                                 user_ref = user_ref,
                                 game_id = game.game_id,

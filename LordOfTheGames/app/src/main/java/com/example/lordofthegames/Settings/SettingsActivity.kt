@@ -65,9 +65,6 @@ class SettingsActivity: AppCompatActivity() {
             ViewModelProvider(this)[LoggedViewModel::class.java].getUsrImg(banana.getString("email", "BANANA").toString())
         )
 
-        //val btn: Button = findViewById(R.id.btn_verde).setOnClickListener(this);
-        //val btn1: Button = findViewById(R.id.btn_azzurro).setOnClickListener(this);
-
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
