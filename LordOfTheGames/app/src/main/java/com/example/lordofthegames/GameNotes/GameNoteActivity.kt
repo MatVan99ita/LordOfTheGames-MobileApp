@@ -101,6 +101,22 @@ class GameNoteActivity: AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.game_notes_menu, menu)
+        this.findViewById<NavigationView>(R.id.nav_view).setNavigationItemSelectedListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.nav_setting -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+                R.id.nav_usr -> {
+                    val intent = Intent(this, LoggedActivity::class.java)
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    this.startActivity(intent)
+                }
+
+            }
+            true
+        }
         return true
     }
 
@@ -134,27 +150,6 @@ class GameNoteActivity: AppCompatActivity() {
             super.onOptionsItemSelected(item)
         }
     }
-
-    /*
-    * override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (actionBarDrawerToggle.onOptionsItemSelected(item)){
-            true
-        } else if(item.itemId == R.id.nav_setting){
-            val intent = Intent(this, SettingsActivity::class.java)
-            drawerLayout.closeDrawer(GravityCompat.START)
-            this.startActivity(intent)
-            true
-        } else if(item.itemId == R.id.nav_usr){
-            val intent = Intent(this, LoggedActivity::class.java)
-            drawerLayout.closeDrawer(GravityCompat.START)
-            intent.putExtra("user_ref", true)
-            this.startActivity(intent)
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-    * */
 
 
     fun TUDEI(): String {
