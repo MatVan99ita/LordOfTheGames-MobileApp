@@ -4,12 +4,6 @@ import android.app.Application
 import com.example.lordofthegames.Database.AbstractViewModel
 import com.example.lordofthegames.user_badge.UserBadge
 
-/** TODO: aggiungere in questi fragment per generare notifiche con badge
- *      LoggedInFragment,
- *      HomeFragment,
- *      GameDetailsFragment,
- *      DiscussionSpecificFragment
- * */
 class UserBadgeViewModel(application: Application): AbstractViewModel(application) {
 
     fun getCompletedGameCount(user_ref: String): Int {
