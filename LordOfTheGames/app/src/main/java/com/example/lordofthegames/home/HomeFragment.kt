@@ -125,7 +125,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 radioStar.addView(rdbtn)
             }
 
-            Utilities.setDrawerWithUser(//todo: usarla ovunque
+            Utilities.setDrawerWithUser(
                 requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),
                 banana.getString("email", "BANANA").toString(),
@@ -388,7 +388,7 @@ class HomeFragment: Fragment(), OnItemListener {
         )
         recyclerView.adapter = adapter
 
-        Utilities.setDrawerWithUser(//todo: usarla ovunque
+        Utilities.setDrawerWithUser(
             requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
             banana.getString("nickname", "BANANA").toString(),
             banana.getString("email", "BANANA").toString(),

@@ -252,7 +252,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
                     }
 
-                    Utilities.setDrawerWithUser(//todo: usarla ovunque
+                    Utilities.setDrawerWithUser(
                         requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                         banana.getString("nickname", "BANANA").toString(),
                         banana.getString("email", "BANANA").toString(),
