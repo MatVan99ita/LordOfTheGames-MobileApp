@@ -11,10 +11,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.user_login.LoggedActivity
+import com.example.lordofthegames.user_login.LoggedViewModel
+import com.google.android.material.navigation.NavigationView
 
 class SettingsActivity: AppCompatActivity() {
 
@@ -52,6 +55,14 @@ class SettingsActivity: AppCompatActivity() {
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
+        )
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        Utilities.setDrawerWithUser(
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            ViewModelProvider(this)[LoggedViewModel::class.java].getUsrImg(banana.getString("email", "BANANA").toString())
         )
 
         //val btn: Button = findViewById(R.id.btn_verde).setOnClickListener(this);
