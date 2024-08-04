@@ -115,4 +115,8 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         return repo.deDownComment(commentId)
     }
 
+    fun getUsrImg(mail: String): String? {
+        return repo.getUsrImg(mail)
+    }
+
 }

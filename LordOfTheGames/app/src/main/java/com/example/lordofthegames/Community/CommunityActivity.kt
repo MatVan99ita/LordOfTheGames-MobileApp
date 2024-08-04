@@ -1,13 +1,16 @@
 package com.example.lordofthegames.Community
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
@@ -58,6 +61,15 @@ class CommunityActivity: AppCompatActivity() {
             bind.communityActivityDrawer,
             navigationView,
             this
+        )
+
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val communityViewModel: DiscussionViewModel = ViewModelProvider(this)[DiscussionViewModel::class.java]
+        Utilities.setDrawerWithUser(//todo: usarla ovunque
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            communityViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
         )
 
     }
