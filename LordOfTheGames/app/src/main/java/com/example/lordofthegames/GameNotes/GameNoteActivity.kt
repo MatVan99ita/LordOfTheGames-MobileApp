@@ -8,12 +8,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
 import org.joda.time.DateTimeFieldType.dayOfMonth
 import org.joda.time.format.DateTimeFormat
@@ -39,7 +41,7 @@ class GameNoteActivity: AppCompatActivity() {
 
         setContentView(R.layout.activity_game_notes)
 
-
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         noteViewModel = GameNoteViewModel(application)
         drawerLayout = findViewById(R.id.gn_drawer)
         game_title = intent.getStringExtra("game_title").toString()
@@ -79,6 +81,13 @@ class GameNoteActivity: AppCompatActivity() {
             }
 
         })
+
+        Utilities.setDrawerWithUser(//todo: usarla ovunque
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
+        )
     }
 
 

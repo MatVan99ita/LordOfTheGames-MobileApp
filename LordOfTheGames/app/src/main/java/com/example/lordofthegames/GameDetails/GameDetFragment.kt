@@ -2,6 +2,7 @@ package com.example.lordofthegames.GameDetails
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
@@ -84,6 +85,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
     private lateinit var editText: EditText
     private lateinit var spinner_GS: Spinner
     private var gameStatus: String = "Not played"
+    private lateinit var banana: SharedPreferences
 
     private val statuss = listOf(
         "Not played",
@@ -105,6 +107,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
                 .getString("email", "sesso")
             .toString()
         setHasOptionsMenu(true)
+        banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
     }
 
 
@@ -177,9 +180,8 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
             val game = gameDetViewModel.getGameDetails(game_title)
 
-            if (savedInstanceState != null) {
-                gameStatus = gameDetViewModel.getGameStatus(game.game_id, savedInstanceState.getString("mail", "null"))
-            }
+            gameStatus = banana.getString("mail", "null")
+                ?.let { gameDetViewModel.getGameStatus(game.game_id, it) }.toString()
 
             val linearLayoutManagerCategory = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val linearLayoutManagerPlatform = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

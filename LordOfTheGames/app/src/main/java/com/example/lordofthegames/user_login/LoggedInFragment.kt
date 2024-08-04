@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -32,6 +33,7 @@ import com.example.lordofthegames.db_entities.User
 import com.example.lordofthegames.recyclerView.UserGameGraphItem
 import com.github.mikephil.charting.charts.PieChart
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.util.Base64
 import java.util.concurrent.ExecutorService
@@ -51,6 +53,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var user: User
     private lateinit var defaultImg: Drawable
     private var isExpanded = true
+    private lateinit var banana: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +75,7 @@ class LoggedInFragment: Fragment(){
         bind.menuButton.text = if(isExpanded) "Badge \u25B2" else "Badge \u25BC"
         statistics = viewm.getUserStatisticsCounts(requireArguments().getString("email", "sesso"))
         bind.btnExit.setOnClickListener { eschilo() }
-        val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val p: PieChart = bind.chart
         user = viewm.getUsr(banana.getString("email", "mail")!!)
 
@@ -90,12 +93,20 @@ class LoggedInFragment: Fragment(){
                     user.photo
                 )
             )
+            Utilities.setDrawerWithUser(
+                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                banana.getString("nickname", "BANANA").toString(),
+                banana.getString("email", "BANANA").toString(),
+                viewm.getUsrImg(banana.getString("email", "BANANA").toString())
+            )
         } else {
             bind.loggedUsrImg.setImageResource(
                 R.mipmap.gabibbo_blade_of_striscia
             )
         }
         cameraExecutor = Executors.newFixedThreadPool(1)
+
+
 
         Utilities.setupPieChart(p, statistics, banana.getString("Theme", "NoTheme").equals("Night"))
 
@@ -337,7 +348,15 @@ class LoggedInFragment: Fragment(){
                 } else {
                     bind.btnSaveChanges.visibility = View.GONE
                     bind.btnAnnullaLogges.visibility = View.GONE
+
+                    Utilities.setDrawerWithUser(
+                        requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                        banana.getString("nickname", "BANANA").toString(),
+                        banana.getString("email", "BANANA").toString(),
+                        viewm.getUsrImg(banana.getString("email", "BANANA").toString())
+                    )
                 }
+
             }
 
             bind.btnAnnullaLogges.setOnClickListener {

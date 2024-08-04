@@ -53,6 +53,9 @@ class LoggedViewModel(application: Application): AbstractViewModel(application) 
         return repository.getUser(mail)
     }
 
+    fun getUsrImg(mail: String): String? {
+        return repository.getUsrImg(mail)
+    }
 
 
 }

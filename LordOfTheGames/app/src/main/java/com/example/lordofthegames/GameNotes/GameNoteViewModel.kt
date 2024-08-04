@@ -54,4 +54,8 @@ class GameNoteViewModel(application: Application): ViewModel() {
     fun saveNotes(content: String, last_mod:String, game_ref: Int, user_ref: String): Int{
         return repository.saveNotes(content, last_mod, game_ref, user_ref)
     }
+
+    fun getUsrImg(mail: String): String? {
+        return repository.getUsrImg(mail)
+    }
 }

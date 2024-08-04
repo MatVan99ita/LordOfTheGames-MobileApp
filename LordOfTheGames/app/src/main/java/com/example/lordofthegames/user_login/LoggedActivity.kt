@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room.databaseBuilder
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.MainActivity
@@ -75,6 +76,7 @@ class LoggedActivity: AppCompatActivity() {
                     bundle,
                 )
 
+
                 Utilities.setUpToolBar(
                     this,
                     findViewById(R.id.topbar),
@@ -99,6 +101,7 @@ class LoggedActivity: AppCompatActivity() {
                 )
             }
         }
+
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {

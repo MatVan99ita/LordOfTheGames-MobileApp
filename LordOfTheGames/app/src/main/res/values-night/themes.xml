@@ -24,6 +24,7 @@
         <item name="fontItemColor">#050609</item>
 
         <item name="pageColor">#110A2E</item>
+        <item name="contrary">#ffffff</item>
 
 
         <item name="colorPrimaryPale">#8145A1</item>

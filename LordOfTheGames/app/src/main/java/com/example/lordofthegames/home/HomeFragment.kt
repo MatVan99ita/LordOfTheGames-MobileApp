@@ -12,6 +12,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -67,6 +68,7 @@ class HomeFragment: Fragment(), OnItemListener {
     private var selectedRadioStarButtonId: Int = -1
     private var selectedRadioHeadButtonId: Int = -1
     val listener: OnItemListener = this
+    private lateinit var banana: SharedPreferences
 
 
 
@@ -98,7 +100,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 displayGame()
             }
 
-            val banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+            banana = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             val navigationView = requireActivity().findViewById<View>(R.id.nav_view) as NavigationView
             val headerView = navigationView.getHeaderView(0)
 
@@ -385,6 +387,13 @@ class HomeFragment: Fragment(), OnItemListener {
             )
         )
         recyclerView.adapter = adapter
+
+        Utilities.setDrawerWithUser(//todo: usarla ovunque
+            requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
+        )
     }
 
     private fun filterGames(category: String? = null, platform: String? = null): MutableList<GameItem> {

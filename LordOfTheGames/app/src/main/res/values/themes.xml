@@ -19,6 +19,7 @@
         <item name="themeItemsBGColor">#8AEFDBC9</item>
         <item name="themeBorderColor">#9C27B0</item>
         <item name="fontItemColor">#050609</item>
+        <item name="contrary">#000000</item>
 
         <item name="pageColor">#ECCBAA</item>
 
@@ -39,6 +40,9 @@
 
 
 
+    <style name="Fontato" parent="Theme.LordOfTheGames">
+        <item name="android:fontFamily">@font/god_of_war</item>
+    </style>
 
     <style name="LoMaterioBaton" parent="Widget.MaterialComponents.Button">
         <item name="colorPrimary">#850000</item>

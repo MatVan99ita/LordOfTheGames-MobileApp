@@ -43,8 +43,6 @@ class SettingsFragment: Fragment() {
     ): View? {
         //return super.onCreateView(inflater, container, savedInstanceState)
 
-        val view = inflater.inflate(R.layout.fragment_settings, container, false)
-
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 

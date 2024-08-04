@@ -18,7 +18,7 @@ abstract class AbstractViewModel(application: Application): AndroidViewModel(app
 
     fun getGameStatus(gameId: Int, mail: String): String{
         val s = repository.getGameStatus(gameId, mail)
-        Log.i("AAAAAAAAAAAAAAAAAAAAAA", "${s.length}")
+
         return s
     }
 }

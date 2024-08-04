@@ -17,6 +17,7 @@
         <attr name="pageColor"                  format="reference|color" />
         <attr name="closeBG"                    format="reference|color" />
         <attr name="onCloseBG"                  format="reference|color" />
+        <attr name="contrary"                   format="reference|color" />
 
     </declare-styleable>
     
