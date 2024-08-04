@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.provider.CalendarContract.Events
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -104,12 +105,16 @@ class NotificationFragment: Fragment(), OnItemListener {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 Log.e("LOCALENDARIAZZIO", "$selected_notification")
-                addToCalendar(
-                    DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
-                    if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis,
-                    selected_notification.title!!,
-                    selected_notification.content!!
-                )
+                (if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis)?.let { it1 ->
+                    addEventToCalendar(
+                        title = selected_notification.title!!,
+                        description = selected_notification.content!!,
+                        begin = DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
+                        end = it1,
+
+                        )
+                }
+
                 bind.notificationSpecificFrameLayout.visibility = View.GONE
             }
             else {
@@ -176,30 +181,6 @@ class NotificationFragment: Fragment(), OnItemListener {
         notificationAdapter.updateView(viewm.getNotification(user_nick))
     }
 
-
-    private fun addToCalendar(dataInizio: Long, dataFine: Long? = null, title: String, description: String){
-        val values = ContentValues()
-        values.put(CalendarContract.Events.DTSTART, dataInizio)
-        if(dataFine != null) values.put(CalendarContract.Events.DTEND, dataFine) else values.put(CalendarContract.Events.DURATION, "+P1H")
-        values.put(CalendarContract.Events.TITLE, title)
-        values.put(
-            CalendarContract.Events.CALENDAR_ID,
-            Utilities.getCalendarId(requireContext()) ?: 1
-        )
-        values.put(CalendarContract.Events.DESCRIPTION, attr.description)
-        values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
-        val uri = requireContext().contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)
-
-        if (uri != null) {
-            val eventID = uri.lastPathSegment!!.toLong()
-            // L'evento è stato creato con successo
-            Utilities.showaToast(requireContext(), "Evento creato con ID: $eventID")
-        } else {
-            // L'inserimento dell'evento è fallito
-            Utilities.showaToast(requireContext(), "Errore nella creazione dell'evento")
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -244,6 +225,41 @@ class NotificationFragment: Fragment(), OnItemListener {
     override fun onDestroy() {
         super.onDestroy()
         exeggutor.shutdown()
+    }
+
+    private fun addToCalendar(dataInizio: Long, dataFine: Long? = null, title: String, description: String){
+        val values = ContentValues()
+        values.put(CalendarContract.Events.DTSTART, dataInizio)
+        if(dataFine != null) values.put(CalendarContract.Events.DTEND, dataFine) else values.put(CalendarContract.Events.DURATION, "+P1H")
+        values.put(CalendarContract.Events.TITLE, title)
+        values.put(
+            CalendarContract.Events.CALENDAR_ID,
+            Utilities.getCalendarId(requireContext()) ?: 1
+        )
+        values.put(CalendarContract.Events.DESCRIPTION, attr.description)
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
+        val uri = requireContext().contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)
+
+        if (uri != null) {
+            val eventID = uri.lastPathSegment!!.toLong()
+            // L'evento è stato creato con successo
+            Utilities.showaToast(requireContext(), "Evento creato con ID: $eventID")
+        } else {
+            // L'inserimento dell'evento è fallito
+            Utilities.showaToast(requireContext(), "Errore nella creazione dell'evento")
+        }
+    }
+
+    fun addEventToCalendar(title: String, description: String, begin: Long, end: Long) {
+        val intent: Intent = Intent(Intent.ACTION_INSERT)
+            .setData(Events.CONTENT_URI)
+            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
+            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
+            .putExtra(Events.TITLE, title)
+            .putExtra(Events.DESCRIPTION, description)
+            .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+            .putExtra(Intent.EXTRA_EMAIL, requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("email", "sessp"))
+        startActivity(intent)
     }
 
 
