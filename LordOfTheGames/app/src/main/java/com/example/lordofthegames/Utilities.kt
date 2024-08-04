@@ -77,8 +77,6 @@ class Utilities {
     /*
     * TODO: ULTIMATE
     *  Funzionalità obbligatorie
-        1.5. Mettere l'immagine presa dalla camera nel hader di tutto e anche nel drawerLayout <- va fatto per ogni activity e comunque il drawer deve avere interazioni dappertutto
-        *
         2. Profilo utente
             2. GPS (si può usare semplicemente per la posizione utente, es. casa)
         *
@@ -536,7 +534,8 @@ class Utilities {
             pieChart.centerText = "Giochi totali: \n ${graphData.gameNumTot} \n "
             pieChart.setDrawEntryLabels(false)
             pieChart.contentDescription = ""
-
+            data.setValueTextSize(15f);
+            pieChart.setCenterTextSize(15f)
             pieChart.holeRadius = 35F;
             pieChart.maxHighlightDistance = 74f;
 
