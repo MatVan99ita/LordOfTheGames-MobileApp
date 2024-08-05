@@ -28,6 +28,9 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
                         game_ref = c.getInt(c.getColumnIndexOrThrow("game_id")),
                         user_ref = c.getString(c.getColumnIndexOrThrow("user_ref")),
                         img = c.getString(c.getColumnIndexOrThrow("img")),
+                        location = c.getString(c.getColumnIndexOrThrow("location")),
+                        data_inizio = c.getString(c.getColumnIndexOrThrow("data_inizio")),
+                        data_fine = c.getString(c.getColumnIndexOrThrow("data_fine"))
                     ),
                     totaleLike = c.getInt(c.getColumnIndexOrThrow("TotaleLike")),
                     totComment = c.getInt(c.getColumnIndexOrThrow("NumeroCommenti")),
@@ -87,14 +90,17 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         return repo.getGameDetail(title!!).game_id
     }
 
-    fun saveNewDiscussion(title: String, content: String, usr: String, game: Int, img: String?): Long {
+    fun saveNewDiscussion(title: String, content: String, usr: String, game: Int, img: String?, location: String?, dataInizio: String?, dataFine: String?): Long {
         return repo.saveNewDiscussion(
             Discussion(
                 title = title,
                 content = content,
                 user_ref = usr,
                 game_ref = game,
-                img = img
+                img = img,
+                location = location,
+                data_inizio = dataInizio,
+                data_fine = dataFine
             )
         )
     }

@@ -363,12 +363,17 @@ class DiscussionCreateFragment: Fragment() {
             Utilities.showaToast(requireContext(), "Manca il contenuto")
         }
 
+        //TODO: sistemare posizione e date con calendario
+        //      aggiungere le cose di posizione e date per creare discussioni eventp e metterle anche poi nella vista di creazione
         val disc_id = viewm.saveNewDiscussion(
             title = bind.etTitle.text?.toString()!!,
             content = bind.etContent.text?.toString()!!,
             usr = s,
             game = game_id,
-            img = if(c_img != null) c_img else null
+            img = if(c_img != null) c_img else null,
+            location = "",
+            dataInizio = "",
+            dataFine = ""
         )
 
 

@@ -29,5 +29,8 @@ data class Discussion(
     @ColumnInfo(index = true)
     var game_ref: Int,
     var user_ref: String,
+    var location: String?,
+    var data_inizio: String?,
+    var data_fine: String?
 ){
 }

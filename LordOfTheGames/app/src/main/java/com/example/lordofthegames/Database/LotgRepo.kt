@@ -22,7 +22,7 @@ class LotgRepo(application: Application) {
 
     @WorkerThread
     fun insertUser(user: User): Long {
-        return lotgDao.insertUser(user.mail, user.nickname, user.password, user.photo)
+        return lotgDao.insertUser(user.mail, user.nickname, user.password, user.photo, user.position)
     }
 
     @WorkerThread

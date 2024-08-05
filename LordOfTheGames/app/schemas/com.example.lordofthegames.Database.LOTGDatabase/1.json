@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fb736fc334b62f1dd5f7e22d752c5ce6",
+    "identityHash": "2149fb657ab2bd4b40369ee942a37995",
     "entities": [
       {
         "tableName": "achievement",
@@ -187,7 +187,7 @@
       },
       {
         "tableName": "discussion",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, `img` TEXT, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`discussion_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `img` TEXT, `game_ref` INTEGER NOT NULL, `user_ref` TEXT NOT NULL, `location` TEXT, `data_inizio` TEXT, `data_fine` TEXT, FOREIGN KEY(`game_ref`) REFERENCES `game`(`game_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`user_ref`) REFERENCES `user`(`nickname`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "discussion_id",
@@ -208,6 +208,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "img",
+            "columnName": "img",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "game_ref",
             "columnName": "game_ref",
             "affinity": "INTEGER",
@@ -220,8 +226,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "img",
-            "columnName": "img",
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "data_inizio",
+            "columnName": "data_inizio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "data_fine",
+            "columnName": "data_fine",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -629,7 +647,7 @@
       },
       {
         "tableName": "user",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mail` TEXT NOT NULL, `nickname` TEXT NOT NULL, `password` TEXT NOT NULL, `photo` TEXT, PRIMARY KEY(`mail`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mail` TEXT NOT NULL, `nickname` TEXT NOT NULL, `password` TEXT NOT NULL, `photo` TEXT, `position` TEXT, PRIMARY KEY(`mail`))",
         "fields": [
           {
             "fieldPath": "mail",
@@ -652,6 +670,12 @@
           {
             "fieldPath": "photo",
             "columnName": "photo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "position",
+            "columnName": "position",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -835,7 +859,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fb736fc334b62f1dd5f7e22d752c5ce6')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2149fb657ab2bd4b40369ee942a37995')"
     ]
   }
 }

@@ -85,7 +85,7 @@ class Utilities {
             – mockup (potete usare diversi software, come balsamiq, figma, AdobeXD, ecc.. e in formato cartaceo eventualmente)
         • Mappa (max 2)
             – se non previsto dalle funzionalità dell'app si può visualizzare la posizione dell'utente nel profilo, potete utilizzare sia OpenStreetMap che Google Map
-        • Intent per chiamata/calendario o simili (max 2) <- CALENDARIO IN LAVORAZIONE
+        • Intent per chiamata/calendario o simili (max 2)
             – uno di questi: https://developer.android.com/guide/components/intents-common - preferibilmente non visto a lezione
         • Tracking utente su mappa (max 4) <- boh
     * */
@@ -99,6 +99,7 @@ class Utilities {
         const val REQUEST_WRITE_STORAGE = 106
         const val READ_CALENDAR_CODE  = 100
         const val WRITE_CALENDAR_CODE = 100
+        const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
 

@@ -3,13 +3,11 @@ package com.example.lordofthegames.Database
 import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.MapInfo
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import androidx.room.Update
 import com.example.lordofthegames.db_entities.Achievement
 import com.example.lordofthegames.db_entities.Categories
 import com.example.lordofthegames.db_entities.Comments
@@ -58,8 +56,8 @@ interface LotgDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertPlatform(platform: Platform): Long
 
-    @Query("INSERT INTO user (mail, nickname, password, photo) VALUES (:mail, :nick, :psw, :photo)")
-    fun insertUser(mail: String, nick: String, psw: String, photo: String?): Long
+    @Query("INSERT INTO user (mail, nickname, password, photo, position) VALUES (:mail, :nick, :psw, :photo, :position)")
+    fun insertUser(mail: String, nick: String, psw: String, photo: String?, position: String?): Long
 
 
 

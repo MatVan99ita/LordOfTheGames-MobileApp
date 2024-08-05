@@ -10,12 +10,14 @@ import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.add
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.db_entities.User
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -147,12 +149,12 @@ class SignInFragment: Fragment() {
                 bundle.putString("passw", reqpassword.text.toString())
                 bundle.putString("mail", mail.text.toString())
 
-                val fragment2: SignInFragment2 = SignInFragment2()
-                fragment2.arguments = bundle
-
-
-                //signin(mail.text.toString(), reqpassword.text.toString(), nick.text.toString())
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_container_view, fragment2).commit()
+                Utilities.insertFragment(
+                    requireActivity() as AppCompatActivity,
+                    SignInFragment2(),
+                    SignInFragment2::class.java.toString(),
+                    bundle
+                )
             }
         }
         super.onViewCreated(view, savedInstanceState)

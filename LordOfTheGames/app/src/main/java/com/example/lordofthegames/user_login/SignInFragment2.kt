@@ -12,11 +12,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.graphics.PointF
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,12 +30,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
-import com.example.lordofthegames.GameDetails.GameDetActivity
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
@@ -58,10 +56,6 @@ import kotlin.math.sqrt
 
 
 class SignInFragment2: Fragment(){
-
-    private lateinit var nick: String
-    private lateinit var mail: String
-    private lateinit var password: String
 
     private lateinit var cameraExecutor: ExecutorService
 
@@ -90,7 +84,6 @@ class SignInFragment2: Fragment(){
     private var mLastTouchY = 0f
 
 
-    private lateinit var loggedViewModel: LoggedViewModel
 
 
 
@@ -100,7 +93,6 @@ class SignInFragment2: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        loggedViewModel = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
         return inflater.inflate(R.layout.fragment_signin_img, container, false)
     }
 
@@ -120,6 +112,8 @@ class SignInFragment2: Fragment(){
         imageView.setOnTouchListener { _, event ->
             mScaleGestureDetector!!.onTouchEvent(event)
         }
+
+        Log.e("LOUTENZO", "${arguments?.getString("nick")} - ${arguments?.getString("passw")} - ${arguments?.getString("mail")}")
 
          btnImg.setOnClickListener {
             ActivityCompat.requestPermissions(
@@ -266,9 +260,26 @@ class SignInFragment2: Fragment(){
     }
 
 
-    fun signin(nickn: String, passw: String, email: String, img: Bitmap) {
+    fun signin(img: Bitmap) {
 
-        val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        arguments?.putString( "uimg",
+            Base64
+                .getEncoder()
+                .encodeToString(
+                    Utilities
+                        .convertBitmapToByteArray(img)
+                )
+        )
+
+        Utilities.insertFragment(
+            requireActivity() as AppCompatActivity,
+            SignInFragment3(),
+            SignInFragment3::class.simpleName!!,
+            arguments
+        )
+/*
+        val sp: SharedPreferences =
+            requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         val res = loggedViewModel
             .insertNewUsr(
@@ -280,12 +291,13 @@ class SignInFragment2: Fragment(){
                         .getEncoder()
                         .encodeToString(
                             Utilities
-                            .convertBitmapToByteArray(img)
-                        )
+                                .convertBitmapToByteArray(img)
+                        ),
+                    ""
                 )
             )
         Log.i("resresresresresr", "$res")
-        if(res > 0){
+        if (res > 0) {
             Log.i("AAAALAFREGNAALPOSTODELCA", "$mail $nick $passw")
             sp.edit()
                 .putString("logged", "logged")
@@ -301,7 +313,7 @@ class SignInFragment2: Fragment(){
             )
         } else {
             Utilities.showaToast(requireContext(), "Le forse del male sono incerte")
-        }
+        }*/
 
     }
 
@@ -394,15 +406,12 @@ class SignInFragment2: Fragment(){
             }
 
             btnImg2.setOnClickListener {
-                val bundle: Bundle? = arguments
 
                 // Now you have your ArrayList<String>
-                if (bundle != null && img != null) {
-                    this.nick = bundle.getString("nick", "Gabibbo")
-                    this.password = bundle.getString("passw", "Gabibbo")
-                    this.mail = bundle.getString("mail", "Gabibbo")
-                    Log.i("MAMMETA", "$nick $password $mail")
-                    signin(nick, password, mail, img)
+                if (img != null) {
+                    signin(img)
+                } else {
+                    Utilities.showaToast(requireContext(), "Problemi in paraiso")
                 }
             }
         }

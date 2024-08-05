@@ -55,6 +55,9 @@ class LoggedInFragment: Fragment(){
     private var isExpanded = true
     private lateinit var banana: SharedPreferences
 
+
+    //TODO: aggiungere al fragment sotto le medaglie la posizione dell'utente salvata che possa essere modificata
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
