@@ -1,31 +1,31 @@
 package com.example.lordofthegames.user_login
 
-import android.Manifest
+import android.Manifest.permission
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentSigninLocationBinding
 import com.example.lordofthegames.db_entities.User
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Base64
+import com.google.android.gms.location.LocationServices
+import java.io.IOException
+import java.util.Locale
+
 
 class SignInFragment3: Fragment() {
 
@@ -81,6 +81,53 @@ class SignInFragment3: Fragment() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == Utilities.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
         }
+    }
+
+
+
+    fun getPositionFormatted(): String? {
+
+        var corto: String? = null
+        var lungo: String? = null
+
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(permission.ACCESS_FINE_LOCATION), 1
+        )
+        val client = LocationServices.getFusedLocationProviderClient(requireActivity())
+        if (ActivityCompat.checkSelfPermission(requireActivity(), permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return null
+        }
+        client.lastLocation.addOnSuccessListener(
+            requireActivity()
+        ) { location ->
+            if (location != null) {
+                Log.i("LOCATION", "$location")
+                lungo = Uri.parse(
+                    "http://maps.google.com/maps?q=loc:"
+                            + location.latitude + ',' + location.longitude
+                ).toString()
+
+                corto = getCountryAbbreviation(location)
+            }
+        }
+
+         return if(corto != null && lungo != null) "{\"abbr\":$corto, \"pos\":$lungo}" else null
+    }
+
+    private fun getCountryAbbreviation(location: Location): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            val addresses: MutableList<Address>? =
+                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            if (addresses != null && addresses.isNotEmpty()) {
+                return addresses[0].countryCode
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return "N/A"
     }
 
     fun signin(position: String) {
