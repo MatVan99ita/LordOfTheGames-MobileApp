@@ -14,7 +14,7 @@ data class User(
     var nickname: String,
     var password: String,
     var photo: String?,
-    var position: String?
+    var position: String? //{"reduce"="AA", "position"="<stringone supremo>"}
 )
 
 

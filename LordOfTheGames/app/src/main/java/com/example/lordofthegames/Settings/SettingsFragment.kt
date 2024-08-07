@@ -25,6 +25,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.example.lordofthegames.R
+import com.example.lordofthegames.Utilities
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputLayout
 import java.lang.Thread.sleep
@@ -81,10 +82,15 @@ class SettingsFragment: Fragment() {
                 override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
 
                 override fun afterTextChanged(editable: Editable) {
-                    textView.text = editable
-                    val editor = sharedPreferences.edit()
-                    editor.putString("Settings", editable.toString())
-                    editor.apply()
+                    //textView.text = editable
+                    //val editor = sharedPreferences.edit()
+                    //editor.putString("Settings", editable.toString())
+                    //editor.apply()
+
+                    val text = editable.toString()
+                    if (text.isNotEmpty() && text.length == 2) {
+                        textView.text = Utilities.toFlagEmoji(text)
+                    }
                 }
             })
 

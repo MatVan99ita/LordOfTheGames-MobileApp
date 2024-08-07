@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class ProductManager {
 
-    private static final String INDEX = "id";
+   /* private static final String INDEX = "id";
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private static final String IMG = "imageBytes";
@@ -185,6 +185,6 @@ public class ProductManager {
         updateBuilder.update();
         return 0;
     }
-
+*/
 
 }

@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                     BitmapDrawable(resources, Bitmap.createScaledBitmap(cianni!!, 100, 100, true))
 
                 supportActionBar?.setDisplayHomeAsUpEnabled(true);
-                supportActionBar?.setHomeAsUpIndicator(newdrawable)
+                //supportActionBar?.setHomeAsUpIndicator(newdrawable)
                 bottomNavigationView.itemIconTintList = null
 
                 bottomNavigationView.setOnItemSelectedListener { item ->

@@ -9,7 +9,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="@mipmap/ic_gabibbo2_round"
+        app:navigationIcon="@mipmap/gabibbo_blade_of_striscia_round"
         android:padding="1dp"
         android:layout_margin="3dp"
         android:theme="@style/Fontato"
