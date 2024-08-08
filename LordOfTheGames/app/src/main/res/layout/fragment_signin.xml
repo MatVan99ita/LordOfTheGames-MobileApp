@@ -33,14 +33,14 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nickname_textinput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nickname_textinput"
             android:hint="@string/nickname"
-            android:text="MatVan99it"
             android:imeOptions="flagNoExtractUi"
+            android:inputType="textPersonName"
             android:maxLength="12"
-            android:inputType="textPersonName"/>
+            android:text="PIPPOLNO" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

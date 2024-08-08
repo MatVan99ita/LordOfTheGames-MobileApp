@@ -7,7 +7,6 @@ import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.content.IntentSender.SendIntentException
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -28,7 +27,6 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.CalendarContract.Calendars
 import android.provider.MediaStore
-import android.provider.Settings
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
@@ -69,11 +67,11 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsResponse
 import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -84,6 +82,7 @@ import java.text.SimpleDateFormat
 import java.util.Base64
 import java.util.Date
 import java.util.Locale
+import kotlin.Pair
 
 
 class Utilities {
@@ -569,13 +568,13 @@ class Utilities {
         }
 
 
-        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: String?){
+        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: String?, position: String){
             val head = headerView.getHeaderView(0)
             val usr_icon: ImageView = head.findViewById(R.id.usr_icon)
             val nick_head: TextView = head.findViewById(R.id.nickname_header)
             val mail_head: TextView = head.findViewById(R.id.mail_header)
 
-            nick_head.text = nick
+            nick_head.text = "$nick ${this.toFlagEmoji(position)}"
             mail_head.text = mail
             if(img != null) usr_icon.setImageBitmap(this.stringToByteArrayToBitmap(img))
         }
@@ -794,6 +793,18 @@ class Utilities {
             } catch (e: IOException) {
                 e.printStackTrace()
                 return null
+            }
+        }
+
+        fun translateUserPosition(position: String?): Map<String, String>{
+            return if(position != null) {
+                val jsonObject: JSONObject = JSONObject(position)
+                mapOf(
+                    Pair("abbr", jsonObject.getString("abbr")),
+                    Pair("lungo", jsonObject.getString("lungo")),
+                )
+            } else {
+                mapOf()
             }
         }
 

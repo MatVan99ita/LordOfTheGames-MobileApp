@@ -87,7 +87,8 @@ class LoggedInFragment: Fragment(){
             user.photo!!
         )) else bind.loggedUsrImg.setImageDrawable(defaultImg)
 
-        bind.loggedNick.text = user.nickname
+        val l = Utilities.translateUserPosition(user.position)
+        bind.loggedNick.text = "${user.nickname} ${ if(l.isNotEmpty()) l.get("abbr")?.let { Utilities.toFlagEmoji(it) } else "RN" }"
         bind.loggedMail.text = user.mail
 
         if(user.photo != null) {

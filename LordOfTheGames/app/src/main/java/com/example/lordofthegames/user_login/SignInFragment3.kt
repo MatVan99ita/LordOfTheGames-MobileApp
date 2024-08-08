@@ -36,6 +36,7 @@ class SignInFragment3: Fragment() {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var posizioneSalvata: String = ""
+    private var formattedPosition: String = ""
 
     private lateinit var loggedViewModel: LoggedViewModel
     override fun onCreateView(
@@ -119,6 +120,7 @@ class SignInFragment3: Fragment() {
                 bind.testoPosizione.text = "Quindi vieni dal...\n${l?.get(0)}"
                 bind.txtFlag.text = Utilities.toFlagEmoji(l?.get(1)!!)
                 bind.salvaAccount.visibility = View.VISIBLE
+                formattedPosition = "{\"abbr\":\"${l[1]}\", \"lungo\":\"$posizioneSalvata\"}"
             }
         }
     }
@@ -155,7 +157,7 @@ class SignInFragment3: Fragment() {
                     requireArguments().getString("nick", "BANANA"),
                     requireArguments().getString("passw", "BANANA"),
                     requireArguments().getString("uimg", "BANANA"),
-                    posizioneSalvata
+                    formattedPosition
                 )
             )
 
