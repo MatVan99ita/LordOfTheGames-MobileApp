@@ -15,13 +15,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentSigninLocationBinding
 import com.example.lordofthegames.db_entities.User
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.io.IOException
 import java.util.Locale
@@ -31,6 +34,9 @@ class SignInFragment3: Fragment() {
 
     private lateinit var bind: FragmentSigninLocationBinding
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var posizioneSalvata: String = ""
+
     private lateinit var loggedViewModel: LoggedViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,41 +45,82 @@ class SignInFragment3: Fragment() {
     ): View {
         bind = FragmentSigninLocationBinding.inflate(layoutInflater, container, false);
         loggedViewModel = ViewModelProvider(requireActivity())[LoggedViewModel::class.java]
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+
         return bind.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        /*bind.posizzionatp.setOnClickListener {
+
+        bind.txtFlag.text = Utilities.toFlagEmoji("RN")
+
+
+        bind.posizzionatp.setOnClickListener {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    permission.ACCESS_FINE_LOCATION,
+                    permission.ACCESS_COARSE_LOCATION,
                 ),
                 1
             )
 
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+                    permission.ACCESS_COARSE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
-            ) {
+                ||
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+                ) {
                 this.prendiPosizione()
             }
             else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
                     arrayOf(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        permission.ACCESS_FINE_LOCATION,
+                        permission.ACCESS_COARSE_LOCATION,
                     ),
                     1
                 )
             }
-        }*/
+        }
+
+        bind.salvaAccount.setOnClickListener {
+            this.signin()
+        }
 
     }
 
     private fun prendiPosizione() {
-        TODO("Prenderla sta position per ottenere solo la provenienza dell'untemte")
+        Utilities.enableGPS(requireContext(), requireActivity() as AppCompatActivity)
+
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(permission.ACCESS_COARSE_LOCATION), 1
+        )
+        val client = LocationServices
+            .getFusedLocationProviderClient(requireActivity())
+        if (ActivityCompat.checkSelfPermission(requireContext(), permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        client.lastLocation.addOnSuccessListener(
+            requireActivity() ) { location: Location? ->
+            if (location != null) {
+                posizioneSalvata = Uri.parse(
+                    "http://maps.google.com/maps?q=loc:"
+                            + location.latitude + ',' + location.longitude
+                ).toString()
+                val l = Utilities.getCountryNameAndCode(requireContext(), location.latitude, location.longitude)
+                bind.testoPosizione.text = "Quindi vieni dal...\n${l?.get(0)}"
+                bind.txtFlag.text = Utilities.toFlagEmoji(l?.get(1)!!)
+                bind.salvaAccount.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,39 +128,6 @@ class SignInFragment3: Fragment() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == Utilities.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) {
         }
-    }
-
-
-
-    fun getPositionFormatted(): String? {
-
-        var corto: String? = null
-        var lungo: String? = null
-
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(permission.ACCESS_FINE_LOCATION), 1
-        )
-        val client = LocationServices.getFusedLocationProviderClient(requireActivity())
-        if (ActivityCompat.checkSelfPermission(requireActivity(), permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            return null
-        }
-        client.lastLocation.addOnSuccessListener(
-            requireActivity()
-        ) { location ->
-            if (location != null) {
-                Log.i("LOCATION", "$location")
-                lungo = Uri.parse(
-                    "http://maps.google.com/maps?q=loc:"
-                            + location.latitude + ',' + location.longitude
-                ).toString()
-
-                corto = getCountryAbbreviation(location)
-            }
-        }
-
-         return if(corto != null && lungo != null) "{\"abbr\":$corto, \"pos\":$lungo}" else null
     }
 
     private fun getCountryAbbreviation(location: Location): String {
@@ -130,7 +144,7 @@ class SignInFragment3: Fragment() {
         return "N/A"
     }
 
-    fun signin(position: String) {
+    fun signin() {
 
         val sp: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
@@ -141,7 +155,7 @@ class SignInFragment3: Fragment() {
                     requireArguments().getString("nick", "BANANA"),
                     requireArguments().getString("passw", "BANANA"),
                     requireArguments().getString("uimg", "BANANA"),
-                    position
+                    posizioneSalvata
                 )
             )
 
@@ -168,6 +182,8 @@ class SignInFragment3: Fragment() {
     }
 
     /*
-    *
+    * ROBE
     * */
+
+
 }

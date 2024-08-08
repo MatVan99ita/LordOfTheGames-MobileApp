@@ -7,6 +7,8 @@ import android.app.UiModeManager
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
+import android.content.IntentSender.SendIntentException
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -17,6 +19,7 @@ import android.graphics.ImageDecoder
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -25,11 +28,13 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.CalendarContract.Calendars
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
@@ -57,6 +62,15 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate.rgb
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsResponse
+import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -100,6 +114,7 @@ class Utilities {
         const val READ_CALENDAR_CODE  = 100
         const val WRITE_CALENDAR_CODE = 100
         const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+        const val REQUEST_CHECK_SETTINGS = 1001
 
         fun insertFragment(activity: AppCompatActivity, fragment: Fragment, tag: String, bundle: Bundle?){
 
@@ -698,6 +713,88 @@ class Utilities {
             }
 
             return String(Character.toChars(firstLetter)) + String(Character.toChars(secondLetter))
+        }
+
+        fun checkAndEnableGPS(context: Context, activity: AppCompatActivity) {
+            if (activity.getSystemService(Context.LOCATION_SERVICE) != null) {
+                // GPS non attivo, mostriamo un dialogo per attivarlo
+                AlertDialog.Builder(activity)
+                    .setMessage("GPS is disabled. Do you want to enable it?")
+                    .setPositiveButton(
+                        "Yes"
+                    ) { _, _ -> // Apri le impostazioni per attivare il GPS
+                        this.enableGPS(context, activity)
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
+            }
+        }
+
+        fun enableGPS(context: Context, activity: AppCompatActivity) {
+            val locationRequest: LocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10000)
+                .setFastestInterval(5000)
+
+            val builder = LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest)
+
+            val result: Task<LocationSettingsResponse> =
+                LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
+
+            result.addOnCompleteListener { task ->
+                try {
+                    val response = task.getResult(ApiException::class.java)
+                    // GPS is already enabled, perform any action if needed
+                } catch (exception: ApiException) {
+                    when (exception.statusCode) {
+                        LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
+                            // Show the dialog by calling startResolutionForResult(), and check the result in onActivityResult().
+                            val resolvable = exception as ResolvableApiException
+                            resolvable.startResolutionForResult(
+                                activity,
+                                REQUEST_CHECK_SETTINGS
+                            )
+                        } catch (e: SendIntentException) {
+                            // Ignore the error.
+                        } catch (e: ClassCastException) {
+                            // Ignore, should be an impossible error.
+                        }
+
+                        LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE ->// GPS settings are not satisfied. However, we have no way to fix the settings so we won't show the dialog.
+                            Toast.makeText(
+                                context,
+                                "GPS cannot be enabled.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                    }
+                }
+            }
+        }
+
+        fun getCountryNameAndCode(
+            context: Context,
+            latitude: Double,
+            longitude: Double
+        ): Array<String?>? {
+            val geocoder = Geocoder(context, Locale.getDefault())
+            try {
+                // Ottieni una lista di indirizzi dalle coordinate
+                val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+                if (!addresses.isNullOrEmpty()) {
+                    // Prendi il primo indirizzo della lista
+                    val address = addresses[0]
+                    val countryName = address.countryName // Nome completo della nazione
+                    val countryCode = address.countryCode // Codice ISO 3166-1 alpha-2
+                    return arrayOf(countryName, countryCode)
+                } else {
+                    // Se non è stato trovato nessun indirizzo
+                    return null
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                return null
+            }
         }
 
 
