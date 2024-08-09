@@ -125,12 +125,15 @@ class HomeFragment: Fragment(), OnItemListener {
                 radioStar.addView(rdbtn)
             }
 
-            Utilities.setDrawerWithUser(
-                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                banana.getString("nickname", "BANANA").toString(),
-                banana.getString("email", "BANANA").toString(),
-                homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
-            )
+            homeViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+                Utilities.setDrawerWithUser(
+                    requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                    banana.getString("nickname", "BANANA").toString(),
+                    banana.getString("email", "BANANA").toString(),
+                    homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+                    it
+                )
+            }
             su_giu    = requireActivity().findViewById(R.id.btn_order)
             btn_canc  = requireActivity().findViewById(R.id.btn_annulla1)
             btn_save  = requireActivity().findViewById(R.id.btn_salva1)
@@ -388,12 +391,15 @@ class HomeFragment: Fragment(), OnItemListener {
         )
         recyclerView.adapter = adapter
 
-        Utilities.setDrawerWithUser(
-            requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-            banana.getString("nickname", "BANANA").toString(),
-            banana.getString("email", "BANANA").toString(),
-            homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
-        )
+        homeViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+            Utilities.setDrawerWithUser(
+                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                banana.getString("nickname", "BANANA").toString(),
+                banana.getString("email", "BANANA").toString(),
+                homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+                it
+            )
+        }
     }
 
     private fun filterGames(category: String? = null, platform: String? = null): MutableList<GameItem> {

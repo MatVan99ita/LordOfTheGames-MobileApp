@@ -58,12 +58,16 @@ class SettingsActivity: AppCompatActivity() {
         )
         val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
-        Utilities.setDrawerWithUser(
-            this.findViewById<View>(R.id.nav_view) as NavigationView,
-            banana.getString("nickname", "BANANA").toString(),
-            banana.getString("email", "BANANA").toString(),
-            ViewModelProvider(this)[LoggedViewModel::class.java].getUsrImg(banana.getString("email", "BANANA").toString())
-        )
+        ViewModelProvider(this)[LoggedViewModel::class.java].getUsrPosition(banana.getString("email", "BANANA").toString())
+            ?.let {
+                Utilities.setDrawerWithUser(
+                    this.findViewById<View>(R.id.nav_view) as NavigationView,
+                    banana.getString("nickname", "BANANA").toString(),
+                    banana.getString("email", "BANANA").toString(),
+                    ViewModelProvider(this)[LoggedViewModel::class.java].getUsrImg(banana.getString("email", "BANANA").toString()),
+                    it
+                )
+            }
 
     }
 

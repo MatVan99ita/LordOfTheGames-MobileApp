@@ -215,4 +215,8 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
         return l
     }
 
+    fun getUsrPosition(mail: String): String? {
+        return repository.getUsrPos(mail)
+    }
+
 }

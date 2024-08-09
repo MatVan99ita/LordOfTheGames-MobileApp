@@ -65,12 +65,15 @@ class CommunityActivity: AppCompatActivity() {
 
         val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val communityViewModel: DiscussionViewModel = ViewModelProvider(this)[DiscussionViewModel::class.java]
-        Utilities.setDrawerWithUser(
-            this.findViewById<View>(R.id.nav_view) as NavigationView,
-            banana.getString("nickname", "BANANA").toString(),
-            banana.getString("email", "BANANA").toString(),
-            communityViewModel.getUsrImg(banana.getString("email", "BANANA").toString())
-        )
+        communityViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+            Utilities.setDrawerWithUser(
+                this.findViewById<View>(R.id.nav_view) as NavigationView,
+                banana.getString("nickname", "BANANA").toString(),
+                banana.getString("email", "BANANA").toString(),
+                communityViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+                it
+            )
+        }
 
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

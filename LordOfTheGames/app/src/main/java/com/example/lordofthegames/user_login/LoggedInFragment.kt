@@ -54,6 +54,7 @@ class LoggedInFragment: Fragment(){
     private lateinit var defaultImg: Drawable
     private var isExpanded = true
     private lateinit var banana: SharedPreferences
+    private var pos: Map<String, String> = mapOf()
 
 
     //TODO: aggiungere al fragment sotto le medaglie la posizione dell'utente salvata che possa essere modificata
@@ -87,8 +88,8 @@ class LoggedInFragment: Fragment(){
             user.photo!!
         )) else bind.loggedUsrImg.setImageDrawable(defaultImg)
 
-        val l = Utilities.translateUserPosition(user.position)
-        bind.loggedNick.text = "${user.nickname} ${ if(l.isNotEmpty()) l.get("abbr")?.let { Utilities.toFlagEmoji(it) } else "RN" }"
+        pos = Utilities.translateUserPosition(user.position)
+        bind.loggedNick.text = "${user.nickname} ${ if(pos.isNotEmpty()) pos.get("abbr")?.let { Utilities.toFlagEmoji(it) } else "RN" }"
         bind.loggedMail.text = user.mail
 
         if(user.photo != null) {
@@ -97,12 +98,15 @@ class LoggedInFragment: Fragment(){
                     user.photo
                 )
             )
-            Utilities.setDrawerWithUser(
-                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                banana.getString("nickname", "BANANA").toString(),
-                banana.getString("email", "BANANA").toString(),
-                viewm.getUsrImg(banana.getString("email", "BANANA").toString())
-            )
+            (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "RN")?.let {
+                Utilities.setDrawerWithUser(
+                    requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                    banana.getString("nickname", "BANANA").toString(),
+                    banana.getString("email", "BANANA").toString(),
+                    viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
+                    position = it
+                )
+            }
         } else {
             bind.loggedUsrImg.setImageResource(
                 R.mipmap.gabibbo_blade_of_striscia
@@ -353,14 +357,16 @@ class LoggedInFragment: Fragment(){
                     bind.btnSaveChanges.visibility = View.GONE
                     bind.btnAnnullaLogges.visibility = View.GONE
 
-                    Utilities.setDrawerWithUser(
-                        requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                        banana.getString("nickname", "BANANA").toString(),
-                        banana.getString("email", "BANANA").toString(),
-                        viewm.getUsrImg(banana.getString("email", "BANANA").toString())
-                    )
+                    (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "RN")?.let {
+                        Utilities.setDrawerWithUser(
+                            requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                            banana.getString("nickname", "BANANA").toString(),
+                            banana.getString("email", "BANANA").toString(),
+                            viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
+                            position = it
+                        )
+                    }
                 }
-
             }
 
             bind.btnAnnullaLogges.setOnClickListener {

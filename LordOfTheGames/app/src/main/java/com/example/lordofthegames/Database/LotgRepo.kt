@@ -270,5 +270,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getLikeCount(user_ref)
     }
 
+    fun getUsrPos(mail: String): String? {
+        return lotgDao.getUsrPos(mail)
+    }
+
 
 }

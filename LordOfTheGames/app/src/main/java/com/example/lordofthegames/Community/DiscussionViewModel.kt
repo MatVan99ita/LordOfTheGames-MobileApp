@@ -125,4 +125,8 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
         return repo.getUsrImg(mail)
     }
 
+    fun getUsrPosition(mail: String): String? {
+        return repo.getUsrPos(mail)
+    }
+
 }

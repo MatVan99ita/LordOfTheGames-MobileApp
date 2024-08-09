@@ -414,6 +414,8 @@ interface LotgDao {
     fun getCommentCount(user_ref: String): Int
     @Query("SELECT SUM(comment_like) FROM comment WHERE user_ref = :user_ref")
     fun getLikeCount(user_ref: String): Int
+    @Query("SELECT position FROM user WHERE mail = :mail")
+    fun getUsrPos(mail: String): String?
 
 
 }

@@ -574,7 +574,10 @@ class Utilities {
             val nick_head: TextView = head.findViewById(R.id.nickname_header)
             val mail_head: TextView = head.findViewById(R.id.mail_header)
 
-            nick_head.text = "$nick ${this.toFlagEmoji(position)}"
+            val js = this.translateUserPosition(position)
+            nick_head.text = "$nick ${
+                if(js.isNotEmpty()) js.get("abbr")?.let { this.toFlagEmoji(it) } else "RN"
+            }"
             mail_head.text = mail
             if(img != null) usr_icon.setImageBitmap(this.stringToByteArrayToBitmap(img))
         }

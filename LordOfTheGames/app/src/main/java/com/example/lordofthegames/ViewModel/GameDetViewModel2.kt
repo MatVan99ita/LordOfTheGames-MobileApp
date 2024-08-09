@@ -112,5 +112,9 @@ class GameDetViewModel2(application: Application): AbstractViewModel(application
         return repository.getUsrImg(mail)
     }
 
+    fun getUsrPosition(mail: String): String? {
+        return repository.getUsrPos(mail)
+    }
+
 
 }
