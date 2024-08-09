@@ -801,7 +801,7 @@ class Utilities {
 
         fun translateUserPosition(position: String?): Map<String, String>{
             return if(position != null) {
-                val jsonObject: JSONObject = JSONObject(position)
+                val jsonObject = JSONObject(position)
                 mapOf(
                     Pair("abbr", jsonObject.getString("abbr")),
                     Pair("lungo", jsonObject.getString("lungo")),

@@ -89,7 +89,7 @@ class LoggedInFragment: Fragment(){
         )) else bind.loggedUsrImg.setImageDrawable(defaultImg)
 
         pos = Utilities.translateUserPosition(user.position)
-        bind.loggedNick.text = "${user.nickname} ${ if(pos.isNotEmpty()) pos.get("abbr")?.let { Utilities.toFlagEmoji(it) } else "RN" }"
+        bind.loggedNick.text = "${user.nickname} ${ if(pos.isNotEmpty()) pos.get("abbr")?.let { Utilities.toFlagEmoji(it) } else "{\"abbr\":\"RN\"}" }"
         bind.loggedMail.text = user.mail
 
         if(user.photo != null) {
@@ -98,15 +98,14 @@ class LoggedInFragment: Fragment(){
                     user.photo
                 )
             )
-            (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "RN")?.let {
-                Utilities.setDrawerWithUser(
-                    requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                    banana.getString("nickname", "BANANA").toString(),
-                    banana.getString("email", "BANANA").toString(),
-                    viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
-                    position = it
-                )
-            }
+
+            Utilities.setDrawerWithUser(
+                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                banana.getString("nickname", "BANANA").toString(),
+                banana.getString("email", "BANANA").toString(),
+                viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
+                user.position?: "{\"abbr\":\"RN\", \"lungo\":\"KAMCHATKA\"}"
+            )
         } else {
             bind.loggedUsrImg.setImageResource(
                 R.mipmap.gabibbo_blade_of_striscia
@@ -357,7 +356,7 @@ class LoggedInFragment: Fragment(){
                     bind.btnSaveChanges.visibility = View.GONE
                     bind.btnAnnullaLogges.visibility = View.GONE
 
-                    (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "RN")?.let {
+                    (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "{\"abbr\":\"RN\"}")?.let {
                         Utilities.setDrawerWithUser(
                             requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                             banana.getString("nickname", "BANANA").toString(),
