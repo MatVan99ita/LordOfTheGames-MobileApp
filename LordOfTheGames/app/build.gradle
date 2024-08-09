@@ -83,6 +83,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:1.2.3"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.6.2" // Sostituisci con la tua versione di Lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata:2.6.2"  // Sostituisci con la tua versione di Lifecycle
+    implementation 'com.github.JoshHalvorson:calendar-date-range-picker:0.2.0'
 
 
 
