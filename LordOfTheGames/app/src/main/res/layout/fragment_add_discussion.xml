@@ -52,44 +52,38 @@
             app:layout_constraintTop_toBottomOf="@id/lbl_text" />
 
 
-        <dev.joshhalvorson.calendar_date_range_picker.calendar.CalendarPicker
-            android:id="@+id/calendarPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:eventDotGravity="end"
-            app:layout_constraintTop_toBottomOf="@id/et_Content"
-            app:layout_constraintBottom_toTopOf="@+id/post_img" />
-
         <!--TODO: fare qualcosa per rendere anche eventosi i post sia in creazione che nella vista generica-->
+
         <ImageButton
             android:id="@+id/post_img"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:background="@null"
 
+            android:background="@null"
             android:gravity="center"
             android:scaleType="centerCrop"
-            android:src="@mipmap/gabibbo_blade_of_striscia"
 
+            android:src="@mipmap/gabibbo_blade_of_striscia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calendarPicker">
+            app:layout_constraintTop_toBottomOf="@+id/position_layout">
 
         </ImageButton>
+
 
         <Button
             android:id="@+id/btn_save_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:text="Save"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_img" />
-
 
         <Button
             android:id="@+id/btn_nope_post"
@@ -100,6 +94,92 @@
             app:layout_constraintStart_toEndOf="@id/btn_save_post"
             app:layout_constraintTop_toTopOf="@+id/btn_save_post" />
 
+        <LinearLayout
+            android:id="@+id/position_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp"
+            android:textSize="18sp"
+            android:orientation="vertical"
+            android:background="@drawable/theme_gradient_pale"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_Content">
+
+
+            <TextView
+                android:id="@+id/menuPositionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:text="Aggiungi dati evento \u25BC"
+                android:textSize="18sp" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/position_expandable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <Button
+                    android:id="@+id/get_DI_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/get_DF_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/get_DF_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@+id/get_DI_btn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <Button
+                    android:id="@+id/get_OI_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/get_OF_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/get_DI_btn" />
+
+                <Button
+                    android:id="@+id/get_OF_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/get_DI_btn"
+                    app:layout_constraintStart_toEndOf="@+id/get_OI_btn"/>
+
+                <ImageButton
+                    android:id="@+id/gps_discuss_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_gps_fixed_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/textView9"
+                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn"
+                    />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="Posizione attuale"
+                    app:layout_constraintStart_toEndOf="@id/gps_discuss_btn"
+                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
 
 
@@ -126,18 +206,6 @@
         app:layout_constraintEnd_toEndOf="@+id/fab_attachment"
 
         app:srcCompat="@drawable/baseline_add_photo_alternate_24" />
-
-    <!--Action name text for the add alarm button-->
-    <!--Make sure that you are constraining this
-        Text to the add Alarm FAB button-->
-
-    <!--Floating action button for add person-->
-    <!--Make sure that you are constraining this button
-        to the add Alarm FAB button-->
-    <!--Make sure to add backgroundTint attribute to match
-         the entire application color-->
-    <!--because after changing the base application theme
-         the color of the FAB is set Blue as default-->
 
     <TextView
         android:id="@+id/add_image_action_text"
