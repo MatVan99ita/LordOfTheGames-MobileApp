@@ -7,7 +7,7 @@
     android:layout_marginTop="?attr/actionBarSize"
     tools:context=".Community.DiscussionCreateFragment"
     >
-<androidx.core.widget.NestedScrollView
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -161,34 +161,47 @@
                     android:id="@+id/gps_discuss_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/baseline_gps_fixed_24"
+                    app:layout_constraintEnd_toStartOf="@id/auto_position"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/textView9"
-                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/auto_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
                     android:text="Posizione attuale"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/gps_discuss_btn"
-                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/get_OI_btn" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Posizione manuale"
+                    app:layout_constraintEnd_toStartOf="@id/manual_position"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gps_discuss_btn" />
+
+                <EditText
+                    android:id="@+id/manual_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/textView10" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-</androidx.core.widget.NestedScrollView>
+</ScrollView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
