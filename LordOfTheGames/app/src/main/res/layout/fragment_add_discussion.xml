@@ -9,7 +9,8 @@
     >
 <ScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/add_discussion_fragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -122,79 +123,139 @@
                 android:id="@+id/position_expandable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="visible"
                 android:padding="16dp">
 
                 <Button
                     android:id="@+id/get_DI_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/get_DF_btn"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="28dp"
+                    android:text="dd-MM-yyyy"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/get_DF_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/get_DI_btn"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    android:text="dd-MM-yyyy"
+                    app:layout_constraintStart_toStartOf="@+id/get_DI_btn"
+                    app:layout_constraintTop_toBottomOf="@+id/get_DI_btn" />
 
                 <Button
                     android:id="@+id/get_OI_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/get_OF_btn"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="8dp"
+                    android:text="00:00"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/get_DI_btn" />
+                    app:layout_constraintTop_toBottomOf="@+id/get_DF_btn" />
+
+                <Button
+                    android:id="@+id/deleteEvent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="88dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Elimina dati evento"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/manual_position" />
 
                 <Button
                     android:id="@+id/get_OF_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="00:00"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/get_DI_btn"
-                    app:layout_constraintStart_toEndOf="@+id/get_OI_btn"/>
+                    app:layout_constraintTop_toTopOf="@+id/get_OI_btn" />
 
                 <ImageButton
                     android:id="@+id/gps_discuss_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="8dp"
                     android:src="@drawable/baseline_gps_fixed_24"
-                    app:layout_constraintEnd_toStartOf="@id/auto_position"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/get_OI_btn" />
 
                 <TextView
                     android:id="@+id/auto_position"
-                    android:layout_width="wrap_content"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Posizione attuale"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:lines="3"
                     android:linksClickable="true"
-                    app:layout_constraintStart_toEndOf="@id/gps_discuss_btn"
+                    android:text="Posizione attuale: "
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/gps_discuss_btn"
                     app:layout_constraintTop_toBottomOf="@id/get_OI_btn" />
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="5dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Posizione manuale"
-                    app:layout_constraintEnd_toStartOf="@id/manual_position"
+                    android:layout_marginTop="28dp"
+                    android:text="Posizione manuale:"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/gps_discuss_btn" />
 
                 <EditText
                     android:id="@+id/manual_position"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+                <TextView
+                    android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/textView10" />
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Data inizio:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="28dp"
+                    android:text="Data fine:"
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Ora inizio:"
+                    app:layout_constraintEnd_toStartOf="@+id/get_OI_btn"
+                    app:layout_constraintHorizontal_bias="0.692"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/get_DF_btn" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ora fine:"
+                    app:layout_constraintEnd_toStartOf="@+id/get_OF_btn"
+                    app:layout_constraintHorizontal_bias="0.512"
+                    app:layout_constraintStart_toEndOf="@+id/get_OI_btn"
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,8 @@
 package com.example.lordofthegames.Community
 
 import android.Manifest
+import android.animation.Animator
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -14,16 +16,22 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +54,13 @@ class DiscussionCreateFragment: Fragment() {
     private lateinit var viewm: DiscussionViewModel
     private var isAllFabsVisible = false
     private lateinit var cameraExecutor: ExecutorService
+    private var isExpanded = false
+    private var dataInizio: String = ""
+    private var dataFine: String = ""
+    private var oraInizio: String = ""
+    private var oraFine: String = ""
+    private var positionUrl: String = ""
+
     private var c_img: String? = null
     private var game_id: Int = -1
     override fun onCreateView(
@@ -60,7 +75,7 @@ class DiscussionCreateFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        isExpanded = bind.positionExpandable.isVisible
         val interpolator = OvershootInterpolator()
         val game_title = arguments?.getString("game_title")
         game_id = viewm.getGameId(title = game_title)
@@ -154,6 +169,17 @@ class DiscussionCreateFragment: Fragment() {
             }
         }
 
+        bind.menuPositionButton.setOnClickListener{
+            if (isExpanded) {
+                collapse(bind.positionExpandable)
+                bind.menuPositionButton.text = "Aggiungi dati evento \u25BC"
+            } else {
+                expand(bind.positionExpandable)
+                bind.menuPositionButton.text = "Aggiungi dati evento \u25B2"
+            }
+            isExpanded = !isExpanded
+        }
+
         bind.postImg.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Remove image?")
@@ -176,6 +202,42 @@ class DiscussionCreateFragment: Fragment() {
 
         bind.getDIBtn.setOnClickListener { this.getData(true) }
         bind.getDFBtn.setOnClickListener { this.getData(false) }
+
+        bind.gpsDiscussBtn.setOnClickListener {
+            if(bind.manualPosition.text.isNotEmpty()){
+                MaterialAlertDialogBuilder(
+                    requireContext()
+                )
+                    .setTitle("Posizione manuale già insetita")
+                    .setMessage(". Sovrascrivere con posizione attuale?")
+                    .setPositiveButton("si") { _, _ -> this.checkGPSPermission() }
+                    .setNegativeButton("Nouh") { _, _ -> }
+                    .show()
+            } else {
+                this.checkGPSPermission()
+            }
+        }
+
+        bind.manualPosition.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                bind.autoPosition.text = "Posizione attuale: \n ${p0.toString()}"
+            }
+
+        })
+
+        bind.deleteEvent.setOnClickListener {
+            bind.manualPosition.text.clear()
+            bind.autoPosition.text = "Posizione attuale: "
+            bind.getDIBtn.text = "dd-MM-yyyy"
+            bind.getDFBtn.text = "dd-MM-yyyy"
+            bind.getOIBtn.text = "00:00"
+            bind.getOFBtn.text = "00:00"
+        }
+
 
     }
 
@@ -412,6 +474,41 @@ class DiscussionCreateFragment: Fragment() {
 
     }
 
+    fun checkGPSPermission(){
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+            ),
+            1
+        )
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            ||
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            this.auto_position()
+        }
+        else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                ),
+                1
+            )
+            this.checkGPSPermission()
+        }
+    }
+
     fun auto_position(){
         Utilities.enableGPS(requireContext(), requireActivity() as AppCompatActivity)
 
@@ -432,7 +529,9 @@ class DiscussionCreateFragment: Fragment() {
                 //posizioneSalvata = Uri.parse(s).toString()
                 val l = Utilities.getCountryNameAndCode(requireContext(), location.latitude, location.longitude)
                 bind.autoPosition.movementMethod = LinkMovementMethod.getInstance()
-                bind.autoPosition.text = "Posizione manual <a href='$s'>$s</a>"
+                bind.autoPosition.text = "Posizione attuale: \n$s"
+                bind.manualPosition.setText(s)
+                Linkify.addLinks(bind.autoPosition, Linkify.WEB_URLS)
             }
         }
     }
@@ -457,6 +556,7 @@ class DiscussionCreateFragment: Fragment() {
                 // date to our text view.
                 s = "$dayOfMonth-${monthOfYear + 1}-$year"
                 if(b){//DataInizio
+                    dataInizio = s
                     bind.getDIBtn.text = s
                 } else {//DataFine
                     bind.getDFBtn.text = s
@@ -507,6 +607,66 @@ class DiscussionCreateFragment: Fragment() {
         // display our time picker dialog.
         timePickerDialog.show()
     }
+
+
+    private fun expand(v: View) {
+        v.visibility = View.VISIBLE
+
+        // Postpone the calculation to ensure that layout and size calculations are done
+        v.post {
+            Log.e("AAAALTEZZA", "${v.height}")
+            //val targetHeight = calculateGridLayoutHeight((v as GridLayout))
+            val mAnimator = slideAnimator(0, 1811, v)
+            mAnimator.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationEnd(animator: Animator) {
+                    bind.addDiscussionFragment.post {
+                        bind.addDiscussionFragment.smoothScrollTo(0, v.bottom)
+                    }
+                }
+
+                override fun onAnimationStart(animator: Animator) {}
+
+                override fun onAnimationCancel(animator: Animator) {}
+
+                override fun onAnimationRepeat(animator: Animator) {}
+            })
+            mAnimator.start()
+        }
+    }
+
+    private fun collapse(v: View) {
+        val finalHeight = v.height
+        Log.e("AAAAAAAAAAAAALTEZZA", "$finalHeight")
+        val mAnimator = slideAnimator(finalHeight, 0, v)
+
+        mAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationEnd(animator: Animator) {
+                v.visibility = View.GONE
+            }
+
+            override fun onAnimationStart(animator: Animator) {}
+
+            override fun onAnimationCancel(animator: Animator) {}
+
+            override fun onAnimationRepeat(animator: Animator) {}
+        })
+        mAnimator.start()
+    }
+
+    private fun slideAnimator(start: Int, end: Int, v: View): ValueAnimator {
+        val animator = ValueAnimator.ofInt(start, end)
+        animator.interpolator = AccelerateDecelerateInterpolator()
+        animator.setDuration(300)
+
+        animator.addUpdateListener { valueAnimator ->
+            val value = valueAnimator.animatedValue as Int
+            val layoutParams = v.layoutParams
+            layoutParams.height = value
+            v.layoutParams = layoutParams
+        }
+        return animator
+    }
+
 
 
 

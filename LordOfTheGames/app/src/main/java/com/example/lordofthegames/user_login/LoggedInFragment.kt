@@ -180,6 +180,8 @@ class LoggedInFragment: Fragment(){
         }
 
 
+
+
         this.setBadge()
 
     }
