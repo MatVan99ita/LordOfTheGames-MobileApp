@@ -23,11 +23,6 @@ class LoggedActivity: AppCompatActivity() {
     private var savedInstanceState: Bundle? = null
     private lateinit var toolbar: Toolbar
 
-    //TODO:DALLE SPECIFICHE: mappa utente -> la mappa dell'utente adesso non lo soos se la voglio mettere
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         this.savedInstanceState = savedInstanceState

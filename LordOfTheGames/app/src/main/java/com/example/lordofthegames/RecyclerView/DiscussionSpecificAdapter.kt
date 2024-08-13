@@ -46,6 +46,9 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
             )
             holder.discussion_img.visibility = View.VISIBLE
         }
+        if(item.discussion.data_inizio != null){
+            holder.event_poster.visibility = View.VISIBLE
+        }
 
     }
 
@@ -58,6 +61,7 @@ class DiscussionSpecificAdapter(var activity: Activity, var listener: OnItemList
         var discussion_comments: TextView = itemView.findViewById(R.id.comment_count)
         var discussion_user: TextView = itemView.findViewById(R.id.discussion_user)
         val discussion_img: ImageView = itemView.findViewById(R.id.specific_post_img)
+        val event_poster: TextView = itemView.findViewById(R.id.discussion_event_availaible)
 
         private val onItemListener: OnItemListener = lister
 

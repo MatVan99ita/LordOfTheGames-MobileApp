@@ -41,6 +41,8 @@ import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.charset.StandardCharsets
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Arrays
 import java.util.Calendar
 import java.util.concurrent.ExecutorService
@@ -55,10 +57,10 @@ class DiscussionCreateFragment: Fragment() {
     private var isAllFabsVisible = false
     private lateinit var cameraExecutor: ExecutorService
     private var isExpanded = false
-    private var dataInizio: String = ""
-    private var dataFine: String = ""
-    private var oraInizio: String = ""
-    private var oraFine: String = ""
+    private var dataInizio: String? = null
+    private var dataFine:   String? = null
+    private var oraInizio:  String = "17:00"
+    private var oraFine:    String = "17:00"
     private var positionUrl: String = ""
 
     private var c_img: String? = null
@@ -194,7 +196,13 @@ class DiscussionCreateFragment: Fragment() {
                 .show()
         }
 
-        bind.btnSavePost.setOnClickListener { this.createDiscussion() }
+        bind.btnSavePost.setOnClickListener {
+            if(!bind.etTitle.text.isNullOrEmpty() && !bind.etContent.text.isNullOrEmpty())
+                this.createDiscussion()
+            else {
+                Utilities.showaToast(requireContext(), "Dovrai pur scrivere qualcosa no?")
+            }
+        }
         bind.btnNopePost.setOnClickListener { this.deleteDiscussion() }
 
         bind.getOIBtn.setOnClickListener { this.getOra(true) }
@@ -440,17 +448,24 @@ class DiscussionCreateFragment: Fragment() {
             Utilities.showaToast(requireContext(), "Manca il contenuto")
         }
 
-        //TODO: sistemare posizione e date con calendario
-        //      aggiungere le cose di posizione e date per creare discussioni eventp e metterle anche poi nella vista di creazione
+        var di: String? = null
+        var df: String? = null
+        if(dataInizio != null){
+            di = "${dataInizio}-${oraInizio}"
+        }
+        if(dataFine != null){
+            df = "${dataFine}-${oraFine}"
+        }
+
         val disc_id = viewm.saveNewDiscussion(
             title = bind.etTitle.text?.toString()!!,
             content = bind.etContent.text?.toString()!!,
             usr = s,
             game = game_id,
             img = if(c_img != null) c_img else null,
-            location = "",
-            dataInizio = "",
-            dataFine = ""
+            location = positionUrl,
+            dataInizio = di,
+            dataFine = df
         )
 
 
@@ -532,6 +547,7 @@ class DiscussionCreateFragment: Fragment() {
                 bind.autoPosition.text = "Posizione attuale: \n$s"
                 bind.manualPosition.setText(s)
                 Linkify.addLinks(bind.autoPosition, Linkify.WEB_URLS)
+                positionUrl = s
             }
         }
     }
@@ -554,12 +570,21 @@ class DiscussionCreateFragment: Fragment() {
             { _, year, monthOfYear, dayOfMonth ->
                 // on below line we are setting
                 // date to our text view.
-                s = "$dayOfMonth-${monthOfYear + 1}-$year"
+                val m = if("${monthOfYear+1}".length < 2) "0${ monthOfYear +1}" else "${ monthOfYear +1}"
+                val d = if("$dayOfMonth".length < 2) "0$dayOfMonth" else "$dayOfMonth"
+
+                s = "$d/$m/$year"
+
                 if(b){//DataInizio
                     dataInizio = s
                     bind.getDIBtn.text = s
                 } else {//DataFine
-                    bind.getDFBtn.text = s
+                    if(dataInizio != null && Utilities.checkDate(dataInizio!!, s)) {
+                        dataFine = s
+                        bind.getDFBtn.text = s
+                    } else {
+                        Utilities.showaToast(requireContext(), "Wormhole non ammessi")
+                    }
                 }
             },
             // on below line we are passing year, month
@@ -593,9 +618,12 @@ class DiscussionCreateFragment: Fragment() {
                 // on below line we are setting selected
                 // time in our text view.
                 s = "$hourOfDay:$minute"
+
                 if(b){//OraInizio
+                    oraInizio = s
                     bind.getOIBtn.text = s
                 } else {//OraFine
+                    oraFine = s
                     bind.getOFBtn.text = s
                 }
             },
@@ -606,6 +634,7 @@ class DiscussionCreateFragment: Fragment() {
         // at last we are calling show to
         // display our time picker dialog.
         timePickerDialog.show()
+
     }
 
 
@@ -666,7 +695,6 @@ class DiscussionCreateFragment: Fragment() {
         }
         return animator
     }
-
 
 
 

@@ -39,6 +39,9 @@ class NotificationViewModel(application: Application): AndroidViewModel(applicat
                     c.getString(
                         c.getColumnIndexOrThrow("data_fine")
                     ),
+                    c.getString(
+                        c.getColumnIndexOrThrow("position")
+                    ),
                     c.getInt(
                         c.getColumnIndexOrThrow("read")
                     ),

@@ -45,6 +45,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discussion_title" />
 
+        <TextView
+            android:id="@+id/discussion_event_availaible"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="5dp"
+            android:lines="1"
+            android:visibility="gone"
+            android:text="Evento"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/comment_img"
+            app:layout_constraintHorizontal_bias="0.905"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/comment_img"
+            app:layout_constraintVertical_bias="1.0" />
+
         <ImageView
             android:id="@+id/specific_post_img"
             android:layout_width="35dp"

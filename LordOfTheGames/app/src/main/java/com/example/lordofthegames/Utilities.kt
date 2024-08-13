@@ -71,6 +71,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.navigation.NavigationView
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -79,6 +80,7 @@ import java.nio.ByteBuffer
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Base64
 import java.util.Date
 import java.util.Locale
@@ -89,18 +91,10 @@ class Utilities {
 
     /*
     * TODO: ULTIMATE
-    *  Funzionalità obbligatorie
-        2. Profilo utente
-            2. GPS (si può usare semplicemente per la posizione utente, es. casa)
         *
      * Funzionalità opzionali
         • Progettazione / Design (max 2)
             – mockup (potete usare diversi software, come balsamiq, figma, AdobeXD, ecc.. e in formato cartaceo eventualmente)
-        • Mappa (max 2)
-            – se non previsto dalle funzionalità dell'app si può visualizzare la posizione dell'utente nel profilo, potete utilizzare sia OpenStreetMap che Google Map
-        • Intent per chiamata/calendario o simili (max 2)
-            – uno di questi: https://developer.android.com/guide/components/intents-common - preferibilmente non visto a lezione
-        • Tracking utente su mappa (max 4) <- boh
     * */
 
     companion object{
@@ -482,6 +476,7 @@ class Utilities {
                         textContent,
                         data_inizio,
                         data_fine,
+                        "",
                         0,
                         usr_ref
                     )
@@ -809,6 +804,26 @@ class Utilities {
             } else {
                 mapOf()
             }
+        }
+
+
+
+
+        fun checkDate(s1: String, s2: String): Boolean{
+            val formatter = DateTimeFormat.forPattern("dd/MM/yyyy")
+
+
+            val date1 = DateTime.parse(s1, formatter)
+            val date2 = DateTime.parse(s2, formatter)
+
+            return date1 < date2
+        }
+
+
+        fun createDateTimeFormatted(data: String, ora: String): String {
+            val formatter = DateTimeFormat.forPattern("dd/MM/yyyy-HH:mm")
+            val date = DateTime.parse("${data}-${ora}", formatter)
+            return date.toString()
         }
 
 

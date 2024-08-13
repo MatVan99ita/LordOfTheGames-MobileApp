@@ -52,9 +52,6 @@
             android:hint="Insert Note Here"
             app:layout_constraintTop_toBottomOf="@id/lbl_text" />
 
-
-        <!--TODO: fare qualcosa per rendere anche eventosi i post sia in creazione che nella vista generica-->
-
         <ImageButton
             android:id="@+id/post_img"
             android:layout_width="150dp"
@@ -123,7 +120,7 @@
                 android:id="@+id/position_expandable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:padding="16dp">
 
                 <Button

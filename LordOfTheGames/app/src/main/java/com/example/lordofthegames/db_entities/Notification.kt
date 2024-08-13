@@ -21,6 +21,7 @@ data class Notification(
     val content: String?,
     val data_inizio: String?,
     val data_fine: String?,
+    val position: String?,
     val read: Int = 0,
     val usr_ref: String,
 )
