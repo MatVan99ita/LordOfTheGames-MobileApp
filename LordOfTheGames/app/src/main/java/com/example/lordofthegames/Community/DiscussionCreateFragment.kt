@@ -1,14 +1,20 @@
 package com.example.lordofthegames.Community
 
+import android.Manifest
 import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +30,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.charset.StandardCharsets
 import java.util.Arrays
+import java.util.Calendar
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -162,6 +170,13 @@ class DiscussionCreateFragment: Fragment() {
 
         bind.btnSavePost.setOnClickListener { this.createDiscussion() }
         bind.btnNopePost.setOnClickListener { this.deleteDiscussion() }
+
+        bind.getOIBtn.setOnClickListener { this.getOra(true) }
+        bind.getOFBtn.setOnClickListener { this.getOra(false) }
+
+        bind.getDIBtn.setOnClickListener { this.getData(true) }
+        bind.getDFBtn.setOnClickListener { this.getData(false) }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -396,6 +411,104 @@ class DiscussionCreateFragment: Fragment() {
 
 
     }
+
+    fun auto_position(){
+        Utilities.enableGPS(requireContext(), requireActivity() as AppCompatActivity)
+
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 1
+        )
+        val client = LocationServices
+            .getFusedLocationProviderClient(requireActivity())
+        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        client.lastLocation.addOnSuccessListener(
+            requireActivity() ) { location: Location? ->
+            if (location != null) {
+                val s = "http://maps.google.com/maps?q=loc:${location.latitude},${location.longitude}"
+                //posizioneSalvata = Uri.parse(s).toString()
+                val l = Utilities.getCountryNameAndCode(requireContext(), location.latitude, location.longitude)
+                bind.autoPosition.movementMethod = LinkMovementMethod.getInstance()
+                bind.autoPosition.text = "Posizione manual <a href='$s'>$s</a>"
+            }
+        }
+    }
+
+    fun getData(b: Boolean){
+        var s: String = ""
+        val c = Calendar.getInstance()
+
+        // on below line we are getting
+        // our day, month and year.
+        val yearm = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        // on below line we are creating a
+        // variable for date picker dialog.
+        val datePickerDialog = DatePickerDialog(
+            // on below line we are passing context.
+            requireContext(),
+            { _, year, monthOfYear, dayOfMonth ->
+                // on below line we are setting
+                // date to our text view.
+                s = "$dayOfMonth-${monthOfYear + 1}-$year"
+                if(b){//DataInizio
+                    bind.getDIBtn.text = s
+                } else {//DataFine
+                    bind.getDFBtn.text = s
+                }
+            },
+            // on below line we are passing year, month
+            // and day for the selected date in our date picker.
+            yearm,
+            month,
+            day
+        )
+        // at last we are calling show
+        // to display our date picker dialog.
+        datePickerDialog.show()
+
+
+    }
+
+
+
+    fun getOra(b: Boolean){
+        var s: String = ""
+        val c = Calendar.getInstance()
+
+        // on below line we are getting our hour, minute.
+        val hour = c.get(Calendar.HOUR_OF_DAY)
+        val minutes = c.get(Calendar.MINUTE)
+
+        // on below line we are initializing
+        // our Time Picker Dialog
+        val timePickerDialog = TimePickerDialog(
+            requireContext(),
+            { _, hourOfDay, minute ->
+                // on below line we are setting selected
+                // time in our text view.
+                s = "$hourOfDay:$minute"
+                if(b){//OraInizio
+                    bind.getOIBtn.text = s
+                } else {//OraFine
+                    bind.getOFBtn.text = s
+                }
+            },
+            hour,
+            minutes,
+            false
+        )
+        // at last we are calling show to
+        // display our time picker dialog.
+        timePickerDialog.show()
+    }
+
+
 
 
 }
