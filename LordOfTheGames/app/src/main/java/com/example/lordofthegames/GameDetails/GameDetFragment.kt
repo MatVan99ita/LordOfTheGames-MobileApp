@@ -252,16 +252,13 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
                     }
 
-                    gameDetViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)
-                        ?.let {
-                            Utilities.setDrawerWithUser(
-                                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                                banana.getString("nickname", "BANANA").toString(),
-                                banana.getString("email", "BANANA").toString(),
-                                gameDetViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
-                                it
-                            )
-                        }
+                    Utilities.setDrawerWithUser(
+                        requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                        banana.getString("nickname", "BANANA").toString(),
+                        banana.getString("email", "BANANA").toString(),
+                        gameDetViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+                        gameDetViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)
+                    )
 
                     val picasso = Picasso.Builder(activity as Context)
                         .loggingEnabled(true) // Abilita il logging per il debug

@@ -355,15 +355,14 @@ class LoggedInFragment: Fragment(){
                     bind.btnSaveChanges.visibility = View.GONE
                     bind.btnAnnullaLogges.visibility = View.GONE
 
-                    (if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else "{\"abbr\":\"RN\"}")?.let {
-                        Utilities.setDrawerWithUser(
-                            requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                            banana.getString("nickname", "BANANA").toString(),
-                            banana.getString("email", "BANANA").toString(),
-                            viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
-                            position = it
-                        )
-                    }
+
+                    Utilities.setDrawerWithUser(
+                        requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+                        banana.getString("nickname", "BANANA").toString(),
+                        banana.getString("email", "BANANA").toString(),
+                        viewm.getUsrImg(banana.getString("email", "BANANA").toString()),
+                        position = if(pos.isNotEmpty()) pos["abbr"]?.let { Utilities.toFlagEmoji(it) } else Utilities.toFlagEmoji("RN")
+                    )
                 }
             }
 

@@ -67,15 +67,14 @@ class GameNoteActivity: AppCompatActivity() {
             ),
         )
 
-        noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
-            Utilities.setDrawerWithUser(
-                this.findViewById<View>(R.id.nav_view) as NavigationView,
-                banana.getString("nickname", "BANANA").toString(),
-                banana.getString("email", "BANANA").toString(),
-                noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
-                it
-            )
-        }
+
+        Utilities.setDrawerWithUser(
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+            noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)
+        )
 
         user_ref = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("email", "null")!!
         val noteContent = noteViewModel.getNotes(game_title, game_ref, user_ref = user_ref)
@@ -97,15 +96,13 @@ class GameNoteActivity: AppCompatActivity() {
 
         })
 
-        noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
-            Utilities.setDrawerWithUser(
-                this.findViewById<View>(R.id.nav_view) as NavigationView,
-                banana.getString("nickname", "BANANA").toString(),
-                banana.getString("email", "BANANA").toString(),
-                noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
-                it
-            )
-        }
+        Utilities.setDrawerWithUser(
+            this.findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+            noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)
+        )
     }
 
 
