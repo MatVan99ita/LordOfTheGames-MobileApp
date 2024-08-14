@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.Community.CommunityActivity
-import com.example.lordofthegames.GameDetails.GameDetActivity
-import com.example.lordofthegames.R
 import com.example.lordofthegames.databinding.FragmentCommunityListBinding
 import com.example.lordofthegames.recyclerView.CommunitiesAdapter
 import com.example.lordofthegames.recyclerView.CommunityItem
@@ -32,7 +30,7 @@ class CommunityFragment : Fragment(), OnItemListener{
         viewm = ViewModelProvider(requireActivity())[CommunityViewModel::class.java]
         bind = FragmentCommunityListBinding.inflate(layoutInflater, container, false)
         list = viewm.selectAllCommunity()
-        adapter = CommunitiesAdapter(requireActivity(), this, list)
+        adapter = CommunitiesAdapter(requireActivity(), this, list, viewm)
 
         return bind.root
     }

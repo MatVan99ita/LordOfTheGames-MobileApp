@@ -289,5 +289,9 @@ class LotgRepo(application: Application) {
         return lotgDao.getAllUser()
     }
 
+    fun getGameImg(gameTitle: String): String {
+        return lotgDao.getGameImg(gameTitle)
+    }
+
 
 }

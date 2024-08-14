@@ -34,5 +34,9 @@ class CommunityViewModel(application: Application): AndroidViewModel(application
         return repo.selectCommentFromDiscussion(discussion_id)
     }
 
+    fun getGameImg(gameTitle: String): String {
+        return repo.getGameImg(gameTitle)
+    }
+
 
 }

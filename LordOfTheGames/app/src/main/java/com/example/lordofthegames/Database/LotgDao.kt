@@ -430,6 +430,9 @@ interface LotgDao {
     @Query("SELECT nickname FROM user")
     fun getAllUser(): Cursor
 
+    @Query("SELECT game_cover FROM game WHERE game_title = :gameTitle")
+    fun getGameImg(gameTitle: String): String
+
 
 }
 

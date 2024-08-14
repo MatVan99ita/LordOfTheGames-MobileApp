@@ -1,7 +1,10 @@
 package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
-import android.graphics.drawable.Drawable
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +14,13 @@ import android.widget.TextView
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
+import com.example.lordofthegames.home.CommunityViewModel
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.Transformation
 
-class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, var cardItemList: List<CommunityItem>):
+class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, var cardItemList: List<CommunityItem>, var viu: CommunityViewModel):
     RecyclerView.Adapter<CommunitiesAdapter.CommunitiesHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunitiesHolder {
@@ -44,15 +48,24 @@ class CommunitiesAdapter(var activity: Activity, var listener: OnItemListener, v
 
         holder.discussion_count.text = "${c.TotalDiscussions}"
 
+        val img = viu.getGameImg(c.GameTitle)
 
+        val picasso = Picasso.Builder(activity as Context)
+            .loggingEnabled(true) // Abilita il logging per il debug
+            .build()
+        picasso
+            .load(img)
+            .fit()
+            .centerCrop()
+            .into(holder.communityImg)
 
-        val drawable: Drawable? = when((0..2).random()) {
+        /*val drawable: Drawable? = when((0..2).random()) {
             0 -> ContextCompat.getDrawable(activity, R.drawable.ic_t_pose)
             1 -> ContextCompat.getDrawable(activity, R.mipmap.ic_gabibbo_test)//ic_gabibbo_test",
             2 -> ContextCompat.getDrawable(activity, R.mipmap.ic_yeee_foreground)//ic_yeee_foreground
             else -> null
         }
-        holder.communityImg.setImageDrawable(drawable)
+        holder.communityImg.setImageDrawable(drawable)*/
 
 
         /*holder.layout.setBackgroundColor( when((0..11).random()) {
