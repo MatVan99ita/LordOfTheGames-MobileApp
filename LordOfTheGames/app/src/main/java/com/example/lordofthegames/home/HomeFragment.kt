@@ -125,7 +125,7 @@ class HomeFragment: Fragment(), OnItemListener {
                 radioStar.addView(rdbtn)
             }
 
-            homeViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+            homeViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
                 Utilities.setDrawerWithUser(
                     requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
                     banana.getString("nickname", "BANANA").toString(),
@@ -391,15 +391,13 @@ class HomeFragment: Fragment(), OnItemListener {
         )
         recyclerView.adapter = adapter
 
-        homeViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
-            Utilities.setDrawerWithUser(
-                requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
-                banana.getString("nickname", "BANANA").toString(),
-                banana.getString("email", "BANANA").toString(),
-                homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
-                it
-            )
-        }
+        Utilities.setDrawerWithUser(
+            requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,
+            banana.getString("nickname", "BANANA").toString(),
+            banana.getString("email", "BANANA").toString(),
+            homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString()),
+            homeViewModel.getUsrPosition(banana.getString("email", "BANANA")!!).toString()
+        )
     }
 
     private fun filterGames(category: String? = null, platform: String? = null): MutableList<GameItem> {

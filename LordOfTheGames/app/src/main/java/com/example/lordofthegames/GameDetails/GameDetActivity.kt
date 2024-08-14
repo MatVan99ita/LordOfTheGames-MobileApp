@@ -10,10 +10,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Settings.SettingsActivity
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.GameNotes.GameNoteActivity
+import com.example.lordofthegames.ViewModel.GameDetViewModel2
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.google.android.material.navigation.NavigationView
 
@@ -22,6 +24,7 @@ class GameDetActivity: AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    private lateinit var gameDetViewModel: GameDetViewModel2
     private lateinit var game_det_intent: Intent
     private lateinit var string: String
     private lateinit var navigationView: NavigationView
@@ -36,6 +39,7 @@ class GameDetActivity: AppCompatActivity() {
         val bundle = Bundle()
         val imagePath = intent.getStringExtra("game_cover").toString()
         val title = intent.getStringExtra("game_title").toString()
+        gameDetViewModel = ViewModelProvider(this)[GameDetViewModel2::class.java]
         string = title
         game_ref = intent.getIntExtra("game_id", -1)
         bundle.putString("game_cover", imagePath) // put image data in Intent
@@ -62,11 +66,17 @@ class GameDetActivity: AppCompatActivity() {
         )
         setSupportActionBar(findViewById(R.id.topbar))
 
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
         navigationView = findViewById(R.id.nav_view)
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,
             navigationView,
-            this
+            this,
+            Utilities.stringToByteArrayToBitmap(
+                gameDetViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
+            ),
+
         )
 
 

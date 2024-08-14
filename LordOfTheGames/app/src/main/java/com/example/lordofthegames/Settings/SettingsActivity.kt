@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
+import com.example.lordofthegames.home.HomeViewModel
 import com.example.lordofthegames.user_login.LoggedActivity
 import com.example.lordofthegames.user_login.LoggedViewModel
 import com.google.android.material.navigation.NavigationView
@@ -24,6 +25,7 @@ class SettingsActivity: AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var savedInstanceState: Bundle? = null
+    private lateinit var viuvve: HomeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
@@ -50,13 +52,17 @@ class SettingsActivity: AppCompatActivity() {
             null,
         )
         setSupportActionBar(findViewById(R.id.topbar))
+        viuvve = ViewModelProvider(this)[HomeViewModel::class.java]
+        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         actionBarDrawerToggle = Utilities.setUpDrawer(
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
+            Utilities.stringToByteArrayToBitmap(
+                viuvve.getUsrImg(banana.getString("email", "BANANA").toString())!!
+            ),
         )
-        val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
 
         ViewModelProvider(this)[LoggedViewModel::class.java].getUsrPosition(banana.getString("email", "BANANA").toString())
             ?.let {

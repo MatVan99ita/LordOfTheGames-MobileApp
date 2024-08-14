@@ -60,12 +60,13 @@ class CommunityActivity: AppCompatActivity() {
         actionBarDrawerToggle = Utilities.setUpDrawer(
             bind.communityActivityDrawer,
             navigationView,
-            this
+            this,
+            null
         )
 
         val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val communityViewModel: DiscussionViewModel = ViewModelProvider(this)[DiscussionViewModel::class.java]
-        communityViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+        communityViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
             Utilities.setDrawerWithUser(
                 this.findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),

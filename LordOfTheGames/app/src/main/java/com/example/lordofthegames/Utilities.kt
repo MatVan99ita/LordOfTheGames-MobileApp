@@ -136,7 +136,7 @@ class Utilities {
             drawerLayout: DrawerLayout,
             navigationView: NavigationView,
             activity: AppCompatActivity,
-            img: Drawable? = null
+            img: Bitmap?
         ): ActionBarDrawerToggle {
 
             val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
@@ -156,7 +156,7 @@ class Utilities {
                 header_nick.text = sp.getString("nickname", "BESUGHI")
             }
             if(header_img != null && img != null) {
-                header_img.setImageDrawable(img)
+                header_img.setImageBitmap(img)
             }
 
 
@@ -564,16 +564,14 @@ class Utilities {
         }
 
 
-        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: String?, position: String){
+        fun setDrawerWithUser(headerView: NavigationView, nick: String, mail: String, img: String?, position: String?){
             val head = headerView.getHeaderView(0)
             val usr_icon: ImageView = head.findViewById(R.id.usr_icon)
             val nick_head: TextView = head.findViewById(R.id.nickname_header)
             val mail_head: TextView = head.findViewById(R.id.mail_header)
 
             val js = this.translateUserPosition(position)
-            nick_head.text = "$nick ${
-                if(js.isNotEmpty()) js.get("abbr")?.let { this.toFlagEmoji(it) } else "RN"
-            }"
+            nick_head.text = "$nick ${ if(js.isNotEmpty()) js.get("abbr")?.let { this.toFlagEmoji(it) } else this.toFlagEmoji("RN")}"
             mail_head.text = mail
             if(img != null) usr_icon.setImageBitmap(this.stringToByteArrayToBitmap(img))
         }
@@ -796,7 +794,7 @@ class Utilities {
         }
 
         fun translateUserPosition(position: String?): Map<String, String>{
-            return if(position != null) {
+            return if(position != null && position != "null") {
                 val jsonObject = JSONObject(position)
                 mapOf(
                     Pair("abbr", jsonObject.getString("abbr")),

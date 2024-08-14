@@ -62,8 +62,12 @@ class GameNoteActivity: AppCompatActivity() {
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
+            Utilities.stringToByteArrayToBitmap(
+                noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
+            ),
         )
-        noteViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+
+        noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
             Utilities.setDrawerWithUser(
                 this.findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),
@@ -93,7 +97,7 @@ class GameNoteActivity: AppCompatActivity() {
 
         })
 
-        noteViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())?.let {
+        noteViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)?.let {
             Utilities.setDrawerWithUser(
                 this.findViewById<View>(R.id.nav_view) as NavigationView,
                 banana.getString("nickname", "BANANA").toString(),

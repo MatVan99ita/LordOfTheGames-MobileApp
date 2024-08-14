@@ -252,7 +252,7 @@ class GameDetFragment: Fragment(), OnItemListener  {
 
                     }
 
-                    gameDetViewModel.getUsrPosition(banana.getString("email", "BANANA").toString())
+                    gameDetViewModel.getUsrPosition(banana.getString("email", "BANANA")!!)
                         ?.let {
                             Utilities.setDrawerWithUser(
                                 requireActivity().findViewById<View>(R.id.nav_view) as NavigationView,

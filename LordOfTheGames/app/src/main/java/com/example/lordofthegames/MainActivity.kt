@@ -119,7 +119,10 @@ class MainActivity : AppCompatActivity() {
                 actionBarDrawerToggle = Utilities.setUpDrawer(
                     drawerLayout,
                     navigationView,
-                    this
+                    this,
+                    Utilities.stringToByteArrayToBitmap(
+                        homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
+                    ),
                 )
 
                 val drawable: Drawable? = ContextCompat.getDrawable(

@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room.databaseBuilder
 import com.example.lordofthegames.Database.LOTGDatabase
 import com.example.lordofthegames.R
@@ -22,6 +23,7 @@ class LoggedActivity: AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var savedInstanceState: Bundle? = null
     private lateinit var toolbar: Toolbar
+    private lateinit var viuvve: LoggedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -53,7 +55,7 @@ class LoggedActivity: AppCompatActivity() {
             //val sharedPreferences: SharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
             if (sp.contains("logged") && sp.contains("email") && sp.contains("nickname")) {
 
-
+                viuvve = ViewModelProvider(this)[LoggedViewModel::class.java]
                 toolbar = findViewById(R.id.topbar)
                 drawerLayout = findViewById(R.id.logged_activity_drawer)
 
@@ -73,11 +75,14 @@ class LoggedActivity: AppCompatActivity() {
                     null,
                 )
                 setSupportActionBar(findViewById(R.id.topbar))
-
+                val banana = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
                 actionBarDrawerToggle = Utilities.setUpDrawer(
                     drawerLayout,
                     navigationView = findViewById(R.id.nav_view),
                     this,
+                    Utilities.stringToByteArrayToBitmap(
+                        viuvve.getUsrImg(banana.getString("email", "BANANA").toString())!!
+                    ),
                 )
 
             } else {
