@@ -233,7 +233,7 @@ interface LotgDao {
     @Query("SELECT * FROM notes WHERE game_ref = :game_ref AND user_ref = :user_ref")
     fun getNotes(game_ref: Int, user_ref: String): Cursor
 
-    @Query("SELECT * FROM notification WHERE usr_ref = :user_ref")
+    @Query("SELECT * FROM notification WHERE usr_ref = :user_ref ORDER BY id DESC")
     fun getNotification(user_ref: String): Cursor
 
 
@@ -416,6 +416,19 @@ interface LotgDao {
     fun getLikeCount(user_ref: String): Int
     @Query("SELECT position FROM user WHERE mail = :mail")
     fun getUsrPos(mail: String): String?
+
+    @Query("INSERT INTO notification (title, content, usr_ref, data_inizio, data_fine, position) VALUES (:title, :content, :usrRef, :dataInizio, :dataFine, :position)")
+    fun eventNotification(
+        title: String?,
+        content: String?,
+        dataInizio: String?,
+        dataFine: String?,
+        position: String?,
+        usrRef: String
+    )
+
+    @Query("SELECT nickname FROM user")
+    fun getAllUser(): Cursor
 
 
 }

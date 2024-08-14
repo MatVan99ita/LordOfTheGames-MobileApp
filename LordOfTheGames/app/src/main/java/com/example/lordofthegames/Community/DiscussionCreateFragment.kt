@@ -38,6 +38,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentAddDiscussionBinding
+import com.example.lordofthegames.db_entities.Notification
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.charset.StandardCharsets
@@ -467,6 +468,34 @@ class DiscussionCreateFragment: Fragment() {
             dataInizio = di,
             dataFine = df
         )
+
+        if(di != null) { //TODO: aggiungere luogo al framelayout della notifica e la posizione nell'intent calendario
+            //Prendo tutti gli utenti
+            viewm.getAllUser().forEach { nick ->
+
+                viewm.eventNotification(
+                    Notification(
+                        id=0,
+                        title = "Evento: ${bind.etTitle.text?.toString()}",
+                        content = bind.etContent.text?.toString(),
+                        data_inizio = di,
+                        data_fine = df,
+                        position = positionUrl,
+                        read = 0,
+                        usr_ref = nick
+                    )
+                )
+            }
+
+            Utilities.generaNotificaNonSalvabile(
+                context = requireActivity(),
+                title = "Nuovo evento per ${arguments?.getString("game_title")}",
+                content = "",
+                CHANNEL_ID = CommunityActivity::class.java.simpleName
+            )
+        }
+
+
 
 
 

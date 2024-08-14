@@ -1,6 +1,7 @@
 package com.example.lordofthegames.Community
 
 import android.app.Application
+import android.database.Cursor
 import androidx.lifecycle.AndroidViewModel
 import com.example.lordofthegames.Database.LotgRepo
 import com.example.lordofthegames.db_entities.Comments
@@ -127,6 +128,20 @@ class DiscussionViewModel(application: Application): AndroidViewModel(applicatio
 
     fun getUsrPosition(mail: String): String? {
         return repo.getUsrPos(mail)
+    }
+
+    fun getAllUser(): List<String> {
+        val c: Cursor = repo.getAllUser()
+        val l: MutableList<String> = mutableListOf()
+
+        while(c.moveToNext()){
+            l.add(c.getString(c.getColumnIndexOrThrow("nickname")))
+        }
+        return l
+    }
+
+    fun eventNotification(notification: Notification) {
+        repo.eventNotification(notification)
     }
 
 }

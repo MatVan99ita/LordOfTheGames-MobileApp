@@ -274,5 +274,20 @@ class LotgRepo(application: Application) {
         return lotgDao.getUsrPos(mail)
     }
 
+    fun eventNotification(notification: Notification){
+        return lotgDao.eventNotification(
+            notification.title,
+            notification.content,
+            notification.data_inizio,
+            notification.data_fine,
+            notification.position,
+            notification.usr_ref
+        )
+    }
+
+    fun getAllUser(): Cursor {
+        return lotgDao.getAllUser()
+    }
+
 
 }

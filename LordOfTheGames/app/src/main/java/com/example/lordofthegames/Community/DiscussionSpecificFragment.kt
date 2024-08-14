@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.lordofthegames.MainActivity
 import com.example.lordofthegames.R
 import com.example.lordofthegames.Utilities
 import com.example.lordofthegames.databinding.FragmentDiscussionContentSpecificBinding
@@ -153,6 +154,13 @@ class DiscussionSpecificFragment : Fragment(), OnItemListener{
         requireActivity().currentFocus?.let { view ->
             (requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
         }
+        Utilities.generaNotificaNonSalvabile(
+            requireActivity(),
+            title = "Nuovo commento ricevuto",
+            content = "Hai ricevuto una risposta al tuo post: ${disccussion.first.title}",
+            CHANNEL_ID = MainActivity::class.java.simpleName,
+        )
+        Utilities.showaToast(requireContext(), "MODALITA' NOTIFICHE A SE STESSI")
     }
 
     override fun onItemClick(view: View, position: Int) {
