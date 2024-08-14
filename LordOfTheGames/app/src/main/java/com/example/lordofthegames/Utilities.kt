@@ -136,7 +136,7 @@ class Utilities {
             drawerLayout: DrawerLayout,
             navigationView: NavigationView,
             activity: AppCompatActivity,
-            img: Bitmap?
+            img: String?
         ): ActionBarDrawerToggle {
 
             val actionBarDrawerToggle = ActionBarDrawerToggle(activity, drawerLayout, R.string.belandih, R.string.besughi)
@@ -156,7 +156,11 @@ class Utilities {
                 header_nick.text = sp.getString("nickname", "BESUGHI")
             }
             if(header_img != null && img != null) {
-                header_img.setImageBitmap(img)
+                header_img.setImageBitmap(
+                    this.stringToByteArrayToBitmap(
+                        img
+                    )
+                )
             }
 
 

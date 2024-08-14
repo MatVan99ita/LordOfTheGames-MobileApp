@@ -73,9 +73,7 @@ class GameDetActivity: AppCompatActivity() {
             drawerLayout,
             navigationView,
             this,
-            Utilities.stringToByteArrayToBitmap(
-                gameDetViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
-            ),
+            gameDetViewModel.getUsrImg(banana.getString("email", "BANANA")!!)
 
         )
 

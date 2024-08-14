@@ -120,9 +120,7 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout,
                     navigationView,
                     this,
-                    Utilities.stringToByteArrayToBitmap(
-                        homeViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
-                    ),
+                    homeViewModel.getUsrImg(banana.getString("email", "BANANA")!!)
                 )
 
                 val drawable: Drawable? = ContextCompat.getDrawable(

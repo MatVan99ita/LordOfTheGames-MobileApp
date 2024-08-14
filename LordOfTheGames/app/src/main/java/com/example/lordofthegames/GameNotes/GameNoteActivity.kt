@@ -62,9 +62,7 @@ class GameNoteActivity: AppCompatActivity() {
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
-            Utilities.stringToByteArrayToBitmap(
-                noteViewModel.getUsrImg(banana.getString("email", "BANANA").toString())!!
-            ),
+            noteViewModel.getUsrImg(banana.getString("email", "BANANA")!!)
         )
 
 

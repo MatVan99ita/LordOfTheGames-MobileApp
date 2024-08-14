@@ -59,9 +59,7 @@ class SettingsActivity: AppCompatActivity() {
             drawerLayout,
             navigationView = findViewById(R.id.nav_view),
             this,
-            Utilities.stringToByteArrayToBitmap(
-                viuvve.getUsrImg(banana.getString("email", "BANANA").toString())!!
-            ),
+            viuvve.getUsrImg(banana.getString("email", "BANANA")!!)
         )
 
 
