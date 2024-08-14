@@ -10,6 +10,8 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.provider.CalendarContract.Events
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +45,7 @@ class NotificationFragment: Fragment(), OnItemListener {
     private lateinit var recycler: RecyclerView
     private lateinit var selected_notification: Notification
     private lateinit var exeggutor: ExecutorService
-    private val actual_date_format: String = "dd/mm/yyyy - HH:mm"
+    private val actual_date_format: String = "dd/mm/yyyy-HH:mm"
     private val dateTime_formatter: DateTimeFormatter = DateTimeFormat.forPattern(actual_date_format)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +63,6 @@ class NotificationFragment: Fragment(), OnItemListener {
         bind = FragmentNotificationBinding.inflate(layoutInflater, container, false);
         user_nick = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).getString("nickname", "MinaScondo")!!
         list = viewm.getNotification(user_nick)
-
 
         exeggutor = Executors.newFixedThreadPool(1)
         notificationAdapter = NotificationAdapter(this, list, requireActivity())
@@ -105,15 +106,14 @@ class NotificationFragment: Fragment(), OnItemListener {
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 Log.e("LOCALENDARIAZZIO", "$selected_notification")
-                (if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis)?.let { it1 ->
-                    addEventToCalendar(
-                        title = selected_notification.title!!,
-                        description = selected_notification.content!!,
-                        begin = DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
-                        end = it1,
 
-                        )
-                }
+                addEventToCalendar(
+                    title = selected_notification.title!!,
+                    description = selected_notification.content!!,
+                    begin = DateTime.parse(selected_notification.data_inizio, dateTime_formatter).millis,
+                    end = if(selected_notification.data_fine == null) null else DateTime.parse(selected_notification.data_fine, dateTime_formatter).millis,
+                    locheshon = selected_notification.position
+                )
 
                 bind.notificationSpecificFrameLayout.visibility = View.GONE
             }
@@ -159,12 +159,17 @@ class NotificationFragment: Fragment(), OnItemListener {
         bind.notificationContentSpecific.text = item.content
 
         bind.notificationSpecificFrameLayout.visibility = View.VISIBLE
-        bind.notificationDateSpecific.text =
-            if(item.data_inizio != null && item.data_fine == null)
-                item.data_inizio
-            else if(item.data_inizio != null && item.data_fine != null)
-                "${item.data_inizio} ~ ${item.data_fine}"
-            else ""
+
+        var event: String = ""
+
+        event += if(item.data_inizio != null) item.data_inizio else ""
+        event += if(item.data_inizio != null && item.data_fine != null) " ~ ${item.data_fine}" else ""
+        event += if(item.position != null) "\nLuogo: ${item.position}" else ""
+
+        bind.notificationDateSpecific.movementMethod = LinkMovementMethod.getInstance()
+        bind.notificationDateSpecific.text = event
+        Linkify.addLinks(bind.notificationDateSpecific, Linkify.WEB_URLS)
+
         if(
             (list[position].data_inizio == null && list[position].data_fine == null)
             ||
@@ -250,11 +255,12 @@ class NotificationFragment: Fragment(), OnItemListener {
         }
     }
 
-    fun addEventToCalendar(title: String, description: String, begin: Long, end: Long) {
+    fun addEventToCalendar(title: String, description: String, begin: Long, end: Long?, locheshon: String?) {
         val intent: Intent = Intent(Intent.ACTION_INSERT)
             .setData(Events.CONTENT_URI)
             .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
             .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end)
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, locheshon)
             .putExtra(Events.TITLE, title)
             .putExtra(Events.DESCRIPTION, description)
             .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
