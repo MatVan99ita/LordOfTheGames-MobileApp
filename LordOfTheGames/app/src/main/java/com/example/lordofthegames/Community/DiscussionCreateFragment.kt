@@ -469,7 +469,7 @@ class DiscussionCreateFragment: Fragment() {
             dataFine = df
         )
 
-        if(di != null) { //TODO: aggiungere luogo al framelayout della notifica e la posizione nell'intent calendario
+        if(di != null) {
             //Prendo tutti gli utenti
             viewm.getAllUser().forEach { nick ->
 

@@ -91,6 +91,7 @@ class Utilities {
 
     /*
     * TODO: ULTIMATE
+        * Eliminare cose discutibili visibili dappertutto
         *
      * Funzionalità opzionali
         • Progettazione / Design (max 2)
