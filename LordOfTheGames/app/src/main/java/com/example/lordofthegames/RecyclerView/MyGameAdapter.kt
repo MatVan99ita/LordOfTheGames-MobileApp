@@ -1,6 +1,7 @@
 package com.example.lordofthegames.recyclerView
 
 import android.app.Activity
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.lordofthegames.Pair
 import com.example.lordofthegames.R
 import com.example.lordofthegames.db_entities.Game
 import com.example.lordofthegames.home.HomeViewModel
+import com.squareup.picasso.Picasso
 
 class MyGameAdapter(
     var listener: OnItemListener,
@@ -38,6 +40,12 @@ class MyGameAdapter(
         holder.id.text = "${g.game_id}"
         holder.nome.text = g.game_title
         holder.stat.text = g.game_status
+        val picasso = Picasso.Builder(activity as Context)
+            .loggingEnabled(true) // Abilita il logging per il debug
+            .build()
+        picasso
+            .load(g.game_cover)
+            .into(holder.img)
 
         //holder.ach.text = "8/8"
         val p: Pair<Int, Int> = viewModel.getAchievementCount(game_title = g.game_title, user_ref = mail)
